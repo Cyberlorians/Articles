@@ -35,7 +35,8 @@ AllCVE | join kind=leftouter CVEScore on CveId
 | sort by TotalRiskScore desc 
 ```
 ## If output is greater than 10k run the following in MDE API Explorer:
-[MDE API Hunting](https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/run-advanced-query-api?view=o365-worldwide#request-example "MDE API Hunting")
+[MDE API Hunting - MSFT Docs](https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/run-advanced-query-api?view=o365-worldwide#request-example "MDE API Hunting")
+
 
 ![alt text](https://github.com/TheCyberlorians/kqlquerypack/blob/main/AHMGAPI.png "MDE API Explorer")
 
