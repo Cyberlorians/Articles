@@ -50,9 +50,14 @@ AllCVE | join kind=leftouter CVEScore on CveId
 ## Take output and dump into a txt file into "folder":
 ![alt text](https://github.com/TheCyberlorians/uploadedimages/blob/main/jsonoutputmdeapi.png)
 
-## Take this script and put into “folder”, call it “jsontocsv.ps1”:
+## Take this script and put into “folder”, call it “jsontocsv.ps1”
 ```
 $PathToJson = Read-Host -Prompt "Enter JSON Txt File" 
 (Get-Content -Path $PathToJson | ConvertFrom-Json).Results | Export-Csv -Path $PathToJson.Replace('.txt','.csv') -NoTypeInformation
 ```
+## Run script and enter the file - csv file will dump into "folder"
+![alt text](https://github.com/TheCyberlorians/uploadedimages/blob/main/jsontocsv.png)
+
+## Verify output in csv file
+![alt text](https://github.com/TheCyberlorians/uploadedimages/blob/main/jsoncsvexcel.png)
 
