@@ -1,4 +1,5 @@
 # Hunting query for all risk scores and machine groups:
+...
 // Devices
 let devicelist =
 DeviceInfo
@@ -32,7 +33,7 @@ AllCVE | join kind=leftouter CVEScore on CveId
 | extend splitall=split(MachineGroup, DeviceName)
 | project-away DeviceId1, DeviceName1, splitall
 | sort by TotalRiskScore desc 
-
+...
 # If output is greater than 10k run the following in MDE API Explorer:
 [MDE API Hunting](https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/run-advanced-query-api?view=o365-worldwide#request-example "MDE API Hunting")
 
