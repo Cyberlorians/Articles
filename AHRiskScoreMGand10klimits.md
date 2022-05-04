@@ -1,5 +1,5 @@
-## Hunting query for all risk scores and machine groups:
-#### Huge thanks and collab effort to Matthew Zorich and David Lajoie
+#### Advanced Hunting in MDE for Risk Score, Machine Groups AND beating the 10klimits - Huge thanks and collab effort to Matthew Zorich and David Lajoie
+## Hunting query for all risk scores and machine groups
 ```
 // Devices
 let devicelist =
