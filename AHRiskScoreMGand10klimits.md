@@ -1,4 +1,5 @@
 ## Hunting query for all risk scores and machine groups:
+#### Huge thanks and collab effort to Matthew Zorich and David Lajoie
 ```
 // Devices
 let devicelist =
