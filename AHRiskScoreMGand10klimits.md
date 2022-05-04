@@ -1,4 +1,4 @@
-#### Advanced Hunting in MDE for Risk Score, Machine Groups AND beating the 10klimits - Huge thanks and collab effort to Matthew Zorich and David Lajoie
+#### Advanced Hunting in MDE for Risk Score, Machine Groups AND beating the 10klimits - Huge thanks and collab effort to [Matthew Zorich](https://twitter.com/reprise_99?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor) and David Lajoie.
 ## Hunting query for all risk scores and machine groups
 ```
 // Devices
