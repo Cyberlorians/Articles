@@ -16,6 +16,8 @@ Some quick notes on the image below. The parameters call for "ID" - you can find
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/trafficlaw.png)
 
+The next step will consist of creating a remediation task. Caveat and pleast take note! In order for this to work the managed identity has to have permissions at the highest tier of what you are setting and sending to Sentinel LAW. I.e., Do not set a one subscription and expect the policy to write on another subscrition where the parameters are set.
 1. Create a remediation task
-2. Create a system assigned managed identity
+2. Create a system assigned managed identity 
+
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/trafficanalyticsremed.png)
