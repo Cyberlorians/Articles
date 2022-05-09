@@ -29,7 +29,7 @@ The next step will consist of creating a remediation task. Caveat and pleast tak
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/Azurenetanalyitcsschematable.png)
 
-**Verifying Azure Traffic Analytics is capturing data and you are receiving proper traffic and visualization (see the red, malicious traffic in the image below).**
+**Verifying Azure Traffic Analytics is capturing data and you are receiving proper traffic and visualization (see the red, malicious traffic in the image below in this demo).**
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/trafficanalyticsblade.png)
 
