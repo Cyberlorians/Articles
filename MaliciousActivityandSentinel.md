@@ -16,5 +16,6 @@ Some quick notes on the image below. The parameters call for "ID" - you can find
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/trafficlaw.png)
 
-
+1. Create a remediation task
+2. Create a system assigned managed identity
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/trafficanalyticsremed.png)
