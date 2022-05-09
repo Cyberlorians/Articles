@@ -27,3 +27,5 @@ Verifying Azure Traffic Analytics has made it to Sentinel.
 2. Type "AzureNetworkAnalytics_CL" as seen below.
 3. Please read more detail on [Traffic Analytics Schema](https://docs.microsoft.com/en-us/azure/network-watcher/traffic-analytics-schema).
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/Azurenetanalyitcsschematable.png)
+
+## Continue to Part-2: Malicious traffic in Sentinel. ##
