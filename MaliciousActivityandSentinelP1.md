@@ -28,4 +28,7 @@ Verifying Azure Traffic Analytics has made it to Sentinel.
 3. Please read more detail on [Traffic Analytics Schema](https://docs.microsoft.com/en-us/azure/network-watcher/traffic-analytics-schema).
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/Azurenetanalyitcsschematable.png)
 
+Verifying Azure Traffic Analytics is capturing data and you are receiving proper traffic and visualization (see the red, malicious traffic in the image below).
+![])https://github.com/Cyberlorians/uploadedimages/blob/main/trafficanalyticsblade.png)
+
 ## Continue to Part-2: Malicious traffic in Sentinel. ##
