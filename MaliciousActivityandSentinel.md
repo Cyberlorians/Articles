@@ -5,14 +5,14 @@
 ### Configure network security groups to use specific workspace for traffic analytics ###
 Some quick notes on the image below. The parameters call for "ID" - you can find this ID by going to the resource, overview tab, resource JSON and pull the ResourceID string).
 1. Parameter 1 - DeployifNotExists
-Parameter 2 - Chose NSG Region. The NSG, NetworkWatcher and storage account need to be same.
-Parameter 3 - Storage ResourceID of the storage account.
-Parameter 4 - Unchecking the "only show parameters" will allow you to pick 10 or (default 60).
-Parameter 5 - Sentinel ResourceID (json view) - obtain the workspace ID for the Sentinel Log Analytics Workspace.
-Parameter 6 - Chose Workspace Region.
-Parameter 7 - Sentinel WorkspaceID - This is Sentinels LAW WorkspaceID NOT ResourceID.
-Parameter 8 - Set the Network Watcher Resource Group where Network Watcher resides.
-Parameter 9 - Set the NAME of the Network Watcher (within the same region in Network Watcher RG).
+2. Parameter 2 - Chose NSG Region. The NSG, NetworkWatcher and storage account need to be same.
+3. Parameter 3 - Storage ResourceID of the storage account.
+4. Parameter 4 - Unchecking the "only show parameters" will allow you to pick 10 or (default 60).
+5. Parameter 5 - Sentinel ResourceID (json view) - obtain the workspace ID for the Sentinel Log Analytics Workspace.
+6. Parameter 6 - Chose Workspace Region.
+7. Parameter 7 - Sentinel WorkspaceID - This is Sentinels LAW WorkspaceID NOT ResourceID.
+8. Parameter 8 - Set the Network Watcher Resource Group where Network Watcher resides.
+9. Parameter 9 - Set the NAME of the Network Watcher (within the same region in Network Watcher RG).
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/trafficlaw.png)
 
