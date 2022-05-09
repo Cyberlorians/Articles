@@ -20,7 +20,7 @@ The next step will consist of creating a remediation task. Caveat and pleast tak
 1. Create a remediation task
 2. Create a system assigned managed identity 
 
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/trafficanalyticsremed.png)
+    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/trafficanalyticsremed.png)
 
 **Verifying Azure Traffic Analytics has made it to Sentinel.**
 1. Navigate to Sentinel LAW.
@@ -31,6 +31,6 @@ The next step will consist of creating a remediation task. Caveat and pleast tak
 
 **Verifying Azure Traffic Analytics is capturing data and you are receiving proper traffic and visualization (see the red, malicious traffic in the image below in this demo).**
 
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/trafficanalyticsblade.png)
+    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/trafficanalyticsblade.png)
 
 ## Continue to Part-2: Malicious traffic in Sentinel. ##
