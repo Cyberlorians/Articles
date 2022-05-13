@@ -14,7 +14,7 @@ Head back to the main Traffic Analytics blade now and click on "Malicious IPs", 
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/trafficpublicipinfokql.png)
 
-That last step I had you do has led you to the log analytics workspace of Sentinel.  Are the pre-reqs starting to make sense? What you are seeing below is a KQL query from the flow logs of 'MaliciousFlow' with IP, PublicIp, Location, ThreatType and Description. Yup! Those are Botnets and NO they should NOT be overlooked as "oh, there just botnets". You're going to see why.
+That last step I had you do has led you to the log analytics workspace of Sentinel.  Are the pre-reqs starting to make sense? What you are seeing below is a KQL query from the flow logs of 'MaliciousFlow' with IP, PublicIp, Location, ThreatType and Description. Yup! Those are Botnets and NO they should NOT be overlooked as "Oh, those are just botnets doing probing against our environment". You're going to see why.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/networkwatcherquery.png)
 
