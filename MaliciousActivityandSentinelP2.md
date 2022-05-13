@@ -18,6 +18,9 @@ That last step I had you do has led you to the log analytics workspace of Sentin
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/networkwatcherquery.png)
 
-In conclusion of Part-2, I hope you are starting to get the visualization where I am about to bring you. Hold on because it's about to get nuts.
+In conclusion of Part-2, I hope you are starting to get the visualization where I am about to bring you. Hang on because it's about to get nuts.
+
+I recommend and at your own risk, stand up a honeypot in your own environment. Rod Trent had posted this honeypot article on behalf of Pierre Thoor. So, that has saved me from doing a full write up and I thank them. The article is wonderful and you should do follow it. However, for my "Malicious traffic in Sentinel" series just stand up a VM with an NSG allowing any/any in.  Keep in mind though, this series is not only to help you learn in your environment but to take these steps in each part of the series and use on any production tenant.
+
 
 ## Continue to Part-3: Malicious traffic in Sentinel. Coming Soon! ##
