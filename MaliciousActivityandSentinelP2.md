@@ -12,9 +12,9 @@ This image is the heat map of my malicious activity. I can enhance this as much 
 
 Head back to the main Traffic Analytics blade now and click on "Malicious IPs", where the red arrow is pointing.
 
-	![](https://github.com/Cyberlorians/uploadedimages/blob/main/trafficpublicipinfokql.png)
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/trafficpublicipinfokql.png)
 
 That last step I had you do has now led you to the log analytics workspace of Sentinel.  Are the pre-reqs starting to make sense? What you are seeing below is a KQL query from the flow logs of 'MaliciousFlow' with IP, PublicIp, Location, ThreatType and Description. 
 
-	![](https://github.com/Cyberlorians/uploadedimages/blob/main/networkwatcherquery.png)
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/networkwatcherquery.png)
 
