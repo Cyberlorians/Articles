@@ -36,4 +36,4 @@ The next step will consist of creating a remediation task. Caveat and pleast tak
 
    
 
-## Continue to Part-2: Malicious traffic in Sentinel. ##
+## [Continue to Part-2: Malicious traffic in Sentinel](https://github.com/Cyberlorians/Articles/blob/main/MaliciousActivityandSentinelP2.md). ##
