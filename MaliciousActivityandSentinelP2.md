@@ -18,4 +18,6 @@ That last step I had you do has led you to the log analytics workspace of Sentin
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/networkwatcherquery.png)
 
+In conclusion of Part-2, I hope you are starting to get the visualization where I am about to bring you. Hold on because it's about to get nuts.
+
 ## Continue to Part-3: Malicious traffic in Sentinel. Coming Soon! ##
