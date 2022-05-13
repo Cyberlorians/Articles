@@ -1,4 +1,4 @@
-## Part-2: Malicious traffic in Sentinel. ## In development
+## Part-2: Malicious traffic in Sentinel. ## 
 
 In [Part-1](https://github.com/Cyberlorians/Articles/blob/main/MaliciousActivityandSentinelP1.md) of this series I showed you how to connect NSG Flow logs with Network Watcher, Traffic Analytics and sending it all to the final destination of Sentinel. Ok, so where do we go from here? First, lets focus on what we did in [Part-1](https://github.com/Cyberlorians/Articles/blob/main/MaliciousActivityandSentinelP1.md). The last picture I displayed was Traffic Analyitcs, so let us focus there for a minute. Head on over to the Network Watcher we setup, then Traffic Analytics. Disclaimer: I have malicious traffic ONLY because I have a honeypot with allowed traffic - do this at your own risk. However and a big however, this very well could be you or your customers environment. Remember in Part-1 when I stated I had a customer with a bad NSG? Well, this is how it went down in real time and I am just playing out the steps for you all, step by step.
 
