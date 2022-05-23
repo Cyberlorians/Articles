@@ -22,4 +22,4 @@ I recommend, and at your own risk, stand up a honeypot in your own environment. 
 
 In conclusion of Part-2, I hope you are starting to get the visualization of where I am about to bring you. Hang on because it's about to get nuts.
 
-## Continue to Part-3: Malicious traffic in Sentinel. Coming Soon! ##
+## [Continue to Part-3: Malicious traffic in Sentinel](https://github.com/Cyberlorians/Articles/blob/main/MaliciousActivityandSentinelP3.md) ##
