@@ -10,7 +10,7 @@ Navigate back to the Workbook in Sentinel and open it up. I am only going to foc
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/maliciousactors.png)
 
-Lets just get into Sentinel already! We need a rule to trigger an alert, don't we? This workbook nor Traffic Analytics does that by default. So, I have one ready to go to eliminated FPs (False Positives). How did I start that query rule. Well, navigate back to "Network Watcher>Traffic Analytics", and click the RED inblound.
+Lets just get into Sentinel already! We need a rule to trigger an alert, don't we? This workbook nor Traffic Analytics does that by default. So, I have one ready to [go](https://github.com/Cyberlorians/Sentinel/blob/main/Analytic%20Rules/Custom%20-%20Malicious%20IP%20Allowed%20IN.json) to eliminate any FPs (False Positives). How did I start that query rule. Well, navigate back to "Network Watcher>Traffic Analytics", and click the RED inblound.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/trafficanalyticskql.png)
 
