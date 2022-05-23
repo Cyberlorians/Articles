@@ -16,11 +16,7 @@ Lets just get into Sentinel already! We need a rule to trigger an alert, don't w
 
 Now, we see the basics of [my analytic rule](https://github.com/Cyberlorians/Sentinel/blob/main/Analytic%20Rules/Custom%20-%20Malicious%20IP%20Allowed%20IN.json) and your upcoming analytic rule.
 
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/trafficanalyticskql2.png)
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/trafficanalyticskql2.png) 
 
 
-
- 
-
-
-## [Continue to Part-3: Malicious traffic in Sentinel](https://github.com/Cyberlorians/Articles/blob/main/MaliciousActivityandSentinelP3.md) ##
+## Continue to Part-4: Malicious traffic in Sentinel. Coming Soon! ##
