@@ -1,6 +1,6 @@
 ## Part-3: Malicious traffic in Sentinel. ## 
 
-[Part-2](https://github.com/Cyberlorians/Articles/blob/main/MaliciousActivityandSentinelP2.md) showed us how Traffic Analytics and malicious activity in Network Watcher but we also sent our logs to Sentinels LAW. Let's start getting into the juicy data. 
+[Part-2](https://github.com/Cyberlorians/Articles/blob/main/MaliciousActivityandSentinelP2.md) showed us how bring together Traffic Analytics and malicious activity in Network Watcher as well as sending the logs to Sentinels LAW. Let's start getting into the juicy data. 
 
 What I want you to do next is open your Sentinel workspace, navigate to Workbooks add "Azure Network Watcher" and save it.
 
