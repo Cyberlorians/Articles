@@ -2,9 +2,13 @@
 
 [Part-2](https://github.com/Cyberlorians/Articles/blob/main/MaliciousActivityandSentinelP2.md) showed us how Traffic Analytics and malicious activity in Network Watcher but we also sent our logs to Sentinels LAW. Let's start getting into the juicy data. 
 
-What I want you to do next is open your Sentinel workspace, navigate to Workbooks add "Azure Network Watcher".
+What I want you to do next is open your Sentinel workspace, navigate to Workbooks add "Azure Network Watcher" and save it.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/azurenetworkwatcher.png)
+
+Navigate back to the Workbook in Sentinel and open it up. I am only going to focus on the Malicious IP activity but please navigate through this work as it will show NIC, VM, Traffic flows, Attached resources, NSGs being attacked and etc.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/maliciousactors.png)
  
 This image is the heat map of my malicious activity. I can enhance this as much as I would like by clicking on any of the endpoints, connecting the dots and clicking on any of the fields at the top menu.  
 
