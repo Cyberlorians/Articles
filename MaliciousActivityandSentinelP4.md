@@ -8,7 +8,7 @@ Open your Sentinel workspace and navigate to Anayltics. Click on import and impo
 
 That was easy, right? Now, that we have the rule import, click Edit on your new rule. 
 
-(https://github.com/Cyberlorians/uploadedimages/blob/main/maliciousINruleEDIT.png)
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/maliciousINruleEDIT.png)
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/maliciousactors.png)
 
