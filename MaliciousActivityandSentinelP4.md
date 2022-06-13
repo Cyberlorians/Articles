@@ -1,8 +1,8 @@
 ## Part-4: Malicious traffic in Sentinel. ## 
 
-[Part-3](https://github.com/Cyberlorians/Articles/blob/main/MaliciousActivityandSentinelP3.md) showed us Network Watcher workbook, the basics of "Malicious Actors", and AzureNetworkAnalytics_CL custom log showing inbound flows.
+[Part-3](https://github.com/Cyberlorians/Articles/blob/main/MaliciousActivityandSentinelP3.md) showed us Network Watcher workbook, the basics of "Malicious Actors", and AzureNetworkAnalytics_CL custom log showing inbound flows. Lets get right into the nitty gritty and import the analytical rule. 
 
-What I want you to do next is open your Sentinel workspace, navigate to Workbooks add "Azure Network Watcher" and save it.
+Open your Sentinel workspace and navigate to Anayltics. Click on import and import [Custom - Malicious IP Allowed IN](https://github.com/Cyberlorians/Sentinel/blob/main/Analytic%20Rules/Custom%20-%20Malicious%20IP%20Allowed%20IN.json) rule. 
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/azurenetworkwatcher.png)
 
