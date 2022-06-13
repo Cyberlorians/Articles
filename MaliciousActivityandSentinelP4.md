@@ -3,12 +3,16 @@
 [Part-3](https://github.com/Cyberlorians/Articles/blob/main/MaliciousActivityandSentinelP3.md) showed us Network Watcher workbook, the basics of "Malicious Actors", and AzureNetworkAnalytics_CL custom log showing inbound flows. Lets get right into the nitty gritty and import the playbook first, then the analytic rule. The playbook you will import is called "IP2GEOComments", which will add comments to the Malicious traffic incident. The comments will be IP origin and IP information.
 
 In the Azure Portal, search for Custom Deployment and "Build your own template in the editor".
+
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/customteplatelogicapp.png)
 
 Paste the content from [IP2GEOComments](https://github.com/Cyberlorians/Sentinel/blob/main/Playbooks/IP2GEOComments.json).
+
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/customtemplatelogicapptemplate.png)
 
-Open your Sentinel workspace and navigate to Anayltics. Click on import and import [Custom - Malicious IP Allowed IN](https://github.com/Cyberlorians/Sentinel/blob/main/Analytic%20Rules/Custom%20-%20Malicious%20IP%20Allowed%20IN.json) rule. 
+Open your Sentinel workspace and navigate to Anayltics. Click on import and import [Custom - Malicious IP Allowed IN]
+
+(https://github.com/Cyberlorians/Sentinel/blob/main/Analytic%20Rules/Custom%20-%20Malicious%20IP%20Allowed%20IN.json) rule. 
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/allowmaliciousinrule.png)
 
