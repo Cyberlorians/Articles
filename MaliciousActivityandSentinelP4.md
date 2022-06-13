@@ -4,7 +4,7 @@
 
 Open your Sentinel workspace and navigate to Anayltics. Click on import and import [Custom - Malicious IP Allowed IN](https://github.com/Cyberlorians/Sentinel/blob/main/Analytic%20Rules/Custom%20-%20Malicious%20IP%20Allowed%20IN.json) rule. 
 
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/azurenetworkwatcher.png)
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/allowmaliciousinrule.png)
 
 Navigate back to the Workbook in Sentinel and open it up. I am only going to focus on the Malicious IP activity but please navigate through this work as it will show NIC, VM, Traffic flows, Attached resources, NSGs being attacked and etc. Please navigate to "Malicious Actors" in the workbook. Here we see Malicious IPs and allowed IN (please dig into this workbook and get a feel for it). 
 
