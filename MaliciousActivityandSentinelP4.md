@@ -6,7 +6,9 @@ Open your Sentinel workspace and navigate to Anayltics. Click on import and impo
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/allowmaliciousinrule.png)
 
-Navigate back to the Workbook in Sentinel and open it up. I am only going to focus on the Malicious IP activity but please navigate through this work as it will show NIC, VM, Traffic flows, Attached resources, NSGs being attacked and etc. Please navigate to "Malicious Actors" in the workbook. Here we see Malicious IPs and allowed IN (please dig into this workbook and get a feel for it). 
+That was easy, right? Now, that we have the rule import, click Edit on your new rule. 
+
+(https://github.com/Cyberlorians/uploadedimages/blob/main/maliciousINruleEDIT.png)
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/maliciousactors.png)
 
