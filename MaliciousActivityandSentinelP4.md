@@ -44,6 +44,10 @@ In the Analytics rule wizard, navigate to "Automated Reponse" tab and under "ale
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/ip2geoautoresponse.png)
 
+If you have followed all steps and you are indeed having malicious traffic inbound your rule will kick off and the playbook will add comments as seen below.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/ip2geotagsworking.png)
+
 
 
 
