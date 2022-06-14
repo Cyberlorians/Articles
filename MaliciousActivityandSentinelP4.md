@@ -36,9 +36,11 @@ On to the next step which is the Analytical rule. Open your Sentinel workspace a
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/allowmaliciousinrule.png)
 
-That was easy, right? Now, that we have the rule imported, click "Edit" on your new rule. 
+That was easy, right? Now, that we have the rule imported, click "Edit" on your new rule. Note - you may edit this rule now or later based on your preferences.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/maliciousINruleEDIT.png)
+
+In the Analytics rule wizard, navigate to "Automated Reponse" tab and under "alert automation", add the new IP2GEOComments playbooks. Click review and then save. 
 
 
 
