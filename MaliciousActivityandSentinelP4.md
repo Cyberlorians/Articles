@@ -70,6 +70,6 @@ Go back into your new incident and under the comments section you will see any a
 
 To sum this all up. You now have IP2GEOComments which will auto run when an incident triggers AND you now have the ability to run Get-VirusTotalIPReport for FREE. A quick note, you can run the Virus Total playbook on any investigation of your choice now. This concludes my 4 part mini series. I hope you have enjoyed and my detailed steps helped.
 
-## [Back to Part-1: Malicious traffic in Sentinel](https://github.com/Cyberlorians/Articles/blob/main/MaliciousActivityandSentinelP1.md). ##
-## [Back to Part-2: Malicious traffic in Sentinel](https://github.com/Cyberlorians/Articles/blob/main/MaliciousActivityandSentinelP2.md). ##
-## [Back to Part-3: Malicious traffic in Sentinel](https://github.com/Cyberlorians/Articles/blob/main/MaliciousActivityandSentinelP3.md). ##
+## [Back to Part-1: Malicious traffic in Sentinel](https://github.com/Cyberlorians/Articles/blob/main/MaliciousActivityandSentinelP1.md) ##
+## [Back to Part-2: Malicious traffic in Sentinel](https://github.com/Cyberlorians/Articles/blob/main/MaliciousActivityandSentinelP2.md) ##
+## [Back to Part-3: Malicious traffic in Sentinel](https://github.com/Cyberlorians/Articles/blob/main/MaliciousActivityandSentinelP3.md) ##
