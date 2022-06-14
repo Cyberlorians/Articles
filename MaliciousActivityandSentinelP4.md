@@ -32,11 +32,7 @@ Lastly, go back to the left hand side of the logic app and under "Development To
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/logicappdesignerverify.png)
 
-
-
-
-
-Open your Sentinel workspace and navigate to Anayltics. Click on import and import [Custom - Malicious IP Allowed IN](https://github.com/Cyberlorians/Sentinel/blob/main/Analytic%20Rules/Custom%20-%20Malicious%20IP%20Allowed%20IN.json) rule. 
+On to the next step which is the Analytical rule. Open your Sentinel workspace and navigate to Anayltics. Click on import and import [Custom - Malicious IP Allowed IN](https://github.com/Cyberlorians/Sentinel/blob/main/Analytic%20Rules/Custom%20-%20Malicious%20IP%20Allowed%20IN.json) rule. 
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/allowmaliciousinrule.png)
 
