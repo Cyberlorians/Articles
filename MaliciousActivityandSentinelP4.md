@@ -64,6 +64,10 @@ Chose the new, "Get-VirusTotalIPReport" and click "Run".
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/getvtrun.png)
 
+Go back into your new incident and under the comments section you will see any and all Virus Total IP Reports.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/getvtcomments.png)
+
 
 
 
