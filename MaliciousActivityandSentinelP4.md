@@ -12,11 +12,11 @@ Paste the content from [IP2GEOComments](https://github.com/Cyberlorians/Sentinel
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/customtemplatelogicappcreate.png)
 
-After the playbook has imported we need to configure permissions for the logic app. Note - the logic app runs as a mananged identity but will need Microsoft Sentinel Responder permissions. To begin, navigate to your new IP2GEOComments logic app and go to "Identity" tab. You should see the status is "On". Now click on "Azure Role Assignments".
+After the playbook has imported we need to configure permissions for the logic app. Disclaimer: the logic app runs as a mananged identity but will need Microsoft Sentinel Responder permissions. To begin, navigate to your new IP2GEOComments logic app and go to "Identity" tab. You should see the status is "On". Now click on "Azure Role Assignments".
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/logicapppermissions.png)
 
-After clicking on "Azure Role Assignments" tab, click "Add role assignment (Preview). Chose your subscription, resource group and Role as shown in the image. Note - for this setup the only option is to set the permissions at the same resource group for "Microsoft Sentinel Responder" permission as the most least privilege assignment. You can set the SAME permission at the Sentinel Log Analytics Workspace for more granularity. After adding, save the permissions.
+After clicking on "Azure Role Assignments" tab, click "Add role assignment (Preview). Chose your subscription, resource group and Role as shown in the image. Disclaimer: for this setup the only option is to set the permissions at the same resource group for "Microsoft Sentinel Responder" permission as the most least privilege assignment. You can set the SAME permission at the Sentinel Log Analytics Workspace for more granularity. After adding, save the permissions.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/logicapppermissions2.png)
 
@@ -36,7 +36,7 @@ On to the next step which is the Analytical rule. Open your Sentinel workspace a
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/allowmaliciousinrule.png)
 
-That was easy, right? Now, that we have the rule imported, click "Edit" on your new rule. Note - you may edit this rule now or later based on your preferences.
+That was easy, right? Now, that we have the rule imported, click "Edit" on your new rule. Disclaimer: you may edit this rule now or later based on your preferences.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/maliciousINruleEDIT.png)
 
@@ -48,11 +48,11 @@ If you have followed all steps and you are indeed having malicious traffic inbou
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/ip2geotagsworking.png)
 
-Cool huh! I think so too but we could use a bit more detail on those IPs. Following the SAME steps as above, deploy [Get-VirusTotalIPReport](https://github.com/Cyberlorians/Sentinel/blob/main/Playbooks/Get-VirusTotalIPReport.json). I adjusted this playbook from the Sentinel community to run as a managed identity AND who will have "whois" data. Note - and you CANNOT miss this step. Please sign up a [VirusTotal](www.virustotal.com) which is free for the API Key and on the logic app designer connector you will have to enter your api-key, name and update.
+Cool huh! I think so too but we could use a bit more detail on those IPs. Following the SAME steps as above, deploy [Get-VirusTotalIPReport](https://github.com/Cyberlorians/Sentinel/blob/main/Playbooks/Get-VirusTotalIPReport.json). I adjusted this playbook from the Sentinel community to run as a managed identity AND who will have "whois" data. Disclaimer: and you CANNOT miss this step. Please sign up a [VirusTotal](www.virustotal.com) which is free for the API Key and on the logic app designer connector you will have to enter your api-key, name and update.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/getvirustotalconnection.png)
 
-Next is to scroll slightly down to "condition" and enter connection name, workspace key and workspace ID (all found on our Sentinel LAW). Note - you have to enter TWO DIFFERENT Connection names otherwise it will not work. I have "GETVTLAW and GETVTLAW2". Click Update and then SAVE the changes.
+Next is to scroll slightly down to "condition" and enter connection name, workspace key and workspace ID (all found on our Sentinel LAW). Disclaimer: you have to enter TWO DIFFERENT Connection names otherwise it will not work. I have "GETVTLAW and GETVTLAW2". Click Update and then SAVE the changes.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/getvtlawworkspaceid.png)
 
@@ -68,7 +68,7 @@ Go back into your new incident and under the comments section you will see any a
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/getvtcomments.png)
 
-To sum this all up. You now have IP2GEOComments which will auto run when an incident triggers AND you now have the ability to run Get-VirusTotalIPReport for FREE. A quick note, you can run the Virus Total playbook on any investigation of your choice now. This concludes my 4 part mini series. I hope you have enjoyed and my detailed steps helped.
+To sum this all up. You now have IP2GEOComments which will auto run when an incident triggers AND you now have the ability to run Get-VirusTotalIPReport for FREE. Disclaimer: you can run the Virus Total playbook on any investigation of your choice now. This concludes my 4 part mini series. I hope you have enjoyed and my detailed steps helped.
 
 ## [Back to Part-1: Malicious traffic in Sentinel](https://github.com/Cyberlorians/Articles/blob/main/MaliciousActivityandSentinelP1.md) ##
 ## [Back to Part-2: Malicious traffic in Sentinel](https://github.com/Cyberlorians/Articles/blob/main/MaliciousActivityandSentinelP2.md) ##
