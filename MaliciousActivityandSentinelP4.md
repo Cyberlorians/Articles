@@ -60,6 +60,10 @@ Head back to Seninel and on the Incident, scroll over and click on the ellipsis 
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/getvirustotalrunplaybook.png)
 
+Chose the new, "Get-VirusTotalIPReport" and click "Run".
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/getvtrun.png)
+
 
 
 
