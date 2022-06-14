@@ -21,4 +21,4 @@ Now, we see the basics of [my analytic rule](https://github.com/Cyberlorians/Sen
 Lets head to Part-4 and get this anayltical rule into Sentinel!!
 
 
-## [Continue to Part-4: Malicious traffic in Sentinel](https://github.com/Cyberlorians/Articles/blob/main/MaliciousActivityandSentinelP4.md). ##
+## [Continue to Part-4: Malicious traffic in Sentinel](https://github.com/Cyberlorians/Articles/blob/main/MaliciousActivityandSentinelP4.md) ##
