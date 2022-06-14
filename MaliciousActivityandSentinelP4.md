@@ -16,6 +16,10 @@ After the playbook has imported we need to configure permissions for the logic a
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/logicapppermissions.png)
 
+After clicking on "Azure Role Assignments" tab, click "Add role assignment (Preview). Chose your subscription, resource group and Role as shown in the image. Note - for this setup the only option is to set the permissions at the same resource group for "Microsoft Sentinel Responder" permission as the most least privilege assignment. You can set the SAME permission at the Sentinel Log Analytics Workspace for more granularity.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/logicapppermissions2.png)
+
 Open your Sentinel workspace and navigate to Anayltics. Click on import and import [Custom - Malicious IP Allowed IN](https://github.com/Cyberlorians/Sentinel/blob/main/Analytic%20Rules/Custom%20-%20Malicious%20IP%20Allowed%20IN.json) rule. 
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/allowmaliciousinrule.png)
