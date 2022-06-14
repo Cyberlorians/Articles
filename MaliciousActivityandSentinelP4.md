@@ -12,6 +12,10 @@ Paste the content from [IP2GEOComments](https://github.com/Cyberlorians/Sentinel
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/customtemplatelogicappcreate.png)
 
+After the playbook has imported we need to configure permissions for the logic app. Note - the logic app runs as a mananged identity but will need Microsoft Sentinel Responder permissions. To begin, navigate to your new IP2GEOComments logic app and go to "Identity" tab. You should see the status is "On". Now click on "Azure Role Assignments".
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/logicapppermissions.png)
+
 Open your Sentinel workspace and navigate to Anayltics. Click on import and import [Custom - Malicious IP Allowed IN](https://github.com/Cyberlorians/Sentinel/blob/main/Analytic%20Rules/Custom%20-%20Malicious%20IP%20Allowed%20IN.json) rule. 
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/allowmaliciousinrule.png)
