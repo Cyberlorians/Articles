@@ -16,9 +16,25 @@ After the playbook has imported we need to configure permissions for the logic a
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/logicapppermissions.png)
 
-After clicking on "Azure Role Assignments" tab, click "Add role assignment (Preview). Chose your subscription, resource group and Role as shown in the image. Note - for this setup the only option is to set the permissions at the same resource group for "Microsoft Sentinel Responder" permission as the most least privilege assignment. You can set the SAME permission at the Sentinel Log Analytics Workspace for more granularity.
+After clicking on "Azure Role Assignments" tab, click "Add role assignment (Preview). Chose your subscription, resource group and Role as shown in the image. Note - for this setup the only option is to set the permissions at the same resource group for "Microsoft Sentinel Responder" permission as the most least privilege assignment. You can set the SAME permission at the Sentinel Log Analytics Workspace for more granularity. After adding, save the permissions.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/logicapppermissions2.png)
+
+Back on the left hand side of the logic app blade, head to "API Connections" and you will see the the API connection that is associated with the logic app.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/logicappapiverify.png)
+
+Click on the API connection and double check that it is in a ready state.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/logicappverify2.png)
+
+Lastly, go back to the left hand side of the logic app and under "Development Tools", chose "Logic app designer". Open each step and verify that the managed identity is connected. It should be but if it is not, chose "Change connection" and add the managed identity that is associated with the logic app.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/logicappdesignerverify.png)
+
+
+
+
 
 Open your Sentinel workspace and navigate to Anayltics. Click on import and import [Custom - Malicious IP Allowed IN](https://github.com/Cyberlorians/Sentinel/blob/main/Analytic%20Rules/Custom%20-%20Malicious%20IP%20Allowed%20IN.json) rule. 
 
