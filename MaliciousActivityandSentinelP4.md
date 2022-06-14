@@ -48,6 +48,9 @@ If you have followed all steps and you are indeed having malicious traffic inbou
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/ip2geotagsworking.png)
 
+Cool huh! I think so too but we could use a bit more detail on those IPs. Following the SAME steps as above, deploy [Get-VirusTotalIPReport](https://github.com/Cyberlorians/Sentinel/blob/main/Playbooks/Get-VirusTotalIPReport.json). I adjusted this playbook from the Sentinel community to run as a managed identity AND who will have "whois" data. On the Incident, scroll over and click on the ellipsis and chose "Run Playbook (Preview)"
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/getvirustotalrunplaybook.png)
 
 
 
