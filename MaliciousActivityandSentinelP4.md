@@ -42,6 +42,8 @@ That was easy, right? Now, that we have the rule imported, click "Edit" on your 
 
 In the Analytics rule wizard, navigate to "Automated Reponse" tab and under "alert automation", add the new IP2GEOComments playbooks. Click review and then save. 
 
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/ip2geoautoresponse.png)
+
 
 
 
