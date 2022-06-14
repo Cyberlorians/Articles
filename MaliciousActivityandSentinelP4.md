@@ -50,7 +50,13 @@ If you have followed all steps and you are indeed having malicious traffic inbou
 
 Cool huh! I think so too but we could use a bit more detail on those IPs. Following the SAME steps as above, deploy [Get-VirusTotalIPReport](https://github.com/Cyberlorians/Sentinel/blob/main/Playbooks/Get-VirusTotalIPReport.json). I adjusted this playbook from the Sentinel community to run as a managed identity AND who will have "whois" data. Note - and you CANNOT miss this step. Please sign up a [VirusTotal](www.virustotal.com) which is free for the API Key and on the logic app designer connector you will have to enter your api-key, name and update.
 
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/getvirustotalapikey.png)
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/getvirustotalconnection.png)
+
+Next is to scroll slightly down to "condition" and enter connection name, workspace key and workspace ID (all found on our Sentinel LAW).
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/getvirustotalworkspaceinfo.png)
+
+
 
 On the Incident, scroll over and click on the ellipsis and chose "Run Playbook (Preview)"
 
