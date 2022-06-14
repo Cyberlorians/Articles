@@ -6,9 +6,10 @@ In the Azure Portal, search for Custom Deployment and "Build your own template i
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/customteplatelogicapp.png)
 
-Paste the content from [IP2GEOComments](https://github.com/Cyberlorians/Sentinel/blob/main/Playbooks/IP2GEOComments.json).
+Paste the content from [IP2GEOComments](https://github.com/Cyberlorians/Sentinel/blob/main/Playbooks/IP2GEOComments.json), hit apply and continue to create on the next step of the deployment.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/customtemplatelogicapptemplate.png)
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/customtemplatelogicappcreate.png)
 
 Open your Sentinel workspace and navigate to Anayltics. Click on import and import [Custom - Malicious IP Allowed IN](https://github.com/Cyberlorians/Sentinel/blob/main/Analytic%20Rules/Custom%20-%20Malicious%20IP%20Allowed%20IN.json) rule. 
 
