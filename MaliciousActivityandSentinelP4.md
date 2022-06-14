@@ -68,6 +68,8 @@ Go back into your new incident and under the comments section you will see any a
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/getvtcomments.png)
 
+To sum this all up. You now have IP2GEOComments which will auto run when an incident triggers AND you now have the ability to run Get-VirusTotalIPReport for FREE. A quick note, you can run the Virus Total playbook on any investigation of your choice now.
+
 
 
 
