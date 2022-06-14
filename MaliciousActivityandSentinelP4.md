@@ -52,13 +52,11 @@ Cool huh! I think so too but we could use a bit more detail on those IPs. Follow
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/getvirustotalconnection.png)
 
-Next is to scroll slightly down to "condition" and enter connection name, workspace key and workspace ID (all found on our Sentinel LAW).
+Next is to scroll slightly down to "condition" and enter connection name, workspace key and workspace ID (all found on our Sentinel LAW). Click Update and then SAVE the changes.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/getvirustotalworkspaceinfo.png)
 
-
-
-On the Incident, scroll over and click on the ellipsis and chose "Run Playbook (Preview)"
+Head back to Seninel and on the Incident, scroll over and click on the ellipsis and chose "Run Playbook (Preview)"
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/getvirustotalrunplaybook.png)
 
