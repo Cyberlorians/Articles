@@ -91,9 +91,12 @@ Install-ADServiceAccount -Identity $Name
 
 #### Step9: Install "AADConnectProvisioningAgentSetup.exe", which you just downloaded.
 
+Connect to AzureAD with hybrid AAD role account.
 Customize the installation and chose "Use custom gMSA", enter the gMSA created earlier.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/cloudsyncsetup1.png)
+
+Connect to Active Directory with EnterpriseAdmin account>Confirm and hit next. The installation should have been successful. Again, if any issues it was becasue of the -KerberosEncryptionType but you would know that was not working during the PowerShell script installation.
 
 
 
