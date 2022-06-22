@@ -1,10 +1,10 @@
 ## Azure Active Directory Connect Cloud Sync - Hardened (STIGGED) Setup. ##
 
-A lot of the work I do consists of working in hardened security baselines. In short, what does that mean? It means that STIGS are pushed via Group Policy to harden the systems. There is a new variant of AADC called Azure Active Directory Connect Cloud Sync which uses a provisioning agent instead of the traditional connect application over the Azure Fabric backbone. For in depth overview please review [here](https://docs.microsoft.com/en-us/azure/active-directory/cloud-sync/what-is-cloud-sync?toc=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Fazure%2Factive-directory%2Fcloud-sync%2Ftoc.json&bc=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Fazure%2Fbread%2Ftoc.json).
+A lot of the work I do consists of working in hardened security baselines. In short, that means STIGS are pushed via Group Policy to harden the systems. There new variant is called Azure Active Directory Connect Cloud Sync which uses a provisioning agent instead of the traditional connect application over the Azure Fabric backbone. For in depth overview please review [here](https://docs.microsoft.com/en-us/azure/active-directory/cloud-sync/what-is-cloud-sync?toc=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Fazure%2Factive-directory%2Fcloud-sync%2Ftoc.json&bc=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Fazure%2Fbread%2Ftoc.json).
 
-The current environment(s) I have been working in are now 2016+ OS level. In this document it will focus on 2019+ [DISA STIG](https://public.cyber.mil/stigs/gpo/) and on Microsoft Windows Server 2022 Domain Controllers and on our new 2022 Member Server. Disclaimer - The prerequisites are listed [here](https://docs.microsoft.com/en-us/azure/active-directory/cloud-sync/how-to-prerequisites?tabs=public-cloud) for AADC-CloudSync. The member server should be treated as a Tier0 Member Server (Tier0 = identity), that means your Domain/Enterprise Admin will be used on both the DC and AADC. Before I begin, please open a the prerequisite screen side by side with this article. Also, this setup is to work with FIPS enabled, if you cannot get approval to turn of FIPS for the server (recommended).
+The current environment(s) I have been working in are currently at 2016+ OS level. I will focus on 2019+ [DISA STIG](https://public.cyber.mil/stigs/gpo/), Microsoft Windows Server 2022 Domain Controllers and on our new 2022 Member Server. Disclaimer - The prerequisites are listed [here](https://docs.microsoft.com/en-us/azure/active-directory/cloud-sync/how-to-prerequisites?tabs=public-cloud) for AADC-CloudSync. The member server should be treated as a Tier0 Member Server (Tier0 = identity), which means your Domain/Enterprise Admin will be used on both the DC and AADC. Before I begin, please open a the prerequisite screen side by side with this article. Also, this setup is to work with FIPS enabled, if you cannot get approval to turn of FIPS for the server (recommended).
 
-IF and IF your domain is NOT using gmsa(Group Managed Service Accounts), you need to Create the Key Distribution Services KDS Root Key seen. More info [here](https://docs.microsoft.com/en-us/windows-server/security/group-managed-service-accounts/create-the-key-distribution-services-kds-root-key). 
+IF your domain is NOT using gmsa(Group Managed Service Accounts), you need to Create the Key Distribution Services KDS Root Key seen. More info [here](https://docs.microsoft.com/en-us/windows-server/security/group-managed-service-accounts/create-the-key-distribution-services-kds-root-key). 
 
 ## Enter the below commands on your Domain Controller or other Tier0 management server with your RSAT tools installed.
 #### Domain Prereq
@@ -13,7 +13,7 @@ Add-KdsRootKey –EffectiveImmediately
 Add-KdsRootKey -EffectiveTime ((get-date).addhours(-10))
 ```
 #### Domain Create Group. 
-While you are there, open ADUC and create an AD group and put all of the AADCCloudSync servers. I created a group called 'cloudsyncretrievepwd'. Why do we do this? IF you are planning on high availability a group is better suited for ease of management when it comes to allowing the gMSA to 'PrincipalsAllowToRetrieveManagedPassword' of the cloud sync severs. 
+While you are there, open ADUC and create an AD group with all of the AADCCloudSync servers. I created a group called 'cloudsyncretrievepwd'. Why do we do this? If you are planning on high availability a group is better suited for ease of management when it comes to allowing the gMSA to run with 'PrincipalsAllowToRetrieveManagedPassword' of the cloud sync severs. 
 
 ## AADC Cloud Sync server setup. 
 
@@ -98,7 +98,7 @@ Customize the installation and chose "Use custom gMSA", enter the gMSA created e
 
 Connect to Active Directory with EnterpriseAdmin account>Confirm and hit next. 
 
-The installation should have been successful. Again, if any issues it was becasue of the -KerberosEncryptionType but you would know that was not working during the PowerShell script installation.
+The installation should have been successful. Again, if any issues it was because of the -KerberosEncryptionType but you would know that was not working during the PowerShell script installation.
 
 #### Step10: Password hash sync with FIPS enabled. If you have gone this far - you have FIPS enabled.
 
