@@ -40,7 +40,42 @@ Open CMD and run as Administrator.
     </runtime> 
 ```
 #### Step5: Reboot
-#### Step6: 
+#### Step6: Open PowerShell(Run as Administrator) and run the following. 
+```
+Install-WindowsFeature -Name RSAT-AD-PowerShell
+```
+#### Step7: Copy the contents of the script to the cloud sync server. Disclaimer - you may or may not need to use the -KerberosEncryptionType flag but if you are using 2019 Domain Controller STIG you will have to. 
+```
+# Filename:    cloudsyncgmsa.ps1
+# Description: Creates and installs a custom gMSA account for use with Azure AD Connect cloud sync.
+#
+# DISCLAIMER:
+# Copyright (c) Microsoft Corporation. All rights reserved. This 
+# script is made available to you without any express, implied or 
+# statutory warranty, not even the implied warranty of 
+# merchantability or fitness for a particular purpose, or the 
+# warranty of title or non-infringement. The entire risk of the 
+# use or the results from the use of this script remains with you.
+#
+#
+#
+#
+# Declare variables
+$Name = 'aadccsgmsa'
+$Description = "Azure AD Cloud Sync service account for cloud sync server"
+$Server = "aadccs01.cyberlorians.net"
+$Principal = Get-ADGroup 'cloudsyncretrievepwd'
+
+# Create service account in Active Directory
+New-ADServiceAccount -Name $Name `
+-Description $Description `
+-DNSHostName $Server `
+-ManagedPasswordIntervalInDays 30 `
+-PrincipalsAllowedToRetrieveManagedPassword $Principal `
+-Enabled $True `
+-PassThru
+
+Set-ADServiceAccount -Identity $Name -KerberosEncryptionType AES128,AES256
 
 
 
