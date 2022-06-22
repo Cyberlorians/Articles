@@ -83,6 +83,7 @@ Set-ADServiceAccount -Identity $Name -KerberosEncryptionType AES128,AES256 //If 
 
 # Install the new service account on Azure AD Cloud Sync server
 Install-ADServiceAccount -Identity $Name
+```
 
 #### Step8: Navigate to AAD>Azure AD Connect>Manage Azure AD cloud sync and "download agent".
 
