@@ -102,8 +102,17 @@ The installation should have been successful. Again, if any issues it was becasu
 
 #### Step10: Password hash sync with FIPS enabled. If you have gone this far - you have FIPS enabled.
 
-Enable MD5 for password hash synchronization [here](https://docs.microsoft.com/en-us/azure/active-directory/cloud-sync/how-to-install).
+Enable MD5 for password hash synchronization [here](https://docs.microsoft.com/en-us/azure/active-directory/cloud-sync/how-to-install). Now, reboot.
 
+#### Step11: Check AAD Agent health.
+
+Navigate to "AAD>Azure AD Connect>Manage Azure AD cloud sync>Review all agents" and
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/cloudsyncagenthealth.png)
+
+Once confirmed - continue to "Cloud sync configuration" [here](https://docs.microsoft.com/en-us/azure/active-directory/cloud-sync/how-to-configure). 
+
+Cheers!
 
 
 
