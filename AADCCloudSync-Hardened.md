@@ -88,6 +88,7 @@ Install-ADServiceAccount -Identity $Name
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/cloudsyncdownload1.png)
 
+#### Step9:
 
 
 
