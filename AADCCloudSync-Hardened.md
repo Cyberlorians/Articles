@@ -46,7 +46,7 @@ Open CMD and run as Administrator.
 ```
 Install-WindowsFeature -Name RSAT-AD-PowerShell
 ```
-#### Step7: Copy the contents of the script to the cloud sync server. Disclaimer - you may or may not need to use the -KerberosEncryptionType flag but if you are using 2019 Domain Controller STIG you will have to. 
+#### Step7: Copy the contents of the script to the cloud sync server. Disclaimer - you may or may not need to use the -KerberosEncryptionType flag but if you are using 2019 Domain Controller STIG you will have to on OS 2019-2022.
 ```
 Install-WindowsFeature -Name RSAT-AD-PowerShell
 Run this script
