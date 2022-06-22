@@ -4,16 +4,11 @@ A lot of the work I do consists of working in hardened security baselines. In sh
 
 The current environment(s) I have been working in are currently at 2016+ OS level. I will focus on 2019+ [DISA STIG](https://public.cyber.mil/stigs/gpo/), Microsoft Windows Server 2022 Domain Controllers and on our new 2022 Member Server. Disclaimer - The prerequisites are listed [here](https://docs.microsoft.com/en-us/azure/active-directory/cloud-sync/how-to-prerequisites?tabs=public-cloud) for AADC-CloudSync. The member server should be treated as a Tier0 Member Server (Tier0 = identity), which means your Domain/Enterprise Admin will be used on both the DC and AADC. Before I begin, please open another browser window with the prerequisite screen side by side with this article. Also, this setup is to work with FIPS enabled, if you cannot get approval to turn of FIPS for the server (recommended).
 
-If your domain is NOT using gmsa(Group Managed Service Accounts), you need to Create the Key Distribution Services KDS Root Key seen. More info [here](https://docs.microsoft.com/en-us/windows-server/security/group-managed-service-accounts/create-the-key-distribution-services-kds-root-key). 
+If your domain is NOT using gmsa(Group Managed Service Accounts), you need to Create the Key Distribution Services KDS Root Key seen. More info [here](https://docs.microsoft.com/en-us/windows-server/security/group-managed-service-accounts/create-the-key-distribution-services-kds-root-key). This is a prerequisite for using gMSA. If you are using gMSA, skip this step.
 
-## Enter the below commands on your Domain Controller or other Tier0 management server with your RSAT tools installed.
-#### Domain Prereq
-```
-Add-KdsRootKey –EffectiveImmediately
-Add-KdsRootKey -EffectiveTime ((get-date).addhours(-10))
-```
 #### Domain Create Group. 
-While you are there, open ADUC and create an AD group with all of the AADCCloudSync servers. I created a group called 'cloudsyncretrievepwd'. Why do we do this? If you are planning on high availability a group is better suited for ease of management when it comes to allowing the gMSA to run with 'PrincipalsAllowToRetrieveManagedPassword' of the cloud sync severs. 
+
+Create an Active Directory Security Group and make the cloud sync server(s) members. I created a group called 'cloudsyncretrievepwd'. Why do we do this? If you are planning on high availability a group is better suited for ease of management when it comes to allowing the gMSA to run with 'PrincipalsAllowToRetrieveManagedPassword' of the cloud sync severs. 
 
 ## AADC Cloud Sync server setup. 
 
