@@ -6,7 +6,7 @@ The current environment(s) I have been working in are currently at 2016+ OS leve
 
 If your domain is NOT using gmsa(Group Managed Service Accounts), you need to Create the Key Distribution Services KDS Root Key seen. More info [here](https://docs.microsoft.com/en-us/windows-server/security/group-managed-service-accounts/create-the-key-distribution-services-kds-root-key). This is a prerequisite for using gMSA. If you are using gMSA, skip this step.
 
-#### Domain Create Group. 
+## Domain Create Group. 
 
 Create an Active Directory Security Group and make the cloud sync server(s) members. I created a group called 'cloudsyncretrievepwd'. Why do we do this? If you are planning on high availability a group is better suited for ease of management when it comes to allowing the gMSA to run with 'PrincipalsAllowToRetrieveManagedPassword' of the cloud sync severs. 
 
