@@ -30,10 +30,11 @@ New-ItemProperty -path 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders
 New-ItemProperty -path 'HKLM:\SOFTWARE\Microsoft\.NETFramework\v4.0.30319' -name 'SchUseStrongCrypto' -value 1 -PropertyType 'DWord' -Force | Out-Null
 ```
 #### Step4: FIPS bypass for .NetFramework. If FIPS is disabled please skip this next step.
-Open CMD and run as Administrator. Open machine.config for both variants and find/edit/add "<<enforceFIPSPolicy enabled="false"/>".
+Open CMD and run as Administrator. 
 ``` 
 %SYSTEMROOT%\Microsoft.NET\Framework\v4.0.30319\Config\machine.config
 %SYSTEMROOT%\Microsoft.NET\Framework64\v4.0.30319\Config\machine.config
+***ADD the following to each machine.config file***
 <runtime>  
         <enforceFIPSPolicy enabled="false"/>  
     </runtime> 
