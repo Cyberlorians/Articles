@@ -6,11 +6,13 @@ The current environment(s) I have been working in are now 2016+ OS level. In thi
 
 IF and IF your domain is NOT using gmsa(Group Managed Service Accounts), you need to Create the Key Distribution Services KDS Root Key seen. More info [here](https://docs.microsoft.com/en-us/windows-server/security/group-managed-service-accounts/create-the-key-distribution-services-kds-root-key). 
 
-## Enter the below commands on your PDC Emulator Domain Controller.
+## Enter the below commands on your Domain Controller or other Tier0 management server with your RSAT tools installed.
+#### Domain Prereq
 ```
 Add-KdsRootKey –EffectiveImmediately
 Add-KdsRootKey -EffectiveTime ((get-date).addhours(-10))
 ```
+#### Domain Create Group. 
 While you are there, open ADUC and create an AD group and put all of the AADCCloudSync servers. I created a group called 'cloudsyncretrievepwd'. Why do we do this? IF you are planning on high availability a group is better suited for ease of management when it comes to allowing the gMSA to 'PrincipalsAllowToRetrieveManagedPassword' of the cloud sync severs. 
 
 ## AADC Cloud Sync server setup. 
@@ -46,6 +48,8 @@ Install-WindowsFeature -Name RSAT-AD-PowerShell
 ```
 #### Step7: Copy the contents of the script to the cloud sync server. Disclaimer - you may or may not need to use the -KerberosEncryptionType flag but if you are using 2019 Domain Controller STIG you will have to. 
 ```
+Install-WindowsFeature -Name RSAT-AD-PowerShell
+Run this script
 # Filename:    cloudsyncgmsa.ps1
 # Description: Creates and installs a custom gMSA account for use with Azure AD Connect cloud sync.
 #
@@ -61,10 +65,10 @@ Install-WindowsFeature -Name RSAT-AD-PowerShell
 #
 #
 # Declare variables
-$Name = 'aadccsgmsa'
+$Name = 'aadccsgmsa' //The name of the gMSA to be created
 $Description = "Azure AD Cloud Sync service account for cloud sync server"
-$Server = "aadccs01.cyberlorians.net"
-$Principal = Get-ADGroup 'cloudsyncretrievepwd'
+$Server = "aadccs01.cyberlorians.net" //This is the cloud sync server name
+$Principal = Get-ADGroup 'cloudsyncretrievepwd' //AD group created in the DC step
 
 # Create service account in Active Directory
 New-ADServiceAccount -Name $Name `
@@ -75,7 +79,10 @@ New-ADServiceAccount -Name $Name `
 -Enabled $True `
 -PassThru
 
-Set-ADServiceAccount -Identity $Name -KerberosEncryptionType AES128,AES256
+Set-ADServiceAccount -Identity $Name -KerberosEncryptionType AES128,AES256 //If using 2019STIG and above you have to use
+
+# Install the new service account on Azure AD Cloud Sync server
+Install-ADServiceAccount -Identity $Name
 
 
 
