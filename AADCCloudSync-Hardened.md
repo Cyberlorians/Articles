@@ -7,7 +7,8 @@ The current environment(s) I have been working in are now 2016+ OS level. In thi
 IF and IF your domain is NOT using gmsa(Group Managed Service Accounts), you need to Create the Key Distribution Services KDS Root Key seen. More info [here](https://docs.microsoft.com/en-us/windows-server/security/group-managed-service-accounts/create-the-key-distribution-services-kds-root-key). 
 
 ## Enter the below commands on your PDC Emulator Domain Controller.
-```Add-KdsRootKey –EffectiveImmediately
+```
+Add-KdsRootKey –EffectiveImmediately
 Add-KdsRootKey -EffectiveTime ((get-date).addhours(-10))
 ```
 From a DC or management server, open ADUC and create an AD group and put all of the AADCCloudSync servers. I created a group called 'cloudsyncretrievepwd'. Why do we do this? IF you are planning on high availability a group is better suited for ease of management when it comes to allowing the gMSA to 'PrincipalsAllowToRetrieveManagedPassword' of the cloud sync severs. 
