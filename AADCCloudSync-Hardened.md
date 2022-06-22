@@ -91,6 +91,8 @@ Install-ADServiceAccount -Identity $Name
 
 #### Step9: Install "AADConnectProvisioningAgentSetup.exe", which you just downloaded.
 
+Customize the installation and chose "Use custom gMSA", enter the gMSA created earlier.
+
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/cloudsyncsetup1.png)
 
 
