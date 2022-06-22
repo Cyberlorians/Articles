@@ -13,9 +13,11 @@ Add-KdsRootKey -EffectiveTime ((get-date).addhours(-10))
 ```
 While you are there, open ADUC and create an AD group and put all of the AADCCloudSync servers. I created a group called 'cloudsyncretrievepwd'. Why do we do this? IF you are planning on high availability a group is better suited for ease of management when it comes to allowing the gMSA to 'PrincipalsAllowToRetrieveManagedPassword' of the cloud sync severs. 
 
-## AADC Cloud Sync server setup. Follow my instructions along with the official docs posted [here](https://docs.microsoft.com/en-us/azure/active-directory/cloud-sync/how-to-prerequisites?tabs=public-cloud).
+## AADC Cloud Sync server setup. 
 
-Step1: Turn off IE Mode for Administrators via Server Manager.
+Follow my instructions along with the official docs posted [here](https://docs.microsoft.com/en-us/azure/active-directory/cloud-sync/how-to-prerequisites?tabs=public-cloud).
+
+#Step1: Turn off IE Mode for Administrators via Server Manager.
 Step2: Patch and make sure .Net Framework 4.7+ is installed and updated. 
 Step3: Enable TLS1.2
 ```
