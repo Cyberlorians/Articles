@@ -17,7 +17,7 @@ While you are there, open ADUC and create an AD group and put all of the AADCClo
 
 Follow my instructions along with the official docs posted [here](https://docs.microsoft.com/en-us/azure/active-directory/cloud-sync/how-to-prerequisites?tabs=public-cloud).
 
-# Step1: Turn off IE Mode for Administrators via Server Manager.
+### Step1: Turn off IE Mode for Administrators via Server Manager.
 Step2: Patch and make sure .Net Framework 4.7+ is installed and updated. 
 Step3: Enable TLS1.2
 ```
