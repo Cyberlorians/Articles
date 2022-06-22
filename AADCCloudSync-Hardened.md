@@ -96,7 +96,13 @@ Customize the installation and chose "Use custom gMSA", enter the gMSA created e
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/cloudsyncsetup1.png)
 
-Connect to Active Directory with EnterpriseAdmin account>Confirm and hit next. The installation should have been successful. Again, if any issues it was becasue of the -KerberosEncryptionType but you would know that was not working during the PowerShell script installation.
+Connect to Active Directory with EnterpriseAdmin account>Confirm and hit next. 
+
+The installation should have been successful. Again, if any issues it was becasue of the -KerberosEncryptionType but you would know that was not working during the PowerShell script installation.
+
+#### Step10: Password hash sync with FIPS enabled. If you have gone this far - you have FIPS enabled.
+
+Enable MD5 for password hash synchronization [here](https://docs.microsoft.com/en-us/azure/active-directory/cloud-sync/how-to-install).
 
 
 
