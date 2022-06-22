@@ -91,5 +91,7 @@ Install-ADServiceAccount -Identity $Name
 
 #### Step9: Install "AADConnectProvisioningAgentSetup.exe", which you just downloaded.
 
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/cloudsyncsetup1.png)
+
 
 
