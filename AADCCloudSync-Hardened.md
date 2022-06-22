@@ -39,6 +39,8 @@ Open CMD and run as Administrator.
         <enforceFIPSPolicy enabled="false"/>  
     </runtime> 
 ```
+#### Step5: Reboot
+#### Step6: 
 
 
 
