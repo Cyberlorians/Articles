@@ -8,7 +8,7 @@ Before I begin, please open another browser window with the prerequisite screen 
 
 CloudSync should be installed on an on-premises member server (can be an Azure IaaS VM as well), Windows 2016 and later. This member server should be a member of the Tier0 (Identity Tier) or installing the agent on a Domain Controller is supported. 
 
-*Disclaimer:* Installing CloudSync on Domain Controllers gives the organization default high availability, less patch management and member server life cycle. Albeit, if the organization does NOT allow the installation of CloudSync on the traditional Domain Controller, please continue to install on a Tier0 member server. 
+*Disclaimer:* Installing CloudSync on Domain Controllers gives the organization default high availability, less patch management and a smaller footprint on server life cycle. Albeit, if the organization does NOT allow the installation of CloudSync on the traditional Domain Controller, please continue to install on a Tier0 member server. 
 
 If your domain is NOT using gmsa(Group Managed Service Accounts), you need to Create the Key Distribution Services KDS Root Key seen. More info [here](https://docs.microsoft.com/en-us/windows-server/security/group-managed-service-accounts/create-the-key-distribution-services-kds-root-key). This is a prerequisite for using gMSA. If you are using gMSA, skip this step.
 
@@ -112,6 +112,10 @@ Navigate to "AAD>Azure AD Connect>Manage Azure AD cloud sync>Review all agents" 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/cloudsyncagenthealth.png)
 
 Once confirmed - continue to "Cloud sync configuration" [here](https://docs.microsoft.com/en-us/azure/active-directory/cloud-sync/how-to-configure). 
+
+#### Step12: Adding another agent for High Availability.
+
+Follow Steps 1-4 and step 9. Step10, if applicable.
 
 Cheers!
 
