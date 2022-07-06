@@ -6,7 +6,7 @@
 
 I hope I caught your attention with the title.  Now that I have your attention, how do we capture the "bad" traffic hitting our environment.  We do this by creating an [NSG](https://docs.microsoft.com/en-us/azure/network-watcher/nsg-flow-logs-policy-portal) (network security group) Flow Log to [Traffic Analyitcs](https://docs.microsoft.com/en-us/azure/network-watcher/traffic-analytics-policy-portal) and send them off to Sentinel. This is an important note: You can accomplish NSG Flow Logs & Traffic Anayltics Azure Policy by using **"Configure network security groups to use specific workspace for traffic analyitcs"**, so use the latter and call it a day. Pre-reqs you will need an azure storage account for the flow logs and to enable [NetworkWatcher](https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-create). 
 
-Disclaimer: by default "Retention (days)" on the Flow logs settings is set to 0. This does not matter as in this scenario the logs are going to Sentinel for retention based on configuration in your enviornment.
+*Disclaimer* - By default "Retention (days)" on the Flow logs settings is set to 0. This does not matter as in this scenario the logs are going to Sentinel for retention based on configuration in your enviornment.
 
 ### Configure network security groups to use specific workspace for traffic analytics - by Azure Policy ###
 Some quick notes on the image below. The parameters call for "ID" - you can find this ID by going to the resource, overview tab, resource JSON and pull the ResourceID string). Enter the parameters below and hit next to Remediation tab.
