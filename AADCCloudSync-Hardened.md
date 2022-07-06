@@ -101,6 +101,8 @@ Connect to Active Directory with EnterpriseAdmin account>Confirm and hit next.
 
 The installation should have been successful. Again, if any issues it was because of the -KerberosEncryptionType but you would know that was not working during the PowerShell script installation.
 
+*Disclaimer* - The STIG GPOs do NOT set the logon as a service, User rights permissions. By default, the installation should add the gMSA account to this "User Rights Assignment". If you are setting this setting via GPO, please add the gMSA account. Another note - if are using any other gMSA, lets say for Defender for Identity, you will have to also be sure all accounts are healthy, added and not overwriting. In short, either use GPO to set multiple or do it manually.
+
 #### Step10: Password hash sync with FIPS enabled. If you have gone this far - you have FIPS enabled.
 
 Enable MD5 for password hash synchronization [here](https://docs.microsoft.com/en-us/azure/active-directory/cloud-sync/how-to-install). Now, reboot.
