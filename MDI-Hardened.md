@@ -4,7 +4,7 @@ A lot of the work I do consists of working in hardened security baselines. In sh
 
 ## Microsoft Defender for Identity ##
 
-The [prerequisites](https://docs.microsoft.com/en-us/defender-for-identity/prerequisites) are pretty straight forward and have been updated. Please, please read this thoroughly and for my friends workings in US Government, here is your [doc](https://docs.microsoft.com/en-us/defender-for-identity/us-govt-gcc-high). *Disclaimer* - depending on your govt envirnonment, you may have to allow *atp.azure.us through your proxy instead *.atp.azure.com, just be aware. 
+The [prerequisites](https://docs.microsoft.com/en-us/defender-for-identity/prerequisites) are pretty straight forward and have been updated. Please, please read this thoroughly and for my friends working in US Government, here is your [doc](https://docs.microsoft.com/en-us/defender-for-identity/us-govt-gcc-high). *Disclaimer* - depending on your govt environment, you may have to allow *atp.azure.us through your proxy instead *.atp.azure.com, just be aware. 
 
 Plan for capacity [here](https://docs.microsoft.com/en-us/defender-for-identity/capacity-planning).
 
