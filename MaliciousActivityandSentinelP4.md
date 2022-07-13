@@ -54,7 +54,7 @@ Once deployed, you will see three API connectors. Listed below.
 
 	1 - "azureloganalyticsdatacollector-Get-VirusTotalIPReport" - Edit API connect and Enter the WorkspaceID and WorkspaceKey. Click SAVE.
 	2 - "virustotal-Get-VirusTotalIPReport" - Edit API connect and Enter your new "x-api_key". Click SAVE.
-	3 - "azuresentinel-Get-VirusTotalIPReport" - This connector is the managed identity connector piece. So, for this one go back to to the logic app>identity blade and give it the "Microsoft Sentinel Responder" Role on the Sentinel LAW. Once that is complete just verify this API states it is "Ready"
+	3 - "azuresentinel-Get-VirusTotalIPReport" - This connector is the managed identity connector piece. So, for this one go back to to the logic app>identity blade and give it the "Microsoft Sentinel Responder" Role on the Sentinel LAW. Once that is complete just verify this API states it is "Ready".
 
 Head back to Seninel and on the Incident, scroll over and click on the ellipsis and chose "Run Playbook (Preview)"
 
