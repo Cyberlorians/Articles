@@ -48,13 +48,12 @@ If you have followed all steps and you are indeed having malicious traffic inbou
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/ip2geotagsworking.png)
 
-Cool huh! I think so too but we could use a bit more detail on those IPs. Following the SAME steps as above, deploy [Get-VirusTotalIPReport](https://github.com/Cyberlorians/Sentinel/blob/main/Playbooks/Get-VirusTotalIPReport.json). I adjusted this playbook from the Sentinel community to run as a managed identity AND who will have "whois" data. Disclaimer: and you CANNOT miss this step. Please sign up a [VirusTotal](www.virustotal.com) which is free for the API Key and on the logic app designer connector you will have to enter your api-key, name and update.
+Cool huh! I think so too but we could use a bit more detail on those IPs. Following the SAME steps as above, deploy [Get-VirusTotalIPReport](https://github.com/Cyberlorians/Sentinel/blob/main/Playbooks/Get-VirusTotalIPReport.json). I adjusted this playbook from the Sentinel community to run as a managed identity AND who will have "whois" data. Disclaimer: and you CANNOT miss this step. Please sign up a [VirusTotal](https://www.virustotal.com/gui/home/upload) which is free for the API Key and on the logic app designer connector you will have to enter your api-key, name and update. *Disclaimer* - the logic app needs managed identity permissions of "Microsoft Sentinel Responder". It is best to put the logic app within the same resource group as Sentinel/LAW.
 
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/getvirustotalconnection.png)
-
-Next is to scroll slightly down to "condition" and enter connection name, workspace key and workspace ID (all found on our Sentinel LAW). Disclaimer: you have to enter TWO DIFFERENT Connection names otherwise it will not work. I have "GETVTLAW and GETVTLAW2". Click Update and then SAVE the changes.
-
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/getvtlawworkspaceid.png)
+Once deployed, you will see three API connectors. Listed below.
+	1 - "azureloganalyticsdatacollector-Get-VirusTotalIPReport" - Edit API connect and Enter the WorkspaceID and WorkspaceKey. Click SAVE.
+	2 - "virustotal-Get-VirusTotalIPReport" - Edit API connect and Enter your new "x-api_key". Click SAVE.
+	3 - "azuresentinel-Get-VirusTotalIPReport" - This connector is the managed identity connector piece. So, for this one go back to to the logic app>identity blade and give it the "Microsoft Sentinel Responder" Role on the Sentinel LAW. Once that is complete just verify this API states it is "Ready"
 
 Head back to Seninel and on the Incident, scroll over and click on the ellipsis and chose "Run Playbook (Preview)"
 
