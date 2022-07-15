@@ -66,10 +66,10 @@ Run this script
 #
 #
 # Declare variables
-$Name = 'aadccsgmsa' //The name of the gMSA to be created
+$Name = 'aadccsgmsa' #The name of the gMSA to be created
 $Description = "Azure AD Cloud Sync service account for cloud sync server"
-$Server = "aadccs01.cyberlorians.net" //This is the cloud sync server name joined to domain
-$Principal = Get-ADGroup 'cloudsyncretrievepwd' //AD group created in the DC step
+$Server = "aadccsgmsa.cyberlorians.net" #This is the cloud gmsa dns name
+$Principal = Get-ADGroup 'cloudsyncretrievepwd' #AD group created in the DC step
 
 # Create service account in Active Directory
 New-ADServiceAccount -Name $Name `
