@@ -29,7 +29,7 @@ Configure Object Auditing - this needs to be completed for [4662](https://docs.m
 
 The recommendation here is to use a gMSA account. Lets dig into creating that.
 
-If your domain is NOT using gmsa(Group Managed Service Accounts), you need to Create the Key Distribution Services KDS Root Key seen. More info here. This is a prerequisite for using gMSA. If you are using gMSA, skip this step.
+If your domain is NOT using gmsa(Group Managed Service Accounts), you need to Create the Key Distribution Services KDS Root Key seen. More info [here](https://docs.microsoft.com/en-us/windows-server/security/group-managed-service-accounts/create-the-key-distribution-services-kds-root-key). This is a prerequisite for using gMSA. If you are using gMSA, skip this step.
 
 Domain Group - Create.
 Create an Active Directory Security Group and make the MDI member servers members of the group. I created a group called 'MDIGroup'. Why do we do this? If you are planning on protecting Domain Controllers and ADFS Servers with MDI, they need to be members of the same group to allow -PrincipalsAllowedToRetrieveManagedPassword.
