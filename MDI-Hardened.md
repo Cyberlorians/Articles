@@ -66,4 +66,8 @@ Test-ADServiceAccount -Identity 'MDIgMSA'
 ```
 !!Verify!! that the newly created gMSA account has the [log on as a service](https://docs.microsoft.com/en-us/defender-for-identity/directory-service-accounts#verify-that-the-gmsa-account-has-the-required-rights-if-needed) permission to all MDI machines. *Disclaimer* - add this to the Domain Controller OS Based STIG and if using in conjunction with ADFS, then add to the ADFS OS Based STIG as well. I cannot stress how important this step is. In the past, this step was missing from current docs and I am happing that it has been added but it is still an easy oversight. If this is NOT in place, nothing will work!
 
+Your last step in the gMSA ladder is to [Configure the gMSA in 365 Defender](https://docs.microsoft.com/en-us/defender-for-identity/directory-service-accounts#configure-directory-service-account-in-microsoft-365-defender). When adding the gMSA account suffix with the $ so it matches the SAMAccountName Attribute on prem in AD.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/mdigmsa.png)
+
 
