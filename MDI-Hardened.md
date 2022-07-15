@@ -79,9 +79,9 @@ I am not going to cover this in detail, perhaps another article. However, keep t
 This is another DENY to Domain Controllers. On a STIG level, you could add these [GPO](https://docs.microsoft.com/en-us/defender-for-identity/remote-calls-sam) settings to each OS Based GPO STIG. Or, add a top level down from the root. Read through this page closely as you are going to have to decide how to approach these rights assignments and how GPO precendence could effect them. I.e, if you are following a correct Tiered Model, putting the these SAM-R settings at the root can work. See the DENY below - DENY Read and Apply Group Policy to Domain Controllers.
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/SAMR.png)
 
-You are on a roll now.
+You are on a roll now. Final steps are below!
 
-Download the [sensor](https://docs.microsoft.com/en-us/defender-for-identity/download-sensor).
+`Download the [sensor](https://docs.microsoft.com/en-us/defender-for-identity/download-sensor).
 
 If you are going via a proxy, check the doc [here](https://docs.microsoft.com/en-us/defender-for-identity/configure-proxy).
 
