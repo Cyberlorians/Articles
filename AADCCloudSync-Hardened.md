@@ -47,7 +47,7 @@ Open CMD and run as Administrator.
 ```
 Install-WindowsFeature -Name RSAT-AD-PowerShell
 ```
-#### Step7: Copy the contents of the script to the cloud sync server. Disclaimer - you may or may not need to use the -KerberosEncryptionType flag but if you are using 2019 Domain Controller STIG you will have to on OS 2019-2022.
+#### Step7: Copy the contents of the script to the cloud sync server. Disclaimer - you may or may not need to use the -KerberosEncryptionType flag but if you are using 2016 Domain Controller STIG you will have to on OS 2016-2022.
 ```
 Install-WindowsFeature -Name RSAT-AD-PowerShell
 Run this script
@@ -80,7 +80,7 @@ New-ADServiceAccount -Name $Name `
 -Enabled $True `
 -PassThru
 
-Set-ADServiceAccount -Identity $Name -KerberosEncryptionType AES128,AES256 //If using 2019STIG and above you have to use
+Set-ADServiceAccount -Identity $Name -KerberosEncryptionType AES128,AES256 //If using 2016STIG and above you have to use
 
 # Install the new service account on Azure AD Cloud Sync server
 Install-ADServiceAccount -Identity $Name
