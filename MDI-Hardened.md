@@ -70,4 +70,17 @@ Your last step in the gMSA ladder is to [Configure the gMSA in 365 Defender](htt
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/mdigmsa.png)
 
+## [MDI Role Groups](https://docs.microsoft.com/en-us/defender-for-identity/role-groups) ##
+
+I am not going to cover this in detail, perhaps another article. However, keep the MDI groups protected, carefully. Use Conditional Access Policy to enforce access to the traditional ATP portal. As well as, use a Privilege Access Group to lock down the groups via nesting. These groups are NOT AAD Roles so you cannot PIM them by default. Just adding food for thought but that is not the intent of this article. More on that later.
+
+## [Configure SAM-R](https://docs.microsoft.com/en-us/defender-for-identity/remote-calls-sam) ##
+
+This is another DENY to Domain Controllers. On a STIG level, which is the most work you could add these [GPO](https://docs.microsoft.com/en-us/defender-for-identity/remote-calls-sam) settings to each OS Based GPO STIG. Or, add a top level down from the root. Read through this page, closely as you are going to have to decide how to approach these rights assigments and how GPO precendence could effect them. I.e, if you are following a correct Tiered Model, putting the these SAM-R settings at the root can work. See the DENY below - DENY Read and Apply Group Policy to Domain Controllers.
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/SAMR.png)
+
+
+
+
+
 
