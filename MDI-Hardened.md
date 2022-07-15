@@ -81,7 +81,7 @@ This is another DENY to Domain Controllers. On a STIG level, you could add these
 
 You are on a roll now. Final steps are below!
 
--Download the [sensor](https://docs.microsoft.com/en-us/defender-for-identity/download-sensor).`
+-Download the [sensor](https://docs.microsoft.com/en-us/defender-for-identity/download-sensor).[br]
 -If you are going via a proxy, check the doc [here](https://docs.microsoft.com/en-us/defender-for-identity/configure-proxy).
 
 After extracting the contents, install Npcap first - DO NOT MISS THIS STEP!
