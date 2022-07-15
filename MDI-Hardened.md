@@ -64,4 +64,3 @@ New-ADServiceAccount -Name $Name `
 Get-ADServiceAccount -Identity 'MDIgMSA' -Properties * | select Prin*
 Test-ADServiceAccount -Identity 'MDIgMSA' 
 
-Set-ADServiceAccount -Identity $Name -KerberosEncryptionType AES128,AES256 //If using 2016STIG and above you have to use
