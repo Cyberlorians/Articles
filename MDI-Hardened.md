@@ -19,6 +19,8 @@ Domain Controllers - Use STIG baseline and follow [doc](https://docs.microsoft.c
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/eventid1644.png)
 
-ADFS - Use STIG baseline, ADFS [auditing](https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/troubleshooting/ad-fs-tshoot-logging) and follow [ADFS events](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection#for-active-directory-federation-services-ad-fs-events).
+ADFS - Use STIG baseline, ADFS [auditing](https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/troubleshooting/ad-fs-tshoot-logging) and follow [ADFS events](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection#for-active-directory-federation-services-ad-fs-events). Lastly, [Enable auditing on an ADFS Object](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection#enable-auditing-on-an-adfs-object).
 
 OS flavors and Tiered structures - Use STIG baseline and follow [other events](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection#for-other-events).
+
+Configure Object Auditing - this needs to be completed for [4662](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection#configure-object-auditing) events. *Disclaimer* - follow these steps closely. One tidbit too, on the first step, the instructions are clear. When it says 'Clear All', then add full control and so on. It will look like under 'Properties', that it is empty. Click 'OK' and apply. Go back into the current setting you just set and it will be made clear you that 'WRITE' permissions are now there. Just wanted to clear that confusion up. Repeat the SAME steps for all 3 Audit entries.
