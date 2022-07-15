@@ -89,6 +89,8 @@ You are on a roll now. Final steps are below!
 
 Once installation has completed. Check the MDI portal and see the health of your sensor. If you have followed each step all should be well.
 
+Now go connect MDI/365 to Sentinel and be complete!
+
 
 
 
