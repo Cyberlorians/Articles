@@ -29,37 +29,39 @@ Configure Object Auditing - this needs to be completed for [4662](https://docs.m
 
 The recommendation here is to use a gMSA account. Lets dig into creating that.
 
-Copy the contents of the script to the cloud sync server. Disclaimer - you may or may not need to use the -KerberosEncryptionType flag but if you are using 2016 Domain Controller STIG you will have to on OS 2016-2022.
+If your domain is NOT using gmsa(Group Managed Service Accounts), you need to Create the Key Distribution Services KDS Root Key seen. More info here. This is a prerequisite for using gMSA. If you are using gMSA, skip this step.
+
+Domain Group - Create.
+Create an Active Directory Security Group and make the MDI member servers members of the group. I created a group called 'MDIGroup'. Why do we do this? If you are planning on protecting Domain Controllers and ADFS Servers with MDI, they need to be members of the same group to allow -PrincipalsAllowedToRetrieveManagedPassword.
+
+Copy the contents of the script to the first DC you are installing MDI on. Disclaimer - you may or may not need to use the -KerberosEncryptionType flag but if you are using 2016+ Domain Controller STIGyou will have to on OS 2016-2022.
 ```
-Install-WindowsFeature -Name RSAT-AD-PowerShell
+Install-WindowsFeature -Name RSAT-AD-PowerShell //This is already installed if you are on a Domain Controller
+
 Run this script
-# Filename:    cloudsyncgmsa.ps1
-# Description: Creates and installs a custom gMSA account for use with Azure AD Connect cloud sync.
-#
-# DISCLAIMER:
-# Copyright (c) Microsoft Corporation. All rights reserved. This 
-# script is made available to you without any express, implied or 
-# statutory warranty, not even the implied warranty of 
-# merchantability or fitness for a particular purpose, or the 
-# warranty of title or non-infringement. The entire risk of the 
-# use or the results from the use of this script remains with you.
-#
-#
-#
+# Filename:    MDIgMSA.ps1
+# Description: Creates and installs a custom gMSA account for use with Microsoft Defender for Identity.
 #
 # Declare variables
-$Name = 'aadccsgmsa' //The name of the gMSA to be created
-$Description = "Azure AD Cloud Sync service account for cloud sync server"
-$Server = "aadccs01.cyberlorians.net" //This is the cloud sync server name joined to domain
-$Principal = Get-ADGroup 'cloudsyncretrievepwd' //AD group created in the DC step
+$Name = 'MDIgMSA' #The name of the gMSA to be created
+$Description = "MDI group managed service account for MDI"
+$DNS = "MDIgMSA.cyberlorians.net" #This is the gmsa dns hostname
+$Principal = Get-ADGroup 'MDIGroup' #AD group created in the DC step, comment out if using 'Domain Controllers' only and uncomment next step.
+#$Principal = Get-ADGroup 'Domain Controllers' #Uncomment if just using DomainControllers and comment out the previous step
+$Kerb = 'AES128,AES256' #If using 2016STIG and above you have to use
 
 # Create service account in Active Directory
 New-ADServiceAccount -Name $Name `
 -Description $Description `
--DNSHostName $Server `
+-DNSHostName $DNS `
 -ManagedPasswordIntervalInDays 30 `
+-KerberosEncryptionType $Kerb `
 -PrincipalsAllowedToRetrieveManagedPassword $Principal `
 -Enabled $True `
 -PassThru
+
+#Install-ADServiceAccount -Identity 'MDIgMSA'
+Get-ADServiceAccount -Identity 'MDIgMSA' -Properties * | select Prin*
+Test-ADServiceAccount -Identity 'MDIgMSA' 
 
 Set-ADServiceAccount -Identity $Name -KerberosEncryptionType AES128,AES256 //If using 2016STIG and above you have to use
