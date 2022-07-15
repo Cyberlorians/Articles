@@ -60,7 +60,10 @@ New-ADServiceAccount -Name $Name `
 -Enabled $True `
 -PassThru
 
-#Install-ADServiceAccount -Identity 'MDIgMSA'
+#Install-ADServiceAccount -Identity 'MDIgMSA'#MSFT Docs call for this piece BUT you do not have to since you will be setting the new gMSA account in a GPO for proper permissions. 
 Get-ADServiceAccount -Identity 'MDIgMSA' -Properties * | select Prin*
 Test-ADServiceAccount -Identity 'MDIgMSA' 
+```
+!!Verify!! that the newly created gMSA account has the [log on as a service](https://docs.microsoft.com/en-us/defender-for-identity/directory-service-accounts#verify-that-the-gmsa-account-has-the-required-rights-if-needed) permission to all MDI machines. *Disclaimer* - add this to the Domain Controller OS Based STIG and if using in conjunction with ADFS, then add to the ADFS OS Based STIG as well. I cannot stress how important this step is. In the past, this step was missing from current docs and I am happing that it has been added but it is still an easy oversight. If this is NOT in place, nothing will work!
+
 
