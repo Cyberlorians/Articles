@@ -25,6 +25,8 @@ OS flavors and Tiered structures - Use STIG baseline and follow [other events](h
 
 Configure Object Auditing - this needs to be completed for [4662](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection#configure-object-auditing) events. *Disclaimer* - follow these steps closely. One tidbit too, on the first step, the instructions are clear. When it says 'Clear All', then add full control and so on. It will look like under 'Properties', that it is empty. Click 'OK' and apply. Go back into the current setting you just set and it will be made clear to you that 'WRITE' permissions are now there. Just wanted to clear that confusion up. Repeat the SAME steps for all 3 Audit entries.
 
+*Disclaimer* - Huge Kudos to Raymond Roethof and allowing me to drop his link for some tidbits as well. His document [here](https://thalpius.com/2022/07/30/microsoft-defender-for-identity-auditing/) outlines all the auditing steps. Albeit, my article revolves around hardened systems. One awesome tidbit from his is the 4th section, "Object Auditing". This will simplify those GUI steps for you all. Cheers and thanks Raymond.s
+
 ## [Directory Service Account Recommendations](https://docs.microsoft.com/en-us/defender-for-identity/directory-service-accounts) ##
 
 The recommendation here is to use a gMSA account. Lets dig into creating that.
