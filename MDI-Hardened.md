@@ -11,6 +11,8 @@ Plan for capacity [here](https://docs.microsoft.com/en-us/defender-for-identity/
 
 ## [Configure Windows Event Collection](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection) ##
 
+*Disclaimer* - Huge Kudos to Raymond Roethof and allowing me to drop his link for some tidbits as well. His document [here](https://thalpius.com/2022/07/30/microsoft-defender-for-identity-auditing/) outlines all the auditing steps. Albeit, my article revolves around hardened systems. One awesome tidbit from his is the 4th section, "Object Auditing". This will simplify those GUI steps for you all. Cheers and thanks Raymond.
+
 For the most part STIGs capture the audit settings but MDI does call out a bit more, [here](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection). My advise is Do NOT edit default GPOs, whether that be Default Domain Controllers of the Default Domain. For each OS flavor you should be following its own hardened baseline, same holds true for a Domain Controller - use dedicated GPOs.  The "Configure Windows Event Collection", site is a bit misleading so I broke it down for you. When you go to edit, DO NOT forget to edit each for success and failures.
 
 Domain Controllers - Use STIG baseline and follow [doc](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection#configure-audit-policies).
@@ -24,8 +26,6 @@ ADFS - Use STIG baseline, ADFS [auditing](https://docs.microsoft.com/en-us/windo
 OS flavors and Tiered structures - Use STIG baseline and follow [other events](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection#for-other-events).
 
 Configure Object Auditing - this needs to be completed for [4662](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection#configure-object-auditing) events. *Disclaimer* - follow these steps closely. One tidbit too, on the first step, the instructions are clear. When it says 'Clear All', then add full control and so on. It will look like under 'Properties', that it is empty. Click 'OK' and apply. Go back into the current setting you just set and it will be made clear to you that 'WRITE' permissions are now there. Just wanted to clear that confusion up. Repeat the SAME steps for all 3 Audit entries.
-
-*Disclaimer* - Huge Kudos to Raymond Roethof and allowing me to drop his link for some tidbits as well. His document [here](https://thalpius.com/2022/07/30/microsoft-defender-for-identity-auditing/) outlines all the auditing steps. Albeit, my article revolves around hardened systems. One awesome tidbit from his is the 4th section, "Object Auditing". This will simplify those GUI steps for you all. Cheers and thanks Raymond.s
 
 ## [Directory Service Account Recommendations](https://docs.microsoft.com/en-us/defender-for-identity/directory-service-accounts) ##
 
