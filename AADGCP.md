@@ -68,3 +68,8 @@ Under the 'UPN: domain substitute steps'. I wanted to show the snippet because t
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/tenantgcptransform.png)
 
+## Configure Cloud Identity or Google Workspace for single sign-on
+
+These steps are laid out [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-ad-configuring-provisioning-and-single-sign-on#configuring_cloud_identity_for_single_sign-on) and remember the certificate you are uploading is coming off the enterprise app, 'SAML Signing Certificate' (BASE64) you downloaded.
+
+
