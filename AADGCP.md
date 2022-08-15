@@ -34,3 +34,11 @@ Steps are outlined [here](https://cloud.google.com/architecture/identity/federat
 
 *Disclaimer* - I am showcasing for administrative work only using cloud only, .onmicrosoft.com accounts. I.e., cyberlorians.com is a dns suffix on prem in my ADDS environment using ADFS. If I were to use the same suffix I would allow the same account which is on prem to be used (no least privilege) and going through ADFS as the token gets passed from the on prem ADDS servers first (this is messy but 100% doable). So many scenarios can work here, so please understand them all from the documentation. I'm just focusing on admin accounts only to break all lateral movement and anti-phising campaigns from email. I have a block rule in my exchange admin center from any outside email to my primary (*.onmicrosoft.com), to help lock this effort down. You may use a custom domain name if you would like to keep in line with the Enterprise Access Model - Management Plan. Just keep least privilege in mind. 
 
+#### Step3: Configure User Provisioning.
+
+As stated, in this lab, I am doing a UPN: domain substitute but please chose accordingly [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-ad-configuring-provisioning-and-single-sign-on#configure_user_provisioning). It is really straight forward but below are snippets for visualization (User & Group mappings).
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/gcpattrimapping1.png)
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/gcpattrimapping2.png)
+
