@@ -111,7 +111,7 @@ Back on the Attributes & Claims page - Additional Claims - Enter as seen below.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/gcpmanageclaim6.png)
 
-
+*Note 3* - Always think of least privilege during this type of setup. Whether it be from on prem first, B2B or cloud only. Don't mix the traditional Tiers from on prem and control and data planes of the cloud or worse, give access via a B2B user from another tenant full admin rights to your Google platform. When talking administrative functions and least privilege, also chose passwordless scenarios, MFA, phish resistant and etc. A good example to where you this situation may not require a cloud only admin account, is say a read only or billing account for the GCP side. In that case you may find it acceptable to use an on prem synced account to flow through the entire process. Albeit, you may inadverently change the Identity lifecycle and management piece to all of this and introduce lax security. 
 
 
 
