@@ -11,6 +11,7 @@ access, as well as quickly detect and take action against anomalous behavior whe
 I am going to explain and walk you through how to Federate Google Cloud with Azure Active Directory, see google [doc](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-active-directory). 
 
 *Disclaimer* - My example will be to not only use AAD as the sole identity provider but to leverage 'cloud only accounts' from the AAD side. Why cloud only? In a lot of scenarios, the other endoint, GCP in this case is for administrative purposes only. So, I am keeping seperation of duties and least privilege in mind rather than syncing a tiered admin account from on prem and flowing through. In short, better security. See diagram below of the setup. 
+
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/overviewaadgcp.png)
 
 
