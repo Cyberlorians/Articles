@@ -25,6 +25,8 @@ Lets dig in! This setup is assumed you have AzureAD and Google already setup. Th
 ## Provisioning Setup
 
 #### Step1: Create a 'delegated admin' in GCP for AzureAD. 
-This user will be the automated provisioning account that we set in the AAD application to SCIM the users/groups to GCP. Those steps are outlined [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-ad-configuring-provisioning-and-single-sign-on#creating_a_cloud_identity_user_account_for_synchronization).
+This user will be the automated provisioning account that we set in the AAD application to SCIM the users/groups to GCP. Those steps are outlined [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-ad-configuring-provisioning-and-single-sign-on#creating_a_cloud_identity_user_account_for_synchronization). Proceed to domain name setup if you want any subdomains. If not, leave the primary as is.
 
 #### Step2: Configure Azure AD Provisioning. 
+Steps are outlined [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-ad-configuring-provisioning-and-single-sign-on#create_an_enterprise_application), however, name your Enterpise Application: 'GoogleCloudProvisioning.onmicrosoft'. Or something to distinguish it by. The real reason I state this is because if using AAD B2B you will need another provisioning enterprise application with its own attribute mappings.
+
