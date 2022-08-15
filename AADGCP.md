@@ -115,7 +115,7 @@ Back on the Attributes & Claims page - Additional Claims - Enter as seen below.
 
 *Note 4* - Don't think using multiple apps for provisioning and SSO will a nightmare. I recommend using AAD Dymanic groups to populate your groups. This way you just assign the groups permissions to the apps and call it a day because you know the users with a certain, (another attribute) will be auto populated into these groups.
 
-Part2: The security layer to this - coming soon!
+## Part2: The security layer to this - coming soon! ##
 
 
 
