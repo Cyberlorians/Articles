@@ -50,3 +50,21 @@ Leave this step as default and all is well, document is [here](https://cloud.goo
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/gcpprovusergroup.png)
 
+## SSO Setup
+
+#### Step1: Configure AAD for Single sign-on
+
+Follow the instructions [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-ad-configuring-provisioning-and-single-sign-on#configuring_azure_ad_for_single_sign-on) by creating a new Enterprise Application first then proceeding with configure user assignment (the same users/groups assigned to the provisioning). 
+
+#### Step2: Configure SAML Settings
+
+Instructions are [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-ad-configuring-provisioning-and-single-sign-on#configure_saml_settings), however, I want to show the settings by the snippets below.
+
+SAML specific to your custom domain name is below. 
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/gcpsaml.png)
+
+Under the 'UPN: domain substitute steps'. I wanted to show the snippet because the instructions on the doc can be bit janky. Under the join() for parameter2, just type the custom domain name in the field and hit enter. It will look like below. Do NOT put quotes because the parameter will then have double qoutes and NOT work.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/tenantgcptransform.png)
+
