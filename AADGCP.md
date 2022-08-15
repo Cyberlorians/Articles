@@ -18,7 +18,7 @@ To accomplish this feat, we will be using SCIM (System for Cross-Domain Identity
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/overviewgcpidp.png)
 
-*Dislaimer & Pre-reqs* - GCP does not allow .onmicrosoft.com accounts to provision to GCP. You MUST use a custom domain domain. It is recommend to use the SAME custom domain name that is being using in AAD but is not necessary either. See [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-active-directory#usage_of_dns_domains_in_azure_ad) on GCP domain names. What does that mean? cyberlorians.com exists in both AAD and GCP. In fact, a customer is not able to setup a GCP environment with a custom domain name. Plan wisely. 
+*Dislaimer & Pre-reqs* - GCP does not allow .onmicrosoft.com accounts to provision to GCP. You MUST use a custom domain domain. It is recommend to use the SAME custom domain name that is being using in AAD but is not necessary either. See [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-active-directory#usage_of_dns_domains_in_azure_ad) on GCP domain names. What does that mean? cyberlorians.com exists in both AAD and GCP. In fact, a customer is not able to setup a GCP environment without a custom domain name. Plan wisely. 
 
 Lets dig in! This setup is assumed you have AzureAD and Google already setup. The first we need to do is create the user provisioning piece from AAD>GCP. The official document is [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-ad-configuring-provisioning-and-single-sign-on) on those steps. 
 
@@ -64,7 +64,7 @@ SAML specific to your custom domain name is below.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/gcpsaml.png)
 
-Under the 'UPN: domain substitute steps'. I wanted to show the snippet because the instructions on the doc can be bit janky. Under the join() for parameter2, just type the custom domain name in the field and hit enter. It will look like below. Do NOT put quotes because the parameter will then have double qoutes and NOT work.
+Under the 'UPN: domain substitute steps'. Look at the snippet because the instructions on the doc can be bit janky. Under the join() for parameter2, just type the custom domain name in the field and hit enter. It will look like below. Do NOT put quotes because the parameter will then have double qoutes and NOT work.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/tenantgcptransform.png)
 
@@ -113,6 +113,7 @@ Back on the Attributes & Claims page - Additional Claims - Enter as seen below.
 
 *Note 3* - Always think of least privilege during this type of setup. Whether it be from on prem first, B2B or cloud. Don't mix the traditional Tiers from on prem OR control and data planes of the cloud or worse, give access to a B2B user from another tenant full admin rights to your Google platform. When talking administrative functions and least privilege, also chose passwordless scenarios, MFA, phish resistant and etc. A good example to where you this situation may not require a cloud only admin account, is perhaps a read only or billing account for the GCP side. In that case you may find it acceptable to use an on prem synced account to flow through the entire process. Albeit, you may inadverently change the identity lifecycle and management piece to all of this and introduce lax security. 
 
+*Note 4* - Don't think using multiple apps for provisioning and SSO will a nightmare. I recommend using AAD Dymanic groups to populate your groups. This way you just assign the groups permissions to the apps and call it a day because you know the users with a certain, (another attribute) will be auto populated into these groups.
 
 Part2: The security layer to this - coming soon!
 
