@@ -74,6 +74,17 @@ These steps are laid out [here](https://cloud.google.com/architecture/identity/f
 
 Log into myapps.microsoft.com and you should be able to SSO into GCP.
 
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/gcpmyapps.png)
+
+SSO>GCP Console confirmation
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/gcpssoconfirmed.png)
+
+
+## Further Notes
+
+I stated to use multiple Enterprise Apps for provisioning and SSO. At first this may sound goofy but it is for least privilege of the application. One app is controlling provisioning into the other cloud provider, therefore we do not need any users to view this application or anyone outside of the owner or proper AAD privileged role to view. 
+
 Don't forget to check your current Conditional Access Policies and enfore security.
 
 
