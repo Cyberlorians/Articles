@@ -36,9 +36,17 @@ Steps are outlined [here](https://cloud.google.com/architecture/identity/federat
 
 #### Step3: Configure User Provisioning.
 
-As stated, in this lab, I am doing a UPN: domain substitute but please chose accordingly [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-ad-configuring-provisioning-and-single-sign-on#configure_user_provisioning). It is really straight forward but below are snippets for visualization (User & Group mappings).
+As stated, in this lab, I am doing a UPN: domain substitute but please chose accordingly [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-ad-configuring-provisioning-and-single-sign-on#configure_user_provisioning). It is really straight forward but below are snippets for visualization (User & Group mappings). Remember, these users and groups will transform to GCP with the suffix of cranesmeadows.com (GCP Domain Name).
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/gcpattrimapping1.png)
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/gcpattrimapping2.png)
+
+#### Step4: Enable Automatic Provisioning.
+
+Leave this step as default and all is well, document is [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-ad-configuring-provisioning-and-single-sign-on#enable_automatic_provisioning).
+
+#### Step5: Assign the users to the new provisioning enterprise app (seen below) to being provisioned to GCP. Confirm provisioning is working and check GCP to see the new users. 
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/gcpprovusergroup.png)
 
