@@ -18,8 +18,10 @@ To accomplish this feat, we will be using SCIM (System for Cross-Domain Identity
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/overviewgcpidp.png)
 
-*Dislaimer & Pre-reqs* - GCP does not allow .onmicrosoft.com accounts to provision to GCP. You MUST use a custom domain domain. It is recommend to use the SAME custom domain name that is being using in AAD but is not necessary either. See [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-active-directory#usage_of_dns_domains_in_azure_ad). What does that mean? cyberlorians.com exists in both AAD and GCP. In fact, a customer is not able to setup a GCP environment with a custom domain name. Plan wisely. 
+*Dislaimer & Pre-reqs* - GCP does not allow .onmicrosoft.com accounts to provision to GCP. You MUST use a custom domain domain. It is recommend to use the SAME custom domain name that is being using in AAD but is not necessary either. See [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-active-directory#usage_of_dns_domains_in_azure_ad) on GCP domain names. What does that mean? cyberlorians.com exists in both AAD and GCP. In fact, a customer is not able to setup a GCP environment with a custom domain name. Plan wisely. 
 
 Lets dig in! This setup is assumed you have AzureAD and Google already setup. The first we need to do is create the user provisioning piece from AAD>GCP. The official document is [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-ad-configuring-provisioning-and-single-sign-on) on those steps. 
 
-d
+## Provisioning setup. 
+
+#### Step1: Create a delegated user in GCP for AzureAD. This user will be the provisioning service account that we set in the AAD application to SCIM the users/groups to GCP. Those steps are outlined [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-ad-configuring-provisioning-and-single-sign-on#creating_a_cloud_identity_user_account_for_synchronization).
