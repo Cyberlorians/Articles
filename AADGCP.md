@@ -22,6 +22,6 @@ To accomplish this feat, we will be using SCIM (System for Cross-Domain Identity
 
 Lets dig in! This setup is assumed you have AzureAD and Google already setup. The first we need to do is create the user provisioning piece from AAD>GCP. The official document is [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-ad-configuring-provisioning-and-single-sign-on) on those steps. 
 
-## Provisioning setup. 
+## Provisioning Setup
 
 #### Step1: Create a delegated user in GCP for AzureAD. This user will be the provisioning service account that we set in the AAD application to SCIM the users/groups to GCP. Those steps are outlined [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-ad-configuring-provisioning-and-single-sign-on#creating_a_cloud_identity_user_account_for_synchronization).
