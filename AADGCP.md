@@ -36,7 +36,7 @@ Steps are outlined [here](https://cloud.google.com/architecture/identity/federat
 
 #### Step3: Configure User Provisioning.
 
-As stated, in this lab, I am doing a UPN: domain substitute but please chose accordingly [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-ad-configuring-provisioning-and-single-sign-on#configure_user_provisioning). It is really straight forward but below are snippets for visualization (User & Group mappings). Remember, these users and groups will transform to GCP with the suffix of cranesmeadows.com (GCP Domain Name).
+As stated, in this lab, I am doing a UPN: domain substitute but please chose accordingly [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-ad-configuring-provisioning-and-single-sign-on#configure_user_provisioning). It is straight forward but below are snippets for visualization (User & Group mappings). Remember, these users and groups will transform to GCP with the suffix of cranesmeadows.com (GCP Domain Name).
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/gcpattrimapping1.png)
 
@@ -46,13 +46,13 @@ As stated, in this lab, I am doing a UPN: domain substitute but please chose acc
 
 Leave this step as default and all is well, document is [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-ad-configuring-provisioning-and-single-sign-on#enable_automatic_provisioning).
 
-#### Step5: Assign the users to the new provisioning enterprise app (seen below) to being provisioned to GCP. Confirm provisioning is working and check GCP to see the new users. 
+#### Step5: Assign the users to the new provisioning enterprise app (seen below) to be provisioned. Confirm provisioning is working and check GCP to see the new users. 
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/gcpprovusergroup.png)
 
 ## SSO Setup
 
-#### Step1: Configure AAD for Single sign-on
+#### Step1: Configure AAD for Single sign-on.
 
 Follow the instructions [here](https://cloud.google.com/architecture/identity/federating-gcp-with-azure-ad-configuring-provisioning-and-single-sign-on#configuring_azure_ad_for_single_sign-on) by creating a new Enterprise Application first then proceeding with configure user assignment (the same users/groups assigned to the provisioning). 
 
