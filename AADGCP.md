@@ -74,5 +74,7 @@ These steps are laid out [here](https://cloud.google.com/architecture/identity/f
 
 Log into myapps.microsoft.com and you should be able to SSO into GCP.
 
+Don't forget to check your current Conditional Access Policies and enfore security.
+
 
 
