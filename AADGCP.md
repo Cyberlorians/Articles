@@ -94,11 +94,21 @@ Enterprise App = GCP-SSO. Head to Single sign-on>2(Attributes & Claims).
 Claim Name = UUID (Name ID) - Edit this field in the below images.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/gcpmanageclaim0.png)
+
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/gcpmanageclaim1.png)
+
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/gcpmanageclaim2.png)
+
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/gcpmanageclaim3.png)
+
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/gcpmanageclaim4.png)
+
+Any claim condition - Just enter as seen below.
+
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/gcpmanageclaim5.png)
+
+Back on the Attributes & Claims page - Additional Claims - Enter as seen below.
+
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/gcpmanageclaim6.png)
 
 
