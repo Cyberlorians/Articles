@@ -83,7 +83,7 @@ SSO>GCP Console confirmation
 
 ## Further Notes
 
-*Note 1* - I stated to use multiple Enterprise Apps for provisioning and SSO. At first this may sound goofy but it is for least privilege of the application. One app is controlling provisioning into the other cloud provider, therefore we do not need any users to view this application or anyone outside of the owner or proper AAD privileged role to view. 
+*Note 1* - I stated to use multiple Enterprise Apps for provisioning and SSO. At first this may sound goofy but it is for least privilege of the application. One app is controlling provisioning into the other cloud provider, therefore we do not need any users to view this application or anyone outside of the owner or proper AAD privileged role to view and make a configuration to the privileged role and sync attributes. 
 
 *Note 2* - If wanting to incorporate B2B from Azure Commercial or Public, stand up yet another provisioning Enterprise Application for this need and follow these [steps](https://cloud.google.com/architecture/identity/azure-ad-b2b-user-provisioning-and-sso#configure_azure_ad_provisioning). The reason for this and at this time of writing is simply because under the provisioning attribute mapping, it is difficult to add multiple 'Replacements' for the AAD attribute to the 'primaryEmail', GCP attribute. One a way is found, this documentation will be updated. 
 
