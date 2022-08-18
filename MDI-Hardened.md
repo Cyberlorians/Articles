@@ -53,14 +53,16 @@ $Principal = Get-ADGroup 'MDIGroup' #AD group created in the DC step, comment ou
 $Kerb = 'AES128,AES256' #If using 2016STIG and above you have to use
 
 # Create service account in Active Directory
-New-ADServiceAccount -Name $Name `
--Description $Description `
--DNSHostName $DNS `
--ManagedPasswordIntervalInDays 30 `
--KerberosEncryptionType $Kerb `
--PrincipalsAllowedToRetrieveManagedPassword $Principal `
--Enabled $True `
--PassThru
+$NewGMSAServiceDetails = @{
+    Name = $Name
+    Description = $Description
+    DNSHostName = $DNS
+    ManagedPasswordIntervalInDays = 30
+    KerberosEncryptionType = $Kerb
+    PrincipalsAllowedToRetrieveManagedPassword = $Principal
+    Enabled = $True
+}
+New-ADServiceAccount @NewGMSAServiceDetails -PassThru
 
 #Install-ADServiceAccount -Identity 'MDIgMSA'#MSFT Docs call for this piece BUT you do not have to since you will be setting the new gMSA account in a GPO for proper permissions. 
 Get-ADServiceAccount -Identity 'MDIgMSA' -Properties * | select Prin*
