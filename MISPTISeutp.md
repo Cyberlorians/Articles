@@ -5,8 +5,9 @@ After the announcement of the free, LIMO Threat Intelligence injestion was deeme
 
 *Pre-req* - Create a Ubuntu VM, I am using Azure for this use case. Don't need anything crazy to keep the cost low for this use case. Being this is owned by the SecOps team, the VM lives within my SecOps subscription in Azure.
 
-## This installs the MISP TI Platform
+*Disclaimer* - You can use the default account that is created when you stand up the server, initially or create a user called MISP. Regardless, a user account named 'MISP' will be created during the install. I chose to use my default admin account and then change the password later for RDP access. 
 
+## This installs the MISP TI Platform
 
 ```
 # Ssh to the new Ubuntu VM. The following commands can be copied and pasted into the ssh session.
@@ -14,14 +15,14 @@ After the announcement of the free, LIMO Threat Intelligence injestion was deeme
 # Update/Upgrade System, if needed
 sudo apt-get update -y && sudo apt-get upgrade -y
 
-# Create a Local Password for MISP User
+# Create a Local Password for MISP User - If MISP was created already. If not, go to next step (you will do this later).
 sudo passwd misp
 
 # Install XRDP
-sudo apt install xrdp -y
-sudo adduser xrdp ssl-cert
-sudo systemctl restart xrdp
-sudo ufw allow 3389
+sudo apt install xrdp -y;
+sudo adduser xrdp ssl-cert;
+sudo systemctl restart xrdp;
+sudo ufw allow 3389;
 
 # Install Xfce4 Desktop
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y install xfce4
