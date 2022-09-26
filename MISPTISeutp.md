@@ -59,9 +59,9 @@ sudo systemctl reboot
 
 ```
 
-## Configure MISP TI Platform
+# Configure MISP TI Platform
 
-# RDP to whichever user has xrdp permissions to the Ubuntu VM
+## RDP to whichever user has xrdp permissions to the Ubuntu VM
 
 log into the server as seen below
 
