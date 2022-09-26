@@ -103,9 +103,17 @@ cd security-api-solutions/Samples/MISP/
 pip install -r requirements.txt
 nano config.py
 ```
-After opening config.py, edit the file as seen below, replacing with your information.
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/MISPsetup4.png)
+2. After opening config.py, edit the file as seen below, replacing with your information.
 
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/MISPsetup5.png)
 
+3. Use CTRL+O to write-out, save and CTRL-X to exit.
+
+4. Run the following now to sync the feeds to Sentinel.
+```
+python script.py
+```
+
+## Chron job setup.
 
 
