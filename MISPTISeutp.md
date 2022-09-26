@@ -104,7 +104,7 @@ pip install -r requirements.txt
 nano config.py
 ```
 After opening config.py, edit the file as seen below, replacing with your information.
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/MISPsetup3.png)
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/MISPsetup4.png)
 
 
 
