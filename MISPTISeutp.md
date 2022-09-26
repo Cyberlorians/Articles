@@ -7,9 +7,9 @@ After the announcement of the free, LIMO Threat Intelligence injestion was deeme
 
 ## This installs the MISP TI Platform
 
-# Ssh to the new Ubuntu VM. The following commands can be copied and pasted into the ssh session.
 
 ```
+# Ssh to the new Ubuntu VM. The following commands can be copied and pasted into the ssh session.
 
 # Update/Upgrade System, if needed
 sudo apt-get update -y && sudo apt-get upgrade -y
