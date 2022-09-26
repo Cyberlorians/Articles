@@ -15,9 +15,6 @@ After the announcement of the free, LIMO Threat Intelligence injestion was deeme
 # Update/Upgrade System, if needed.
 sudo apt-get update -y && sudo apt-get upgrade -y
 
-//# Create a Local Password for MISP User - If MISP was created already. If not, go to next step (you will do this later). 
-sudo passwd misp
-
 # Install Firefox Browser - this needs to be installed to configure MISP to Sentinel.
 sudo apt install firefox -y
 
