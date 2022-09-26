@@ -64,11 +64,14 @@ sudo systemctl reboot
 1. RDP to whichever user has xrdp permissions to the Ubuntu VM
 
 2. Log into the server as seen below. The default username and password were provided earlier. 
+
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/MISPlogin.png)
 
 3. Enter default password will prompt you to change the password
 
-enable FEEDS
+4. Enable FEEDS and caching. These two are by default, you can add more from the proper MISP website [here](https://www.misp-project.org/feeds/).
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/MISPsetup1.png).
 
 retrieve your key from earlier. if you forgot - do this cat /home/misp/MISP-authkey.txt
 
