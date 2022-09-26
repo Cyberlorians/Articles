@@ -61,11 +61,12 @@ sudo systemctl reboot
 
 # Configure MISP TI Platform
 
-## RDP to whichever user has xrdp permissions to the Ubuntu VM
+1. RDP to whichever user has xrdp permissions to the Ubuntu VM
 
-log into the server as seen below
+2. Log into the server as seen below. The default username and password were provided earlier. 
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/MISPlogin.png)
 
-enter default password will prompt you to change the password
+3. Enter default password will prompt you to change the password
 
 enable FEEDS
 
