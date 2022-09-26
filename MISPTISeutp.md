@@ -7,6 +7,7 @@ After the announcement of the free, LIMO Threat Intelligence injestion was deeme
 
 ### Ubuntu, MISP TI Install Steps ###
 Connect to the Ubuntu VM via ssh.
+
 '''
 ## This installs the MISP TI Platform
 
@@ -32,4 +33,5 @@ sudo apt install firefox -y
 # This will install MISP Core
 wget -O /tmp/INSTALL.sh https://raw.githubusercontent.com/MISP/MISP/2.4/INSTALL/INSTALL.sh
 bash /tmp/INSTALL.sh -c
+
 '''
