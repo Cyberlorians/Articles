@@ -73,15 +73,17 @@ sudo systemctl reboot
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/MISPsetup1.png).
 
-retrieve your key from earlier. if you forgot - do this cat /home/misp/MISP-authkey.txt
+5. Retrieve your key from earlier. if you forgot - cat /home/misp/MISP-authkey.txt, hang on to it!
 
-## Create AAD App Reg
-# Open the Application Registration Portal and click New registration on the menu bar.
-# Enter a name, and choose Register, other options can be left with their defaults.
-# Note down the Application (client) ID and Directory (tenant) ID. You will need to enter these into the script’s configuration file.
-# Under Certificates & secrets, click New client secret enter a description and click Add. A new secret will be displayed. Copy this for later entry into the script.
-# Under API permissions, choose Add a permission > Microsoft Graph.
-# Under Application Permissions, add ThreatIndicators.ReadWrite.OwnedBy.
+## Create AAD App Reg in Azure AD.
+
+1. Open the Application Registration Portal and click New registration on the menu bar.
+2. Enter a name, and choose Register, other options can be left with their defaults.
+3. Note down the Application (client) ID and Directory (tenant) ID. You will need to enter these into the script’s configuration file.
+4. Under Certificates & secrets, click New client secret enter a description and click Add. A new secret will be displayed. Copy this for later entry into the script.
+5. Under API permissions, choose Add a permission > Microsoft Graph.
+6. Under Application Permissions, add ThreatIndicators.ReadWrite.OwnedBy.
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/MISPsetup2.png).
 
 ## Enable the Sentinel Connector
 Open your Azure Sentinel workspace, click ‘Data connectors’ and then look for the ‘Threat Intelligence Platforms’ connection. Open the connector and click Connect.
