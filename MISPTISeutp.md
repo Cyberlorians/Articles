@@ -9,7 +9,7 @@ After the announcement of the free, LIMO Threat Intelligence injestion was deeme
 
 # Ssh to the new Ubuntu VM. The following commands can be copied and pasted into the ssh session.
 
-'''
+```
 
 # Update/Upgrade System, if needed
 sudo apt-get update -y && sudo apt-get upgrade -y
@@ -33,4 +33,4 @@ sudo apt install firefox -y
 wget -O /tmp/INSTALL.sh https://raw.githubusercontent.com/MISP/MISP/2.4/INSTALL/INSTALL.sh
 bash /tmp/INSTALL.sh -c
 
-'''
+```
