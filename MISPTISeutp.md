@@ -87,8 +87,11 @@ sudo systemctl reboot
 
 ## Enable the Sentinel Connector
 Open your Azure Sentinel workspace, click ‘Data connectors’ and then look for the ‘Threat Intelligence Platforms’ connection. Open the connector and click Connect.
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/MISPsetup3.png)
 
 ## Setup the script for MISP-Sentinel API Calls
+
+1. Run the below script.
 
 ```
 sudo apt-get install python3-venv
@@ -100,7 +103,9 @@ cd security-api-solutions/Samples/MISP/
 pip install -r requirements.txt
 nano config.py
 ```
+After opening config.py, edit the file as seen below, replacing with your information.
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/MISPsetup3.png)
 
-## Configure the config.py file.
+
 
 
