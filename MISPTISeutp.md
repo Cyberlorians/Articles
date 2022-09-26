@@ -29,9 +29,13 @@ bash /tmp/INSTALL.sh
 wget -O /tmp/INSTALL.sh https://raw.githubusercontent.com/MISP/MISP/2.4/INSTALL/INSTALL.sh
 bash /tmp/INSTALL.sh -c
 ```
+
 # Copy the content from the output in a notepad/shared file, temporarily. You need the AuthKey.
 
+This key can be pulled later by:  cat /home/misp/MISP-authkey.txt
+
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/MISPafterinstall1.png)
+
 
 ```
 # Now, create a local password for MISP user. I chose to wait until AFTER the script ends.
