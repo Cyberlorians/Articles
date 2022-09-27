@@ -15,6 +15,9 @@ After the announcement of the free, LIMO Threat Intelligence injestion was deeme
 # Update/Upgrade System, if needed.
 sudo apt-get update -y && sudo apt-get upgrade -y
 
+# Reboot
+sudo systemctl reboot
+
 # Install Firefox Browser - this needs to be installed to configure MISP to Sentinel.
 sudo apt install firefox -y
 
@@ -39,20 +42,17 @@ This key can be pulled later by:  cat /home/misp/MISP-authkey.txt
 sudo passwd misp
 
 # Install Xfce4 Desktop.
-sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y install xfce4
 sudo apt install xfce4-session
 
 # Install XRDP.
 sudo apt-get -y install xrdp
 sudo systemctl enable xrdp
-sudo adduser xrdp ssl-cert
-echo xfce4-session >~/.xsession
 sudo ufw allow 3389
 sudo service xrdp restart
-
-# Reboot
-sudo systemctl reboot
+sudo adduser misp ssl-cert
+echo xfce4-session >~/.xsession
+sudo service xrdp restart
 
 ```
 
