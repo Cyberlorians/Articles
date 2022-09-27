@@ -58,7 +58,7 @@ sudo service xrdp restart
 
 # Configure MISP TI Platform
 
-1. RDP to whichever user has xrdp permissions to the Ubuntu VM
+1. RDP to the Ubuntu server with the MISP user created during the MISP install.
 
 2. Log into the server as seen below. The default username and password were provided earlier. 
 
