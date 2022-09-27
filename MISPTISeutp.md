@@ -95,6 +95,7 @@ sudo apt-get install python3-venv
 sudo python3 -m venv mispToSentinel
 cd mispToSentinel
 source bin/activate
+git clone https://github.com/MISP/PyMISP
 git clone https://github.com/microsoftgraph/security-api-solutions
 cd security-api-solutions/Samples/MISP/
 sudo pip install -r requirements.txt
