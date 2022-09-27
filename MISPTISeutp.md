@@ -102,7 +102,7 @@ nano config.py
 ```
 2. After opening config.py, edit the file as seen below, replacing with your information. Remember your Auth Key is at: cat /home/misp/MISP-authkey.txt
 
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/MISPsetup5.png)
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/MISPsetup6.png)
 
 3. Use CTRL+O to write-out, save and CTRL-X to exit.
 
