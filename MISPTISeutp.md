@@ -66,7 +66,7 @@ sudo service xrdp restart
 
 3. Enter default password will prompt you to change the password
 
-4. Enable FEEDS and caching. These two are by default, you can add more from the proper MISP website [here](https://www.misp-project.org/feeds/).
+4. After logging in, navigate to 'Sync Actions'>'List Feeds'. Select both default feeds, enable and cache. Once done, click 'Fetch and store all feed data'. These two are by default, you can add more from the proper MISP website [here](https://www.misp-project.org/feeds/).
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/MISPsetup1.png).
 
