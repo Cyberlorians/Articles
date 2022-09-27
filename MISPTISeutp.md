@@ -86,20 +86,19 @@ sudo service xrdp restart
 Open your Azure Sentinel workspace, click ‘Data connectors’ and then look for the ‘Threat Intelligence Platforms’ connection. Open the connector and click Connect.
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/MISPsetup3.png)
 
-## Setup the script for MISP-Sentinel API Calls.
+## Setup the script for MISP-Sentinel API Calls. RDP as MISP first. 
 
 1. Run the below script.
 
 ```
 sudo apt-get install python3-venv
-sudo python3 -m venv mispToSentinel
+python3 -m venv mispToSentinel
 cd mispToSentinel
 source bin/activate
-git clone https://github.com/MISP/PyMISP
 git clone https://github.com/microsoftgraph/security-api-solutions
 cd security-api-solutions/Samples/MISP/
-sudo pip install -r requirements.txt
-sudo nano config.py
+pip install -r requirements.txt
+nano config.py
 ```
 2. After opening config.py, edit the file as seen below, replacing with your information. Remember your Auth Key is at: cat /home/misp/MISP-authkey.txt
 
