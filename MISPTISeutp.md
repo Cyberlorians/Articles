@@ -108,7 +108,7 @@ nano config.py
 
 4. Run the following now to sync the feeds to Sentinel.
 ```
-python3 script.py
+python script.py
 ```
 
 ## Chron job setup.
