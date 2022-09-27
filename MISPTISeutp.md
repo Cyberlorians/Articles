@@ -109,7 +109,13 @@ nano config.py
 ```
 python script.py
 ```
+Confirm ingestion by navigating to the TI workbook in Sentinel.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/MISPsetup7.png)
 
 ## Chron job setup.
 
+Below is a CRONTAB entry example of running the script every Sunday at 2am. You can use the generator [here](https://crontab-generator.org/). The example below is to run every day at midnight.
+
+* 0 * * * home/misp/mispToSentinel/security-api-solutions/Samples/python script.py >/dev/null 2>&1
 
