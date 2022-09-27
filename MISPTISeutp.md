@@ -101,7 +101,7 @@ cd security-api-solutions/Samples/MISP/
 sudo pip install -r requirements.txt
 sudo nano config.py
 ```
-2. After opening config.py, edit the file as seen below, replacing with your information.
+2. After opening config.py, edit the file as seen below, replacing with your information. Remember your Auth Key is at: cat /home/misp/MISP-authkey.txt
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/MISPsetup5.png)
 
