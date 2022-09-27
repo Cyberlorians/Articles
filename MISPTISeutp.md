@@ -96,8 +96,7 @@ python3 -m venv mispToSentinel
 cd mispToSentinel
 source bin/activate
 git clone https://github.com/microsoftgraph/security-api-solutions
-cd security-api-solutions/Samples/MISP/
-pip install -r requirements.txt
+pip3 install requests requests-futures pymisp
 nano config.py
 ```
 2. After opening config.py, edit the file as seen below, replacing with your information. Remember your Auth Key is at: cat /home/misp/MISP-authkey.txt
