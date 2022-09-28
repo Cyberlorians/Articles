@@ -1,4 +1,4 @@
-## MISP Open Source Threat Intelligence Platform to Microsoft Sentinel. Authored by: Michael Crane and Matt Larkin. ##
+## MISP Open Source Threat Intelligence Platform to Microsoft Sentinel. Authored by: Matt Larkin and Michael Crane. ##
 
 After the announcement of the free, LIMO Threat Intelligence injestion was deemed to be End of Life. Many of us have been after a replacement. This guide will associate a cost, check cost workbook, and a VM cost. However, it will have an automated process of TI into your Sentinel instance. See MISP [here](https://www.misp-project.org/).
 
