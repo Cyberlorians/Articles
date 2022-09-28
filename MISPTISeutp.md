@@ -51,7 +51,7 @@ sudo adduser misp ssl-cert
 echo xfce4-session >~/.xsession
 sudo service xrdp restart
 
-# Install Firefox Browser - this needs to be installed to configure MISP to Sentinel.
+# Install Firefox Browser - this needs to be installed to configure MISP to Sentinel Feeds.
 sudo apt install firefox -y
 
 ```
