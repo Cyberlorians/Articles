@@ -18,9 +18,6 @@ sudo apt-get update -y && sudo apt-get upgrade -y
 # Reboot
 sudo systemctl reboot
 
-# Install Firefox Browser - this needs to be installed to configure MISP to Sentinel.
-sudo apt install firefox -y
-
 # Please check the installer options first to make the best choice for your install 
 wget -O /tmp/INSTALL.sh https://raw.githubusercontent.com/MISP/MISP/2.4/INSTALL/INSTALL.sh
 bash /tmp/INSTALL.sh
@@ -53,6 +50,9 @@ sudo service xrdp restart
 sudo adduser misp ssl-cert
 echo xfce4-session >~/.xsession
 sudo service xrdp restart
+
+# Install Firefox Browser - this needs to be installed to configure MISP to Sentinel.
+sudo apt install firefox -y
 
 ```
 
