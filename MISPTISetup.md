@@ -96,6 +96,7 @@ python3 -m venv mispToSentinel
 cd mispToSentinel
 source bin/activate
 git clone https://github.com/microsoftgraph/security-api-solutions
+cd security-api-solutions/Samples/MISP/
 pip3 install requests requests-futures pymisp
 nano config.py
 ```
