@@ -118,6 +118,6 @@ Confirm ingestion by navigating to the TI workbook in Sentinel.
 
 Below is a CRONTAB entry example of running the script every Sunday at 2am. You can use the generator [here](https://crontab-generator.org/). The example below is to run every day at midnight.
 ```
-* 0 * * * home/misp/mispToSentinel/security-api-solutions/Samples/python script.py >/dev/null 2>&1
+0 2 * * 0 home/misp/mispToSentinel/security-api-solutions/Samples/python script.py >/dev/null 2>&1
 ```
 
