@@ -1,6 +1,6 @@
 ## MISP Open Source Threat Intelligence Platform to Microsoft Sentinel. Authored by: Matt Larkin and Michael Crane. ##
 
-After the announcement of the free, LIMO Threat Intelligence ingestion was deemed to be End of Life. Many of us have been after a replacement. This guide will associate a cost, check cost workbook, and a VM cost. However, it will have an automated process of TI into your Sentinel instance. See MISP [here](https://www.misp-project.org/).
+After the announcement of the free, LIMO Threat Intelligence injestion was deemed to be End of Life. Many of us have been after a replacement. This guide will associate a cost, check cost workbook, and a VM cost. However, it will have an automated process of TI into your Sentinel instance. See MISP [here](https://www.misp-project.org/).
 
 
 *Pre-req* - Create a Ubuntu VM, I am using Azure for this use case. Don't need anything crazy to keep the cost low for this use case. Being this is owned by the SecOps team, the VM lives within my SecOps subscription in Azure.
@@ -116,8 +116,8 @@ Confirm ingestion by navigating to the TI workbook in Sentinel.
 
 ## Chron job setup.
 
-Below is a CRONTAB entry example of running the script every Sunday at 2am. You can use the generator [here](https://crontab-generator.org/). The example below is to run every day at midnight.
+Below is a CRONTAB entry example of running the script every Sunday at 2am. You can use the generator [here](https://crontab-generator.org/).
 ```
-0 2 * * 0 home/misp/mispToSentinel/security-api-solutions/Samples/python script.py >/dev/null 2>&1
+* 0 * * * home/misp/mispToSentinel/security-api-solutions/Samples/python script.py >/dev/null 2>&1
 ```
 
