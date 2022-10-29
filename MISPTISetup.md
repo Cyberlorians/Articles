@@ -102,13 +102,13 @@ nano config.py
 ```
 2. After opening config.py, edit the file as seen below, replacing with your information. Remember your Auth Key is at: cat /home/misp/MISP-authkey.txt
 
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/MISPsetup6.png)
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/mispconfig.png)
 
 3. Use CTRL+O to write-out, save and CTRL-X to exit.
 
 4. Run the following now to sync the feeds to Sentinel.
 ```
-python script.py
+python3 script.py
 ```
 Confirm ingestion by navigating to the TI workbook in Sentinel.
 
