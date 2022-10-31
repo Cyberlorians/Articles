@@ -13,11 +13,13 @@ Microsoft-AzureADPasswordProtection-DCAgent/Admin!*[System[(Level=1 or Level=2 o
 Once configured, head over to Sentiel and plug in the below query.
 
 
-'''
+```
 Event
 | where Source == "Microsoft-AzureADPasswordProtection-DCAgent"
 | summarize PasswordChangesValidated = countif(EventID == 10014), PasswordSetsValidated = countif(EventID == 10015), PasswordChangesRejected = countif(EventID == 10016), PasswordSetsRejected = countif(EventID == 10017), PasswordChangeAuditOnlyFailures = countif(EventID == 10024), PasswordSetAuditOnlyFailures = countif(EventID == 10025), PasswordChangeErrors = countif(EventID == 10012), PasswordSetErrors = countif(EventID == 10013) by bin(TimeGenerated, 7d), Computer
-'''
+```
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/AADPassDCR2.png)
 
 
 
