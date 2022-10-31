@@ -8,7 +8,7 @@ If you would like to capture the Password Protection Summaries, your first setup
 
 Microsoft-AzureADPasswordProtection-DCAgent/Admin!*[System[(Level=1 or Level=2 or Level=3 or Level=4 or Level=0 or Level=5)]]
 
-!(https://github.com/Cyberlorians/uploadedimages/blob/main/AADPassDCR.png)
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/AADPassDCR.png)
 
 Once configured, head over to Sentiel and plug in the below query.
 
