@@ -48,7 +48,7 @@ If you have followed all steps and you are indeed having malicious traffic inbou
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/ip2geotagsworking.png)
 
-Cool huh! I think so too but we could use a bit more detail on those IPs. Following the SAME steps as above, deploy [Get-VirusTotalIPReport](https://github.com/Cyberlorians/Sentinel/blob/main/Playbooks/Get-VirusTotalIPReport.json). I adjusted this playbook from the Sentinel community to run as a managed identity AND who will have "whois" data. Disclaimer: and you CANNOT miss this step. Please sign up a [VirusTotal](https://www.virustotal.com/gui/home/upload) which is free for the API Key and on the logic app designer connector you will have to enter your api-key, name and update. *Disclaimer* - the logic app needs managed identity permissions of "Microsoft Sentinel Responder". It is best to put the logic app within the same resource group as Sentinel/LAW.
+Cool huh! I think so too but we could use a bit more detail on those IPs. Following the SAME steps as above, deploy [Get-VirusTotalIPReport](https://github.com/Cyberlorians/Sentinel/blob/main/Playbooks/Get-VirusTotalIPReport-Incident.json). I adjusted this playbook from the Sentinel community to run as a managed identity AND who will have "whois" data. Disclaimer: and you CANNOT miss this step. Please sign up a [VirusTotal](https://www.virustotal.com/gui/home/upload) which is free for the API Key and on the logic app designer connector you will have to enter your api-key, name and update. *Disclaimer* - the logic app needs managed identity permissions of "Microsoft Sentinel Responder". It is best to put the logic app within the same resource group as Sentinel/LAW.
 
 Once deployed, you will see three API connectors. Listed below.
 
