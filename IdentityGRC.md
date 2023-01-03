@@ -39,5 +39,7 @@ Have you ever wanted a way for your folks to query the Azure Active Directory lo
 
 #### 4. Review and Create.
 
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/customrbac4.png)
+
    
 
