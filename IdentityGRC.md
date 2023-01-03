@@ -72,7 +72,7 @@ Have you ever wanted a way for your folks to query the Azure Active Directory lo
 
 Where does this leave you? Well, I would start to use Matt Zorichs queries [here](https://github.com/reprise99/Sentinel-Queries/tree/main/Azure%20Active%20Directory) and review his write [up](https://learnsentinel.blog/2022/06/21/kql-lessons-learnt-from-365daysofkql/). You can look through some of the examples here to help get you started. I would also deploy his [365daysofKQL](https://github.com/reprise99/Sentinel-Queries/tree/main/Query%20Pack). The Microsoft Sentinel community has a ton of precanned queries as well. 
 
-Next up, head on over to the identity [workbooks] section as a caveat to this article. *This is currently under development*.
+Next up, head on over to the identity [workbooks](https://github.com/Cyberlorians/Articles/blob/main/IdentityGRCWorkbooks.md) section as a caveat to this article. *This is currently under development*.
 
 
 
