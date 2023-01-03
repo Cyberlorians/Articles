@@ -70,6 +70,8 @@ Have you ever wanted a way for your folks to query the Azure Active Directory lo
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/customrbac10.png)
 
+* I would start to use Matt Zorichs queries [here](https://github.com/reprise99/Sentinel-Queries/tree/main/Azure%20Active%20Directory). You can look through some of the examples here to help get you started. I would also deploy his [365daysofKQL](https://github.com/reprise99/Sentinel-Queries/tree/main/Query%20Pack).
+
 
 
 
