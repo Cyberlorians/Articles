@@ -8,17 +8,16 @@ You will use Azure Monitor>Workbooks section to import these or any workbooks.
 
 ### Conditional Access Trends Workook ####
 
-1 - Navigte to Azure Monitor>Worksbooks, select New. 
+#### 1 - Navigte to Azure Monitor>Worksbooks, select New. 
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/customwbs1.png)
 
-2 - Paste the JSON file [here](https://github.com/Cyberlorians/Workbooks/blob/main/ConditionalAccessTrends.json) into the workbook template and click 'apply'.
+#### 2 - Paste the JSON file [here](https://github.com/Cyberlorians/Workbooks/blob/main/ConditionalAccessTrends.json) into the workbook template and click 'apply'.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/customwbs2.png)
 
-3 - Set the workspace to your dedicated RBAC scoped permission.
+#### 3 - Set the workspace to your dedicated RBAC scoped permission and SAVE the workbook the RG you have 'Workbook Contributor' permission on.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/customwbs3.png)
 
-4 - Save the workbook the RG you have 'Workbook Contributor' permission on. 
 
