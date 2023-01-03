@@ -56,4 +56,20 @@ Have you ever wanted a way for your folks to query the Azure Active Directory lo
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/customrbac7.png)
 
+### Verify user access with Identity GRC user. ###
+
+#### 1. Log into Azure>Monitor and then Logs.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/customrbac8.png)
+
+#### 2. Select the scope of the Log Analytics Workspace which you have access too and click 'apply'.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/customrbac9.png)
+
+#### 3. Verify you can now query the AAD tables as listed above. Example is below. 
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/customrbac10.png)
+
+
+
 
