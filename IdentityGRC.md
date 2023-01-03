@@ -8,7 +8,11 @@ Have you ever wanted a way for your folks to query the Azure Active Directory lo
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/customrbac1.png)
 2. Name the Role: Custom - AAD Logs Reader.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/customrbac2.png)
 3. Under JSON, click 'edit' and paste the below code into the actions brackets and hit 'save'.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/customrbac3.png)
 4. Review and Create.
 ```
 
