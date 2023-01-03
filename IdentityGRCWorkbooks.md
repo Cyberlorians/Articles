@@ -8,6 +8,8 @@ You will use Azure Monitor>Workbooks section to import these or any workbooks.
 
 ### Conditional Access Trends Workook ####
 
+This is kind of a unique workbook. It was built on a few customer asks, Matt Zorichs [CAP Insights](https://learnsentinel.blog/2022/05/09/azure-ad-conditional-access-insights-auditing-with-microsoft-sentinel/) AND from the Conditional Access Entra blade on insights. So, a 3 in 1, whammy of a workbook. 
+
 #### 1 - Navigte to Azure Monitor>Worksbooks, select New. 
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/customwbs1.png)
