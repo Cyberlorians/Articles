@@ -4,19 +4,16 @@ Have you ever wanted a way for your folks to query the Azure Active Directory lo
 
 ### Create the custom RBAC role on the Resource Group where the LAW resides (you cannot create a custom role at the LAW, yet).  ###
 
-1. At the ResourceGroup (IAM), add a custom role.
+#### 1. At the ResourceGroup (IAM), add a custom role.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/customrbac1.png)
 
-2. Name the Role: Custom - AAD Logs Reader.
+#### 2. Name the Role: Custom - AAD Logs Reader.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/customrbac2.png)
 
-3. Under JSON, click 'edit' and paste the below code into the actions brackets and hit 'save'.
+#### 3. Under JSON, click 'edit' and paste the below code into the actions brackets and hit 'save'.
 
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/customrbac3.png)
-
-#### 4. Review and Create.####
 ```
 
 "actions": [
@@ -37,6 +34,10 @@ Have you ever wanted a way for your folks to query the Azure Active Directory lo
                 ],
 
 ```
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/customrbac3.png)
+
+#### 4. Review and Create.
 
    
 
