@@ -27,7 +27,7 @@ This is kind of a unique workbook. It was built on a few customer asks, Matt Zor
 
 Maintaining a well managed AzureAD tenant w/ kql. A lot of this is based off Matt Zorichs - AADSpringCleaning (sorry, Matt I stole your data) and a few other tweaks from the field too. Deploy the workbook and follow along [here](https://learnsentinel.blog/2022/03/16/maintaining-a-well-managed-azure-ad-tenant-with-kql/). This workbook should be used monthly or quarterly, not just every spring. It will help keep your tenant identities in check. Another great caveat with this is the 'Conditional Access Trends Workbook'.
 
-#### 1 - Navigte to Azure Monitor>Worksbooks, select New. 
+#### 1 - Navigte to Azure Monitor>Worksbooks, select New. (Same steps as above).
 
 #### 2 - Paste the JSON file [here](https://github.com/Cyberlorians/Workbooks/blob/main/AzureADSpringCleaning.json) into the workbook template and click 'apply'.
 
