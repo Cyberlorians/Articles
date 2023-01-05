@@ -23,3 +23,8 @@ This is kind of a unique workbook. It was built on a few customer asks, Matt Zor
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/customwbs3.png)
 
 
+### AzureAD Spring Cleaning Workbook ####
+
+#### 1 - Navigte to Azure Monitor>Worksbooks, select New. 
+
+#### 2 - Paste the JSON file [here]https://github.com/Cyberlorians/Workbooks/blob/main/AzureADSpringCleaning.json) into the workbook template and click 'apply'.
