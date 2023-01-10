@@ -6,7 +6,7 @@ You will use Azure Monitor>Workbooks section to import these or any workbooks.
 
 *Disclaimer* - Give access to the same security group that was created in the first artcle. I.e., grant 'Workbook Contributor', to the 'Custom - AAD Logs Reader', security group on a Resource Group where the users will be saving these workbooks. I chose to create a Resource Group called, Workbooks and set the permissions that way. 
 
-### Conditional Access Trends and Changes Workook ####
+### Conditional Access Trends and Changes Workbook ####
 
 This is kind of a unique workbook. It was built on a few customer asks, Matt Zorichs [CAP Insights](https://learnsentinel.blog/2022/05/09/azure-ad-conditional-access-insights-auditing-with-microsoft-sentinel/) (please follow his document to see how you can leverage the workbook further) AND from the Conditional Access Entra blade on insights. So, a 3 in 1, whammy of a workbook. 
 
