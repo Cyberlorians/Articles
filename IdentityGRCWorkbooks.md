@@ -29,6 +29,6 @@ Maintaining a well managed AzureAD tenant w/ kql. A lot of this is based off Mat
 
 #### 1 - Navigte to Azure Monitor>Worksbooks, select New. (Same steps as above).
 
-#### 2 - Paste the JSON file [here](https://github.com/Cyberlorians/Workbooks/blob/main/AzureADSpringCleaning.json) into the workbook template and click 'apply'.
+#### 2 - Paste the JSON file [here](https://github.com/Cyberlorians/Workbooks/blob/main/AzureADMaintenace.json) into the workbook template and click 'apply'.
 
 #### 3 - Set the workspace to your dedicated RBAC scoped permission and SAVE the workbook the RG you have 'Workbook Contributor' permission on.
