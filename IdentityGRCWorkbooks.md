@@ -8,7 +8,7 @@ You will use Azure Monitor>Workbooks section to import these or any workbooks.
 
 ### Conditional Access Trends and Changes Workbook ####
 
-This is kind of a unique workbook. It was built on a few customer asks, Matt Zorichs [CAP Insights](https://learnsentinel.blog/2022/05/09/azure-ad-conditional-access-insights-auditing-with-microsoft-sentinel/) (please follow his document to see how you can leverage the workbook further) AND from the Conditional Access Entra blade on insights. So, a 3 in 1, whammy of a workbook. The other workbook included is partially from Daniel Chronlund [here](https://danielchronlund.com/category/conditional-access/)] with a new caveat of adding a text box for you type in your exlusion group name. 
+This is kind of a unique workbook. It was built on a few customer asks, Matt Zorichs [CAP Insights](https://learnsentinel.blog/2022/05/09/azure-ad-conditional-access-insights-auditing-with-microsoft-sentinel/) (please follow his document to see how you can leverage the workbook further) AND from the Conditional Access Entra blade on insights. So, a 3 in 1, whammy of a workbook. The other workbook included is partially from Daniel Chronlund [here](https://danielchronlund.com/category/conditional-access/) with a new caveat of adding a text box for you type in your exlusion group name to view any changes that have taken place.
 
 #### 1 - Navigte to Azure Monitor>Worksbooks, select New. 
 
