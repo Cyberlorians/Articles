@@ -6,7 +6,7 @@ You will use Azure Monitor>Workbooks section to import these or any workbooks.
 
 *Disclaimer* - Give access to the same security group that was created in the first artcle. I.e., grant 'Workbook Contributor', to the 'Custom - AAD Logs Reader', security group on a Resource Group where the users will be saving these workbooks. I chose to create a Resource Group called, Workbooks and set the permissions that way. 
 
-### Conditional Access Trends Workook ####
+### Conditional Access Trends and Changes Workook ####
 
 This is kind of a unique workbook. It was built on a few customer asks, Matt Zorichs [CAP Insights](https://learnsentinel.blog/2022/05/09/azure-ad-conditional-access-insights-auditing-with-microsoft-sentinel/) (please follow his document to see how you can leverage the workbook further) AND from the Conditional Access Entra blade on insights. So, a 3 in 1, whammy of a workbook. 
 
@@ -23,7 +23,7 @@ This is kind of a unique workbook. It was built on a few customer asks, Matt Zor
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/customwbs3.png)
 
 
-### AzureAD Spring Cleaning Workbook ####
+### Azure Active Directory Maintenance Workbook ####
 
 Maintaining a well managed AzureAD tenant w/ kql. A lot of this is based off Matt Zorichs - AADSpringCleaning (sorry, Matt I stole your data) and a few other tweaks from the field too. Deploy the workbook and follow along [here](https://learnsentinel.blog/2022/03/16/maintaining-a-well-managed-azure-ad-tenant-with-kql/). This workbook should be used monthly or quarterly, not just every spring. It will help keep your tenant identities in check. Another great caveat with this is the 'Conditional Access Trends Workbook'.
 
