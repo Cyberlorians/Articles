@@ -35,4 +35,6 @@ Maintaining a well managed AzureAD tenant w/ kql. A lot of this is based off Mat
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/maintenacewb.png)
 
-### AzureAD Signins and Audits ### - In progress
+### AzureAD Signins and Audits ### 
+
+- In progress
