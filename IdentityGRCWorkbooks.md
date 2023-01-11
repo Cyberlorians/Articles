@@ -34,3 +34,5 @@ Maintaining a well managed AzureAD tenant w/ kql. A lot of this is based off Mat
 #### 3 - Set the workspace to your dedicated RBAC scoped permission and SAVE the workbook the RG you have 'Workbook Contributor' permission on.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/maintenacewb.png)
+
+### AzureAD Signins and Audits ### - In progress
