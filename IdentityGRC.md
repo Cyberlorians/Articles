@@ -3,10 +3,11 @@
 Have you ever wanted a way for your folks to query the Azure Active Directory log data without having a complimentary AAD Role? The following solution, you will create a custom RBAC role on the Resource Group where the Log Analytics Workspace resides. This introduces least privilege without the need for an AAD role and allows the users to query, using KQL and to create custom workbooks. The only caveat is that the workbooks for identity in the AAD and Conditional Access blades in the Entra portal are based off an AAD role. You are left with creating custom kql's, which is fine but NO workbooks for your GRC users to query using the built-in AAD workbooks because you do not have that role now. Let me start with showing you how to set this up first, get your folks being able to query the data and then in a part2, I will show the workbooks for identity.
 
 *Pre-requisites* - Create an AAD Security Group labeled 'Custom - AAD Logs Reader' and populate with your Identity GRC users.
+*Pre-requisites* - Azure Active Directory Diagnostic setting and send logs to a Log Analytics Workspace. Recommened to send to your Sentinel LAW.
 
 ### Create the custom RBAC role on the Resource Group where the LAW resides (you cannot create a custom role at the LAW, yet).  ###
 
-#### 1. At the ResourceGroup (IAM), add a custom role.
+#### 1. At the ResourceGroup (IAM), where your Log Analytics Workspace resides. Add a custom role.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/customrbac1.png)
 
@@ -42,7 +43,6 @@ Have you ever wanted a way for your folks to query the Azure Active Directory lo
 #### 4. Review and Create.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/customrbac4.png)
-
    
 #### 5. At the ResourceGroup (IAM), add role assignment.
 
@@ -70,7 +70,7 @@ Have you ever wanted a way for your folks to query the Azure Active Directory lo
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/customrbac10.png)
 
-Where does this leave you? Well, I would start to use Matt Zorichs queries [here](https://github.com/reprise99/Sentinel-Queries/tree/main/Azure%20Active%20Directory) and review his write [up](https://learnsentinel.blog/2022/06/21/kql-lessons-learnt-from-365daysofkql/). You can look through some of the examples here to help get you started. I would also deploy his [365daysofKQL](https://github.com/reprise99/Sentinel-Queries/tree/main/Query%20Pack). The Microsoft Sentinel community has a ton of precanned queries as well. 
+Where does this leave you? Well, I would start to use Matt Zorichs queries [here](https://github.com/reprise99/Sentinel-Queries/tree/main/Azure%20Active%20Directory) and review his write [up](https://learnsentinel.blog/2022/06/21/kql-lessons-learnt-from-365daysofkql/). You can look through some of the examples here to help get you started. I would also deploy his [365daysofKQL](https://github.com/reprise99/Sentinel-Queries/tree/main/Query%20Pack). The Microsoft Sentinel community has a ton of precanned queries as well.. 
 
 Next up, head on over to the identity [workbooks](https://github.com/Cyberlorians/Articles/blob/main/IdentityGRCWorkbooks.md) section as a caveat to this article. *This is currently under development*.
 
