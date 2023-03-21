@@ -32,10 +32,15 @@ The DCR rule has to be in place first. Just create a simple syslog DCR and call 
 ## Run the following on your CEF machine, AFTER you have created the DCR rule. 
 
 ```
+# Azure Commercial. The installation script configures the rsyslog or syslog-ng daemon to use the required protocol and restarts the daemon
 sudo wget -O Forwarder_AMA_installer.py https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/DataConnectors/Syslog/Forwarder_AMA_installer.py
 sudo python3 Forwarder_AMA_installer.py 
 
 ```
+# Edit the rsyslog or syslog-ng conf file. 
+On the Ubuntu server you will see it has been changed to CEF by uncommented modules and inputs. Confirm changes at: 'cat /etc/rsyslog.conf'
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/cefmagrsyslog.png)
+
 # Now, create a local password for MISP user. I chose to wait until AFTER the script ends.
 sudo passwd misp
 
