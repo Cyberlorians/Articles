@@ -23,12 +23,17 @@ sudo apt install rsyslog
 
 ```
 
-## Copy the content from the output in a notepad/shared file, temporarily. You need the AuthKey.
+## Creating the Data Collection Rule.
 
-This key can be pulled later by:  cat /home/misp/MISP-authkey.txt
+The DCR rule has to be in place first. Just create a simple syslog DCR and call it a day, as we will reconfiguring it later.
 
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/MISPafterinstall1.png)
+*Instructions* - [here](https://learn.microsoft.com/en-us/azure/sentinel/forward-syslog-monitor-agent)
 
+## Run the following on your CEF machine, AFTER you have created the DCR rule. 
+
+```
+sudo wget -O Forwarder_AMA_installer.py https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/DataConnectors/Syslog/Forwarder_AMA_installer.py
+sudo python3 Forwarder_AMA_installer.py 
 
 ```
 # Now, create a local password for MISP user. I chose to wait until AFTER the script ends.
