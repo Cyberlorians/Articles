@@ -81,9 +81,41 @@ $DCRResponse | ConvertTo-JSON | Out-File "$(pwd).Path\dcr.json"
 
 You can follow the directions [here](https://learn.microsoft.com/en-us/azure/sentinel/connect-cef-ama#request-body). 
 
-Edit and Notes: Where you see a RED dot, take not of the MSFT article and your changes according to yours. Below is an example.
+Edit and Notes: Where you see a RED dot, take not of the MSFT article and your changes according to yours. Below is an example. Make changes and save the file.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/cefdcredit.png)
+
+# PUT Request Body - **This is the same for any Azure Environment**
+
+```
+$json = Get-Content c:\tools\dcrcefapi.json
+$DCRPUT = Invoke-RestMethod -Method ‘PUT’ $url -Body $json -Headers $headers -ContentType $ct
+```
+
+# Confirm changes have been made by reading the overview/JSON on your DCR rule in Azure Monitor.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/CEFcompleteDCR.png)
+
+# Test the connector [here](https://learn.microsoft.com/en-us/azure/sentinel/connect-cef-ama#test-the-connector)
+
+# Confirm you are ingesting the CEF Logs into Sentinel.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/SentinelCEFProof.png)
+
+# Verify the connect is installed correctly, run the troubleshooting script w/ this command.
+
+Azure Commercial
+```
+sudo wget -O cef_AMA_troubleshoot.py https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/DataConnectors/CEF/cef_AMA_troubleshoot.py
+sudo python3 cef_AMA_troubleshoot.py
+```
+
+Azure Government
+```
+sudo wget -O cef_AMA_troubleshoot.py https://raw.githubusercontent.com/Cyberlorians/Sentinel/main/Connectors/CEF/cef_AMA_troubleshoot.py
+sudo python3 cef_AMA_troubleshoot.py
+```
+
 
 
 
