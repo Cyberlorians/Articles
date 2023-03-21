@@ -29,10 +29,10 @@ The DCR rule has to be in place first. Just create a simple syslog DCR and call 
 
 *Instructions* - [here](https://learn.microsoft.com/en-us/azure/sentinel/forward-syslog-monitor-agent)
 
-## Run the following on your CEF machine, AFTER you have created the DCR rule. 
-
+## Run the following on your CEF machine, AFTER you have created the DCR rule.
+ 
+Azure Commercial or Azure Goverment. The installation script configures the rsyslog or syslog-ng daemon to use the required protocol and restarts the daemon
 ```
-# Azure Commercial or Azure Goverment. The installation script configures the rsyslog or syslog-ng daemon to use the required protocol and restarts the daemon
 sudo wget -O Forwarder_AMA_installer.py https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/DataConnectors/Syslog/Forwarder_AMA_installer.py
 sudo python3 Forwarder_AMA_installer.py 
 
@@ -77,7 +77,7 @@ $url = “https://management.usgovcloudapi.net/subscriptions/$($subscriptionId)/
 $DCRResponse = Invoke-RestMethod $url -Method 'Get' -Headers $headers
 $DCRResponse | ConvertTo-JSON | Out-File "$(pwd).Path\dcr.json"
 ```
-# Reading the Request Body and make edits
+## Reading the Request Body and make edits
 
 You can follow the directions [here](https://learn.microsoft.com/en-us/azure/sentinel/connect-cef-ama#request-body). 
 
@@ -85,24 +85,24 @@ Edit and Notes: Where you see a RED dot, take not of the MSFT article and your c
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/cefdcredit.png)
 
-# PUT Request Body - **This is the same for any Azure Environment**
+## PUT Request Body - **This is the same for any Azure Environment**
 
 ```
 $json = Get-Content c:\tools\dcrcefapi.json
 $DCRPUT = Invoke-RestMethod -Method ‘PUT’ $url -Body $json -Headers $headers -ContentType $ct
 ```
 
-# Confirm changes have been made by reading the overview/JSON on your DCR rule in Azure Monitor.
+## Confirm changes have been made by reading the overview/JSON on your DCR rule in Azure Monitor.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/CEFcompleteDCR.png)
 
-# Test the connector [here](https://learn.microsoft.com/en-us/azure/sentinel/connect-cef-ama#test-the-connector)
+## Test the connector [here](https://learn.microsoft.com/en-us/azure/sentinel/connect-cef-ama#test-the-connector)
 
-# Confirm you are ingesting the CEF Logs into Sentinel.
+## Confirm you are ingesting the CEF Logs into Sentinel.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/SentinelCEFProof.png)
 
-# Verify the connect is installed correctly, run the troubleshooting script w/ this command.
+## Verify the connect is installed correctly, run the troubleshooting script w/ this command.
 
 Azure Commercial
 ```
