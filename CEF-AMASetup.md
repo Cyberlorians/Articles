@@ -46,7 +46,24 @@ On the Ubuntu server you will see it has been changed to CEF by uncommented modu
 
 *PreReqs* - PowerShell, Az Module.
 
-GET Request URL and Header - **Azure Government** Steps:  
+GET Request URL and Header - **Azure Commercial** 
+ 
+```
+Connect-AzAccount -Environment Azure -UseDeviceAuthentication
+$token = (Get-AzAccessToken -ResourceUrl 'https://management.azure.com').Token
+$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+$headers.Add("Authorization","Bearer $token")
+$ct = ‘application/json’
+$subscriptionId= ‘SubscriptionIDofWhereTheDCRLives’
+$resourceGroupName = 'RGofWhereTheDCRLives'
+$dataCollectionRuleName = ‘CEF-DCR-Name’
+$url = “https://management.azure.com/subscriptions/$($subscriptionId)/resourceGroups/$($resourceGroupName)/providers/Microsoft.Insights/dataCollectionRules/$($dataCollectionRuleName)?api-version=2019-11-01-preview”
+$DCRResponse = Invoke-RestMethod $url -Method 'Get' -Headers $headers
+$DCRResponse | ConvertTo-JSON | Out-File "$(pwd).Path\dcr.json"
+```
+
+GET Request URL and Header - **Azure Government**  
+
 ```
 Connect-AzAccount -Environment AzureUSGovernment -UseDeviceAuthentication
 $token = (Get-AzAccessToken -ResourceUrl 'https://management.usgovcloudapi.net').Token
@@ -57,7 +74,19 @@ $subscriptionId= ‘SubscriptionIDofWhereTheDCRLives’
 $resourceGroupName = 'RGofWhereTheDCRLives'
 $dataCollectionRuleName = ‘CEF-DCR-Name’
 $url = “https://management.usgovcloudapi.net/subscriptions/$($subscriptionId)/resourceGroups/$($resourceGroupName)/providers/Microsoft.Insights/dataCollectionRules/$($dataCollectionRuleName)?api-version=2019-11-01-preview”
-$json = Get-Content c:\tools\CEF-DCR-Name.json
+$DCRResponse = Invoke-RestMethod $url -Method 'Get' -Headers $headers
+$DCRResponse | ConvertTo-JSON | Out-File "$(pwd).Path\dcr.json"
+```
+# Reading the Request Body and make edits
+
+You can follow the directions [here](https://learn.microsoft.com/en-us/azure/sentinel/connect-cef-ama#request-body). 
+
+Edit and Notes: Where you see a RED dot, take not of the MSFT article and your changes according to yours. Below is an example.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/dcredit.png)
+
+
+
 
 
 
