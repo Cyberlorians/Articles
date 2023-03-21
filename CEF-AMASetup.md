@@ -83,7 +83,7 @@ You can follow the directions [here](https://learn.microsoft.com/en-us/azure/sen
 
 Edit and Notes: Where you see a RED dot, take not of the MSFT article and your changes according to yours. Below is an example.
 
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/dcredit.png)
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/cefdcredit.png)
 
 
 
