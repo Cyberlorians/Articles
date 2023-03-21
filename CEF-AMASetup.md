@@ -1,6 +1,6 @@
 ## Stream Comment Event Format (CEF) with Azure Monitor Agent (the helping hand guide). Authored by: Michael Crane and Lorenzo Ireland. ##
 
-Many folks using Sentinel have issues with clarity around the Common Event Format (CEF) via AMA and rightfully so. This article deems to clear any confusion in both Azure Commercial and Goverment tenants. See MISP [here](https://learn.microsoft.com/en-us/azure/sentinel/connect-cef-ama).
+Many folks using Sentinel have issues with clarity around the Common Event Format (CEF) via AMA and rightfully so. This article deems to clear any confusion in both Azure Commercial and Goverment tenants. See CEF-AMA [here](https://learn.microsoft.com/en-us/azure/sentinel/connect-cef-ama).
 
 *Disclaimer* - In Microsoft Sentinel, the CEF connector is only giving you instructions to create a DCR and looking for the ingestion on a flag. It is NOT a true connector. You will have manual work to do and this solution does work in Azure Government. 
 
