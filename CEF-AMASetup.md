@@ -46,7 +46,7 @@ On the Ubuntu server you will see it has been changed to CEF by uncommented modu
 
 *PreReqs* - PowerShell, Az Module.
 
-GET Request URL and Header - Azure Government Steps:  
+GET Request URL and Header - #Azure Government# Steps:  
 ```
 Connect-AzAccount -Environment AzureUSGovernment -UseDeviceAuthentication
 $token = (Get-AzAccessToken -ResourceUrl 'https://management.usgovcloudapi.net').Token
