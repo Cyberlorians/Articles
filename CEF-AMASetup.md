@@ -25,14 +25,14 @@ sudo apt install rsyslog
 
 ## Creating the Data Collection Rule.
 
-The DCR rule has to be in place first. Just create a simple syslog DCR and call it a day, as we will reconfiguring it later.
+The DCR rule has to be in place first. Just create a simple syslog DCR and call it a day, as we will reconfiguring it later. Once created, allow some time for the AMA extension to be added to the machine and the syslog data to ingest into Sentinel before going onto the next step. 
 
 *Instructions* - [here](https://learn.microsoft.com/en-us/azure/sentinel/forward-syslog-monitor-agent)
 
 ## Run the following on your CEF machine, AFTER you have created the DCR rule. 
 
 ```
-# Azure Commercial. The installation script configures the rsyslog or syslog-ng daemon to use the required protocol and restarts the daemon
+# Azure Commercial or Azure Goverment. The installation script configures the rsyslog or syslog-ng daemon to use the required protocol and restarts the daemon
 sudo wget -O Forwarder_AMA_installer.py https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/DataConnectors/Syslog/Forwarder_AMA_installer.py
 sudo python3 Forwarder_AMA_installer.py 
 
@@ -41,5 +41,24 @@ sudo python3 Forwarder_AMA_installer.py
 On the Ubuntu server you will see it has been changed to CEF by uncommented modules and inputs. Confirm changes at: 'cat /etc/rsyslog.conf'
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/cefmagrsyslog.png)
+
+# Setup the connector with the API - Reconfigure the DCR for CEF and NOT syslog. 
+
+*PreReqs* - PowerShell, Az Module.
+
+GET Request URL and Header - Azure Government Steps:  
+```
+Connect-AzAccount -Environment AzureUSGovernment -UseDeviceAuthentication
+$token = (Get-AzAccessToken -ResourceUrl 'https://management.usgovcloudapi.net').Token
+$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+$headers.Add("Authorization","Bearer $token")
+$ct = ‘application/json’
+$subscriptionId= ‘SubscriptionIDofWhereTheDCRLives’
+$resourceGroupName = 'RGofWhereTheDCRLives'
+$dataCollectionRuleName = ‘CEF-DCR-Name’
+$url = “https://management.usgovcloudapi.net/subscriptions/$($subscriptionId)/resourceGroups/$($resourceGroupName)/providers/Microsoft.Insights/dataCollectionRules/$($dataCollectionRuleName)?api-version=2019-11-01-preview”
+$json = Get-Content c:\tools\CEF-DCR-Name.json
+
+
 
 
