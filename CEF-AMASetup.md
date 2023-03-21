@@ -6,9 +6,7 @@ Many folks using Sentinel have issues with clarity around the Common Event Forma
 
 *Pre-req* - Create a Ubuntu VM, I am using Azure for this use case. Don't need anything crazy to keep the cost low for this use case. Being this is owned by the SecOps team, the VM lives within my SecOps subscription in Azure.
 
-*Disclaimer* - You can use the default account that is created when you stand up the server, initially or create a user called MISP. Regardless, a user account named 'MISP' will be created during the install. I chose to use my default admin account and then change the password later for RDP access. 
-
-## This installs the MISP TI Platform
+## CEF Setup on Ubuntu 22.04
 
 ```
 # Ssh to the new Ubuntu VM. The following commands can be copied and pasted into the ssh session.
@@ -19,13 +17,10 @@ sudo apt-get update -y && sudo apt-get upgrade -y
 # Reboot
 sudo systemctl reboot
 
-# Please check the installer options first to make the best choice for your install 
-wget -O /tmp/INSTALL.sh https://raw.githubusercontent.com/MISP/MISP/2.4/INSTALL/INSTALL.sh
-bash /tmp/INSTALL.sh
+# Check if Python 2.7/3 is installed and syslog-ng or rsyslog (rsyslog by default) 
+sudo apt install python3
+sudo apt install rsyslog
 
-# This will install MISP Core - Install will pause to create user MISP, chose yes to run as MISP. 
-wget -O /tmp/INSTALL.sh https://raw.githubusercontent.com/MISP/MISP/2.4/INSTALL/INSTALL.sh
-bash /tmp/INSTALL.sh -c
 ```
 
 ## Copy the content from the output in a notepad/shared file, temporarily. You need the AuthKey.
