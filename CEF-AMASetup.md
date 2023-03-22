@@ -1,26 +1,25 @@
-## Stream Comment Event Format (CEF) with Azure Monitor Agent (the helping hand guide). Authored by: Michael Crane and Lorenzo Ireland. ##
+## Stream Common Event Format (CEF) using Azure Monitor Agent (AMA) (the helping hand guide). Authored by: Michael Crane and Lorenzo Ireland. ##
 
-Many folks using Sentinel have issues with clarity around the Common Event Format (CEF) via AMA and rightfully so. This article deems to clear any confusion in both Azure Commercial and Goverment tenants. See CEF-AMA [here](https://learn.microsoft.com/en-us/azure/sentinel/connect-cef-ama).
+Many folks using Sentinel have issues with clarity around the Common Event Format (CEF) via AMA and rightfully so. This article deems to clear any confusion in both Azure Commercial and US Goverment tenants. See CEF-AMA [here](https://learn.microsoft.com/en-us/azure/sentinel/connect-cef-ama).
 
-*Disclaimer* - In Microsoft Sentinel, the CEF connector is only giving you instructions to create a DCR and looking for the ingestion on a flag. It is NOT a true connector. You will have manual work to do and this solution does work in Azure Government. 
+*Disclaimer* - In Microsoft Sentinel, the CEF connector simply provides instructions to create a Data Collection Rule (DCR) and a Python script to enble rsyslog TCP and UDP on port 514. From there, the CEF entry is forwarded via the Azure Monitor Agent (443 TLS 1.2) to it's corresponding Data Collection Rule to the assigned table (CommonSecurityLog) located in Log Analytics. It is NOT a true connector and simply takes advantage of AMA, DCR, and a [Workspace transformation](https://learn.microsoft.com/en-us/azure/sentinel/data-transformation). You will have some manual work to do and this solution does work in Microsoft Azure US Government. 
 
-*Pre-req* - Create a Ubuntu VM, I am using Azure for this use case. Don't need anything crazy to keep the cost low for this use case. Being this is owned by the SecOps team, the VM lives within my SecOps subscription in Azure.
+*Pre-req* - Create an Azure Monitor Agent supported Linux Virtual Machine (VM). This example uses Ubuntu 22.04. This has also been tested with Rocky 8 Linux. I am using Azure for this use case. The VM you select should be based upon the volume of CEF traffic you expect to recieve. Being this is owned by the SecOps team, the VM lives within my SecOps subscription in Azure.
 
 ## CEF Setup on Ubuntu 22.04
 
 ```
-# Ssh to the new Ubuntu VM. The following commands can be copied and pasted into the ssh session.
+# SSH to the newly created Ubuntu VM. The following commands can be copied and pasted into the ssh session.
 
 # Update/Upgrade System, if needed.
 sudo apt-get update -y && sudo apt-get upgrade -y
 
 # Reboot
-sudo systemctl reboot
+sudo reboot
 
 # Check if Python 2.7/3 is installed and syslog-ng or rsyslog (rsyslog by default) 
 sudo apt install python3
 sudo apt install rsyslog
-
 ```
 
 ## Creating the Data Collection Rule.
@@ -115,11 +114,3 @@ Azure Government
 sudo wget -O cef_AMA_troubleshoot.py https://raw.githubusercontent.com/Cyberlorians/Sentinel/main/Connectors/CEF/cef_AMA_troubleshoot.py
 sudo python3 cef_AMA_troubleshoot.py
 ```
-
-
-
-
-
-
-
-
