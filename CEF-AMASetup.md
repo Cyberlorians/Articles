@@ -37,12 +37,12 @@ sudo wget -O Forwarder_AMA_installer.py https://raw.githubusercontent.com/Azure/
 sudo python3 Forwarder_AMA_installer.py 
 
 ```
-# Edit the rsyslog or syslog-ng conf file. 
+## Edit the rsyslog or syslog-ng conf file. 
 On the Ubuntu server you will see it has been changed to CEF by uncommented modules and inputs. Confirm changes at: 'cat /etc/rsyslog.conf'
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/cefmagrsyslog.png)
 
-# Setup the connector with the API - Reconfigure the DCR for CEF and NOT syslog. 
+## Setup the connector with the API - Reconfigure the DCR for CEF and NOT syslog. 
 
 *PreReqs* - PowerShell, Az Module.
 
