@@ -47,7 +47,6 @@ GCCH - https://api-gov.securitycenter.microsoft.us/api/machines/SoftwareVulnerab
 1 - As stated, when you deployed the MDETVM logic app, it deploys a managed identity with the SAME name. The next step gives permissions for the API call to the App Role assignment on 'Windows Defender ATP - Vulnerability.Read.All'. The WindowsDefenderAtp AppRoleID is ($appId = "fc780465-2017-40d4-a0c5-307022471b92).
 
 
-
 Export the below code to a ps1 file - PowerShell Script. The SearchString 'MDETVM' will be the managed identity created from the logic app deployment. IF you change the name of the logic app during deploying you will need to change the -SearchString flag within the script below to reflect your new name. 
 
 ```
@@ -72,5 +71,22 @@ foreach ($miObjectID in $miObjectIDs) {
     }
 }
 ```
+Successful TVM permissions will look like below.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/TVMperms.png)
+
+Run the logic app with the 'Run Trigger' option to test the app and ingestion into Sentinel. The initial ingest will take a few minutes as the table is created in the Log Analytics Worskpace. 
+
+*Disclaimer* - The logic app is set to run once per day. You can adjust the Recurrence step as you see fit.
+
+A Successful run will look like the below snippet.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/TVMVerify.png)
+
+Give it up to 10minutes to ingest.
+
+Verify ingestion in Sentinel/LAW
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/MDETVMSentinel.png)
 
 
