@@ -32,6 +32,16 @@ As of now, there is no Sentinel connector option for 365Defender TVM Data to ing
 
 3 - Enter the Log Analytics WorkspaceID and Key. You can find this under your current LAW>Agents blade. Grab that info and pop into the corresponding fields and save. The API should say connected now.
 
+4 - Changing the HTTP step per your Azure Environment. As stated, below as built for a GCC environment but you can adjust the http GET URI field accoridng to your environment.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/TVMHTTPGet.png)
+
+```
+
+Commerical - https://api-us.securitycenter.windows.com/api/machines/SoftwareVulnerabilitiesByMachine?deviceName
+GCC - https://api-gcc.securitycenter.microsoft.us/api/machines/SoftwareVulnerabilitiesByMachine?deviceName
+GCCH - https://api-gov.securitycenter.microsoft.us/api/machines/SoftwareVulnerabilitiesByMachine?deviceName
+
 ## Setting Permissions On The Managed Identity 
 
 1 - As stated, when you deployed the MDETVM logic app, it deploys a managed identity with the SAME name. The next step gives permissions for the API call to the App Role assignment on 'Windows Defender ATP - Vulnerability.Read.All'. The WindowsDefenderAtp AppRoleID is ($appId = "fc780465-2017-40d4-a0c5-307022471b92).
