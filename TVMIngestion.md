@@ -89,4 +89,21 @@ Verify ingestion in Sentinel/LAW
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/MDETVMSentinel.png)
 
+## Example KQL Below comparing with KVE that CISA has put out.
+
+```
+let KEV=
+externaldata(cveID: string, vendorProject: string, product: string, vulnerabilityName: string, dateAdded: datetime, shortDescription: string, requiredAction: string, dueDate: datetime)
+[
+h@'https://www.cisa.gov/sites/default/files/csv/known_exploited_vulnerabilities.csv'
+]
+with(format='csv',ignorefirstrecord=true);
+MDETVM_CL
+| project deviceName_s, osPlatform_s, cveID=cveId_s
+| join kind=inner KEV on cveID
+| summarize ['Vulnerabilities']=make_set(cveID) by deviceName_s
+| extend ['Count of Known Exploited Vulnerabilities'] = array_length(['Vulnerabilities'])
+| sort by ['Count of Known Exploited Vulnerabilities']
+```
+
 
