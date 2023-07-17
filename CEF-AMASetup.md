@@ -1,4 +1,4 @@
-## Stream Common Event Format (CEF) using Azure Monitor Agent (AMA) (the helping hand guide). Authored by: Michael Crane and Lorenzo Ireland. ##
+## Stream Common Event Format (CEF) using Azure Monitor Agent (AMA) (the helping hand guide). Authored by: Michael Crane and [Lorenzo Ireland](https://github.com/dcodev1702). ##
 
 Many folks using Sentinel have issues with clarity around the Common Event Format (CEF) via AMA and rightfully so. This article deems to clear any confusion in both Azure Commercial and US Goverment tenants. See CEF-AMA [here](https://learn.microsoft.com/en-us/azure/sentinel/connect-cef-ama).
 
@@ -32,7 +32,7 @@ The DCR rule has to be in place first. Just create a simple syslog DCR and call 
  
 Azure Commercial or Azure Goverment. The installation script configures the rsyslog or syslog-ng daemon to use the required protocol and restarts the daemon
 ```
-sudo wget -O Forwarder_AMA_installer.py https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/DataConnectors/Syslog/Forwarder_AMA_installer.py
+sudo wget https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/DataConnectors/Syslog/Forwarder_AMA_installer.py
 sudo python3 Forwarder_AMA_installer.py 
 
 ```
@@ -105,12 +105,12 @@ $DCRPUT = Invoke-RestMethod -Method ‘PUT’ $url -Body $json -Headers $headers
 
 Azure Commercial
 ```
-sudo wget -O cef_AMA_troubleshoot.py https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/DataConnectors/CEF/cef_AMA_troubleshoot.py
+sudo wget https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/DataConnectors/CEF/cef_AMA_troubleshoot.py
 sudo python3 cef_AMA_troubleshoot.py
 ```
 
 Azure Government
 ```
-sudo wget -O cef_AMA_troubleshoot.py https://raw.githubusercontent.com/Cyberlorians/Sentinel/main/Connectors/CEF/cef_AMA_troubleshoot.py
+sudo https://raw.githubusercontent.com/Cyberlorians/Sentinel/main/Connectors/CEF/cef_AMA_troubleshoot.py
 sudo python3 cef_AMA_troubleshoot.py
 ```

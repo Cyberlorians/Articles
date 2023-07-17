@@ -114,7 +114,7 @@ Confirm ingestion by navigating to the TI workbook in Sentinel.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/MISPsetup7.png)
 
-## Chron job setup.
+## Cron job setup.
 
 Below is a CRONTAB entry example of running the script every day at midnight. You can use the generator [here](https://crontab-generator.org/).
 ```
