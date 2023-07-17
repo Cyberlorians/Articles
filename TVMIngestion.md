@@ -6,7 +6,7 @@ As of now, there is no Sentinel connector option for 365Defender TVM Data to ing
 
 *Disclaimer* - You can use any API call from the 365Defender API side that is listed but the JSON schema will have to be properly adjusted and the results may vary. This is done in the logic app (Parse JSON step) - by uploading a sample. Tweak this until it is satisfactory.
 
-## Export the below code to a ps1 file - PowerShell Script. The SearchString 'MDETVM' will be the managed identity created from the logic app deployment. IF you change the name of the logic app during deploying you will need to change the -SearchString flag within the script below to reflect your new name. 
+Export the below code to a ps1 file - PowerShell Script. The SearchString 'MDETVM' will be the managed identity created from the logic app deployment. IF you change the name of the logic app during deploying you will need to change the -SearchString flag within the script below to reflect your new name. 
 
 ```
 $miObjectID = $null
