@@ -37,9 +37,14 @@ As of now, there is no Sentinel connector option for 365Defender TVM Data to ing
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/TVMHTTPGet.png)
 
 ```
-Commerical - https://api.securitycenter.windows.com/api/machines/SoftwareVulnerabilitiesByMachine?deviceName
-GCC - https://api-gcc.securitycenter.microsoft.us/api/machines/SoftwareVulnerabilitiesByMachine?deviceName
-GCCH - https://api-gov.securitycenter.microsoft.us/api/machines/SoftwareVulnerabilitiesByMachine?deviceName
+Commercial URL = https://api.securitycenter.microsoft.com/api/machines/SoftwareVulnerabilitiesByMachine?deviceName
+Commercial Audience = https://api.securitycenter.microsoft.com
+
+GCC URL = https://api-gcc.securitycenter.microsoft.us/api/machines/SoftwareVulnerabilitiesByMachine?deviceName
+GCC Audience = https://api-gcc.securitycenter.microsoft.us
+
+GCCH URI = https://api-gov.securitycenter.microsoft.us/api/machines/SoftwareVulnerabilitiesByMachine?deviceName
+GCCH Audience = https://api-gov.securitycenter.microsoft.us
 ```
 
 ## Setting Permissions On The Managed Identity 
