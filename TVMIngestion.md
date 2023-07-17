@@ -9,18 +9,27 @@ As of now, there is no Sentinel connector option for 365Defender TVM Data to ing
 ## Deploy the logic app
 
 1 - [MDETVM Logic App](https://raw.githubusercontent.com/Cyberlorians/Playbooks/main/MDETVM.json). Copy the contents of the logic app.
+
 2 - In Azure, natigave to 'Deploy A Custom Template' and chose 'Build your own template in the editor'
+
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/TVMcustomdeployment.png)
-3. - On the screen, copy the contents from step #1 and PASTE into the table, replacing all data.
+
+3 - On the screen, copy the contents from step #1 and PASTE into the table, replacing all data.
+
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/uploadtemplate.png)
+
 4 - Hit Save and deploy.
 
 ## Configuring the MDETVM Logic App
 
 1 - After deployment, open the new logic app. Within the logic app blade, on the left hand side - navigate to API Connections.
+
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/TVMAPI.png)
+
 2 - Click on 'Edit API Connection'
+
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/TVMWorkspaceConfig.png)
+
 3 - Enter the Log Analytics WorkspaceID and Key. You can find this under your current LAW>Agents blade. Grab that info and pop into the corresponding fields and save. The API should say connected now.
 
 ## Setting Permissions On The Managed Identity 
