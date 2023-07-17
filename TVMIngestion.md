@@ -94,7 +94,7 @@ Verify ingestion in Sentinel/LAW
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/MDETVMSentinel.png)
 
-## Example KQL Below comparing with KVE that CISA has put out.
+## Example KQL Below comparing with KEV that CISA has put out.
 
 ```
 let KEV=
