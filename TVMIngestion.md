@@ -13,7 +13,7 @@ As of now, there is no Sentinel connector option for 365Defender TVM Data to ing
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/TVMcustomdeployment.png)
 3. - On the screen, copy the contents from step #1 and PASTE into the table, replacing all data.
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/uploadtemplate.png)
-4. - Hit Save and deploy.
+##4 - Hit Save and deploy.
 
 Export the below code to a ps1 file - PowerShell Script. The SearchString 'MDETVM' will be the managed identity created from the logic app deployment. IF you change the name of the logic app during deploying you will need to change the -SearchString flag within the script below to reflect your new name. 
 
