@@ -20,7 +20,7 @@ As of now, there is no Sentinel connector option for 365Defender TVM Data to ing
 1 - After deployment, open the new logic app. Within the logic app blade, on the left hand side - navigate to API Connections.
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/TVMAPI.png)
 2 - Click on 'Edit API Connection'
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/TVMWorkspaceConfig.png
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/TVMWorkspaceConfig.png)
 3 - Enter the Log Analytics WorkspaceID and Key. You can find this under your current LAW>Agents blade. Grab that info and pop into the corresponding fields and save. The API should say connected now.
 
 ## Setting Permissions On The Managed Identity 
