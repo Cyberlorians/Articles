@@ -21,6 +21,10 @@ connect-azaccount -usedeviceauthentication
 select-azsubscription "Identity"
 Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWindowsAgent -Publisher Microsoft.Azure.Monitor -ResourceGroupName "Assessment" -VMName "Assessment" -Location EastUS -EnableAutomaticUpgrade $true -TypeHandlerVersion '1.16'
 ```
+
+WAIT 5 minutes after AMA install to proceed!
+
+
 *ServicesHub Configuration*
 1. ADD Asessment via ServicesHub. Once installed this creates a DCR rule (verify the VM is in the DCR rule).
 2. After installation (file will populate in the Assessment folder and a new folder on the C:\ called 'ODA' will be created.
@@ -39,7 +43,6 @@ Install-Module Microsoft.Graph -Verbose -AllowClobber -Force
 Install-Module Msonline -verbose -allowclobber -force
 ```
 !!REBOOT!!
-
 
 
 *Create Asssessment Application* - Run as Global Admin
