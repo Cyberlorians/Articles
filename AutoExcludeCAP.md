@@ -50,13 +50,51 @@ foreach ($miObjectID in $miObjectIDs) {
 }
 ```
 
-```
-Commercial URL = https://api.securitycenter.microsoft.com/api/machines/SoftwareVulnerabilitiesByMachine?deviceName
-Commercial Audience = https://api.securitycenter.microsoft.com
+## Post-Configuration of the AutoCAPExclude Logic App
+1. Set your reoccurence of the logic app.
 
-GCC URL = https://api-gcc.securitycenter.microsoft.us/api/machines/SoftwareVulnerabilitiesByMachine?deviceName
-GCC Audience = https://api-gcc.securitycenter.microsoft.us
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/autocaprecur.png)
 
-GCCH URI = https://api-gov.securitycenter.microsoft.us/api/machines/SoftwareVulnerabilitiesByMachine?deviceName
-GCCH Audience = https://api-gov.securitycenter.microsoft.us
+2. Configure your endpoint based off what graph environment you are working with.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/autocapgetcond.png)
+
+*Graph endpoints for Step2 are below*
+
 ```
+Commercial URL = https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies
+Commercial Audience = https://graph.microsoft.com
+
+GCC URL = https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies
+GCC Audience = https://graph.microsoft.com
+
+GCCH URI = https://graph.microsoft.us/v1.0/identity/conditionalAccess/policies
+GCCH Audience = https://graph.microsoft.us
+```
+
+3. Configure the SEND MAIL (POST) and what graph endpoint you need to use. 
+*The first arrow can and should be a DL email. The second arrow can and should be another DL of one or more.*
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/autocapemail.png)
+
+```
+Commercial URL = https://graph.microsoft.com/v1.0/users/EMAILADDRESS/sendmail
+Commercial Audience = https://graph.microsoft.com
+
+GCC URL = https://graph.microsoft.com/v1.0/users/EMAILADDRESS/sendmail
+GCC Audience = https://graph.microsoft.com
+
+GCCH URI = https://graph.microsoft.us/v1.0/users/EMAILADDRESS/sendmail
+GCCH Audience = https://graph.microsoft.us
+```
+
+4. Run logic app and test (make sure the exclusion group is not part of a conditional access to test).
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/autocapproof.png)
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/autocapsendemailproof.png)
+
+4. Configure Diagnostic Settings to send to LAW/Sentinel.
+
+Anayltical Rule to keep track if any failures of the logic app at high alert.
+
