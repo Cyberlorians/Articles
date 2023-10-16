@@ -15,6 +15,17 @@
 
 4 - Hit Save and deploy.
 
+## Pre-Configuration of the AutoCAPExclude Logic App
+
+1 - Turn on Managed Identity on the logic app.
+
+2 - On the Parameters Tab of the logic app, Enter the objectID of your Exclusion Group.
+
+3 - Save changes on the logic app.
+
+
+*Open Azure PowerShell via the browser & Paste the below code*
+
 ```
 
 $miObjectID = $null
