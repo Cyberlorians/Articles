@@ -106,3 +106,13 @@ GCCH Audience = https://graph.microsoft.us
 
 Anayltical Rule to keep track if any failures of the logic app at high alert.
 
+*Sentinel KQL Below*
+
+```
+AzureDiagnostics
+| where resource_workflowName_s == "AutoCAPExclude"
+| sort by TimeGenerated asc
+| where status_s == "Failed"
+| distinct startTime_t, resource_workflowName_s, status_s, resource_actionName_s
+```
+
