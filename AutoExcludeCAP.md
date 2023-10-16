@@ -4,7 +4,7 @@ Having your break glass accounts be part of an exclusion group which is EXCLUDE 
 
 ## Deploy the logic app
 
-1 - [AutoCAPExclude](https://raw.githubusercontent.com/Cyberlorians/Playbooks/main/MDETVM.json). Copy the contents of the logic app.
+1 - [AutoCAPExclude](https://github.com/Cyberlorians/LogicApps/blob/main/AutoCAPExclude.json). Copy the contents of the logic app.
 
 2 - In Azure, natigave to 'Deploy A Custom Template' and chose 'Build your own template in the editor'
 
