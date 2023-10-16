@@ -5,12 +5,25 @@
 2. Create Log Analytics Workspace in Assessment RG: 'Assessment-LAW'
 3. Create AzureVM (Server 22): 'Assessment' 
 
+Domain Environment	Required Azure Service Endpoints
+```
+management.azure.com	Azure Resource Manager
+login.windows.net	Azure Active Directory
+dc.services.visualstudio.com	Application Insights
+agentserviceapi.azure-automation.net	Guest Configuration
+*-agentservice-prod-1.azure-automation.net	Guest Configuration
+*.his.hybridcompute.azure-automation.net	Hybrid Identity Service
+```
+
 *Install Azure Monitor Agent via Azure PowerShell*
 ```
 connect-azaccount -usedeviceauthentication
 select-azsubscription "Identity"
 Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWindowsAgent -Publisher Microsoft.Azure.Monitor -ResourceGroupName "Assessment" -VMName "Assessment" -Location EastUS -EnableAutomaticUpgrade $true -TypeHandlerVersion '1.16'
 ```
+*ServicesHub Configuration*
+1. ADD Asessment via ServicesHub. Once installed this creates a DCR rule (verify the VM is in the DCR rule).
+2. After installation (file will populate in the Assessment folder and a new folder on the C:\ called 'ODA' will be created.
 
 *Log into Assessment Virtual Machine*
 
@@ -25,3 +38,13 @@ Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWind
 Install-Module Microsoft.Graph -Verbose -AllowClobber -Force 
 Install-Module Msonline -verbose -allowclobber -force
 ```
+!!REBOOT!!
+
+
+
+
+*Create Asssessment Application*
+
+```
+New-MicrosoftAssessmentsApplication -allowclobber -force (run as GA)
+
