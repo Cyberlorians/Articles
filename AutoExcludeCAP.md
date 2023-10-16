@@ -9,6 +9,12 @@
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/TVMcustomdeployment.png)
 
+3 - On the screen, copy the contents from step #1 and PASTE into the table, replacing all data.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/uploadtemplate.png)
+
+4 - Hit Save and deploy.
+
 ```
 
 $miObjectID = $null
