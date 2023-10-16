@@ -42,7 +42,6 @@ Install-Module Msonline -verbose -allowclobber -force
 
 
 
-
 *Create Asssessment Application* - Run as Global Admin
 
 ```
@@ -59,5 +58,6 @@ Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\ -ScheduledTaskUsername 
 
 *Verifying Data*
 1. After the ST has been kicked off. The C:\Assessment folder will being to populate with a numerical folder. Once this beings, look at the Log Anayltics Workspace and start to verify that data is flowing. 
+2. Once confirmed, you will see data trickle in over the next few hours and the assessment begin to populate in ServicesHub.
 
 
