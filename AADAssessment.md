@@ -17,7 +17,7 @@ Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWind
 2. mkdir C:\Assessment
 3. Turn off IE EnchancedMode
 
-*Set two policies, locally*
+*Set two policies*
 4. Start -> Run -> gpedit.msc-> Computer Configuration -> Windows -> Security -> Local Policies -> User Rights Assignment -> Log on as a batch job -> Add Adminstrators
 5. Start -> Run -> gpedit.msc-> Computer Configuration -> Administrative Template -> system -> user profile ->Do not forcefully unload the users registry at user logoff -> Click Enable
 
