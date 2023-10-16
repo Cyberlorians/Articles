@@ -24,7 +24,7 @@
 3 - Save changes on the logic app.
 
 
-*Open Azure PowerShell via the browser & Paste the below code*
+## Open Azure PowerShell via the browser & Paste the below code*
 
 ```
 
