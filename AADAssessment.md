@@ -47,4 +47,7 @@ Install-Module Msonline -verbose -allowclobber -force
 
 ```
 New-MicrosoftAssessmentsApplication -allowclobber -force
+Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\ -ScheduledTaskUsername Assessment\xadmin
+```
+
 
