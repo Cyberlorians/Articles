@@ -43,8 +43,8 @@ Install-Module Msonline -verbose -allowclobber -force
 
 
 
-*Create Asssessment Application*
+*Create Asssessment Application* - Run as Global Admin
 
 ```
-New-MicrosoftAssessmentsApplication -allowclobber -force (run as GA)
+New-MicrosoftAssessmentsApplication -allowclobber -force
 
