@@ -94,7 +94,11 @@ GCCH Audience = https://graph.microsoft.us
 
 4. Run logic app and test (make sure the exclusion group is not part of a conditional access to test).
 
+*Excluded group now added to the CAP*
+
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/autocapproof.png)
+
+*Email sent to DLs in the logic app*
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/autocapsendemailproof.png)
 
