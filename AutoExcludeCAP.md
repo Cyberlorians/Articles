@@ -104,9 +104,7 @@ GCCH Audience = https://graph.microsoft.us
 
 4. Configure Diagnostic Settings to send to LAW/Sentinel.
 
-Anayltical Rule to keep track if any failures of the logic app at high alert.
-
-*Sentinel KQL Below*
+*Create an Azure Monitor or Sentinel Analytical Rule based off kQL log below*
 
 ```
 AzureDiagnostics
