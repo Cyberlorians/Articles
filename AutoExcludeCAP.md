@@ -92,7 +92,7 @@ GCCH URI = https://graph.microsoft.us/v1.0/users/EMAILADDRESS/sendmail
 GCCH Audience = https://graph.microsoft.us
 ```
 
-## Run logic app and test (make sure the exclusion group is not part of a conditional access to test).
+## Run logic app and test (make sure the exclusion group is not part of a conditional access to test)
 
 *Excluded group now added to the CAP*
 
@@ -102,9 +102,11 @@ GCCH Audience = https://graph.microsoft.us
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/autocapsendemailproof.png)
 
-## Configure Diagnostic Settings to send to LAW/Sentinel.
+## Monitoring & Alerting of the automation
 
-*Create an Azure Monitor or Sentinel Analytical Rule based off kQL log below*
+1. On the logic app, click > Diagnostic Settings and send to the preferred Log Analytics Workspace.
+
+2. Create an Azure Monitor or Sentinel Analytical Rule based off kQL log below*
 
 ```
 AzureDiagnostics
