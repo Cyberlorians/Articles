@@ -54,4 +54,10 @@ New-MicrosoftAssessmentsApplication -allowclobber -force
 Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\ -ScheduledTaskUsername Assessment\xadmin
 ```
 
+*Run the Scheduled Task*
+1. You can edit the ST that was created and remove the schedule. Once removed, right-click and run.
+
+*Verifying Data*
+1. After the ST has been kicked off. The C:\Assessment folder will being to populate with a numerical folder. Once this beings, look at the Log Anayltics Workspace and start to verify that data is flowing. 
+
 
