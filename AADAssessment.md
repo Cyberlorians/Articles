@@ -19,20 +19,6 @@ TEST-NetConnection
 tnc management.azure.com -Port 443; tnc login.windows.net -port 443; tnc dc.services.visualstudio.com -port 443; tnc agentserviceapi.azure-automation.net -port 443
 ```
 
-*Install Azure Monitor Agent via Azure PowerShell*
-```
-connect-azaccount -usedeviceauthentication
-select-azsubscription "Identity"
-Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWindowsAgent -Publisher Microsoft.Azure.Monitor -ResourceGroupName "Assessment" -VMName "Assessment" -Location EastUS -EnableAutomaticUpgrade $true -TypeHandlerVersion '1.16'
-```
-
-WAIT 5 minutes after AMA install to proceed!
-
-
-*ServicesHub Configuration*
-1. ADD Asessment via ServicesHub. Once installed this creates a DCR rule (verify the VM is in the DCR rule).
-2. After installation (file will populate in the Assessment folder and a new folder on the C:\ called 'ODA' will be created.
-
 *Log into Assessment Virtual Machine*
 
 1. Log in as the local administrator account
@@ -40,6 +26,12 @@ WAIT 5 minutes after AMA install to proceed!
 3. Turn off IE EnchancedMode
 4. Start -> Run -> gpedit.msc-> Computer Configuration -> Windows -> Security -> Local Policies -> User Rights Assignment -> Log on as a batch job -> Add Adminstrators
 5. Start -> Run -> gpedit.msc-> Computer Configuration -> Administrative Template -> system -> user profile ->Do not forcefully unload the users registry at user logoff -> Click Enable
+
+
+*ServicesHub Configuration*
+1. ADD Asessment via ServicesHub. Once installed this creates a DCR rule and installs the AMA extension (verify the VM is in the DCR rule). This can take 5-10m for DCR and AMA extension to fully install. Be patient.
+2. After installation (file will populate in the Assessment folder and a new folder on the C:\ called 'ODA' will be created.
+
 
 *Run PowerShell as Administrator and install two modules* - DO NOT MISS THIS STEP!
 ```
