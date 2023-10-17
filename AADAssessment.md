@@ -13,6 +13,10 @@ dc.services.visualstudio.com	Application Insights
 agentserviceapi.azure-automation.net	Guest Configuration
 *-agentservice-prod-1.azure-automation.net	Guest Configuration
 *.his.hybridcompute.azure-automation.net	Hybrid Identity Service
+
+TEST-NetConnection
+
+tnc management.azure.com -Port 443; tnc login.windows.net -port 443; tnc dc.services.visualstudio.com -port 443; tnc agentserviceapi.azure-automation.net -port 443
 ```
 
 *Install Azure Monitor Agent via Azure PowerShell*
@@ -32,7 +36,7 @@ WAIT 5 minutes after AMA install to proceed!
 *Log into Assessment Virtual Machine*
 
 1. Log in as the local administrator account
-2. mkdir C:\Assessment
+2. mkdir C:\Assessment\AAD
 3. Turn off IE EnchancedMode
 4. Start -> Run -> gpedit.msc-> Computer Configuration -> Windows -> Security -> Local Policies -> User Rights Assignment -> Log on as a batch job -> Add Adminstrators
 5. Start -> Run -> gpedit.msc-> Computer Configuration -> Administrative Template -> system -> user profile ->Do not forcefully unload the users registry at user logoff -> Click Enable
@@ -41,8 +45,10 @@ WAIT 5 minutes after AMA install to proceed!
 ```
 Install-Module Microsoft.Graph -Verbose -AllowClobber -Force 
 Install-Module Msonline -verbose -allowclobber -force
+Install-Module AzureRM -verbose -allowclobber -Force
+Install-Module AzureADPreview -verbose -allowclobber -Force
 ```
-!!REBOOT!!
+## REBOOT the Virtual Machine before proceeding to next step.
 
 
 *Create Asssessment Application* - Run as Global Admin
