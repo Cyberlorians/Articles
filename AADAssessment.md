@@ -95,7 +95,7 @@ AzureAssessmentRecommendation
 | where RecommendationResult == "Failed"
 | project Recommendation, Description,AffectedObjectDetails
 ```
-2. Once confirmed, you will see data trickle in over the next few hours and the assessment begin to populate in ServicesHub.
+2. Once confirmed, you will see data trickle in over the next few hours populate in ServicesHub.
 
 
 
