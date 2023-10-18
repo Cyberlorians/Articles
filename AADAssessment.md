@@ -11,6 +11,7 @@
 *Domain Environment - Required Azure Service Endpoints*
 
 | Endpoint | Desciprtion |
+| :---        |    :----:   |
 |management.azure.com |	Azure Resource Manager|<br>
 login.windows.net	Azure Active Directory<br>
 dc.services.visualstudio.com	Application Insights<br>
