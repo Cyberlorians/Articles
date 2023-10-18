@@ -47,7 +47,9 @@ Install-Module AzureADPreview -verbose -allowclobber -Force
 ## REBOOT the Virtual Machine before proceeding to next step.
 
 
-*Create Asssessment Application* - Run as Global Admin
+## Create Asssessment Application 
+
+*Authentication to Azure as Global Administrator*
 
 ```
 New-MicrosoftAssessmentsApplication -allowclobber -force
