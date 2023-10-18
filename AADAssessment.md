@@ -10,7 +10,7 @@
 
 *Domain Environment - Required Azure Service Endpoints*
 
-management.azure.com	Azure Resource Manager
+management.azure.com	Azure Resource Manager<br>
 login.windows.net	Azure Active Directory
 dc.services.visualstudio.com	Application Insights
 agentserviceapi.azure-automation.net	Guest Configuration
@@ -20,7 +20,10 @@ agentserviceapi.azure-automation.net	Guest Configuration
 *TEST-NetConnection*
 
 ```
-tnc management.azure.com -Port 443; tnc login.windows.net -port 443; tnc dc.services.visualstudio.com -port 443; tnc agentserviceapi.azure-automation.net -port 443
+tnc management.azure.com -Port 443; 
+tnc login.windows.net -port 443;
+tnc dc.services.visualstudio.com -port 443;
+tnc agentserviceapi.azure-automation.net -port 443
 ```
 
 ## Virtual Machine Assessment Configuration
