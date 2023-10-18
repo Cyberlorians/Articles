@@ -71,11 +71,13 @@ Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\AAD -ScheduledTaskUserna
 ```
 
 ## Run the Scheduled Task ##
+
 1. Open the Scheduled Task and remove the schedule. Once removed, right-click and run.
+2. After the ST has been kicked off. The C:\Assessment\AAD folder will being to populate with a numerical folder.
 
 ## Verifying Data to the Log Analytics Workspace ##
 
-1. After the ST has been kicked off. The C:\Assessment\AAD folder will being to populate with a numerical folder. Once this beings, look at the Log Anayltics Workspace and start to verify that data is flowing. 
+1.  Confirm heartbeat in Log Anayltics Workspace and begin to verify that data is flowing. 
 
 ```
 //Queries the Heartbeat table to locate installed LA or Azure Monitor Agents and if on-prem or in Azure 
