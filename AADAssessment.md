@@ -40,7 +40,7 @@ The installation creates a DCR rule and installs the AzureMonitorAgent extension
 2. After installation (file will populate in the Assessment folder and a new folder on the C:\ called 'ODA' will be created.
 
 
-*Run PowerShell as Administrator and install four modules* - DO NOT MISS THIS STEP!
+## Run PowerShell as Administrator and install four modules on the Assessment Server - DO NOT MISS THIS STEP! ##
 ```
 Install-Module Microsoft.Graph -Verbose -AllowClobber -Force 
 Install-Module Msonline -verbose -allowclobber -force
@@ -63,8 +63,8 @@ New-MicrosoftAssessmentsApplication -allowclobber -force
 Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\AAD -ScheduledTaskUsername Assessment\xadmin
 ```
 
-*Run the Scheduled Task*
-1. You can edit the ST that was created and remove the schedule. Once removed, right-click and run.
+## Run the Scheduled Task ##
+1. Open the Scheduled Task and remove the schedule. Once removed, right-click and run.
 
 ## Verifying Data to the Log Analytics Workspace ##
 
