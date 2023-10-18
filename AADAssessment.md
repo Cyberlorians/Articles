@@ -97,6 +97,8 @@ AzureAssessmentRecommendation
 ```
 2. Once confirmed, you will see data trickle in over the next few hours populate in ServicesHub.
 
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/assessmentshcomplete.png)
+
 
 
 
