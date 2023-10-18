@@ -63,8 +63,21 @@ Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\AAD -ScheduledTaskUserna
 *Run the Scheduled Task*
 1. You can edit the ST that was created and remove the schedule. Once removed, right-click and run.
 
-*Verifying Data*
+## Verifying Data to the Log Analytics Workspace ##
+
+```
+//Queries the Heartbeat table to locate installed LA or Azure Monitor Agents and if on-prem or in Azure 
+Heartbeat
+| where TimeGenerated >= ago(7d)
+| where Category == "Direct Agent" or Category == "Azure Monitor Agent"
+| where isnotempty(ResourceType)
+| extend Cloud = ResourceProvider == "Microsoft.Compute"
+| extend Onprem = ResourceProvider == "Microsoft.HybridCompute"
+| distinct Computer, ResourceType, Cloud, Onprem, Category
+```
 1. After the ST has been kicked off. The C:\Assessment folder will being to populate with a numerical folder. Once this beings, look at the Log Anayltics Workspace and start to verify that data is flowing. 
 2. Once confirmed, you will see data trickle in over the next few hours and the assessment begin to populate in ServicesHub.
+
+
 
 
