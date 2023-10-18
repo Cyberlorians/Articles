@@ -1,10 +1,12 @@
 ## Microsoft Entra ID Assessment - Azure Monitor Agent 
 
-## Pre-Requirements
+## Requirements
 
 1. Create Resource Group: 'Assessment'
 2. Create Log Analytics Workspace in Assessment RG: 'Assessment-LAW'
 3. Create AzureVM (Server 22): 'Assessment' 
+
+*Disclaimer - .NET 4.8 is required. Server 2022 comes with this framework by default*
 
 *Domain Environment - Required Azure Service Endpoints*
 
@@ -15,7 +17,7 @@ agentserviceapi.azure-automation.net	Guest Configuration
 *-agentservice-prod-1.azure-automation.net	Guest Configuration
 *.his.hybridcompute.azure-automation.net	Hybrid Identity Service
 
-TEST-NetConnection
+*TEST-NetConnection*
 
 ```
 tnc management.azure.com -Port 443; tnc login.windows.net -port 443; tnc dc.services.visualstudio.com -port 443; tnc agentserviceapi.azure-automation.net -port 443
