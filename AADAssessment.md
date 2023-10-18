@@ -1,11 +1,12 @@
 ## Microsoft Entra ID Assessment - Azure Monitor Agent 
 
-*Pre-Reqs*
+## Pre-Requirements
+
 1. Create Resource Group: 'Assessment'
 2. Create Log Analytics Workspace in Assessment RG: 'Assessment-LAW'
 3. Create AzureVM (Server 22): 'Assessment' 
 
-## Domain Environment - Required Azure Service Endpoints
+*Domain Environment - Required Azure Service Endpoints*
 
 management.azure.com	Azure Resource Manager
 login.windows.net	Azure Active Directory
