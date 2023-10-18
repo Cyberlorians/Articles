@@ -41,6 +41,8 @@ tnc agentserviceapi.azure-automation.net -port 443
 
 1. ADD Asessment via ServicesHub. 
 	1. Add the VM and the assessment path you used from the previous step. Installation will begin.
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/assessmentshadd.png)
+
 The installation creates a DCR rule and installs the AzureMonitorAgent extension (verify the VM is in the DCR rule). This can take 5-10m for DCR and AMA extension to fully install. Be patient.
 2. After installation (file will populate in the Assessment folder and a new folder on the C:\ called 'ODA' will be created.
 
