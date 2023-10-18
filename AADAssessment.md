@@ -11,11 +11,11 @@
 *Domain Environment - Required Azure Service Endpoints*
 
 management.azure.com	Azure Resource Manager<br>
-login.windows.net	Azure Active Directory
-dc.services.visualstudio.com	Application Insights
-agentserviceapi.azure-automation.net	Guest Configuration
-*-agentservice-prod-1.azure-automation.net	Guest Configuration
-*.his.hybridcompute.azure-automation.net	Hybrid Identity Service
+login.windows.net	Azure Active Directory<br>
+dc.services.visualstudio.com	Application Insights<br>
+agentserviceapi.azure-automation.net	Guest Configuration<br>
+*-agentservice-prod-1.azure-automation.net	Guest Configuration<br>
+*.his.hybridcompute.azure-automation.net	Hybrid Identity Service<br>
 
 *TEST-NetConnection*
 
