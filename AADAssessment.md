@@ -5,8 +5,8 @@
 2. Create Log Analytics Workspace in Assessment RG: 'Assessment-LAW'
 3. Create AzureVM (Server 22): 'Assessment' 
 
-Domain Environment	Required Azure Service Endpoints
-```
+## Domain Environment - Required Azure Service Endpoints
+
 management.azure.com	Azure Resource Manager
 login.windows.net	Azure Active Directory
 dc.services.visualstudio.com	Application Insights
@@ -16,6 +16,7 @@ agentserviceapi.azure-automation.net	Guest Configuration
 
 TEST-NetConnection
 
+```
 tnc management.azure.com -Port 443; tnc login.windows.net -port 443; tnc dc.services.visualstudio.com -port 443; tnc agentserviceapi.azure-automation.net -port 443
 ```
 
@@ -33,7 +34,7 @@ tnc management.azure.com -Port 443; tnc login.windows.net -port 443; tnc dc.serv
 2. After installation (file will populate in the Assessment folder and a new folder on the C:\ called 'ODA' will be created.
 
 
-*Run PowerShell as Administrator and install two modules* - DO NOT MISS THIS STEP!
+*Run PowerShell as Administrator and install four modules* - DO NOT MISS THIS STEP!
 ```
 Install-Module Microsoft.Graph -Verbose -AllowClobber -Force 
 Install-Module Msonline -verbose -allowclobber -force
@@ -51,7 +52,7 @@ New-MicrosoftAssessmentsApplication -allowclobber -force
 
 *Create Scheduled Task*
 ```
-Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\ -ScheduledTaskUsername Assessment\xadmin
+Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\AAD -ScheduledTaskUsername Assessment\xadmin
 ```
 
 *Run the Scheduled Task*
