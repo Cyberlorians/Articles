@@ -65,7 +65,7 @@ Install-Module AzureADPreview -verbose -allowclobber -Force
 New-MicrosoftAssessmentsApplication -allowclobber -force
 ```
 
-*Create Scheduled Task*
+*Create Scheduled Task* - run this task as the local admin with computername\localadmin as shown below.
 ```
 Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\AAD -ScheduledTaskUsername Assessment\xadmin
 ```
