@@ -43,7 +43,7 @@ tnc agentserviceapi.azure-automation.net -port 443
 	1. Add the VM and the assessment path you used from the previous step. Installation will begin.
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/assessmentshadd.png)
 
-The installation creates a DCR rule and installs the AzureMonitorAgent extension (verify the VM is in the DCR rule). This can take 5-10m for DCR and AMA extension to fully install. Be patient.
+The installation creates a Data Collection Rule and installs the AzureMonitorAgent extension (verify the VM is in the DCR rule). This can take 5-10m for DCR and AMA extension to fully install. Be patient.
 2. After installation (file will populate in the Assessment folder and a new folder on the C:\ called 'ODA' will be created.
 
 
@@ -75,17 +75,24 @@ Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\AAD -ScheduledTaskUserna
 
 ## Verifying Data to the Log Analytics Workspace ##
 
+1. After the ST has been kicked off. The C:\Assessment\AAD folder will being to populate with a numerical folder. Once this beings, look at the Log Anayltics Workspace and start to verify that data is flowing. 
+
 ```
 //Queries the Heartbeat table to locate installed LA or Azure Monitor Agents and if on-prem or in Azure 
 Heartbeat
-| where TimeGenerated >= ago(7d)
+| where TimeGenerated >= ago(7d) //Change Time
 | where Category == "Direct Agent" or Category == "Azure Monitor Agent"
 | where isnotempty(ResourceType)
 | extend Cloud = ResourceProvider == "Microsoft.Compute"
 | extend Onprem = ResourceProvider == "Microsoft.HybridCompute"
 | distinct Computer, ResourceType, Cloud, Onprem, Category
 ```
-1. After the ST has been kicked off. The C:\Assessment folder will being to populate with a numerical folder. Once this beings, look at the Log Anayltics Workspace and start to verify that data is flowing. 
+```
+//Viewing Failed Recommendation Results
+AzureAssessmentRecommendation 
+| where RecommendationResult == "Failed"
+| project Recommendation, Description,AffectedObjectDetails
+```
 2. Once confirmed, you will see data trickle in over the next few hours and the assessment begin to populate in ServicesHub.
 
 
