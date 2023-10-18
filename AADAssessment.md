@@ -20,7 +20,7 @@ TEST-NetConnection
 tnc management.azure.com -Port 443; tnc login.windows.net -port 443; tnc dc.services.visualstudio.com -port 443; tnc agentserviceapi.azure-automation.net -port 443
 ```
 
-*Log into Assessment Virtual Machine*
+## Virtual Machine Assessment Configuration
 
 1. Log in as the local administrator account
 2. mkdir C:\Assessment\AAD
@@ -29,8 +29,11 @@ tnc management.azure.com -Port 443; tnc login.windows.net -port 443; tnc dc.serv
 5. Start -> Run -> gpedit.msc-> Computer Configuration -> Administrative Template -> system -> user profile ->Do not forcefully unload the users registry at user logoff -> Click Enable
 
 
-*ServicesHub Configuration*
-1. ADD Asessment via ServicesHub. Once installed this creates a DCR rule and installs the AMA extension (verify the VM is in the DCR rule). This can take 5-10m for DCR and AMA extension to fully install. Be patient.
+## Services Hub Configuration
+
+1. ADD Asessment via ServicesHub. 
+	1. Add the VM and the assessment path you used from the previous step. Installation will begin.
+The installation creates a DCR rule and installs the AzureMonitorAgent extension (verify the VM is in the DCR rule). This can take 5-10m for DCR and AMA extension to fully install. Be patient.
 2. After installation (file will populate in the Assessment folder and a new folder on the C:\ called 'ODA' will be created.
 
 
