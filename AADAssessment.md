@@ -59,7 +59,7 @@ Install-Module AzureADPreview -verbose -allowclobber -Force
 
 ## Create Asssessment Application 
 
-*Authentication to Azure as Global Administrator*
+*Authentication to Azure as Global Administrator*- you will be prompted for MFA and after setup, you must consent to the application permissions.
 
 ```
 New-MicrosoftAssessmentsApplication -allowclobber -force
