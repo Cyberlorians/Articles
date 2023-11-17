@@ -39,7 +39,7 @@ if ($miObjectIDs -eq $null) {
 
 # The app ID of the Microsoft Graph API where we want to assign the permissions
 $appId = "00000003-0000-0000-c000-000000000000"
-$permissionsToAdd = @("policy.Read.All","Policy.ReadWrite.ConditionalAccess","send.mail")
+$permissionsToAdd = @("policy.Read.All","Policy.ReadWrite.ConditionalAccess","mail.send")
 $app = Get-AzureADServicePrincipal -Filter "AppId eq '$appId'"
 
 foreach ($miObjectID in $miObjectIDs) {
