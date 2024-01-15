@@ -111,6 +111,6 @@ sudo python3 cef_AMA_troubleshoot.py
 
 Azure Government
 ```
-sudo https://raw.githubusercontent.com/Cyberlorians/Sentinel/main/Connectors/CEF/cef_AMA_troubleshoot.py
+sudo https://raw.githubusercontent.com/Cyberlorians/Sentinel/main/Connectors/CEF/cef_AMA_GOV_troubleshoot.py
 sudo python3 cef_AMA_troubleshoot.py
 ```
