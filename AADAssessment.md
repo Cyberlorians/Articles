@@ -92,8 +92,10 @@ Heartbeat
 ```
 //Viewing Failed Recommendation Results
 AzureAssessmentRecommendation 
-| where RecommendationResult == "Failed"
-| project Recommendation, Description,AffectedObjectDetails
+| where TimeGenerated > ago (90d) //set time
+| where RecommendationResult contains ''
+| summarize count() by RecommendationResult, ['Week Starting']=startofweek(TimeGenerated) 
+| sort by ['Week Starting'] desc, RecommendationResult asc 
 ```
 2. Once confirmed, you will see data trickle in over the next few hours populate in ServicesHub.
 
