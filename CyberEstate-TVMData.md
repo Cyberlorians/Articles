@@ -10,11 +10,11 @@ Lets start by setting up the Data Factory.
 
 ## Deploy Data Factory - follow the steps below.
 
-**Step 1** - *In Azure, Create Data Factory.*
+**1** - *In Azure, Create Data Factory.*
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf1.png)
 
-** Step 2** - *After creation of the Data Factory navigate to Managed Identities just under the Settings blade. Click "Azure Role Assignments".*
+**2** - *After creation of the Data Factory navigate to Managed Identities just under the Settings blade. Click "Azure Role Assignments".*
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf2.png)
 
@@ -31,3 +31,5 @@ Lets start by setting up the Data Factory.
 **5** - *Click Author > then the + sign > Pipeline > Import from pipeline template"*
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf5.png)
+
+**6** - *When prompted for a ZIP file, down and save the [TVM Data Factory Template](https://github.com/Cyberlorians/CyberEstate/blob/main/XDRTVM.zip) file then upload as the template.*
