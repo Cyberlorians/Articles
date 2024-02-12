@@ -14,10 +14,20 @@ Lets start by setting up the Data Factory.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf1.png)
 
-**2** - *After creation of the Data Factory navigate to Managed Identities just under the Settings blade.*
+**2** - *After creation of the Data Factory navigate to Managed Identities just under the Settings blade. Click "Azure Role Assignments".*
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf2.png)
 
+**3** - *As seen in the image, add "Storage Blob Contributor" for this managed identity to the Data Lake created earlier.*
+
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf3.png)
 
+
+**4** - *Click "Launch Studio"*
+
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf4.png)
+
+
+**5** - *Click Author > then the + sign > Pipeline > Import from pipeline template"*
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf5.png)
