@@ -16,11 +16,11 @@ Lets start by setting up the Data Lake.
 
 **2** - *Enable Hierarchical Namespace. This will flag Data Lake GenV2 to kick off.*
 
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/storage2.png
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/storage2.png)
 
 **3** - *Uncheck the recovery features. If you do not do this it will block the deployment*
 
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/storage3.png
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/storage3.png)
 
 
 ## Deploy Data Factory - follow the steps below.
