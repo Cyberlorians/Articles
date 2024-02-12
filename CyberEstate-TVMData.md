@@ -12,10 +12,8 @@ Lets start by setting up the Data Factory.
 
 1 - Create Data Factory
 
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/uploadtemplate.png)
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf1.png)
 
 2 - After creation of the Data Factory navigate to Managed Identities just under the Settings blade.
 
-![](3 - On the screen, copy the contents from step #1 and PASTE into the table, replacing all data.
-
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/uploadtemplate.png)
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf2.png)
