@@ -10,11 +10,11 @@ Lets start by setting up the Data Factory.
 
 ## Deploy Data Factory - follow the steps below.
 
-**1** - *In Azure, Create Data Factory.*
+**Step 1** - *In Azure, Create Data Factory.*
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf1.png)
 
-**2** - *After creation of the Data Factory navigate to Managed Identities just under the Settings blade. Click "Azure Role Assignments".*
+** Step 2** - *After creation of the Data Factory navigate to Managed Identities just under the Settings blade. Click "Azure Role Assignments".*
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf2.png)
 
