@@ -17,3 +17,7 @@ Lets start by setting up the Data Factory.
 **2** - *After creation of the Data Factory navigate to Managed Identities just under the Settings blade.*
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf2.png)
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf3.png)
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf4.png)
