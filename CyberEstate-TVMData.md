@@ -79,4 +79,14 @@ Lets start by setting up the Data Lake. You are going to deploy a standard Azure
 
 ## Validate and Publish DataFactory Piplines
 
-**1** - *
+**1** - *After the last step of configuration, you'll be brought back to the pipeline menu. Click debug. Everything should check out perfectly if the steps were followed.*
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/pipelinevalidate.png).
+
+**2** - *Navigate over to your Data Lake and verify the folders have been uploaded. Once there check the files are gz and block blobs (they are).*
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/adlsproof.png)
+
+**3** - Once firmed successful, click "Publish All".*
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfoutlooksuccesspublish.png)
