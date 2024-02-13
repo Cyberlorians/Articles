@@ -76,3 +76,7 @@ Lets start by setting up the Data Lake. You are going to deploy a standard Azure
 **8** - *Verify all connections are good and hit complete.*
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/connectionscompleted.png)
+
+## Validate and Publish DataFactory Piplines
+
+**1** - *
