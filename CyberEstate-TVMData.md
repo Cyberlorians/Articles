@@ -6,6 +6,8 @@ There is no Sentinel connector option for Microsofts XDR Threat Vulnerability Ma
 
 The why! When querying API data in XDR there are call limitations and when using the LogicApp it is easy to hit those limitations. Data Factory allows pagination (continually looping) on the odata call within the API until all data is seen and ingestion to X (your endpoint). This is a huge deal because all of our Federal Customers have this mandate to track their TVM data and send to another agency. Regardless if you are a Federal CX you will want this solution because; **A** - *no connector to Sentinel or Streaming API in XDR*, **B** - *only 30 Days of data reside in XDR*, **C** - *the need for long term storage of said data to X (another endpoint).* The great piece with this solution is that we are sending to a blob container and compressed! So the data will arrive on the storage account half the size as a gz file type. We can then query from ADX to view the data.
 
+The Data Lake was chosen specific to MSFT products. There are use cases when the need is to send out via the EventHub for interagency collaboration around Dashboardings. For these situations please refer to your architect and look at Event Hubs. This is but another working solution to use ADLS for the Life Cycle Mangaement around block blobs (compressed) and external querying. The ext query leverages your org to not ingest this data if chosen. I would lean to ingesting into ADX so I am able to X-query ADX from my Sentinel workspace.
+
 Lets start by setting up the Data Lake. You are going to deploy a standard Azure DataLake Storage Gen2 and we will use blob containers.
 
 <details><summary> <b><u><font size="<h3>">Deploy Storage Account - follow the steps below.</font></u></b></summary> 
@@ -181,7 +183,7 @@ external_table('tvm_software')
 
 </details>
 
-The Data Lake was chosen specific to MSFT products. There are use cases when the need is to send out via the EventHub for interagency collaboration around Dashboardings. For these situations please refer to your architect and look at Event Hubs. This is but another working solution to use ADLS for the Life Cycle Mangaement around block blobs (compressed) and external querying. The ext query leverages your org to not ingest this data if chosen. I would lean to ingesting into ADX so I am able to X-query ADX from my Sentinel workspace.
+
 
 
 
