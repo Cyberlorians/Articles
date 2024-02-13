@@ -1,10 +1,10 @@
 ## CyberEstate with Threat & Vulnerability Managment to the DataLake
 
-This article is a follow up to my [TVMIngestion](). As a refresh, the background is as follows:
+This article is a follow up to my [TVMIngestion](https://github.com/Cyberlorians/Articles/blob/main/TVMIngestion.md). As a refresh, the background is as follows:
 
-There is no Sentinel connector option for Microsofts XDR Threat Vulnerability Management Data to ingest into Sentinel. Since the release of my LogicApp, which works flawless for smaller orgs - there are API [limitations](https://learn.microsoft.com/en-us/legal/microsoft-365/api-terms). Working alongside with two other colleagues they  had exposed me to Data Factory.
+There is no Sentinel connector option for Microsofts XDR Threat Vulnerability Management data to ingest into Sentinel. Since the release of my LogicApp, which works flawless for smaller orgs - there are API [limitations](https://learn.microsoft.com/en-us/legal/microsoft-365/api-terms). Working alongside with two other colleagues they  had exposed me to Data Factory.
 
-The why! When querying API data in XDR there are call limitations and when using the LogicApp it is easy to hit those limitations. Data Factory allows pagination (continually looping) on the odata call within the API until all data is seen and ingestion to X (your endpoint). This is a huge deal because all of our Federal Customers have this mandate to track their TVM data and send to another agency. Regardless if you are a Federal CX you will want this solution because; **A** - *no connector to Sentinel or Streaming API in XDR*, **B** - *only 30 Days of data reside in XDR*, **C** - *the need for long term storage of said data to X (another endpoint).* The great piece with this solution, and you can change your endpoint to a Sentinel workspace or etc (transform) we are sending to a blob container and compressed! So the data will arrive on the storage account half the size as a gz file type. We can then query from ADX to view the data.
+The why! When querying API data in XDR there are call limitations and when using the LogicApp it is easy to hit those limitations. Data Factory allows pagination (continually looping) on the odata call within the API until all data is seen and ingestion to X (your endpoint). This is a huge deal because all of our Federal Customers have this mandate to track their TVM data and send to another agency. Regardless if you are a Federal CX you will want this solution because; **A** - *no connector to Sentinel or Streaming API in XDR*, **B** - *only 30 Days of data reside in XDR*, **C** - *the need for long term storage of said data to X (another endpoint).* The great piece with this solution is that we are sending to a blob container and compressed! So the data will arrive on the storage account half the size as a gz file type. We can then query from ADX to view the data.
 
 Lets start by setting up the Data Lake. You are going to deploy a standard Azure DataLake Storage Gen2 and we will use blob containers.
 
@@ -90,3 +90,41 @@ Lets start by setting up the Data Lake. You are going to deploy a standard Azure
 **3** - Once firmed successful, click "Publish All".*
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfoutlooksuccesspublish.png)
+
+*4** - *Add a trigger to your pipeline - you chose the schedule.*
+
+## Azure Data Explorer - Create [ADX](). You will have to follow these instructions for each TVM table.
+
+**1** - *Right click your DB and click, create External Table. Give the table a name accordingly to the TVM data you will be querying.*
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfadx1.png)
+
+**2** - *On the Source tab, select "container" and add your data lake that was created.*
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfadx2.png)
+
+**3** - *You will be prompted to grant permissions to ADX to READ the blob data.*
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfadx3.png)
+
+**4** - *You will notice the compression type is Gzip. You can right click and remove the odata.context and odata.count columns if you chose. If not, click "Create table".*
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfadx4.png)
+
+**5** - *Your table has been successfully created. This is not ingestion into ADX, it is only an external query. If you wish to ingest you will have to setup on a constant ingest with Event Grid.*
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfadx5.png)
+
+**6** *Query your data.**
+
+```
+external_table('tvm_software')
+| project value
+| mv-expand value
+| evaluate bag_unpack(value)
+```
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfadx6.png)
+
+
+
