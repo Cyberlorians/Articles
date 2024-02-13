@@ -41,7 +41,7 @@ Lets start by setting up the Data Lake. You are going to deploy a standard Azure
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfperms1.png)
 
-![]https://github.com/Cyberlorians/uploadedimages/blob/main/adfperm2.png)
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfperm2.png)
 
 ## Configuring Data Factory - follow steps below.
 
