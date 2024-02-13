@@ -1,12 +1,12 @@
 ## CyberEstate with Threat & Vulnerability Managment to the DataLake
 
-This article is a follow up to my [TVMIngestion](). As a refresh, the backgroun is as follow:
+This article is a follow up to my [TVMIngestion](). As a refresh, the background is as follows:
 
-As of now, there is no Sentinel connector option for Microsofts XDR Threat Vulnerability Management Data to ingest into Sentinel. Since the release of my LogicApp, which works flawless for smaller orgs - there are API limitations. Working alongside with two other colleagues they  had exposed me to Data Factory.
+There is no Sentinel connector option for Microsofts XDR Threat Vulnerability Management Data to ingest into Sentinel. Since the release of my LogicApp, which works flawless for smaller orgs - there are API [limitations](https://learn.microsoft.com/en-us/legal/microsoft-365/api-terms). Working alongside with two other colleagues they  had exposed me to Data Factory.
 
-The why! When querying API data in XDR there are call limitations and when using the LogicApp it is easy to hit those limitations. Data Factory allows pagination (continually looping) on the odata call within the API until all data is seen and ingestion to X (your endpoint). This is a huge deal because all of our Federal Customers have this mandata to track their TVM data and send to another agency. Regardless if you are a Federal CX you will want this solution because; **A** - *no connector to Sentinel or Streaming API in XDR*, **B** - *only 30 Days of data reside in XDR*, **3** - *the need for long term storage of said data to X (another endpoint).*
+The why! When querying API data in XDR there are call limitations and when using the LogicApp it is easy to hit those limitations. Data Factory allows pagination (continually looping) on the odata call within the API until all data is seen and ingestion to X (your endpoint). This is a huge deal because all of our Federal Customers have this mandate to track their TVM data and send to another agency. Regardless if you are a Federal CX you will want this solution because; **A** - *no connector to Sentinel or Streaming API in XDR*, **B** - *only 30 Days of data reside in XDR*, **C** - *the need for long term storage of said data to X (another endpoint).* The great piece with this solution, and you can change your endpoint to a Sentinel workspace or etc (transform) we are sending to a blob container and compressed! So the data will arrive on the storage account half the size as a gz file type. We can then query from ADX to view the data.
 
-Lets start by setting up the Data Lake.
+Lets start by setting up the Data Lake. You are going to deploy a standard Azure DataLake Storage Gen2 and we will use blob containers.
 
 ## Deploy Storage Account - follow the steps below.
 
@@ -37,14 +37,24 @@ Lets start by setting up the Data Lake.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf3.png)
 
+**4** - *Open Azure PowerShell CLI and run the [script] you see below.*
 
-**4** - *Click "Launch Studio"*
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfperms1.png)
+
+![]https://github.com/Cyberlorians/uploadedimages/blob/main/adfperm2.png)
+
+## Configuring Data Factory - follow steps below.
+
+**1** - *Click "Launch Studio"*
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf4.png)
 
-
-**5** - *Click Author > then the + sign > Pipeline > Import from pipeline template"*
+**2** - *Click Author > then the + sign > Pipeline > Import from pipeline template"*
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf5.png)
 
-**6** - *When prompted for a ZIP file, down and save the [TVM Data Factory Template](https://github.com/Cyberlorians/CyberEstate/blob/main/XDRTVM.zip) file then upload as the template.*
+**3** - *When prompted for a ZIP file, down and save the [TVM Data Factory Template](https://github.com/Cyberlorians/CyberEstate/blob/main/XDRTVM.zip) file then upload as the template. Once uploaded the default upload will look like the below image.*
+
+**4** - *You will need to create Linked Services for each to work. On the "TVM_Rest_Vuln_Connection(Rest dataset)", click the drop-down and click "New". Follow the below snippet, test-connection and create.*
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfrestvulnconnection.png).
