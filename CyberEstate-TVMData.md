@@ -37,13 +37,49 @@ Lets start by setting up the Data Lake. You are going to deploy a standard Azure
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf3.png)
 
-**4** - *Open Azure PowerShell CLI and run the [script] you see below.*
+**4** - *Open Azure PowerShell CLI and run the [script] you see below. MAKE SURE YOU ENTER YOUR LOGIC APP NAME.*
+
+```
+$miObjectID = $null
+Write-Host "Looking for Managed Identity with default prefix names of the Logic App..."
+$miObjectIDs = @()
+$miObjectIDs = (Get-AzureADServicePrincipal -SearchString "YOURLOGICAPPNAME").ObjectId
+if ($miObjectIDs -eq $null) {
+   $miObjectIDs = Read-Host -Prompt "Enter ObjectId of Managed Identity (from Logic App):"
+}
+
+# The app ID of the Microsoft Graph API where we want to assign the permissions
+$appId = "fc780465-2017-40d4-a0c5-307022471b92"
+$permissionsToAdd = @("Vulnerability.Read.All","Software.Read.All")
+$app = Get-AzureADServicePrincipal -Filter "AppId eq '$appId'"
+
+foreach ($miObjectID in $miObjectIDs) {
+    foreach ($permission in $permissionsToAdd) {
+    Write-Host $permissions
+    $role = $app.AppRoles | where Value -Like $permission | Select-Object -First 1
+    New-AzureADServiceAppRoleAssignment -Id $role.Id -ObjectId $miObjectIDs -PrincipalId $miObjectID -ResourceId $app.ObjectId
+    }
+}
+```
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfperms1.png)
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfperm2.png)
 
 ## Configuring Data Factory - follow steps below.
+
+*Disclaimer - it is important to note that for this demo I chose a commercial instance. You can change the endpoints to mimic other Azure Environments see right below.*
+
+```
+Commercial URL = https://api.securitycenter.microsoft.com/api/machines/SoftwareVulnerabilitiesByMachine?deviceName
+Commercial Audience = https://api.securitycenter.microsoft.com
+
+GCC URL = https://api-gcc.securitycenter.microsoft.us/api/machines/SoftwareVulnerabilitiesByMachine?deviceName
+GCC Audience = https://api-gcc.securitycenter.microsoft.us
+
+GCCH URI = https://api-gov.securitycenter.microsoft.us/api/machines/SoftwareVulnerabilitiesByMachine?deviceName
+GCCH Audience = https://api-gov.securitycenter.microsoft.us
+```
 
 **1** - *Click "Launch Studio"*
 
