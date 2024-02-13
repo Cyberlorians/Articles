@@ -8,7 +8,7 @@ The why! When querying API data in XDR there are call limitations and when using
 
 Lets start by setting up the Data Lake. You are going to deploy a standard Azure DataLake Storage Gen2 and we will use blob containers.
 
-<summary>## Deploy Storage Account - follow the steps below. </summary>
+<details><summary> ## Deploy Storage Account - follow the steps below. </summary></details>
 
 **1** - *In Azure, Create Storage Account.*
 
