@@ -25,7 +25,9 @@ Lets start by setting up the Data Lake. You are going to deploy a standard Azure
 
 </details>
 
-## Deploy Data Factory - follow the steps below.
+
+<details><summary> <b><u><font size="<h3>">## Deploy Data Factory - follow the steps below.</font></u></b></summary> 
+<p>
 
 **1** - *In Azure, Create Data Factory.*
 
@@ -82,6 +84,7 @@ GCC Audience = https://api-gcc.securitycenter.microsoft.us
 GCCH URI = https://api-gov.securitycenter.microsoft.us/api/machines/SoftwareVulnerabilitiesByMachine?deviceName
 GCCH Audience = https://api-gov.securitycenter.microsoft.us
 ```
+</details>
 
 **1** - *Click "Launch Studio"*
 
