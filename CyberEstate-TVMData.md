@@ -8,7 +8,7 @@ The why! When querying API data in XDR there are call limitations and when using
 
 Lets start by setting up the Data Lake. You are going to deploy a standard Azure DataLake Storage Gen2 and we will use blob containers.
 
-<details><summary> <b><u><font size="<h3>">Deploy Storage Account - follow steps below.</font></u></b></summary> 
+<details><summary> <b><u><font size="<h3>">Deploy Storage Account - follow the steps below.</font></u></b></summary> 
 <p>
 
 **1** - *In Azure, Create Storage Account.*
@@ -26,7 +26,7 @@ Lets start by setting up the Data Lake. You are going to deploy a standard Azure
 </details>
 
 
-<details><summary> <b><u><font size="<h3>">## Deploy Data Factory - follow the steps below.</font></u></b></summary> 
+<details><summary> <b><u><font size="<h3>">Deploy Data Factory - follow the steps below.</font></u></b></summary> 
 <p>
 
 **1** - *In Azure, Create Data Factory.*
@@ -86,6 +86,9 @@ GCCH Audience = https://api-gov.securitycenter.microsoft.us
 ```
 </details>
 
+<details><summary> <b><u><font size="<h3>">Working w/ Data Factory - follow the steps below.</font></u></b></summary> 
+<p>
+
 **1** - *Click "Launch Studio"*
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf4.png)
@@ -118,7 +121,11 @@ GCCH Audience = https://api-gov.securitycenter.microsoft.us
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/connectionscompleted.png)
 
-## Validate and Publish DataFactory Piplines
+</details>
+
+<details><summary> <b><u><font size="<h3>">Validate & Publish Data Factory Pipelines - follow the steps below.</font></u></b></summary> 
+<p>
+
 
 **1** - *After the last step of configuration, you'll be brought back to the pipeline menu. Click debug. Everything should check out perfectly if the steps were followed.*
 
@@ -133,6 +140,8 @@ GCCH Audience = https://api-gov.securitycenter.microsoft.us
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfoutlooksuccesspublish.png)
 
 *4** - *Add a trigger to your pipeline - you chose the schedule.*
+
+</details>
 
 ## Azure Data Explorer - Create [ADX](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-and-database?tabs=free). You will have to follow these instructions for each TVM table.
 
