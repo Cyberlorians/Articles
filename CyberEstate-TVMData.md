@@ -181,5 +181,7 @@ external_table('tvm_software')
 
 </details>
 
+The Data Lake was chosen specific to MSFT products. There are use cases when the need is to send out via the EventHub for interagency collaboration around Dashboardings. For these situations please refer to your architect and look at Event Hubs. This is but another working solution to use ADLS for the Life Cycle Mangaement around block blobs (compressed) and external querying. The ext query leverages your org to not ingest this data if chosen. I would lean to ingesting into ADX so I am able to X-query ADX from my Sentinel workspace.
+
 
 
