@@ -60,3 +60,7 @@ Lets start by setting up the Data Lake. You are going to deploy a standard Azure
 **4** - *You will need to create Linked Services for each to work. On the "TVM_Rest_Vuln_Connection(Rest dataset)", click the drop-down and click "New". Follow the below snippet, test-connection and create. NOTE - none of these connections will work unless you have set the permissions for ADF on the managed identity via the script.*
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfrestvulnconnection.png).
+
+**4** - *Navigate to the next Linked Service, "TVM_*_Out", click the drop-down and click "New". Follow the snippet, test-connection and create. NOTE - this connection will not work if you did not follow the step to give the Managed Identity the Storage Contributor role.*
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfoutconnection.png)
