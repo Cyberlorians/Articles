@@ -53,7 +53,7 @@ Lets start by setting up the Data Lake. You are going to deploy a standard Azure
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf5.png)
 
-**3** - *When prompted for a ZIP file, down and save the [TVM Data Factory Template](https://github.com/Cyberlorians/CyberEstate/blob/main/XDRTVM.zip) file then upload as the template. Once uploaded the default upload will look like the below image.*
+**3** - *When prompted for a ZIP file, down and save the [TVM Data Factory Template](https://github.com/Cyberlorians/CyberEstate/blob/main/AHTVM.zip) file then upload as the template. Once uploaded the default upload will look like the below image.*
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf6restvuln.png)
 
@@ -93,7 +93,7 @@ Lets start by setting up the Data Lake. You are going to deploy a standard Azure
 
 *4** - *Add a trigger to your pipeline - you chose the schedule.*
 
-## Azure Data Explorer - Create [ADX](). You will have to follow these instructions for each TVM table.
+## Azure Data Explorer - Create [ADX](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-and-database?tabs=free). You will have to follow these instructions for each TVM table.
 
 **1** - *Right click your DB and click, create External Table. Give the table a name accordingly to the TVM data you will be querying.*
 
@@ -115,7 +115,7 @@ Lets start by setting up the Data Lake. You are going to deploy a standard Azure
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfadx5.png)
 
-**6** *Query your data.**
+**6** *Query your data.*
 
 ```
 external_table('tvm_software')
