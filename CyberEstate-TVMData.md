@@ -55,6 +55,8 @@ Lets start by setting up the Data Lake. You are going to deploy a standard Azure
 
 **3** - *When prompted for a ZIP file, down and save the [TVM Data Factory Template](https://github.com/Cyberlorians/CyberEstate/blob/main/XDRTVM.zip) file then upload as the template. Once uploaded the default upload will look like the below image.*
 
-**4** - *You will need to create Linked Services for each to work. On the "TVM_Rest_Vuln_Connection(Rest dataset)", click the drop-down and click "New". Follow the below snippet, test-connection and create.*
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf6restvuln.png)
+
+**4** - *You will need to create Linked Services for each to work. On the "TVM_Rest_Vuln_Connection(Rest dataset)", click the drop-down and click "New". Follow the below snippet, test-connection and create. NOTE - none of these connections will work unless you have set the permissions for ADF on the managed identity via the script.*
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfrestvulnconnection.png).
