@@ -8,7 +8,7 @@ connect-graph -Environment USGov -Scopes "Application.ReadWrite.All", "Policy.Re
 
 STEP #2
 
-# Create a new Service Principal
+## Create a new Service Principal
 
 ```
 Import-Module Microsoft.Graph.Applications
@@ -22,7 +22,7 @@ New-MgServicePrincipal -BodyParameter $params
 
 STEP #3
 
-# Enable elevation of priv users perms to be added to custom role
+## Enable elevation of priv users perms to be added to custom role
 
 ```
 Import-Module Microsoft.Graph.Identity.SignIns
@@ -35,9 +35,9 @@ Update-MgPolicyAuthorizationPolicy -BodyParameter $params
 ```
 
 
-STEP #5 
+STEP #4
 
-# CREATE WRITE DEFINITION ID
+## CREATE WRITE DEFINITION ID
 
 ```
 # Import the required modules
@@ -63,7 +63,7 @@ $params = @{
 New-MgRoleManagementDirectoryRoleDefinition -BodyParameter $params
 ```
 
-# CREATE READ DEFINITON ID 
+## CREATE READ DEFINITON ID 
 
 ```
 $params = @{
@@ -93,7 +93,7 @@ New-MgRoleManagementDirectoryRoleDefinition -BodyParameter $params
 ```
 STEP #6
 
-# Set Permissions for Service Principal
+## Set Permissions for Service Principal
 
 ```
 connect-azuread
