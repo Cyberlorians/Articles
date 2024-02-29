@@ -62,7 +62,25 @@ $params = @{
 
 New-MgRoleManagementDirectoryRoleDefinition -BodyParameter $params
 ```
+## Add further perms to WRITE ROLE if need be. Custom Roles are LIMITED
 
+```
+"microsoft.directory/users/basic/update",
+                "microsoft.directory/users/contactInfo/update",
+                "microsoft.directory/users/extensionProperties/update",
+                "microsoft.directory/users/jobInfo/update",
+                "microsoft.directory/users/parentalControls/update",
+                "microsoft.directory/users/sponsors/update",
+                "microsoft.directory/users/usageLocation/update",
+                "microsoft.directory/users/preferredDataLocation/update",
+                "microsoft.directory/users/userType/update",
+                "microsoft.directory/deletedItems.users/restore",
+                "microsoft.directory/users/disable",
+                "microsoft.directory/users/enable",
+                "microsoft.directory/users/userPrincipalName/update",
+                "microsoft.directory/users/userType/update",
+                "microsoft.directory/users/delete"
+```
 ## CREATE READ DEFINITON ID 
 
 ```
