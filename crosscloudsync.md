@@ -54,7 +54,7 @@ $params = @{
         }
     )
     assignableScopes = @(
-        "/tenants/1daa4fd5-b537-46b2-b92b-556628c922ed"
+        "/tenants/TENANTID"
     )
     isEnabled = $true
 }
