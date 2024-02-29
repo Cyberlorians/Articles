@@ -54,7 +54,7 @@ $params = @{
         }
     )
     assignableScopes = @(
-        "/tenants/TENANTID"
+        "/tenants/sourcetenant"
     )
     isEnabled = $true
 }
