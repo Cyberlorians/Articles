@@ -45,7 +45,10 @@ Lets start by setting up the Data Lake. You are going to deploy a standard Azure
 
 **4** - *Open Azure PowerShell CLI and run the [script] you see below. MAKE SURE YOU ENTER YOUR LOGIC APP NAME.*
 
+
 ```
+connect-azuread
+
 $miObjectID = $null
 Write-Host "Looking for Managed Identity with default prefix names of the Logic App..."
 $miObjectIDs = @()
