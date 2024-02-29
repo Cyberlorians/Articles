@@ -37,7 +37,7 @@ Update-MgPolicyAuthorizationPolicy -BodyParameter $params
 
 STEP #4
 
-## CREATE WRITE DEFINITION ID
+## CREATE WRITE DEFINITION ID (you will have to go into the UI of the custom role and add other permissions if you'd like to test anything further)
 
 ```
 # Import the required modules
