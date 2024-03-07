@@ -157,17 +157,17 @@ GCCH Audience = https://api-gov.securitycenter.microsoft.us
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adx01.png)
 
-**2** - *On the Source tab, select "container" and add your data lake that was created.*
+**2** - *On the inspect the data tab, review data (I removed two columns to only have value).*
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adx02.png)
 
-**3** - *You will be prompted to grant permissions to ADX to READ the blob data.*
+**3** - *You MAY be prompted to grant permissions to ADX to READ the blob data if you have not done so already. Snippet is below on what that would look like.* 
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfadx3.png)
 
 **4** - *You will notice the compression type is Gzip. You can right click and remove the odata.context and odata.count columns if you chose. If not, click "Create table".*
 
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfadx4.png)
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/adx03.png)
 
 **5** - *Your table has been successfully created. This is not ingestion into ADX, it is only an external query. If you wish to ingest you will have to setup on a constant ingest with Event Grid.*
 
