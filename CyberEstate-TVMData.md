@@ -165,7 +165,7 @@ GCCH Audience = https://api-gov.securitycenter.microsoft.us
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfadx3.png)
 
-**4** - *You will notice the compression type is Gzip. You can right click and remove the odata.context and odata.count columns if you chose. If not, click "Create table".*
+**4** - *Review the summary and hit close. You may know query the data in ADX.*
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adx03.png)
 
@@ -176,13 +176,13 @@ GCCH Audience = https://api-gov.securitycenter.microsoft.us
 **6** *Query your data.*
 
 ```
-external_table('tvm_software')
+TVMDeviceVuln
 | project value
 | mv-expand value
 | evaluate bag_unpack(value)
 ```
+**7** *The preceeding steps were only a one time ingestion. In order to continually ingest from ADLS, you will need to create an [Event Grid](https://learn.microsoft.com/en-us/azure/data-explorer/create-event-grid-connection?tabs=portal-adx%2Cazure-blob-storage#create-an-event-grid-data-connection). Follow the instructions to continually ingest new data the full automated solution.*
 
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfadx6.png)
 
 </details>
 
