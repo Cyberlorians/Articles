@@ -153,9 +153,9 @@ GCCH Audience = https://api-gov.securitycenter.microsoft.us
 
 *Disclaimer - To Create [ADX](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-and-database?tabs=free).*
 
-**1** - *Right click your DB and click, create External Table. Give the table a name accordingly to the TVM data you will be querying.*
+**1** - *Right click your DB and click, "Get Data". Give the table a name accordingly to the TVM data you will be querying.*
 
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/adfadx1.png)
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/adx01.png)
 
 **2** - *On the Source tab, select "container" and add your data lake that was created.*
 
