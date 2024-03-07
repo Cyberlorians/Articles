@@ -6,7 +6,11 @@ There is no Sentinel connector option for Microsofts XDR Threat Vulnerability Ma
 
 The why! When querying API data in XDR there are call limitations and when using the LogicApp it is easy to hit those limitations. Data Factory allows pagination (continually looping) on the odata call within the API until all data is seen and ingestion to X (your endpoint). This is a huge deal because all of our Federal Customers have this mandate to track their TVM data and send to another agency. Regardless if you are a Federal CX you will want this solution because; **A** - *no connector to Sentinel or Streaming API in XDR*, **B** - *only 30 Days of data reside in XDR*, **C** - *the need for long term storage of said data to X (another endpoint).* The great piece with this solution is that we are sending to a blob container and compressed! So the data will arrive on the storage account half the size as a gz file type. We can then query from ADX to view the data.
 
-The Data Lake was chosen specific to MSFT products. There are use cases when the need is to send out via the EventHub for interagency collaboration around Dashboardings. For these situations please refer to your architect and look at Event Hubs. This is but another working solution to use ADLS for the Life Cycle Mangaement around block blobs (compressed) and external querying. The ext query leverages your org to not ingest this data if chosen. I would lean to ingesting into ADX so I am able to X-query ADX from my Sentinel workspace.
+An overview idea of what would small solution of all this enterprise logging around the Cyber Estate can look like is directly below. 
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/onewaytoslicethepie.png)
+
+The Data Lake was chosen specific to MSFT products. There are use cases when the need is to send out via the EventHub for interagency collaboration around Dashboardings. For these situations please refer to your architect and look at Event Hubs. This is but another working solution to use ADLS for the Life Cycle Mangaement around block blobs (compressed) and ADX ingestion. It is important to note that this is possible with External querying the data from ADX to ADLS but not in scope.
 
 Lets start by setting up the Data Lake. You are going to deploy a standard Azure DataLake Storage Gen2 and we will use blob containers.
 
@@ -180,7 +184,7 @@ TVMDeviceVuln
 ```
 
 
-**6** - *The preceeding steps were only a one time ingestion. In order to continually ingest from ADLS, you will need to create an [Event Grid](https://learn.microsoft.com/en-us/azure/data-explorer/create-event-grid-connection?tabs=portal-adx%2Cazure-blob-storage#create-an-event-grid-data-connection). Follow the instructions to continually ingest new data the full automated solution.*
+**6** - *The preceeding steps were only a one time ingestion. In order to continually ingest from ADLS, you will need to create an [Event Grid](https://learn.microsoft.com/en-us/azure/data-explorer/create-event-grid-connection?tabs=portal-adx%2Cazure-blob-storage#create-an-event-grid-data-connection). Follow the instructions to continually ingest new data the full automated solution. When using Event Grid it automatically kicks off a new EH but please understand the limitations around Standard Event Hubs, Namespaces etc. I recommend going Premium Event Hub in any org.*
 
 
 </details>
