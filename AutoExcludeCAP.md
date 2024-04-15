@@ -115,4 +115,7 @@ AzureDiagnostics
 | where status_s == "Failed"
 | distinct startTime_t, resource_workflowName_s, status_s, resource_actionName_s
 ```
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCyberlorians%2FLogicApps%2Fmain%2FAutoCAPExclude.json)
+
+
 
