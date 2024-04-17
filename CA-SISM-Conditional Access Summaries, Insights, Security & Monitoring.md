@@ -37,9 +37,7 @@ foreach ($miObjectID in $miObjectIDs) {
 }
 ```
 
-## Http API call adjustment. 
-
-1(a). Configure your endpoint based off what graph environment you are working with. Please adjust the logic app http call per the tenant you are working in. Commercial & GCC use the same API call, Gov will need to be adjust.
+1(a). *If applicable, change http calls*. Configure your endpoint based off what graph environment you are working with. Please adjust the logic app http call per the tenant you are working in. Commercial & GCC use the same API call, Gov will need to be adjust.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/autocapgetcond.png)
 
