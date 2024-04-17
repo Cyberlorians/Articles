@@ -13,7 +13,6 @@ Lacking permissions for the Identity plane prevents access to view Conditional A
 ## Post-Configuration of the TenantCAPols-Ingest Logic App
 
 
-
 1.  **Open Azure PowerShell via the browser & Paste the below code.**
 
 ```
@@ -40,15 +39,15 @@ foreach ($miObjectID in $miObjectIDs) {
     }
 }
 ```
-2. **Permissions for Law Analytics Workspace.**
+2. **Configuration for Law Analytics Workspace Ingestion.**
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/cacismlaw.png)
 
 
 
-## Http API call adjustment. Please adjust the logic app http call per the tenant you are working in. Commercial & GCC use the same API call, Gov will need to be adjust.
+## Http API call adjustment. 
 
-1. Configure your endpoint based off what graph environment you are working with.
+1. Configure your endpoint based off what graph environment you are working with. Please adjust the logic app http call per the tenant you are working in. Commercial & GCC use the same API call, Gov will need to be adjust.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/autocapgetcond.png)
 
