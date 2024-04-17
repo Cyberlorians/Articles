@@ -43,7 +43,7 @@ foreach ($miObjectID in $miObjectIDs) {
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/autocapgetcond.png)
 
-*Graph endpoints for Step2 are below*
+*Graph endpoints for adjustment are below*
 
 ```
 Commercial URL = https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies
