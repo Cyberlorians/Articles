@@ -14,7 +14,7 @@ Lacking permissions for the Identity plane prevents access to view Conditional A
 
 
 
-1.  **Open Azure PowerShell via the browser & Paste the below code**
+1.  **Open Azure PowerShell via the browser & Paste the below code.**
 
 ```
 connect-azuread
@@ -40,16 +40,15 @@ foreach ($miObjectID in $miObjectIDs) {
     }
 }
 ```
+2. **Permissions for Law Analytics Workspace.**
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/cacismlaw.png)
 
 
 
-## Post-Configuration of the AutoCAPExclude Logic App
+## Http API call adjustment. Please adjust the logic app http call per the tenant you are working in. Commercial & GCC use the same API call, Gov will need to be adjust.
 
-1. Set your recurrencr of the logic app. Suggested 1-5m.
-
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/autocaprecur.png)
-
-2. Configure your endpoint based off what graph environment you are working with.
+1. Configure your endpoint based off what graph environment you are working with.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/autocapgetcond.png)
 
