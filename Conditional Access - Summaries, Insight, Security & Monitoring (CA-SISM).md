@@ -1,22 +1,20 @@
-## Automatically Exclude BreakGlass Group From Conditional Access ##
+## CA-SISM: Conditional Access Summaries, Insights, Security & Monitoring. ##
 
-Having your break glass accounts be part of an exclusion group which is EXCLUDED from conditional access policy is a pivotal piece to your Zero Trust Identity plane, for two simple reasons. This allows the identity team to gain access back into a tenant if someone were to configure a mistake and break AuthZ/AuthN to the tenant. As well as if a threat actor has taken over and removed the exclusions from the policies. You are at mercy of the recurrence and I would suggest this run, every 1-5m in corporate orgs.
+Lacking permissions for the Identity plane prevents access to view Conditional Access Policies, obtaining current policies becomes unattainable. This approach relies on a logic app to invoke the Graph API for conditional access and feed the data into the log analytics workspace. The resulting table will be named 'TenantCAPols_CL'. Ingestion will occur once on both Monday and Friday of every week.
 
 ## Deploy the logic app
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCyberlorians%2FLogicApps%2Fmain%2FTenantCAPols-Ingest.json)
+
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCyberlorians%2FLogicApps%2Fmain%2FAutoCAPExclude.json)
 
 
-## Pre-Configuration of the AutoCAPExclude Logic App
-
-1 - Turn on Managed Identity on the logic app.
-
-2 - On the Parameters Tab of the logic app, Enter the objectID of your Exclusion Group.
-
-3 - Save changes on the logic app.
+## Post-Configuration of the TenantCAPols-Ingest Logic App
 
 
-## Open Azure PowerShell via the browser & Paste the below code*
+
+1.  **Open Azure PowerShell via the browser & Paste the below code**
 
 ```
 connect-azuread
@@ -24,14 +22,14 @@ connect-azuread
 $miObjectID = $null
 Write-Host "Looking for Managed Identity with default prefix names of the Logic App..."
 $miObjectIDs = @()
-$miObjectIDs = (Get-AzureADServicePrincipal -SearchString "AutoCapExclude").ObjectId
+$miObjectIDs = (Get-AzureADServicePrincipal -SearchString "TenantCAPols-Ingest").ObjectId
 if ($miObjectIDs -eq $null) {
    $miObjectIDs = Read-Host -Prompt "Enter ObjectId of Managed Identity (from Logic App):"
 }
 
 # The app ID of the Microsoft Graph API where we want to assign the permissions
 $appId = "00000003-0000-0000-c000-000000000000"
-$permissionsToAdd = @("policy.Read.All","Policy.ReadWrite.ConditionalAccess","mail.send")
+$permissionsToAdd = @("policy.Read.All")
 $app = Get-AzureADServicePrincipal -Filter "AppId eq '$appId'"
 
 foreach ($miObjectID in $miObjectIDs) {
@@ -43,7 +41,6 @@ foreach ($miObjectID in $miObjectIDs) {
 }
 ```
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCyberlorians%2FLogicApps%2Fmain%2FTenantCAPols-Ingest.json)
 
 
 ## Post-Configuration of the AutoCAPExclude Logic App
