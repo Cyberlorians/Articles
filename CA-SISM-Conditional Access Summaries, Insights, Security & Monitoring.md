@@ -7,9 +7,6 @@ Lacking permissions for the Identity plane prevents access to view Conditional A
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCyberlorians%2FLogicApps%2Fmain%2FTenantCAPols-Ingest.json)
 
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCyberlorians%2FLogicApps%2Fmain%2FAutoCAPExclude.json)
-
-
 ## Post-Configuration of the TenantCAPols-Ingest Logic App
 
 
