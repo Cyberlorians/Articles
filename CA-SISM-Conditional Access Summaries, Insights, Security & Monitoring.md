@@ -155,23 +155,4 @@ TenantCAPols_CL
 | project ['Policy display name'] = DisplayName, State, ['Cloud apps included'] = CloudAppsInclude, ['Cloud apps excluded'] = CloudAppsExclude, ['Users included'] = UsersInclude, ['Users excluded'] = UsersExclude, ['Groups included'] = GroupsInclude, ['Groups excluded'] = GroupsExclude, ['Client platforms included'] = ClientPlatformsInclude, ['Client platforms excluded'] = ClientPlatformsExclude, ['Client apps'] = ClientApps, ['Locations included'] = LocationsInclude, ['Locations excluded'] = LocationsExclude, ['User risk levels'] = UserRiskLevels, ['Sign-in risk levels'] = SigninRiskLevels, ['Grant controls'] = GrantControls, CreatedTimeDate, ModifiedTimeDate, PolicyId, ['Full policy JSON'] = FullPolicyJson, ClientPlatformsIncludeTooltip, LocationsIncludeTooltip, UserRiskLevelsTooltip, SigninRiskLevelsTooltip
 ```
 
-## Http API call adjustment. 
-
-1. Configure your endpoint based off what graph environment you are working with. Please adjust the logic app http call per the tenant you are working in. Commercial & GCC use the same API call, Gov will need to be adjust.
-
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/autocapgetcond.png)
-
-*Graph endpoints for Step2 are below*
-
-```
-Commercial URL = https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies
-Commercial Audience = https://graph.microsoft.com
-
-GCC URL = https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies
-GCC Audience = https://graph.microsoft.com
-
-GCCH URI = https://graph.microsoft.us/v1.0/identity/conditionalAccess/policies
-GCCH Audience = https://graph.microsoft.us
-```
-
 
