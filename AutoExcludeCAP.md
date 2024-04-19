@@ -2,32 +2,27 @@
 
 Having your break glass accounts be part of an exclusion group which is EXCLUDED from conditional access policy is a pivotal piece to your Zero Trust Identity plane, for two simple reasons. This allows the identity team to gain access back into a tenant if someone were to configure a mistake and break AuthZ/AuthN to the tenant. As well as if a threat actor has taken over and removed the exclusions from the policies. You are at mercy of the recurrence and I would suggest this run, every 1-5m in corporate orgs.
 
+
+## Pre-Configuration
+
+1. Create a security group in Entra ID and label it 'Exclude - BG'.
+
+2. Grab the ObjectID and save it for Post-Configuration steps.
+
 ## Deploy the logic app
 
-1 - [AutoCAPExclude](https://github.com/Cyberlorians/LogicApps/blob/main/AutoCAPExclude.json). Copy the contents of the logic app.
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCyberlorians%2FLogicApps%2Fmain%2FAutoCAPExclude.json)
 
-2 - In Azure, natigave to 'Deploy A Custom Template' and chose 'Build your own template in the editor'
+1. On the Parameters Tab of the logic app, Enter the objectID of your Exclusion Group.
 
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/TVMcustomdeployment.png)
+!(https://github.com/Cyberlorians/uploadedimages/blob/main/autoexcludeautodeploy.png)
 
-3 - On the screen, copy the contents from step #1 and PASTE into the table, replacing all data.
+## Post-Configuration of the AutoCAPExclude Logic App
 
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/uploadtemplate.png)
-
-4 - Hit Save and deploy.
-
-## Pre-Configuration of the AutoCAPExclude Logic App
-
-1 - Turn on Managed Identity on the logic app.
-
-2 - On the Parameters Tab of the logic app, Enter the objectID of your Exclusion Group.
-
-3 - Save changes on the logic app.
-
-
-## Open Azure PowerShell via the browser & Paste the below code*
+1. Open Azure PowerShell via the browswer & paste the below code.
 
 ```
+connect-azuread
 
 $miObjectID = $null
 Write-Host "Looking for Managed Identity with default prefix names of the Logic App..."
@@ -51,13 +46,11 @@ foreach ($miObjectID in $miObjectIDs) {
 }
 ```
 
-## Post-Configuration of the AutoCAPExclude Logic App
-
-1. Set your recurrencr of the logic app. Suggested 1-5m.
+2. Set your recurrencr of the logic app. Suggested 1-5m.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/autocaprecur.png)
 
-2. Configure your endpoint based off what graph environment you are working with.
+3. Configure your endpoint based off what graph environment you are working with.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/autocapgetcond.png)
 
@@ -74,7 +67,7 @@ GCCH URI = https://graph.microsoft.us/v1.0/identity/conditionalAccess/policies
 GCCH Audience = https://graph.microsoft.us
 ```
 
-3. Configure the SEND MAIL (POST) and what graph endpoint you need to use. 
+4. Configure the SEND MAIL (POST) and what graph endpoint you need to use. 
 *The first arrow can and should be a DL email. The second arrow can and should be another DL of one or more.*
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/autocapemail.png)
@@ -115,7 +108,7 @@ AzureDiagnostics
 | where status_s == "Failed"
 | distinct startTime_t, resource_workflowName_s, status_s, resource_actionName_s
 ```
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCyberlorians%2FLogicApps%2Fmain%2FAutoCAPExclude.json)
+
 
 
 
