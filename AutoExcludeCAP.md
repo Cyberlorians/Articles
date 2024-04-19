@@ -67,12 +67,13 @@ GCCH URI = https://graph.microsoft.us/v1.0/identity/conditionalAccess/policies
 GCCH Audience = https://graph.microsoft.us
 ```
 
-4. Configure the SEND MAIL (POST) and what graph endpoint you need to use. 
-*The first arrow can and should be a DL email. The second arrow can and should be another DL of one or more.*
+4. Configure the SEND MAIL (POST) and what graph endpoint you need to use. Graph Endpoint URLs are listed just below the image.
+
+The first arrow in the URI line item is a shared mailbox. The second arrow within the body are the "recipients".
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/autocapemail.png)
 
-*Graph endpoints for Step3 are below*
+*Graph endpoints for Step4 are below*
 
 ```
 Commercial URL = https://graph.microsoft.com/v1.0/users/EMAILADDRESS/sendmail
