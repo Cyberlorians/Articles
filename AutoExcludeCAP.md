@@ -15,7 +15,7 @@ Having your break glass accounts be part of an exclusion group which is EXCLUDED
 
 1. On the Parameters Tab of the logic app, Enter the objectID of your Exclusion Group.
 
-!(https://github.com/Cyberlorians/uploadedimages/blob/main/autoexcludeautodeploy.png)
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/autoexcludeautodeploy.png)
 
 ## Post-Configuration of the AutoCAPExclude Logic App
 
@@ -46,7 +46,7 @@ foreach ($miObjectID in $miObjectIDs) {
 }
 ```
 
-2. Set your recurrencr of the logic app. Suggested 1-5m.
+2. Set your recurrence of the logic app. Suggested 1-5m.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/autocaprecur.png)
 
