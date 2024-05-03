@@ -1,4 +1,4 @@
-## CA-SISM: Conditional Access Summaries, Insights, Security & Monitoring. ##
+## Tenant Conditional Access Policies - Graph Ingestion. ##
 
 Lacking permissions for the Identity plane prevents access to view Conditional Access Policies, obtaining current policies becomes unattainable. This approach relies on a logic app to invoke the Graph API for conditional access and feed the data into the log analytics workspace. The resulting table will be named 'TenantCAPols_CL'. Ingestion will occur once on both Monday and Friday of every week.
 
