@@ -31,7 +31,7 @@ tnc agentserviceapi.azure-automation.net -port 443
 ## Virtual Machine Assessment Configuration
 
 1. Log in as the local administrator account
-2. mkdir C:\Assessment\AAD
+2. mkdir C:\Assessment\Entra
 3. Turn off IE EnchancedMode
 4. Start -> Run -> gpedit.msc-> Computer Configuration -> Windows -> Security -> Local Policies -> User Rights Assignment -> Log on as a batch job -> Add Adminstrators
 5. Start -> Run -> gpedit.msc-> Computer Configuration -> Administrative Template -> system -> user profile ->Do not forcefully unload the users registry at user logoff -> Click Enable
