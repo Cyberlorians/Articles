@@ -67,7 +67,7 @@ New-MicrosoftAssessmentsApplication -allowclobber -force
 
 *Create Scheduled Task* - run this task as the local admin with computername\localadmin as shown below.
 ```
-Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\AAD -ScheduledTaskUsername Assessment\xadmin
+Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\Entra -ScheduledTaskUsername Assessment\xadmin
 ```
 
 ## Run the Scheduled Task ##
