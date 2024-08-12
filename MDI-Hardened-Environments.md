@@ -109,11 +109,11 @@ if ($sourceGroup -and $targetGroup) {
 
 ***Note: Add this to the Domain Controller OS-Based STIG, and if using it in conjunction with ADFS/CA, also include it in the ADFS/CA OS-Based STIG. I cannot stress how crucial this step is. In the past, this step was omitted from current documentation, but I am pleased it has now been added. However, it remains an easy oversight. Without this in place, nothing will work.***
 
+**5** - *Test gMSA 'LogOnAsAService' permission after policy set in Step 4.*
 ```
 Get-ADServiceAccount -Identity $Identity -Properties * | select Prin*
 Test-ADServiceAccount -Identity $Identity 
 ```
-
 
 </details>
 
