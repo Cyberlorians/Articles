@@ -54,7 +54,7 @@ Review [Directory Service Account Recommendations](https://docs.microsoft.com/en
 ***Note: For optimal security, it is recommended to use a Group Managed Service Account (gMSA).***
 
 
-# Create Sensor Group
+**1** - *Create Sensor Group.*
 ```
 $SensorGroup = 'MDISensors'
 $SensorGroupDesc = 'Members are allowing MDI gMSA attribute of -PrincipalsAllowedtoRetrieveManagedPassowrd.'
@@ -64,7 +64,7 @@ New-ADGroup -Name $SensorGroup `
     -GroupCategory 'Security'
 ```
 
-#Create Group Managed Service Account
+**2** - *Create Group Managed Service Account.*
 ```
 $Identity= 'MDIgMSA' #The name of the gMSA to be created
 $Description = "MDI group managed service account"
@@ -80,7 +80,7 @@ New-ADServiceAccount -Name $Identity `
     -KerberosEncryptionType $Kerb `
     -PassThru
 ```
-#Set all Domain Controllers to be members of Sensor Group
+**3** - *Set all Domain Controllers to be members of Sensor Group.*
 ```
 
 $sourceGroupName = "Domain Controllers"
@@ -105,8 +105,10 @@ if ($sourceGroup -and $targetGroup) {
 }
 ```
 
-#Set gMSA $Identity with permission to logon as batch for Domain Contollers
-!!Verify!! that the newly created gMSA account has the [log on as a service](https://docs.microsoft.com/en-us/defender-for-identity/directory-service-accounts#verify-that-the-gmsa-account-has-the-required-rights-if-needed) permission to all MDI machines. *Disclaimer* - add this to the Domain Controller OS Based STIG and if using in conjunction with ADFS, then add to the ADFS OS Based STIG as well. I cannot stress how important this step is. In the past, this step was missing from current docs and I am happing that it has been added but it is still an easy oversight. If this is NOT in place, nothing will work!
+**4** - *Set gMSA $Identity with [permission](https://learn.microsoft.com/en-us/defender-for-identity/deploy/create-directory-service-account-gmsa#verify-that-the-gmsa-account-has-the-required-rights).
+
+***Note: Add this to the Domain Controller OS-Based STIG, and if using it in conjunction with ADFS, also include it in the ADFS OS-Based STIG. I cannot stress how crucial this step is. In the past, this step was omitted from current documentation, but I am pleased it has now been added. However, it remains an easy oversight. Without this in place, nothing will work.***
+
 ```
 Get-ADServiceAccount -Identity $Identity -Properties * | select Prin*
 Test-ADServiceAccount -Identity $Identity 
