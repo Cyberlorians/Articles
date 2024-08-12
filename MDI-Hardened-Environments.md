@@ -117,7 +117,7 @@ Test-ADServiceAccount -Identity $Identity
 
 </details>
 
-<details><summary> <b><u><font size="<h3>">Grant DSA permissions on all objects (READ).</font></u></b></summary> 
+<details><summary> <b><u><font size="<h3>">Grant Directory Service Account permissions on all objects (READ).</font></u></b></summary> 
 <p>
 
 
@@ -163,6 +163,26 @@ C:\Windows\System32\dsacls.exe $params
 </details>
 
 
+<details><summary> <b><u><font size="<h3>">Configure Auditing on Configuration Container.</font></u></b></summary> 
+<p>
+
+***1*** - *Configure auditing on the configuration container [here](https://learn.microsoft.com/en-us/defender-for-identity/deploy/configure-windows-event-collection#configure-auditing-on-the-configuration-container
+).*
+
+</details>
+
+<details><summary> <b><u><font size="<h3>">Configure SAM-R for lateral movement.</font></u></b></summary> 
+<p>
+
+***Note: This is a DENY Group Policy Object to Domain Controllers. On a STIG level, you could add these settings to each OS based or standalone GPO at the top level down. Plan according on this (layout).***
+
+***1*** - *Configure SAM-R required permissions [here](https://learn.microsoft.com/en-us/defender-for-identity/deploy/remote-calls-sam#configure-sam-r-required-permissions).*
+
+***2*** - *Configure DENY for Domain Controllers on the GPO.*
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/SAMR.png)
+
+</details>
 
 
 
