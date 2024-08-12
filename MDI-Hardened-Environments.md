@@ -184,24 +184,22 @@ C:\Windows\System32\dsacls.exe $params
 
 </details>
 
+<details><summary> <b><u><font size="<h3>">Sensor Installation.</font></u></b></summary> 
+<p>
 
+***Note: Before installing the sensor it is important to add the gMSA (DSA) to the 'Directory Service Accounts' blade in the XDR portal.***
 
-
-
-
-Your last step in the gMSA ladder is to [Configure the gMSA in 365 Defender](https://docs.microsoft.com/en-us/defender-for-identity/directory-service-accounts#configure-directory-service-account-in-microsoft-365-defender). When adding the gMSA account suffix with the $ so it matches the SAMAccountName Attribute on prem in AD.
+***1*** - *[Configure the gMSA in 365 Defender](https://docs.microsoft.com/en-us/defender-for-identity/directory-service-accounts#configure-directory-service-account-in-microsoft-365-defender).*
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/mdigmsa.png)
 
-## [MDI Role Groups](https://docs.microsoft.com/en-us/defender-for-identity/role-groups) ##
+***2*** - *Download the [sensor](https://docs.microsoft.com/en-us/defender-for-identity/download-sensor).*
 
-I am not going to cover this in detail, perhaps another article. However, keep the MDI groups protected, carefully. Use Conditional Access Policy to enforce access to the traditional ATP portal. As well as, use a Privilege Access Group to lock down the groups via nesting. These groups are NOT AAD Roles so you cannot PIM them by default. Just adding food for thought but that is not the intent of this article. More on that later.
+</details>
 
-## [Configure SAM-R](https://docs.microsoft.com/en-us/defender-for-identity/remote-calls-sam) ##
 
-This is another DENY to Domain Controllers. On a STIG level, you could add these [GPO](https://docs.microsoft.com/en-us/defender-for-identity/remote-calls-sam) settings to each OS Based GPO STIG. Or, add a top level down from the root. Read through this page closely as you are going to have to decide how to approach these rights assignments and how GPO precendence could effect them. I.e, if you are following a correct Tiered Model, putting the these SAM-R settings at the root can work. See the DENY below - DENY Read and Apply Group Policy to Domain Controllers.
 
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/SAMR.png)
+
 
 You are on a roll now. Final steps are below!
 
