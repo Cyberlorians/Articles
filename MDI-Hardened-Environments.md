@@ -1,6 +1,6 @@
 ## Microsoft Defender for Identity Hardened Environments ##
 
-This comprehensive installation guide for Microsoft Defender for Identity is specifically designed for deployment in a hardened (STIG-compliant) environment. Based on my experience with deployments, the following steps are arranged strategically: ensure that all object monitoring, SACL (System Control Access List) and service accounts are configured before proceeding with the installation of the sensor.
+This comprehensive installation guide for Microsoft Defender for Identity is specifically designed for deployment in a hardened (STIG-compliant) environment. Based on my experience with deployments, the following steps are arranged strategically: ensure that all object monitoring, SACL (System Control Access List) and service accounts are configured before proceeding with the installation of the sensor. The goal of this document is strictly around Domain Controllers and sensor additions. ADFS servers should be deprecated and moved to Entra CBA. CA services can be followed in the add-on section. 
 
 
 <details><summary> <b><u><font size="<h3>">Prerequisites.</font></u></b></summary> 
@@ -201,6 +201,13 @@ Test-MDISensorApiConnection
 ```
 
 ***4*** - *Install Sensor [setup](https://learn.microsoft.com/en-us/defender-for-identity/deploy/install-sensor).*
+
+</details>
+
+<details><summary> <b><u><font size="<h3>">Additional Scenarios.</font></u></b></summary> 
+<p>
+
+Continue to follow on with addition scenarions listed [here](https://learn.microsoft.com/en-us/defender-for-identity/deploy/active-directory-federation-services).
 
 </details>
 
