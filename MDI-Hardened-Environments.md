@@ -21,24 +21,34 @@ Please review [Configure Windows Event Collection](https://docs.microsoft.com/en
 
 In January 2024, Microsoft introduced a streamlined method for deploying 'Audit Policies' for Microsoft Defender for Identity using the PowerShell module 'DefenderForIdentity'. An overview is posted [here](https://techcommunity.microsoft.com/t5/microsoft-defender-xdr-blog/introducing-the-new-powershell-module-for-microsoft-defender-for/ba-p/4028734). 
 
-In order to proceed please install the module (Install-Module DefenderForIdentity) OR manunally download from [PSGallery](https://www.powershellgallery.com/packages/DefenderForIdentity/1.0.0.0) on the Domain Controller OR on another Tier0 asset server. 
-
-**Note: The DefenderForIdentity module requires the ActiveDirectory and the GroupPolicy modules to be installed on the server.**
-
 For improved clarity, a detailed guide has been created by [MSFTAdvocate](https://www.msftadvocate.com/configure-audit-policies-for-microsoft-defender-for-identity/). Please review this resource before proceeding to the next steps to ensure a coherent understanding of the process.
 
-**1** - *Set Domain Controller Advanced Audit Policy.*
+In order to proceed please install the module (Install-Module DefenderForIdentity) OR manunally download from [PSGallery](https://www.powershellgallery.com/packages/DefenderForIdentity/1.0.0.0) on the Domain Controller OR on another Tier0 asset server. 
+
+**Note: The DefenderForIdentity module requires the ActiveDirectory and the GroupPolicy modules to be installed on the server. It is also advised against modifying default Group Policy Objects (GPOs), such as Default Domain Controllers or Default Domain GPOs. Instead, each operating system should adhere to its own hardened baseline, incorporating appropriate WMI filters. This also applies to Domain Controllers, which should use dedicated GPOs. As an administrator, it is crucial to ensure that the Group Policy Object precedence is correctly configured and functioning as intended.**
+
+**Note: When using the MDIConfiguration module, it will create separate Group Policy Objects (GPOs). It is advisable to leave these policies unchanged, regardless of your existing baselines.**
+
+
+**1** - *Set Domain Controller Advanced Audit Policy.* Review [here](https://learn.microsoft.com/en-us/defender-for-identity/deploy/configure-windows-event-collection#configure-auditing-for-domain-controllers).
 ```
 Set-MDIConfiguration -Mode Domain -Configuration AdvancedAuditPolicysDCs
 ```
 
+**2** - *Set Domain Controller NTLM Auditing.* Review [here](https://learn.microsoft.com/en-us/defender-for-identity/deploy/configure-windows-event-collection#configure-ntlm-auditing).
+```
+Set-MDIConfiguration -Mode Domain -Configuration NTLMAuditing
+```
 
+***3** - *Configure Domain Object Auditing.* Review [here](https://learn.microsoft.com/en-us/defender-for-identity/deploy/configure-windows-event-collection#configure-domain-object-auditing).
+```
+Set-MDIConfiguration -Mode Domain -Configuration DomainObjectAuditing
+```
 
 </details>
 
 
 
-For the most part STIGs capture the audit settings but MDI does call out a bit more, [here](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection). My advise is Do NOT edit default GPOs, whether that be Default Domain Controllers of the Default Domain. For each OS flavor you should be following its own hardened baseline, same holds true for a Domain Controller - use dedicated GPOs.  The "Configure Windows Event Collection", site is a bit misleading so I broke it down for you. When you go to edit, DO NOT forget to edit each for success and failures.
 
 Domain Controllers - Use STIG baseline and follow [doc](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection#configure-audit-policies).
 1. On Domain Controllers ONLY - Configure your hardened baseline GPO for EventID 8004, [here](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection#event-id-8004).
