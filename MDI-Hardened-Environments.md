@@ -19,7 +19,7 @@ Plan for capacity [here](https://docs.microsoft.com/en-us/defender-for-identity/
 
 Please review [Configure Windows Event Collection](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection).
 
-In January 2024, Microsoft introduced a streamlined method for deploying 'Audit Policies' for Microsoft Defender for Identity using the PowerShell module 'DefenderForIdentity'. An overview is posted [here](https://techcommunity.microsoft.com/t5/microsoft-defender-xdr-blog/introducing-the-new-powershell-module-for-microsoft-defender-for/ba-p/4028734). 
+In January 2024, Microsoft introduced a streamlined method for deploying 'Audit Policies' for Microsoft Defender for Identity using the PowerShell module 'DefenderForIdentity'. An overview is posted [here](https://techcommunity.microsoft.com/t5/microsoft-defender-xdr-blog/introducing-the-new-powershell-module-for-microsoft-defender-for/ba-p/4028734). This module simplifies the 'Auditing' setup compared to manual configuration.
 
 For improved clarity, a detailed guide has been created by [MSFTAdvocate](https://www.msftadvocate.com/configure-audit-policies-for-microsoft-defender-for-identity/). Please review this resource before proceeding to the next steps to ensure a coherent understanding of the process.
 
@@ -40,7 +40,7 @@ Set-MDIConfiguration -Mode Domain -Configuration AdvancedAuditPolicysDCs
 Set-MDIConfiguration -Mode Domain -Configuration NTLMAuditing
 ```
 
-***3** - *Configure Domain Object Auditing.* Review [here](https://learn.microsoft.com/en-us/defender-for-identity/deploy/configure-windows-event-collection#configure-domain-object-auditing).
+**3** - *Configure Domain Object Auditing.* Review [here](https://learn.microsoft.com/en-us/defender-for-identity/deploy/configure-windows-event-collection#configure-domain-object-auditing).
 ```
 Set-MDIConfiguration -Mode Domain -Configuration DomainObjectAuditing
 ```
