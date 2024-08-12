@@ -1,6 +1,6 @@
 ## Microsoft Defender for Identity Hardened Environments ##
 
-This is a comprehensive installation guide for Microsoft Defender for Identity, specifically tailored for deployment in a hardened (STIG-compliant) environment.
+This comprehensive installation guide for Microsoft Defender for Identity is specifically designed for deployment in a hardened (STIG-compliant) environment. Based on my experience with deployments, the following steps are arranged strategically: ensure that all object monitoring, SACL (System Control Access List) and service accounts are configured before proceeding with the installation of the sensor.
 
 
 <details><summary> <b><u><font size="<h3>">Prerequisites.</font></u></b></summary> 
@@ -14,10 +14,20 @@ Plan for capacity [here](https://docs.microsoft.com/en-us/defender-for-identity/
 
 </details>
 
+<details><summary> <b><u><font size="<h3>">Windows Event Collecting.</font></u></b></summary> 
+<p>
 
-## [Configure Windows Event Collection](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection) ##
+Please review [Configure Windows Event Collection](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection).
 
-*Disclaimer* - Huge Kudos to Raymond Roethof and allowing me to drop his link for some tidbits as well. His document [here](https://thalpius.com/2022/07/30/microsoft-defender-for-identity-auditing/) outlines all the auditing steps. Albeit, my article revolves around hardened systems. One awesome tidbit from his is the 4th section, "Object Auditing". This will simplify those GUI steps for you all. Cheers and thanks Raymond.
+In January 2024, Microsoft introduced a streamlined method for deploying 'Audit Policies' for Microsoft Defender for Identity using the PowerShell module 'DefenderForIdentity'. An overview is posted [here](https://techcommunity.microsoft.com/t5/microsoft-defender-xdr-blog/introducing-the-new-powershell-module-for-microsoft-defender-for/ba-p/4028734). 
+
+In order to proceed please install the module (Install-Module DefenderForIdentity) OR manunally download from [PSGallery](https://www.powershellgallery.com/packages/DefenderForIdentity/1.0.0.0) on the Domain Controller OR on another Tier0 asset server. **Note: The DefenderForIdentity module requires the ActiveDirectory and the GroupPolicy modules to be installed on the server.**
+
+
+
+</details>
+
+
 
 For the most part STIGs capture the audit settings but MDI does call out a bit more, [here](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection). My advise is Do NOT edit default GPOs, whether that be Default Domain Controllers of the Default Domain. For each OS flavor you should be following its own hardened baseline, same holds true for a Domain Controller - use dedicated GPOs.  The "Configure Windows Event Collection", site is a bit misleading so I broke it down for you. When you go to edit, DO NOT forget to edit each for success and failures.
 
