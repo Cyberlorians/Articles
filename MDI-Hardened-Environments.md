@@ -25,7 +25,7 @@ For improved clarity, a detailed guide has been created by [MSFTAdvocate](https:
 
 In order to proceed please install the module (Install-Module DefenderForIdentity) OR manunally download from [PSGallery](https://www.powershellgallery.com/packages/DefenderForIdentity/1.0.0.0) on the Domain Controller OR on another Tier0 asset server. 
 
-**Note: The DefenderForIdentity module requires the ActiveDirectory and the GroupPolicy modules to be installed on the server. It is also advised against modifying default Group Policy Objects (GPOs), such as Default Domain Controllers or Default Domain GPOs. Instead, each operating system should adhere to its own hardened baseline, incorporating appropriate WMI filters. This also applies to Domain Controllers, which should use dedicated GPOs. As an administrator, it is crucial to ensure that the Group Policy Object precedence is correctly configured and functioning as intended.**
+***Note: The DefenderForIdentity module requires the ActiveDirectory and the GroupPolicy modules to be installed on the server. It is also advised against modifying default Group Policy Objects (GPOs), such as Default Domain Controllers or Default Domain GPOs. Instead, each operating system should adhere to its own hardened baseline, incorporating appropriate WMI filters. This also applies to Domain Controllers, which should use dedicated GPOs. As an administrator, it is crucial to ensure that the Group Policy Object precedence is correctly configured and functioning as intended.***
 
 ***Note: When using the MDIConfiguration module, it will create separate Group Policy Objects (GPOs). It is advisable to leave these policies unchanged, regardless of your existing baselines.***
 
@@ -44,16 +44,18 @@ Set-MDIConfiguration -Mode Domain -Configuration NTLMAuditing
 ```
 Set-MDIConfiguration -Mode Domain -Configuration DomainObjectAuditing
 ```
+</details>
+
+<details><summary> <b><u><font size="<h3>">Configure Directory Service Account.</font></u></b></summary> 
+<p>
+
+Review [Directory Service Account Recommendations](https://docs.microsoft.com/en-us/defender-for-identity/directory-service-accounts). 
+
+***Note: For optimal security, it is recommended to use a Group Managed Service Account (gMSA).***
+
 
 </details>
 
-
-
-## [Directory Service Account Recommendations](https://docs.microsoft.com/en-us/defender-for-identity/directory-service-accounts) ##
-
-The recommendation here is to use a gMSA account. Lets dig into creating that.
-
-If your domain is NOT using gmsa (Group Managed Service Accounts), you need to Create the Key Distribution Services KDS Root Key seen. More info [here](https://docs.microsoft.com/en-us/windows-server/security/group-managed-service-accounts/create-the-key-distribution-services-kds-root-key). This is a prerequisite for using gMSA. If you are using gMSA, skip this step.
 
 Domain Group - Create.
 Create an Active Directory Security Group and make the MDI member servers members of the group. I created a group called 'MDIGroup'. Why do we do this? If you are planning on protecting Domain Controllers and ADFS Servers with MDI, they need to be members of the same group to allow -PrincipalsAllowedToRetrieveManagedPassword.
