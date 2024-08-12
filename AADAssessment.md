@@ -31,7 +31,7 @@ tnc agentserviceapi.azure-automation.net -port 443
 ## Virtual Machine Assessment Configuration
 
 1. Log in as the local administrator account
-2. mkdir C:\Assessment\AAD
+2. mkdir C:\Assessment\Entra
 3. Turn off IE EnchancedMode
 4. Start -> Run -> gpedit.msc-> Computer Configuration -> Windows -> Security -> Local Policies -> User Rights Assignment -> Log on as a batch job -> Add Adminstrators
 5. Start -> Run -> gpedit.msc-> Computer Configuration -> Administrative Template -> system -> user profile ->Do not forcefully unload the users registry at user logoff -> Click Enable
@@ -67,7 +67,7 @@ New-MicrosoftAssessmentsApplication -allowclobber -force
 
 *Create Scheduled Task* - run this task as the local admin with computername\localadmin as shown below.
 ```
-Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\AAD -ScheduledTaskUsername Assessment\xadmin
+Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\Entra -ScheduledTaskUsername Assessment\xadmin
 ```
 
 ## Run the Scheduled Task ##
