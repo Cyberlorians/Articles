@@ -21,7 +21,16 @@ Please review [Configure Windows Event Collection](https://docs.microsoft.com/en
 
 In January 2024, Microsoft introduced a streamlined method for deploying 'Audit Policies' for Microsoft Defender for Identity using the PowerShell module 'DefenderForIdentity'. An overview is posted [here](https://techcommunity.microsoft.com/t5/microsoft-defender-xdr-blog/introducing-the-new-powershell-module-for-microsoft-defender-for/ba-p/4028734). 
 
-In order to proceed please install the module (Install-Module DefenderForIdentity) OR manunally download from [PSGallery](https://www.powershellgallery.com/packages/DefenderForIdentity/1.0.0.0) on the Domain Controller OR on another Tier0 asset server. **Note: The DefenderForIdentity module requires the ActiveDirectory and the GroupPolicy modules to be installed on the server.**
+In order to proceed please install the module (Install-Module DefenderForIdentity) OR manunally download from [PSGallery](https://www.powershellgallery.com/packages/DefenderForIdentity/1.0.0.0) on the Domain Controller OR on another Tier0 asset server. 
+
+**Note: The DefenderForIdentity module requires the ActiveDirectory and the GroupPolicy modules to be installed on the server.**
+
+For improved clarity, a detailed guide has been created by [MSFTAdvocate](https://www.msftadvocate.com/configure-audit-policies-for-microsoft-defender-for-identity/). Please review this resource before proceeding to the next steps to ensure a coherent understanding of the process.
+
+**1** - *Set Domain Controller Advanced Audit Policy.*
+```
+Set-MDIConfiguration -Mode Domain -Configuration AdvancedAuditPolicysDCs
+```
 
 
 
