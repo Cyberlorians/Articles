@@ -2,7 +2,6 @@
 
 This is a comprehensive installation guide for Microsoft Defender for Identity, specifically tailored for deployment in a hardened (STIG-compliant) environment.
 
-## Microsoft Defender for Identity ##
 
 <details><summary> <b><u><font size="<h3>">Prerequisites.</font></u></b></summary> 
 <p>
