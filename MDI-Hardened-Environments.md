@@ -27,7 +27,7 @@ In order to proceed please install the module (Install-Module DefenderForIdentit
 
 **Note: The DefenderForIdentity module requires the ActiveDirectory and the GroupPolicy modules to be installed on the server. It is also advised against modifying default Group Policy Objects (GPOs), such as Default Domain Controllers or Default Domain GPOs. Instead, each operating system should adhere to its own hardened baseline, incorporating appropriate WMI filters. This also applies to Domain Controllers, which should use dedicated GPOs. As an administrator, it is crucial to ensure that the Group Policy Object precedence is correctly configured and functioning as intended.**
 
-**Note: When using the MDIConfiguration module, it will create separate Group Policy Objects (GPOs). It is advisable to leave these policies unchanged, regardless of your existing baselines.**
+**Note:** ***When using the MDIConfiguration module, it will create separate Group Policy Objects (GPOs). It is advisable to leave these policies unchanged, regardless of your existing baselines.***
 
 
 **1** - *Set Domain Controller Advanced Audit Policy.* Review [here](https://learn.microsoft.com/en-us/defender-for-identity/deploy/configure-windows-event-collection#configure-auditing-for-domain-controllers).
@@ -48,19 +48,6 @@ Set-MDIConfiguration -Mode Domain -Configuration DomainObjectAuditing
 </details>
 
 
-
-
-Domain Controllers - Use STIG baseline and follow [doc](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection#configure-audit-policies).
-1. On Domain Controllers ONLY - Configure your hardened baseline GPO for EventID 8004, [here](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection#event-id-8004).
-2. Additional Configuration for LDAP Search Event ID 1644, [here](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection#event-id-8004). What is Event ID 1644? See [here](https://github.com/Cyberlorians/uploadedimages/blob/main/eventid1644.png). *Disclaimer* - I would add this registry setting to the OS based hardened GPO so that it gets added to ALL Domain Controllers. See image below.
-
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/eventid1644.png)
-
-ADFS - Use STIG baseline, ADFS [auditing](https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/troubleshooting/ad-fs-tshoot-logging) and follow [ADFS events](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection#for-active-directory-federation-services-ad-fs-events). Lastly, [Enable auditing on an ADFS Object](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection#enable-auditing-on-an-adfs-object).
-
-OS flavors and Tiered structures - Use STIG baseline and follow [other events](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection#for-other-events).
-
-Configure Object Auditing - this needs to be completed for [4662](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection#configure-object-auditing) events. *Disclaimer* - follow these steps closely. One tidbit too, on the first step, the instructions are clear. When it says 'Clear All', then add full control and so on. It will look like under 'Properties', that it is empty. Click 'OK' and apply. Go back into the current setting you just set and it will be made clear to you that 'WRITE' permissions are now there. Just wanted to clear that confusion up. Repeat the SAME steps for all 3 Audit entries.
 
 ## [Directory Service Account Recommendations](https://docs.microsoft.com/en-us/defender-for-identity/directory-service-accounts) ##
 
