@@ -54,45 +54,68 @@ Review [Directory Service Account Recommendations](https://docs.microsoft.com/en
 ***Note: For optimal security, it is recommended to use a Group Managed Service Account (gMSA).***
 
 
+# Create Sensor Group
+```
+$SensorGroup = 'MDISensors'
+$SensorGroupDesc = 'Members are allowing MDI gMSA attribute of -PrincipalsAllowedtoRetrieveManagedPassowrd.'
+New-ADGroup -Name $SensorGroup `
+    -Path "OU=Groups,OU=Tier0,DC=gcccyberlorian,DC=net" `
+    -GroupScope 'Global' `
+    -GroupCategory 'Security'
+```
+
+#Create Group Managed Service Account
+```
+$Identity= 'MDIgMSA' #The name of the gMSA to be created
+$Description = "MDI group managed service account"
+$DNS = 'MDIgMSA.gcccyberlorians.net' #This is the gmsa dns hostname
+$Principal = Get-ADGroup $SensorGroup #Setting attribute for MDI Sensor to -PrincipalsAllowedtoRetrieveManagedPassowrd.
+$Kerb = 'AES128,AES256' #2016 and above OS STIG level - verify encryption used in env.
+New-ADServiceAccount -Name $Identity `
+    -Description $Description `
+    -DNSHostName $DNS `
+    -ManagedPasswordIntervalInDays 30 `
+    -PrincipalsAllowedToRetrieveManagedPassword $Principal `
+    -Enabled $True `
+    -KerberosEncryptionType $Kerb `
+    -PassThru
+```
+#Set all Domain Controllers to be members of Sensor Group
+```
+
+$sourceGroupName = "Domain Controllers"
+$targetGroupName = $SensorGroup
+
+# Retrieve the distinguished name (DN) of the source and target groups
+$sourceGroup = Get-ADGroup -Identity $sourceGroupName
+$targetGroup = Get-ADGroup -Identity $targetGroupName
+
+if ($sourceGroup -and $targetGroup) {
+    # Get all members of the source group
+    $members = Get-ADGroupMember -Identity $sourceGroup.DistinguishedName
+    
+    # Add each member to the target group
+    foreach ($member in $members) {
+        Add-ADGroupMember -Identity $targetGroup.DistinguishedName -Members $member.SamAccountName
+    }
+    
+    Write-Output "All members of '$sourceGroupName' have been added to '$targetGroupName'."
+} else {
+    Write-Output "One or both of the specified groups could not be found."
+}
+```
+
+#Set gMSA $Identity with permission to logon as batch for Domain Contollers
+!!Verify!! that the newly created gMSA account has the [log on as a service](https://docs.microsoft.com/en-us/defender-for-identity/directory-service-accounts#verify-that-the-gmsa-account-has-the-required-rights-if-needed) permission to all MDI machines. *Disclaimer* - add this to the Domain Controller OS Based STIG and if using in conjunction with ADFS, then add to the ADFS OS Based STIG as well. I cannot stress how important this step is. In the past, this step was missing from current docs and I am happing that it has been added but it is still an easy oversight. If this is NOT in place, nothing will work!
+```
+Get-ADServiceAccount -Identity $Identity -Properties * | select Prin*
+Test-ADServiceAccount -Identity $Identity 
+```
+
+
 </details>
 
 
-Domain Group - Create.
-Create an Active Directory Security Group and make the MDI member servers members of the group. I created a group called 'MDIGroup'. Why do we do this? If you are planning on protecting Domain Controllers and ADFS Servers with MDI, they need to be members of the same group to allow -PrincipalsAllowedToRetrieveManagedPassword.
-
-Copy the contents of the script to the first DC you are installing MDI on. Disclaimer - you may or may not need to use the -KerberosEncryptionType flag but if you are using 2016+ Domain Controller STIGyou will have to on OS 2016-2022.
-```
-Install-WindowsFeature -Name RSAT-AD-PowerShell //This is already installed if you are on a Domain Controller
-
-Run this script
-# Filename:    MDIgMSA.ps1
-# Description: Creates and installs a custom gMSA account for use with Microsoft Defender for Identity.
-#
-# Declare variables
-$Name = 'MDIgMSA' #The name of the gMSA to be created
-$Description = "MDI group managed service account for MDI"
-$DNS = "MDIgMSA.cyberlorians.net" #This is the gmsa dns hostname
-$Principal = Get-ADGroup 'MDIGroup' #AD group created in the DC step, comment out if using 'Domain Controllers' only and uncomment next step.
-#$Principal = Get-ADGroup 'Domain Controllers' #Uncomment if just using DomainControllers and comment out the previous step
-$Kerb = 'AES128,AES256' #If using 2016STIG and above you have to use
-
-# Create service account in Active Directory
-$NewGMSAServiceDetails = @{
-    Name = $Name
-    Description = $Description
-    DNSHostName = $DNS
-    ManagedPasswordIntervalInDays = 30
-    KerberosEncryptionType = $Kerb
-    PrincipalsAllowedToRetrieveManagedPassword = $Principal
-    Enabled = $True
-}
-New-ADServiceAccount @NewGMSAServiceDetails -PassThru
-
-#Install-ADServiceAccount -Identity 'MDIgMSA'#MSFT Docs call for this piece BUT you do not have to since you will be setting the new gMSA account in a GPO for proper permissions. 
-Get-ADServiceAccount -Identity 'MDIgMSA' -Properties * | select Prin*
-Test-ADServiceAccount -Identity 'MDIgMSA' 
-```
-!!Verify!! that the newly created gMSA account has the [log on as a service](https://docs.microsoft.com/en-us/defender-for-identity/directory-service-accounts#verify-that-the-gmsa-account-has-the-required-rights-if-needed) permission to all MDI machines. *Disclaimer* - add this to the Domain Controller OS Based STIG and if using in conjunction with ADFS, then add to the ADFS OS Based STIG as well. I cannot stress how important this step is. In the past, this step was missing from current docs and I am happing that it has been added but it is still an easy oversight. If this is NOT in place, nothing will work!
 
 Your last step in the gMSA ladder is to [Configure the gMSA in 365 Defender](https://docs.microsoft.com/en-us/defender-for-identity/directory-service-accounts#configure-directory-service-account-in-microsoft-365-defender). When adding the gMSA account suffix with the $ so it matches the SAMAccountName Attribute on prem in AD.
 
