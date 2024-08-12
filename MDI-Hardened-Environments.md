@@ -195,6 +195,13 @@ C:\Windows\System32\dsacls.exe $params
 
 ***2*** - *Download the [sensor](https://docs.microsoft.com/en-us/defender-for-identity/download-sensor).*
 
+***3*** - *Test Connectivity to Defender for Identity (check again). If failure, refer to [Test Connectivity](https://learn.microsoft.com/en-us/defender-for-identity/deploy/test-connectivity).*
+```
+Test-MDISensorApiConnection
+```
+
+***4*** - *Install Sensor [setup](https://learn.microsoft.com/en-us/defender-for-identity/deploy/install-sensor).*
+
 </details>
 
 
