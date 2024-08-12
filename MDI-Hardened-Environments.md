@@ -1,6 +1,6 @@
-## Microsoft Defender for Identity - Hardened (STIGGED) Setup. ##
+## Microsoft Defender for Identity Hardened Environments ##
 
-A lot of the work I do consists of working in hardened security baselines. In short, that means STIGS are pushed via Group Policy to harden the systems.
+This is a comprehensive installation guide for Microsoft Defender for Identity, specifically tailored for deployment in a hardened (STIG-compliant) environment.
 
 ## Microsoft Defender for Identity ##
 
@@ -14,8 +14,6 @@ Test your prerequisites [here](https://learn.microsoft.com/en-us/defender-for-id
 Plan for capacity [here](https://docs.microsoft.com/en-us/defender-for-identity/capacity-planning).
 
 </details>
-
-test
 
 
 ## [Configure Windows Event Collection](https://docs.microsoft.com/en-us/defender-for-identity/configure-windows-event-collection) ##
