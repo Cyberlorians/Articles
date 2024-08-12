@@ -105,7 +105,7 @@ if ($sourceGroup -and $targetGroup) {
 }
 ```
 
-**4** - *Set gMSA $Identity with [permission](https://learn.microsoft.com/en-us/defender-for-identity/deploy/create-directory-service-account-gmsa#verify-that-the-gmsa-account-has-the-required-rights).
+**4** - *Set gMSA $Identity with [permission](https://learn.microsoft.com/en-us/defender-for-identity/deploy/create-directory-service-account-gmsa#verify-that-the-gmsa-account-has-the-required-rights).*
 
 ***Note: Add this to the Domain Controller OS-Based STIG, and if using it in conjunction with ADFS, also include it in the ADFS OS-Based STIG. I cannot stress how crucial this step is. In the past, this step was omitted from current documentation, but I am pleased it has now been added. However, it remains an easy oversight. Without this in place, nothing will work.***
 
