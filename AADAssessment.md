@@ -40,16 +40,16 @@ tnc agentserviceapi.azure-automation.net -port 443
 ## Services Hub Configuration
 
 1. ADD Asessment via ServicesHub. 
-	1. Add the VM and the assessment path you used from the previous step. Installation will begin.
+	1(a). Add the VM and the assessment path you used from the previous step. Installation will begin.
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/entraassessment.png)
 
 2. The installation creates a Data Collection Rule and installs the AzureMonitorAgent extension (verify the VM is in the DCR rule). This can take 5-10m for DCR and AMA extension to fully install. Be patient.
 3. Verify you see AzureAssessment AND AzureMonitorWindowsAgent
    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/assessmentextension.png)
-	3a. If you DO NOT see AzureMonitorWindowsAgent. Please see below to manually add the extension via Azure CLI (PowerShell).
+   	3(a). If you DO NOT see AzureMonitorWindowsAgent. Please see below to manually add the extension via Azure CLI (PowerShell).
    ```
    Connect-AzAccount
-   Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWindowsAgent -Publisher Microsoft.Azure.Monitor -ResourceGroupName Assessment -VMName Assessment22 -Location EastUS -TypeHandlerVersion 1.0 -EnableAutomaticUpgrade $true
+   Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWindowsAgent -Publisher Microsoft.Azure.Monitor -ResourceGroupName Assessment -VMName Assessment -Location EastUS -TypeHandlerVersion 1.0 -EnableAutomaticUpgrade $true
    ```
 5. After installation (file will populate in the Assessment folder and a new folder on the C:\ called 'ODA' will be created.
 
@@ -74,7 +74,7 @@ New-MicrosoftAssessmentsApplication -allowclobber -force
 
 *Create Scheduled Task* - run this task as the local admin with computername\localadmin as shown below.
 ```
-Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\AAD -ScheduledTaskUsername Assessment\xadmin
+Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\Entra -ScheduledTaskUsername Assessment\xadmin
 ```
 
 ## Verify and run the Scheduled Task ##
@@ -83,7 +83,7 @@ Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\AAD -ScheduledTaskUserna
 1. Verify the Scheduled Task was created. See below.
    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/scheduledtask.png)
 2. Right-Click the ST and click run. Adjust or remove schedule if needed. VM should be powered off between assessments.
-3. After the ST has been kicked off. The C:\Assessment\AAD folder will being to populate with a numerical folder.
+3. After the ST has been kicked off. The C:\Assessment\Entra folder will being to populate with a numerical folder.
 
 ## Verifying Data to the Log Analytics Workspace ##
 
