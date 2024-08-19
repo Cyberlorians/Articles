@@ -31,7 +31,7 @@ tnc agentserviceapi.azure-automation.net -port 443
 ## Virtual Machine Assessment Configuration
 
 1. Log in as the local administrator account
-2. mkdir C:\Assessment\AAD
+2. mkdir C:\Assessment\Entra
 3. Turn off IE EnchancedMode
 4. Start -> Run -> gpedit.msc-> Computer Configuration -> Windows -> Security -> Local Policies -> User Rights Assignment -> Log on as a batch job -> Add Adminstrators
 5. Start -> Run -> gpedit.msc-> Computer Configuration -> Administrative Template -> system -> user profile ->Do not forcefully unload the users registry at user logoff -> Click Enable
@@ -41,10 +41,17 @@ tnc agentserviceapi.azure-automation.net -port 443
 
 1. ADD Asessment via ServicesHub. 
 	1. Add the VM and the assessment path you used from the previous step. Installation will begin.
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/assessmentshadd.png)
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/entraassessment.png)
 
-The installation creates a Data Collection Rule and installs the AzureMonitorAgent extension (verify the VM is in the DCR rule). This can take 5-10m for DCR and AMA extension to fully install. Be patient.
-2. After installation (file will populate in the Assessment folder and a new folder on the C:\ called 'ODA' will be created.
+2. The installation creates a Data Collection Rule and installs the AzureMonitorAgent extension (verify the VM is in the DCR rule). This can take 5-10m for DCR and AMA extension to fully install. Be patient.
+3. Verify you see AzureAssessment AND AzureMonitorWindowsAgent
+   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/assessmentextension.png)
+	3a. If you DO NOT see AzureMonitorWindowsAgent. Please see below to manually add the extension via Azure CLI (PowerShell).
+   ```
+   Connect-AzAccount
+   Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWindowsAgent -Publisher Microsoft.Azure.Monitor -ResourceGroupName Assessment -VMName Assessment22 -Location EastUS -TypeHandlerVersion 1.0 -EnableAutomaticUpgrade $true
+   ```
+5. After installation (file will populate in the Assessment folder and a new folder on the C:\ called 'ODA' will be created.
 
 
 ## Run PowerShell as Administrator and install four modules on the Assessment Server - DO NOT MISS THIS STEP! ##
