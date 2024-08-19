@@ -80,10 +80,10 @@ Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\AAD -ScheduledTaskUserna
 1.  Confirm heartbeat in Log Anayltics Workspace and begin to verify that data is flowing. 
 
 ```
-//Queries the Heartbeat table to locate installed LA or Azure Monitor Agents and if on-prem or in Azure 
+//Queries the Heartbeat table to locate Azure Monitor Agents and if on-prem or in Azure 
 Heartbeat
 | where TimeGenerated >= ago(7d) //Change Time
-| where Category == "Direct Agent" or Category == "Azure Monitor Agent"
+| where Category == "Azure Monitor Agent"
 | where isnotempty(ResourceType)
 | extend Cloud = ResourceProvider == "Microsoft.Compute"
 | extend Onprem = ResourceProvider == "Microsoft.HybridCompute"
