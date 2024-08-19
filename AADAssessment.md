@@ -70,10 +70,13 @@ New-MicrosoftAssessmentsApplication -allowclobber -force
 Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\AAD -ScheduledTaskUsername Assessment\xadmin
 ```
 
-## Run the Scheduled Task ##
+## Verify and run the Scheduled Task ##
 
-1. Open the Scheduled Task and remove the schedule. Once removed, right-click and run.
-2. After the ST has been kicked off. The C:\Assessment\AAD folder will being to populate with a numerical folder.
+
+1. Verify the Scheduled Task was created. See below.
+   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/scheduledtask.png)
+2. Right-Click the ST and click run. Adjust or remove schedule if needed. VM should be powered off between assessments.
+3. After the ST has been kicked off. The C:\Assessment\AAD folder will being to populate with a numerical folder.
 
 ## Verifying Data to the Log Analytics Workspace ##
 
