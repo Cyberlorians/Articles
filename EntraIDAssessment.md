@@ -64,6 +64,8 @@ Install-Module AzureADPreview -verbose -allowclobber -Force
 
 </details>
 
+<details><summary> <b><u><font size="<h3>">Services Hub Configuration.</font></u></b></summary> 
+<p>
 
 ## Services Hub Configuration
 
@@ -71,23 +73,23 @@ Install-Module AzureADPreview -verbose -allowclobber -Force
 	1(a). Add the VM and the assessment path you used from the previous step. Installation will begin.
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/entraassessment.png)
 
-2. The installation creates a Data Collection Rule and installs the AzureMonitorAgent extension (verify the VM is in the DCR rule). This can take 5-10m for DCR and AMA extension to fully install. Be patient.
+2. The installation creates a Data Collection Rule, named 'Azure DCR Rule'. 
+
 3. Verify you see AzureAssessment AND AzureMonitorWindowsAgent
    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/assessmentextension.png)
    	3(a). If you DO NOT see AzureMonitorWindowsAgent. Please see below to manually add the extension via Azure CLI (PowerShell).
-   ```
-   Connect-AzAccount
-   Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWindowsAgent -Publisher Microsoft.Azure.Monitor -ResourceGroupName Assessment -VMName Assessment -Location EastUS -TypeHandlerVersion 1.0 -EnableAutomaticUpgrade $true
-   ```
-5. After installation (file will populate in the Assessment folder and a new folder on the C:\ called 'ODA' will be created.
+   
+4. After DCR kick off from Step #2 a new folder will be created on C:\ called 'ODA'.
+
+</details>
 
 
+<details><summary> <b><u><font size="<h3>">Create Assessment Application.</font></u></b></summary> 
+<p>
 
+## Create 'Microsoft Assessment' Application 
 
-
-## Create Asssessment Application 
-
-*Authentication to Azure as Global Administrator*- you will be prompted for MFA and after setup, you must consent to the application permissions.
+1. Create Application (below). Authentication to Entra as Global Administrator*- you will be prompted for MFA and after setup, you must consent to the application permissions. See application permissions that will be delegated [here](https://learn.microsoft.com/en-us/services-hub/unified/health/getting-started-microsoftassessmentapplication/permission-requirements). When prompted for the Subscription boundary. Chose only the subscription where the assessment VM resides. 
 
 ```
 New-MicrosoftAssessmentsApplication -allowclobber -force
