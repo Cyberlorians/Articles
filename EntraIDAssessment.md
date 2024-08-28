@@ -73,6 +73,7 @@ Install-Module AzureADPreview -verbose -allowclobber -Force
 ## Services Hub Configuration
 
 1. ADD Asessment via ServicesHub. 
+
 	1(a). Add the VM and the assessment path you used from the previous step. Installation will begin.
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/entraassessment.png)
 
