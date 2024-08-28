@@ -12,8 +12,9 @@
 Connect-AzAccount
 Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWindowsAgent -Publisher Microsoft.Azure.Monitor -ResourceGroupName Assessment -VMName Assessment -Location EastUS -TypeHandlerVersion 1.0 -EnableAutomaticUpgrade $true
 ```
-5. Patch the OS and reboot. *Disclaimer - .NET 4.8 is required. Server 2022 comes with this framework by default*
-
+5. Verify Azure Monitor Agent Extension has installed.
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/assessmentextension.png)
+   	
 </details>
 
 <details><summary> <b><u><font size="<h3>">Virtual Machine Assessment Configuration.</font></u></b></summary> 
@@ -42,6 +43,7 @@ tnc login.windows.net -port 443;
 tnc dc.services.visualstudio.com -port 443;
 tnc agentserviceapi.azure-automation.net -port 443
 ```
+3. Patch the OS and reboot. *Disclaimer - .NET 4.8 is required. Server 2022 comes with this framework by default*
 
 ## Virtual Machine Assessment Configuration
 
