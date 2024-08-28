@@ -48,13 +48,10 @@ tnc agentserviceapi.azure-automation.net -port 443
 ```
 3. Patch the OS and reboot. *Disclaimer - .NET 4.8 is required. Server 2022 comes with this framework by default*
 
-## Virtual Machine Assessment Configuration
-
-1. Log in as the local administrator account
-2. mkdir C:\Assessment\Entra
-3. Turn off IE EnchancedMode
-4. Start -> Run -> gpedit.msc-> Computer Configuration -> Windows -> Security -> Local Policies -> User Rights Assignment -> Log on as a batch job -> Add Adminstrators
-5. Start -> Run -> gpedit.msc-> Computer Configuration -> Administrative Template -> system -> user profile ->Do not forcefully unload the users registry at user logoff -> Click Enable
+4. mkdir C:\Assessment\Entra
+5. Turn off IE EnchancedMode
+6. Start -> Run -> gpedit.msc-> Computer Configuration -> Windows -> Security -> Local Policies -> User Rights Assignment -> Log on as a batch job -> Add Adminstrators
+7. Start -> Run -> gpedit.msc-> Computer Configuration -> Administrative Template -> system -> user profile ->Do not forcefully unload the users registry at user logoff -> Click Enable
 
 ## Run PowerShell as Administrator and install four modules on the Assessment Server - DO NOT MISS THIS STEP! ##
 ```
