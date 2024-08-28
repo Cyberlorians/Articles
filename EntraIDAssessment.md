@@ -5,10 +5,10 @@
 
 ## Pre-Reqs
 
-1. Create Resource Group: 'Assessment'
-2. Create Log Analytics Workspace in Assessment RG: 'Assessment-LAW'
-3. Create AzureVM (Server 22): 'Assessment' 
-4. Install the Azure Monitor Agent Extension on the newly created VM. **!!DO NOT MISS THIS STEP!!**
+1. Create Resource Group: 'Assessment'.
+2. Create Log Analytics Workspace in Assessment RG: 'Assessment-LAW'.
+3. Create AzureVM (Server 22): 'Assessment' .
+4. Install the Azure Monitor Agent Extension on the newly created VM. **!!DO NOT MISS THIS STEP!!**.
 ```
 Connect-AzAccount
 Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWindowsAgent -Publisher Microsoft.Azure.Monitor -ResourceGroupName Assessment -VMName Assessment -Location EastUS -TypeHandlerVersion 1.0 -EnableAutomaticUpgrade $true
@@ -46,12 +46,12 @@ tnc login.windows.net -port 443;
 tnc dc.services.visualstudio.com -port 443;
 tnc agentserviceapi.azure-automation.net -port 443
 ```
-3. Patch the OS and reboot. *Disclaimer - .NET 4.8 is required. Server 2022 comes with this framework by default*
+3. Patch the OS and reboot. *Disclaimer - .NET 4.8 is required. Server 2022 comes with this framework by default*.
 
-4. mkdir C:\Assessment\Entra
-5. Turn off IE EnchancedMode
-6. Start -> Run -> gpedit.msc-> Computer Configuration -> Windows -> Security -> Local Policies -> User Rights Assignment -> Log on as a batch job -> Add Adminstrators
-7. Start -> Run -> gpedit.msc-> Computer Configuration -> Administrative Template -> system -> user profile ->Do not forcefully unload the users registry at user logoff -> Click Enable
+4. Create folder directory. 'C:\Assessment\Entra'
+5. Turn off IE EnchancedMode.
+6. Start -> Run -> gpedit.msc-> Computer Configuration -> Windows -> Security -> Local Policies -> User Rights Assignment -> Log on as a batch job -> Add Adminstrators.
+7. Start -> Run -> gpedit.msc-> Computer Configuration -> Administrative Template -> system -> user profile ->Do not forcefully unload the users registry at user logoff -> Click Enable.
 8. Run PowerShell as Administrator and install four modules on the Assessment Server - DO NOT MISS THIS STEP!
 ```
 Install-Module Microsoft.Graph -Verbose -AllowClobber -Force 
@@ -59,7 +59,7 @@ Install-Module Msonline -verbose -allowclobber -force
 Install-Module AzureRM -verbose -allowclobber -Force
 Install-Module AzureADPreview -verbose -allowclobber -Force
 ```
-9. Reboot and proceed
+9. Reboot and proceed.
 
 </details>
 
