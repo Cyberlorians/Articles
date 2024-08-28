@@ -3,6 +3,7 @@
 <details><summary> <b><u><font size="<h3>">Prerequisites.</font></u></b></summary> 
 <p>
 
+## Pre-Reqs
 
 1. Create Resource Group: 'Assessment'
 2. Create Log Analytics Workspace in Assessment RG: 'Assessment-LAW'
@@ -17,8 +18,10 @@ Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWind
    	
 </details>
 
-<details><summary> <b><u><font size="<h3>">Virtual Machine Assessment Configuration.</font></u></b></summary> 
+<details><summary> <b><u><font size="<h3>">On-Demand Assessment Machine Configuration.</font></u></b></summary> 
 <p>
+
+## Machine Configuration
 
 Log in as local administrator to the virtual machine.
 
