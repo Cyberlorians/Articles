@@ -7,16 +7,21 @@
 1. Create Resource Group: 'Assessment'
 2. Create Log Analytics Workspace in Assessment RG: 'Assessment-LAW'
 3. Create AzureVM (Server 22): 'Assessment' 
-4. Install the Azure Monitor Agent Extension on the newly created VM. **DO NOT MISS THIS STEP**
+4. Install the Azure Monitor Agent Extension on the newly created VM. **!!DO NOT MISS THIS STEP!!**
 ```
 Connect-AzAccount
 Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWindowsAgent -Publisher Microsoft.Azure.Monitor -ResourceGroupName Assessment -VMName Assessment -Location EastUS -TypeHandlerVersion 1.0 -EnableAutomaticUpgrade $true
 ```
-5. Patch the OS and reboot.
- 5(a). *Disclaimer - .NET 4.8 is required. Server 2022 comes with this framework by default*
+5. Patch the OS and reboot. *Disclaimer - .NET 4.8 is required. Server 2022 comes with this framework by default*
+
 </details>
 
-6. Verify Endpoints 
+<details><summary> <b><u><font size="<h3>">Virtual Machine Assessment Configuration.</font></u></b></summary> 
+<p>
+
+Log in as local administrator to the virtual machine.
+
+1. Verify Endpoints.
 
 *Domain Environment - Required Azure Service Endpoints*
 
@@ -29,7 +34,7 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 *-agentservice-prod-1.azure-automation.net |	Guest Configuration|
 *.his.hybridcompute.azure-automation.net |	Hybrid Identity Service|
 
-*TEST-NetConnection*
+2. Utilize Test-NetConnection.
 
 ```
 tnc management.azure.com -Port 443; 
