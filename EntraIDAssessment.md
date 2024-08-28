@@ -136,7 +136,7 @@ Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\Entra -ScheduledTaskUser
 ```
 //Viewing Failed Recommendation Results
 AzureAssessmentRecommendation 
-| where TimeGenerated > ago (90d) //set time
+| where TimeGenerated > ago (30d) //set time
 | where RecommendationResult contains ''
 | summarize count() by RecommendationResult, ['Week Starting']=startofweek(TimeGenerated) 
 | sort by ['Week Starting'] desc, RecommendationResult asc 
