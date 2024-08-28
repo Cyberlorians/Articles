@@ -72,18 +72,32 @@ Install-Module AzureADPreview -verbose -allowclobber -Force
 
 ## Services Hub Configuration
 
-1. ADD Asessment via ServicesHub. 
+1. Log into Services Hub and add your log analytics workspace. 
 
-	1(a). Add the VM and the assessment path you used from the previous step. Installation will begin.
+2.  Add the Azure AD Assessment.
+
+3. Add the VM and the assessment path you used from the previous step. Installation will begin.
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/entraassessment.png)
 
-2. The installation creates a Data Collection Rule, named 'Azure DCR Rule'. 
+4. The installation creates a Data Collection Rule, named 'Azure DCR Rule'. 
 
-3. Verify you see AzureAssessment AND AzureMonitorWindowsAgent
+5. Verify you see AzureAssessment AND AzureMonitorWindowsAgent
    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/assessmentextension.png)
-   	3(a). If you DO NOT see AzureMonitorWindowsAgent. Please see below to manually add the extension via Azure CLI (PowerShell).
-   
-4. After DCR kick off from Step #2 a new folder will be created on C:\ called 'ODA'.
+      
+6. After DCR kick off from Step #2 a new folder will be created on C:\ called 'ODA'. Leave this folder alone as it is reserved for system.
+
+7. Confirm heartbeat in Log Anayltics Workspace. This will take a few minutes after the DCR is created (5-10).
+
+```
+//Queries the Heartbeat table to locate Azure Monitor Agents and if on-prem or in Azure 
+Heartbeat
+| where TimeGenerated >= ago(7d) //Change Time
+| where Category == "Azure Monitor Agent"
+| where isnotempty(ResourceType)
+| extend Cloud = ResourceProvider == "Microsoft.Compute"
+| extend Onprem = ResourceProvider == "Microsoft.HybridCompute"
+| distinct Computer, ResourceType, Cloud, Onprem, Category
+```
 
 </details>
 
@@ -100,36 +114,25 @@ Install-Module AzureADPreview -verbose -allowclobber -Force
 ```
 New-MicrosoftAssessmentsApplication -allowclobber -force
 ```
-
-*Create Scheduled Task* - run this task as the local admin with computername\localadmin as shown below.
+3. Create Scheduled Task - run this task as the local admin with computername\localadmin as shown below.
 ```
 Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\Entra -ScheduledTaskUsername Assessment\xadmin
 ```
+4. Verify the Scheduled Task
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/scheduledtask.png)
+
+6. Right-Click the ST and click run. Adjust or remove schedule if needed. VM should be powered off between assessments.
+
+7. After the ST has been kicked off. The C:\Assessment\Entra folder will being to populate with a numerical folder.
 
 </details>
 
-## Verify and run the Scheduled Task ##
+<details><summary> <b><u><font size="<h3>">Verifying Data.</font></u></b></summary> 
+<p>
 
-
-1. Verify the Scheduled Task was created. See below.
-   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/scheduledtask.png)
-2. Right-Click the ST and click run. Adjust or remove schedule if needed. VM should be powered off between assessments.
-3. After the ST has been kicked off. The C:\Assessment\Entra folder will being to populate with a numerical folder.
 
 ## Verifying Data to the Log Analytics Workspace ##
 
-1.  Confirm heartbeat in Log Anayltics Workspace and begin to verify that data is flowing. 
-
-```
-//Queries the Heartbeat table to locate Azure Monitor Agents and if on-prem or in Azure 
-Heartbeat
-| where TimeGenerated >= ago(7d) //Change Time
-| where Category == "Azure Monitor Agent"
-| where isnotempty(ResourceType)
-| extend Cloud = ResourceProvider == "Microsoft.Compute"
-| extend Onprem = ResourceProvider == "Microsoft.HybridCompute"
-| distinct Computer, ResourceType, Cloud, Onprem, Category
-```
 ```
 //Viewing Failed Recommendation Results
 AzureAssessmentRecommendation 
@@ -141,6 +144,8 @@ AzureAssessmentRecommendation
 2. Once confirmed, you will see data trickle in over the next few hours populate in ServicesHub.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/assessmentshcomplete.png)
+
+</details>
 
 
 
