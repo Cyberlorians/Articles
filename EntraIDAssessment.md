@@ -52,15 +52,14 @@ tnc agentserviceapi.azure-automation.net -port 443
 5. Turn off IE EnchancedMode
 6. Start -> Run -> gpedit.msc-> Computer Configuration -> Windows -> Security -> Local Policies -> User Rights Assignment -> Log on as a batch job -> Add Adminstrators
 7. Start -> Run -> gpedit.msc-> Computer Configuration -> Administrative Template -> system -> user profile ->Do not forcefully unload the users registry at user logoff -> Click Enable
-
-## Run PowerShell as Administrator and install four modules on the Assessment Server - DO NOT MISS THIS STEP! ##
+8. Run PowerShell as Administrator and install four modules on the Assessment Server - DO NOT MISS THIS STEP!
 ```
 Install-Module Microsoft.Graph -Verbose -AllowClobber -Force 
 Install-Module Msonline -verbose -allowclobber -force
 Install-Module AzureRM -verbose -allowclobber -Force
 Install-Module AzureADPreview -verbose -allowclobber -Force
 ```
-## REBOOT the Virtual Machine before proceeding to next step.
+9. Reboot and proceed
 
 </details>
 
