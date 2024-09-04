@@ -24,7 +24,7 @@ Let’s create a Summary Rule to focus on only ‘Allowed-IN’
 AzureNetworkAnalytics_CL
 | where SubType_s == 'FlowLog' and FlowType_s == 'MaliciousFlow'    
 | where AllowedInFlows_d == 1
-     | summarize make_set(SrcIP_s), make_set(FlowType_s) by AllowedInFlows_d, DestIP_s, NSGList_s
+| summarize make_set(SrcIP_s), make_set(FlowType_s) by AllowedInFlows_d, DestIP_s, NSGList_s, DestPort_d
 ```
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/sr2.png)
