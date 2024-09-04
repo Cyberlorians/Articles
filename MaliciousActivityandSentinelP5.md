@@ -1,6 +1,6 @@
 ## Part-5: Malicious traffic in Sentinel - Summary Rules. ## 
 
-Flow logs will become verbose, especially when an allowed port is open and malicious activity is allowed IN. We can leverage Summary Rules to summarize only the Allowed Malicious IN activity. What are Summary Rules?
+Flow logs can become quite detailed, particularly when an open port is allowing incoming malicious activity. To manage this, we can use Summary Rules to consolidate and focus on the Allowed Malicious IN activity. What exactly are Summary Rules?
 
 Per [Microsoft](https://learn.microsoft.com/en-us/azure/sentinel/summary-rules) on Summary Rules.
 
