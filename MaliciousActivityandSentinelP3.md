@@ -18,6 +18,5 @@ Now, we see the basics of [my analytic rule](https://github.com/Cyberlorians/Sen
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/trafficanalyticskql2.png) 
 
-Lets head to Part-4 and wrap this up!!
-
+Lets head to Part-4
 ## [Continue to Part-4: Malicious traffic in Sentinel](https://github.com/Cyberlorians/Articles/blob/main/MaliciousActivityandSentinelP4.md) ##
