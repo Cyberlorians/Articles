@@ -14,8 +14,21 @@ Use summary rules in Microsoft Sentinel to aggregate large sets of data in the b
 
 Let’s create a Summary Rule to focus on only ‘Allowed-IN’
 
-1 - ![](https://github.com/Cyberlorians/uploadedimages/blob/main/sr1.png)
+1 - Enter the following below.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/sr1.png)
+
+2- Enter the KQL logic below into the snippet you see below. You can adjust the Query scheduling to your liking or default.
+
+```
+AzureNetworkAnalytics_CL
+| where SubType_s == 'FlowLog' and FlowType_s == 'MaliciousFlow'    
+| where AllowedInFlows_d == 1
+     | summarize make_set(SrcIP_s), make_set(FlowType_s) by AllowedInFlows_d, DestIP_s, NSGList_s
+```
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/sr2.png)
+
+3 - Review & Create.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/sr3.png)
