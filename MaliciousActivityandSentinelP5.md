@@ -32,3 +32,14 @@ AzureNetworkAnalytics_CL
 3 - Review & Create.
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/sr3.png)
+
+4 - Review the new Summary Rule data.
+
+```
+MaliciousIN_CL
+| where _RuleName == "MaliciousIN"
+| project-away _BilledSize, _BinSize, _RuleLastModifiedTime, _RuleName, _BinStartTime, TenantId, Type
+```
+
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/sr4.png)
