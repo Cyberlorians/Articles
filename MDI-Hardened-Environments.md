@@ -46,6 +46,18 @@ Set-MDIConfiguration -Mode Domain -Configuration DomainObjectAuditing
 ```
 </details>
 
+<details><summary> <b><u><font size="<h3>">Configure Auditing on Configuration Container.</font></u></b></summary> 
+<p>
+
+***1*** - *Configure auditing on the configuration container* Review [here](https://learn.microsoft.com/en-us/defender-for-identity/deploy/configure-windows-event-collection#configure-auditing-on-the-configuration-container
+).*
+
+```
+Set-MDIConfiguration -Mode Domain -Configuration ConfigurationContainerAuditing
+```
+
+</details>
+
 <details><summary> <b><u><font size="<h3>">Configure Directory Service Account.</font></u></b></summary> 
 <p>
 
@@ -160,15 +172,6 @@ C:\Windows\System32\dsacls.exe $params
 # $params = @("$deletedObjectsDN", '/R', ('{0}\{1}' -f ([adsi]'').name.Value, $Identity))
 # C:\Windows\System32\dsacls.exe $params
 ```
-</details>
-
-
-<details><summary> <b><u><font size="<h3>">Configure Auditing on Configuration Container.</font></u></b></summary> 
-<p>
-
-***1*** - *Configure auditing on the configuration container [here](https://learn.microsoft.com/en-us/defender-for-identity/deploy/configure-windows-event-collection#configure-auditing-on-the-configuration-container
-).*
-
 </details>
 
 <details><summary> <b><u><font size="<h3>">Configure SAM-R for lateral movement.</font></u></b></summary> 
