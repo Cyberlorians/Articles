@@ -72,7 +72,7 @@ $SensorGroup = 'MDISensors'
 $SensorGroupDesc = 'Members are allowing MDI gMSA attribute of -PrincipalsAllowedtoRetrieveManagedPassowrd.'
 New-ADGroup -Name $SensorGroup `
     -Path "OU=Groups,OU=Tier0,DC=gcccyberlorian,DC=net" `
-    -GroupScope 'Global' `
+    -GroupScope 'Universal' `
     -GroupCategory 'Security'
 ```
 
