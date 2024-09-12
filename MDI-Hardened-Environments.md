@@ -49,8 +49,8 @@ Set-MDIConfiguration -Mode Domain -Configuration DomainObjectAuditing
 <details><summary> <b><u><font size="<h3>">Configure Auditing on Configuration Container.</font></u></b></summary> 
 <p>
 
-***1*** - *Configure auditing on the configuration container* Review [here](https://learn.microsoft.com/en-us/defender-for-identity/deploy/configure-windows-event-collection#configure-auditing-on-the-configuration-container
-).*
+***1*** - *Configure auditing on the configuration container.* Review [here](https://learn.microsoft.com/en-us/defender-for-identity/deploy/configure-windows-event-collection#configure-auditing-on-the-configuration-container
+).
 
 ```
 Set-MDIConfiguration -Mode Domain -Configuration ConfigurationContainerAuditing
