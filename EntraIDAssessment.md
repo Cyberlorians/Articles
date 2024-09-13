@@ -8,7 +8,7 @@
 1. Create Resource Group: 'Assessment'.
 2. Create Log Analytics Workspace in Assessment RG: 'Assessment-LAW'.
 3. Create AzureVM (Server 22): 'Assessment' .
-4. Install the Azure Monitor Agent Extension on the newly created VM. **!!DO NOT MISS THIS STEP!!**.
+4. Install the Azure Monitor Agent Extension on the newly created VM. Run the below command from the Azure Portal PowerShell. **!!DO NOT MISS THIS STEP!!**.
 ```
 Connect-AzAccount
 Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWindowsAgent -Publisher Microsoft.Azure.Monitor -ResourceGroupName Assessment -VMName Assessment -Location EastUS -TypeHandlerVersion 1.0 -EnableAutomaticUpgrade $true
