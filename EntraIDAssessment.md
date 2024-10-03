@@ -13,6 +13,9 @@
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/mgmdidentity.png)
 
 6. Install the Azure Monitor Agent Extension on the newly created VM (this can be seen from the Extensions blade on the VM). Run the below command from the Azure Portal PowerShell. **!!DO NOT MISS THIS STEP!!**.
+
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/amaassessment.png)
+
 ```
 Connect-AzAccount -UseDeviceAuthentication
 Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWindowsAgent -Publisher Microsoft.Azure.Monitor -ResourceGroupName Assessment -VMName Assessment -Location EastUS -TypeHandlerVersion 1.0 -EnableAutomaticUpgrade $true
