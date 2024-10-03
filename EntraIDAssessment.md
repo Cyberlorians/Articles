@@ -83,19 +83,6 @@ Install-Module AzureADPreview -verbose -allowclobber -Force
       
 6. After DCR kick off from Step #2 a new folder will be created on C:\ called 'ODA'. Leave this folder alone as it is reserved for system.
 
-7. Confirm heartbeat in Log Anayltics Workspace. This will take a few minutes after the DCR is created (5-10).
-
-```
-//Queries the Heartbeat table to locate Azure Monitor Agents and if on-prem or in Azure 
-Heartbeat
-| where TimeGenerated >= ago(7d) //Change Time
-| where Category == "Azure Monitor Agent"
-| where isnotempty(ResourceType)
-| extend Cloud = ResourceProvider == "Microsoft.Compute"
-| extend Onprem = ResourceProvider == "Microsoft.HybridCompute"
-| distinct Computer, ResourceType, Cloud, Onprem, Category
-```
-
 </details>
 
 
@@ -144,6 +131,23 @@ AzureAssessmentRecommendation
 
 </details>
 
+<details><summary> <b><u><font size="<h3>">Trouble Shooting</font></u></b></summary> 
+<p>
+
+1. Confirm heartbeat in Log Anayltics Workspace. This will take a few minutes after the DCR is created (5-10).
+
+```
+//Queries the Heartbeat table to locate Azure Monitor Agents and if on-prem or in Azure 
+Heartbeat
+| where TimeGenerated >= ago(7d) //Change Time
+| where Category == "Azure Monitor Agent"
+| where isnotempty(ResourceType)
+| extend Cloud = ResourceProvider == "Microsoft.Compute"
+| extend Onprem = ResourceProvider == "Microsoft.HybridCompute"
+| distinct Computer, ResourceType, Cloud, Onprem, Category
+```
+
+</details>
 
 
 
