@@ -76,14 +76,14 @@ Install-Module AzureADPreview -verbose -allowclobber -Force
 
 1. Log into Services Hub and add your log analytics workspace. 
 
-2.  Add the Azure AD Assessment.
+2. Add the Azure AD Assessment.
 
 3. Add the VM and the assessment path you used from the previous step. Installation will begin.
    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/entraassessment.png)
 
 4. The installation creates a Data Collection Rule, named 'Azure DCR Rule'. 
 
-5. Verify you see AzureAssessment AND AzureMonitorWindowsAgent
+5. Verify you see AzureAssessment, AssessmentPlatform AND AzureMonitorWindowsAgent
    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/assessmentextension.png)
       
 6. After DCR kick off from Step #2 a new folder will be created on C:\ called 'ODA'. Leave this folder alone as it is reserved for system.
