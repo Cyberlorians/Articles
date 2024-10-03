@@ -136,7 +136,7 @@ AzureAssessmentRecommendation
 
 </details>
 
-<details><summary> <b><u><font size="<h3>">Trouble Shooting.</font></u></b></summary> 
+<details><summary> <b><u><font size="<h3>">Troubleshooting.</font></u></b></summary> 
 <p>
 
 1. Confirm heartbeat in Log Anayltics Workspace. 
@@ -151,7 +151,17 @@ Heartbeat
 | extend Onprem = ResourceProvider == "Microsoft.HybridCompute"
 | distinct Computer, ResourceType, Cloud, Onprem, Category
 ```
-
+Was able to fix the issue. Appears C:\Assessment\Entra\AzureAssessment\OmsAssessment\license.xml had expired.
+ 
+FIX (using Azure VM):
+Uninstall "AssessmentPlatform" extension (e.g., from Azure Portal)
+2. Install AssessmentPlatform extension with Typehandlerversion 4.5 using Powershell as an Administrator
+Set-AzVMExtension -ResourceGroupName "Assessment" `
+ -VMName "Assessment" `
+ -Name "AssessmentPlatform" `
+ -Publisher "Microsoft.ServicesHub" `
+ -ExtensionType "AssessmentPlatform" `
+ -TypeHandlerVersion "4.5"
 </details>
 
 
