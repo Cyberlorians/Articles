@@ -56,7 +56,7 @@ tnc agentserviceapi.azure-automation.net -port 443
 
 4. Create folder directory. 'C:\Assessment\Entra'
 5. Turn off IE EnchancedMode.
-6. Start -> Run -> gpedit.msc-> Computer Configuration -> Windows -> Security -> Local Policies -> User Rights Assignment -> Log on as a batch job -> Add Adminstrators.
+6. Start -> Run -> gpedit.msc-> Computer Configuration -> Windows Settings -> Security Settings -> Local Policies -> User Rights Assignment -> Log on as a batch job -> Add Adminstrators.
 7. Start -> Run -> gpedit.msc-> Computer Configuration -> Administrative Template -> system -> user profile ->Do not forcefully unload the users registry at user logoff -> Click Enable.
 8. Run PowerShell as Administrator and install four modules on the Assessment Server - DO NOT MISS THIS STEP!
 ```
