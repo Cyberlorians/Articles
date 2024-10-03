@@ -103,16 +103,21 @@ Install-Module AzureADPreview -verbose -allowclobber -Force
 ```
 New-MicrosoftAssessmentsApplication -allowclobber -force
 ```
-3. Create Scheduled Task - run this task as the local admin with computername\localadmin as shown below.
+</details>
+
+<details><summary> <b><u><font size="<h3>">Create Scheduled Task.</font></u></b></summary> 
+<p>
+   
+1. Create Scheduled Task - run this task as the local admin with computername\localadmin as shown below.
 ```
 Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\Entra -ScheduledTaskUsername Assessment\xadmin
 ```
-4. Verify the Scheduled Task
+2. Verify the Scheduled Task
    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/scheduledtask.png)
 
-6. Right-Click the ST and click run. Adjust or remove schedule if needed. VM should be powered off between assessments.
+3. Right-Click the ST and click run. Adjust or remove schedule if needed. VM should be powered off between assessments.
 
-7. After the ST has been kicked off. The C:\Assessment\Entra folder will being to populate with a numerical folder.
+4. After the ST has been kicked off. The C:\Assessment\Entra folder will being to populate with a numerical folder.
 
 </details>
 
