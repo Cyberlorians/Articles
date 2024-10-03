@@ -8,8 +8,11 @@
 1. Create Resource Group: 'Assessment'.
 2. Create Log Analytics Workspace in Assessment RG: 'Assessment-LAW'.
 3. Create AzureVM (Server 22): 'Assessment'.
-4. Turn on "Enable Systemd Assigned Managed Identity", while building the VM, under the management blade.
-5. Install the Azure Monitor Agent Extension on the newly created VM. Run the below command from the Azure Portal PowerShell. **!!DO NOT MISS THIS STEP!!**.
+4. Turn on "Enable Systemd Assigned Managed Identity", while building the VM, under the management blade. Verify after deployment it is enabled.
+   
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/mgmdidentity.png)
+
+6. Install the Azure Monitor Agent Extension on the newly created VM (this can be seen from the Extensions blade on the VM). Run the below command from the Azure Portal PowerShell. **!!DO NOT MISS THIS STEP!!**.
 ```
 Connect-AzAccount
 Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWindowsAgent -Publisher Microsoft.Azure.Monitor -ResourceGroupName Assessment -VMName Assessment -Location EastUS -TypeHandlerVersion 1.0 -EnableAutomaticUpgrade $true
