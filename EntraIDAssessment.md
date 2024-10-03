@@ -10,7 +10,7 @@
 3. Create AzureVM (Server 22): 'Assessment'.
 4. Turn on "Enable Systemd Assigned Managed Identity", while building the VM, under the management blade. Verify after deployment it is enabled.
    
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/mgmdidentity.png)
+   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/mgmdidentity.png)
 
 6. Install the Azure Monitor Agent Extension on the newly created VM (this can be seen from the Extensions blade on the VM). Run the below command from the Azure Portal PowerShell and verify. **!!DO NOT MISS THIS STEP!!**.
    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/amaassessment.png)
@@ -77,7 +77,7 @@ Install-Module AzureADPreview -verbose -allowclobber -Force
 2.  Add the Azure AD Assessment.
 
 3. Add the VM and the assessment path you used from the previous step. Installation will begin.
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/entraassessment.png)
+   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/entraassessment.png)
 
 4. The installation creates a Data Collection Rule, named 'Azure DCR Rule'. 
 
@@ -106,7 +106,7 @@ New-MicrosoftAssessmentsApplication -allowclobber -force
 Add-AzureAssessmentTask -WorkingDirectory C:\Assessment\Entra -ScheduledTaskUsername Assessment\xadmin
 ```
 4. Verify the Scheduled Task
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/scheduledtask.png)
+   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/scheduledtask.png)
 
 6. Right-Click the ST and click run. Adjust or remove schedule if needed. VM should be powered off between assessments.
 
@@ -130,7 +130,7 @@ AzureAssessmentRecommendation
 ```
 2. Once confirmed, you will see data trickle in over the next few hours populate in ServicesHub.
 
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/assessmentshcomplete.png)
+   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/assessmentshcomplete.png)
 
 </details>
 
