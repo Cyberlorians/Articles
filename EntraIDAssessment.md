@@ -131,10 +131,10 @@ AzureAssessmentRecommendation
 
 </details>
 
-<details><summary> <b><u><font size="<h3>">Trouble Shooting</font></u></b></summary> 
+<details><summary> <b><u><font size="<h3>">Trouble Shooting.</font></u></b></summary> 
 <p>
 
-1. Confirm heartbeat in Log Anayltics Workspace. This will take a few minutes after the DCR is created (5-10).
+1. Confirm heartbeat in Log Anayltics Workspace. 
 
 ```
 //Queries the Heartbeat table to locate Azure Monitor Agents and if on-prem or in Azure 
