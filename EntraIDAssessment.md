@@ -121,7 +121,9 @@ Install-Module AzureADPreview -verbose -allowclobber -Force
 
 1. Verify that you have the Azure subscription Owner role on the Azure subscription on the same email ID that you use to login into Services Hub. Review [Linking Permissions](https://learn.microsoft.com/en-us/services-hub/unified/health/assessments-troubleshooting-ama#linking-and-permissions).
 
-2. Create Application, reviewed [here](https://learn.microsoft.com/en-us/services-hub/unified/health/getting-started-entraid#setup-the-microsoft-microsoft-entra-id-assessment-on-the-data-collection-machine). Authentication to Entra as Global Administrator*- you will be prompted for MFA and after setup, you must consent to the application permissions. See application permissions that will be delegated [here](https://learn.microsoft.com/en-us/services-hub/unified/health/getting-started-microsoftassessmentapplication/permission-requirements). When prompted for the Subscription boundary. Chose only the subscription where the assessment VM resides. 
+2. Create Application, reviewed [here](https://learn.microsoft.com/en-us/services-hub/unified/health/getting-started-entraid#setup-the-microsoft-microsoft-entra-id-assessment-on-the-data-collection-machine). Authentication to Entra as Global Administrator*- you will be prompted for MFA and after setup, you must consent to the application permissions. See application permissions that will be delegated [here](https://learn.microsoft.com/en-us/services-hub/unified/health/getting-started-microsoftassessmentapplication/permission-requirements).
+3. 
+4. When prompted for the Subscription boundary. Chose only the subscription where the assessment VM resides. This step sets READER permission for the application service principal on the subscription.
 
 ```
 New-MicrosoftAssessmentsApplication -allowclobber -force
