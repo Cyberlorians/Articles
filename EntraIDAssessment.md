@@ -171,7 +171,7 @@ AzureAssessmentRecommendation
 
 https://learn.microsoft.com/en-us/services-hub/unified/health/assessments-troubleshooting-ama#linking-and-permissions
 
-<details>
+</details>
  
 
 
