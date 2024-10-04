@@ -169,30 +169,10 @@ AzureAssessmentRecommendation
 <details><summary> <b><u><font size="<h3>">Troubleshooting.</font></u></b></summary> 
 <p>
 
-1. Confirm heartbeat in Log Anayltics Workspace. 
+https://learn.microsoft.com/en-us/services-hub/unified/health/assessments-troubleshooting-ama#linking-and-permissions
 
-```
-//Queries the Heartbeat table to locate Azure Monitor Agents and if on-prem or in Azure 
-Heartbeat
-| where TimeGenerated >= ago(7d) //Change Time
-| where Category == "Azure Monitor Agent"
-| where isnotempty(ResourceType)
-| extend Cloud = ResourceProvider == "Microsoft.Compute"
-| extend Onprem = ResourceProvider == "Microsoft.HybridCompute"
-| distinct Computer, ResourceType, Cloud, Onprem, Category
-```
-Was able to fix the issue. Appears C:\Assessment\Entra\AzureAssessment\OmsAssessment\license.xml had expired.
+<details>
  
-FIX (using Azure VM):
-Uninstall "AssessmentPlatform" extension (e.g., from Azure Portal)
-2. Install AssessmentPlatform extension with Typehandlerversion 4.5 using Powershell as an Administrator
-Set-AzVMExtension -ResourceGroupName "Assessment" `
- -VMName "Assessment" `
- -Name "AssessmentPlatform" `
- -Publisher "Microsoft.ServicesHub" `
- -ExtensionType "AssessmentPlatform" `
- -TypeHandlerVersion "4.5"
-</details>
 
 
 
