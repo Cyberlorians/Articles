@@ -92,24 +92,24 @@ Install-Module AzureADPreview -verbose -allowclobber -Force
 6. Take note and if you see the extensions are out of date, STOP and update. Updates available will look like below, pay close attention to what version is available and use that number to replace the code below.
     ![](https://github.com/Cyberlorians/uploadedimages/blob/main/assessmentupdates.png)
 
-EXAMPLE code is below. You must first uninstall the extension then install using Azure PowerShell CLI.
-```
-Set-AzVMExtension -ResourceGroupName "Assessment" `
--VMName "Assessment" `
--Name "AssessmentPlatform" `
--Publisher "Microsoft.ServicesHub" `
--ExtensionType "AssessmentPlatform" `
--TypeHandlerVersion "4.5"
+   EXAMPLE code is below. You must first uninstall the extension then install using Azure PowerShell CLI.
+   ```
+   Set-AzVMExtension -ResourceGroupName "Assessment" `
+   -VMName "Assessment" `
+   -Name "AssessmentPlatform" `
+   -Publisher "Microsoft.ServicesHub" `
+   -ExtensionType "AssessmentPlatform" `
+   -TypeHandlerVersion "4.5"
  
-Set-AzVMExtension -ResourceGroupName "Assessment" `
--VMName "Assessment" `
--Name "AzureAssessment" `
--Publisher "Microsoft.ServicesHub" `
--ExtensionType "AzureAssessment" `
--TypeHandlerVersion "1.9"
-```
+   Set-AzVMExtension -ResourceGroupName "Assessment" `
+   -VMName "Assessment" `
+   -Name "AzureAssessment" `
+   -Publisher "Microsoft.ServicesHub" `
+   -ExtensionType "AzureAssessment" `
+   -TypeHandlerVersion "1.9"
+   ```
       
-8. After DCR kick off from Step #2 a new folder will be created on C:\ called 'ODA'. Leave this folder alone as it is reserved for system.
+8. After DCR kick off from Step #3 a new folder will be created on C:\ called 'ODA'. Leave this folder alone as it is reserved for system.
 
 </details>
 
