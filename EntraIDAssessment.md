@@ -90,7 +90,7 @@ Install-Module AzureADPreview -verbose -allowclobber -Force
    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/assessmentextension.png)
 
 6. Take note and if you see the extensions are out of date, STOP and update. Updates available will look like below, pay close attention to what version is available and use that number to replace the code below.
-    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/asessmentupdates.png)
+    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/assessmentupdates.png)
 
 EXAMPLE code is below. You must first uninstall the extension then install using Azure PowerShell CLI.
 ```
