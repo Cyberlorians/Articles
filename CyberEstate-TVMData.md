@@ -58,7 +58,7 @@ connect-azuread
 $miObjectID = $null
 Write-Host "Looking for Managed Identity with default prefix names of the Logic App..."
 $miObjectIDs = @()
-$miObjectIDs = (Get-AzureADServicePrincipal -SearchString "YOURLOGICAPPNAME").ObjectId
+$miObjectIDs = (Get-AzureADServicePrincipal -SearchString "YourADFManagedIdentity").ObjectId
 if ($miObjectIDs -eq $null) {
    $miObjectIDs = Read-Host -Prompt "Enter ObjectId of Managed Identity (from Logic App):"
 }
