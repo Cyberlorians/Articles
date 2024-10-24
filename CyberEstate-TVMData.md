@@ -49,7 +49,7 @@ Lets start by setting up the Data Lake. You are going to deploy a standard Azure
 
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/adf3.png)
 
-**4** - *Open Azure PowerShell CLI and run the [script] you see below. MAKE SURE YOU ENTER YOUR LOGIC APP NAME.*
+**4** - *Open Azure PowerShell CLI and run the [script] you see below. Enter your Managed Identity of the ADF.*
 
 
 ```
