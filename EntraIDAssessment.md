@@ -89,10 +89,10 @@ Install-Module AzureADPreview -verbose -allowclobber -Force
 5. Verify you see AzureAssessment, AssessmentPlatform AND AzureMonitorWindowsAgent
    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/assessmentextension.png)
 
-6. Take note and if you see the extensions are out of date, STOP and update. Updates available will look like below, pay close attention to what version is available and use that number to replace the code below.
-    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/assessmentupdates.png)
+6. Take note and if you see the extensions are out of date, STOP and update (select extensions what need updating and click update). Updates available will look like below, pay close attention to what version is available and use that number to replace the code below.
+    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/assessmentupdate2.png)
 
-   EXAMPLE code is below. You must first uninstall the extension then install using Azure PowerShell CLI.
+   EXAMPLE code is below, if you want/have to do manually. You must first uninstall the extension then install using Azure PowerShell CLI.
    ```
    Set-AzVMExtension -ResourceGroupName "Assessment" `
    -VMName "Assessment" `
