@@ -113,6 +113,16 @@ Install-Module AzureADPreview -verbose -allowclobber -Force
 
 </details>
 
+<details><summary> <b><u><font size="<h3>">STOP!! - PAUSE!!</font></u></b></summary> 
+<p>
+
+As of 11/7/2024, after upgrading the extensions to 4.5 and 1.9 there is a known issue of the AzureAssessment.execpkg being removed from the C:\ODA\Pakages folder. Before proceeding, please do the following.
+
+1. Copy the AzureAssessment.execpkg file from "C:\Packages\Plugins\Microsoft.ServicesHub.AzureAssessment\1.9\bin" to "C:\ODA\Packages"
+2. Proceed once confirmed you have copied this file. Again, COPY not CUT.
+
+
+</details>
 
 <details><summary> <b><u><font size="<h3>">Create Assessment Application.</font></u></b></summary> 
 <p>
