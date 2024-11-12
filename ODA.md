@@ -2,18 +2,18 @@
   <summary><b><u>Prerequisites</u></b></summary>
   <p>These are the prerequisites...</p>
   
-  <details style="margin-left: 20px;">
-    <summary><b><u>Sub-Prerequisite 1</u></b></summary>
+  <details>
+    <summary style="margin-left: 20px;"><b><u>Sub-Prerequisite 1</u></b></summary>
     <p>Details about Sub-Prerequisite 1...</p>
     
-    <details style="margin-left: 20px;">
-      <summary><b><u>Sub-Sub-Prerequisite 1.1</u></b></summary>
+    <details>
+      <summary style="margin-left: 40px;"><b><u>Sub-Sub-Prerequisite 1.1</u></b></summary>
       <p>Details about Sub-Sub-Prerequisite 1.1...</p>
     </details>
   </details>
   
-  <details style="margin-left: 20px;">
-    <summary><b><u>Sub-Prerequisite 2</u></b></summary>
+  <details>
+    <summary style="margin-left: 20px;"><b><u>Sub-Prerequisite 2</u></b></summary>
     <p>Details about Sub-Prerequisite 2...</p>
   </details>
 </details>
