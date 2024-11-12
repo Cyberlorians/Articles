@@ -1,7 +1,5 @@
 ## Microsoft Entra ID Assessment - Azure Monitor Agent 
 
-<details><summary> <b><u><font size="<h3>">ODA.</font></u></b></summary> 
-<p>
 
 
 
