@@ -1,5 +1,19 @@
 ## Microsoft Entra ID Assessment - Azure Monitor Agent 
 
+<details>
+  <summary><b><u>Prerequisites</u></b></summary>
+  <p>These are the prerequisites...</p>
+  
+  <details>
+    <summary><b><u>Sub-Prerequisite 1</u></b></summary>
+    <p>Details about Sub-Prerequisite 1...</p>
+  </details>
+  
+  <details>
+    <summary><b><u>Sub-Prerequisite 2</u></b></summary>
+    <p>Details about Sub-Prerequisite 2...</p>
+  </details>
+</details>
 
 
 
