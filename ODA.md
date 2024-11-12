@@ -4,7 +4,7 @@
   
   <details>
     <summary style="margin-left: 20px;"><b><u>Sub-Prerequisite 1</u></b></summary>
-    <p>Details about Sub-Prerequisite 1...</p>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p>Details about Sub-Prerequisite 1...</p>
     
     <details>
       <summary style="margin-left: 40px;"><b><u>Sub-Sub-Prerequisite 1.1</u></b></summary>
