@@ -3,7 +3,7 @@
 <details><summary> <b><u><font size="<h3>">ODA.</font></u></b></summary> 
 <p>
 
-</details>
+
 
 <details><summary> <b><u><font size="<h3>">Prerequisites.</font></u></b></summary> 
 <p>
@@ -29,7 +29,7 @@ Connect-AzAccount -UseDeviceAuthentication
 Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWindowsAgent -Publisher Microsoft.Azure.Monitor -ResourceGroupName Assessment -VMName Assessment -Location EastUS -TypeHandlerVersion 1.0 -EnableAutomaticUpgrade $true
 ```
 
-   	
+   	</details>
 </details>
 
 <details><summary> <b><u><font size="<h3>">On-Demand Assessment Machine Configuration.</font></u></b></summary> 
