@@ -1,8 +1,12 @@
 <details>
-<summary>Network Requirements</summary>
-&nbsp<summary>Commercial</summary>
-<summary>Federal</summary>
+  <summary>Network Requirements</summary>
+  <details>
 </details>
+  ### Heading
+  1. Foo
+  2. Bar
+     * Baz
+     * Qux
 </details>
 
 
