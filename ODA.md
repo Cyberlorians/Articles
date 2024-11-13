@@ -1,7 +1,7 @@
 <details>
 	<summary>Configure On-Demand Assessments</summary><p>
 
-- [On-Demand Assessment - Entra](file.md)
+- [On-Demand Assessment - Entra](./EntraIDAssessment.md)
 - [On-Demand Assessment - Sharepoint](file.md)
 </p>
 </details>
