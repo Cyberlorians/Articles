@@ -2,7 +2,7 @@
 	<summary>Section A</summary>
 	<details open>
 		<summary>Section A.B</summary>
-		<details open>
+		<details show>
 			<summary>Section A.B.C</summary>				
 		</details>
 	</details>
