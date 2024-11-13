@@ -1,6 +1,15 @@
-<details><summary>Tips for collapsed sections</summary>
-<details><summary>AB</summary>``` The Code for AB```</details>
-<details><summary>ABC Section</summary>    ```The code for ABC```</details>
+<details><summary>Network Requirements</summary>
+<details><summary>Azure Public</summary>
+| *Azure Public Endpoint* | *Description* |
+| :---        |    :----:   |
+|management.azure.com |	Azure Resource Manager|
+login.windows.net |	Azure Active Directory|
+dc.services.visualstudio.com |	Application Insights|
+agentserviceapi.azure-automation.net |	Guest Configuration|
+*-agentservice-prod-1.azure-automation.net |	Guest Configuration|
+*.his.hybridcompute.azure-automation.net |	Hybrid Identity Service|
+</details>
+<details><summary>Azure Goverment</summary>    ```The code for ABC```</details>
 </details>
 
 
