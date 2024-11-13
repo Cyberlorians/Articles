@@ -1,6 +1,7 @@
 <details>
   <summary>Network Requirements</summary>
   <Federal>
+</details>
 <Commercial>
 </details>
   ### Heading
