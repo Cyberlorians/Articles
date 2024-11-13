@@ -1,4 +1,19 @@
 <details>
+	<summary>Section A</summary>
+	<details open>
+		<summary>Section A.B</summary>
+		<details>
+			<summary>Section A.B.C</summary>
+			<details>
+				<summary>Section A.B.C.D</summary>
+				  Done!
+			</details>
+		</details>
+	</details>
+</details>
+
+
+<details>
 <summary> <b><u><font size="<h3>">Network Requirements</font></u></b></summary><p>
 
 | *Azure Public Endpoint* | *Description* |
