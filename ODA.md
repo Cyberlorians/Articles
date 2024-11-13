@@ -22,7 +22,29 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 
 </details>
 
+<details><summary> <b><u><font size="<h3>">Configure Microsoft On-Demand Assessment Collector</font></u></b></summary> 
+<p>
 
+1. Create Resource Group: 'Assessment'.
+2. Create Log Analytics Workspace in Assessment RG: 'Assessment'.
+3. Create Azure Virtual Machine (Server 22): 'Assessment'.
+4. Turn on "Enable Systemd Assigned Managed Identity", while building the virtual machine, under the management blade. Verify after deployment it is enabled.
+   
+   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/mgmdidentity.png)
+
+   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/mgmdidentity2.png)
+
+6. Install the Azure Monitor Agent Extension on the newly created virtual machine (this can be seen from the Extensions blade on the VM). Run the below command from the Azure Portal PowerShell and verify.
+   
+   **!!DO NOT MISS THIS STEP!!**
+
+   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/amaassessment.png)
+```
+Connect-AzAccount -UseDeviceAuthentication
+Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWindowsAgent -Publisher Microsoft.Azure.Monitor -ResourceGroupName Assessment -VMName Assessment -Location EastUS -TypeHandlerVersion 1.0 -EnableAutomaticUpgrade $true
+```
+
+</details>
 
 <details><summary> <b><u><font size="<h3>">Prerequisites.</font></u></b></summary> 
 <p>
