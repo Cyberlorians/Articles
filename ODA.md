@@ -1,5 +1,6 @@
 <details><summary>Network Requirements</summary>
-<details><summary>Azure Public</summary>
+<details><summary>Azure Public</summary><p>
+
 | *Azure Public Endpoint* | *Description* |
 | :---        |    :----:   |
 |management.azure.com |	Azure Resource Manager|
