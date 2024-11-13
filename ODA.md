@@ -1,7 +1,7 @@
 <details>
-	<summary>Section A</summary>
+	<summary>Section A</summary><p>
 	<details show>
-		<summary>Section A.B</summary>
+		<summary>Section A.B</summary><p>
 		<details show>
 			<summary>Section A.B.C</summary>				
 		</details>
