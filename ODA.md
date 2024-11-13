@@ -1,15 +1,22 @@
 <details>
-<summary>Section A</summary>
-<details>
-<summary>Section A.B</summary>
-<details>
-<summary>Section A.B.C</summary>
-<details>
-<summary>Section A.B.C.D</summary>
-  Done!
-</details>
-</details>
-</details>
+
+<summary>Network Requirements/summary>
+
+*Azure Public Endpoints*
+
+| Endpoint | Description |
+| :---        |    :----:   |
+|management.azure.com |	Azure Resource Manager|
+login.windows.net |	Azure Active Directory|
+dc.services.visualstudio.com |	Application Insights|
+agentserviceapi.azure-automation.net |	Guest Configuration|
+*-agentservice-prod-1.azure-automation.net |	Guest Configuration|
+*.his.hybridcompute.azure-automation.net |	Hybrid Identity Service|
+
+*Azure Government Endpoints*
+
+| Endpoint | Description |
+
 </details>
 
 
