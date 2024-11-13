@@ -1,7 +1,7 @@
 <details><summary>Network Requirements</summary>
 <ul>
-<details><summary>Azure Public</summary><p>
-
+<details><summary>Azure Public</summary>
+<p>
 | *Azure Public Endpoint* | *Description* |
 | :---        |    :----:   |
 |management.azure.com |	Azure Resource Manager|
@@ -14,8 +14,8 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 </details>
 </ul>
 <ul>
-<details><summary>Azure Government</summary><p>
-
+<details><summary>Azure Government</summary>
+<p>
 | *Azure Government Endpoint* | *Description* |
 | :---        |    :----:   |
 |management.azure.com |	Azure Resource Manager|
