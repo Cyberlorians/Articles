@@ -1,6 +1,6 @@
 <details><summary>Network Requirements</summary>
+<ul>
 <details><summary>Azure Public</summary><p>
-
 | *Azure Public Endpoint* | *Description* |
 | :---        |    :----:   |
 |management.azure.com |	Azure Resource Manager|
@@ -10,7 +10,18 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 *-agentservice-prod-1.azure-automation.net |	Guest Configuration|
 *.his.hybridcompute.azure-automation.net |	Hybrid Identity Service|
 </details>
-<details><summary>Azure Goverment</summary>    ```The code for ABC```</details>
+</ul>
+<details><summary>Azure Government</summary><p>
+| *Azure Government Endpoint* | *Description* |
+| :---        |    :----:   |
+|management.azure.com |	Azure Resource Manager|
+login.windows.net |	Azure Active Directory|
+dc.services.visualstudio.com |	Application Insights|
+agentserviceapi.azure-automation.net |	Guest Configuration|
+*-agentservice-prod-1.azure-automation.net |	Guest Configuration|
+*.his.hybridcompute.azure-automation.net |	Hybrid Identity Service|
+
+</details>
 </details>
 
 
