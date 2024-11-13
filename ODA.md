@@ -1,4 +1,12 @@
 <details open>
+	<summary>Configure On-Demand Assessments</summary><p>
+
+- [On-Demand Assessment - Entra](file.md)
+- [On-Demand Assessment - Sharepoint](file.md)
+</p>
+</details>
+
+<details open>
 	<summary>Network Requirements</summary><p>
 	<details>
 		<summary>Expand but don't open until clicked</summary><p>
