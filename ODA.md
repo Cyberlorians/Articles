@@ -1,8 +1,8 @@
 <details>
 	<summary>Section A</summary><p>
-	<details>
+	<details open>
 		<summary>Section A.B</summary><p>
-		<details open>
+		<details>
 			<summary>Section A.B.C</summary>				
 		</details>
 	</details>
