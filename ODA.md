@@ -1,6 +1,4 @@
-<details>
-
-<summary>Network Requirements/summary>
+<details><summary> <b><u><font size="<h3>">Network Requirements</font></u></b></summary> 
 
 *Azure Public Endpoints*
 
