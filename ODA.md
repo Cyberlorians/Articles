@@ -1,6 +1,6 @@
-<details>
+<details open>
 	<summary>Network Requirements</summary><p>
-	<details open>
+	<details>
 		<summary>Expand but don't open until clicked</summary><p>
 		<details>
 			<summary>Expand but don't open until clicked</summary>				
