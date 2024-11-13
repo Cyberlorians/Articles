@@ -1,6 +1,6 @@
 <details>
 	<summary>Section A</summary>
-	<details open>
+	<details show>
 		<summary>Section A.B</summary>
 		<details show>
 			<summary>Section A.B.C</summary>				
