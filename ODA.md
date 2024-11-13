@@ -10,9 +10,8 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 *-agentservice-prod-1.azure-automation.net |	Guest Configuration|
 *.his.hybridcompute.azure-automation.net |	Hybrid Identity Service|
 
-*Azure Government Endpoints*
 
-| Azure Government Endpoint | Description |
+| *Azure Government Endpoint* | Description |
 | :---        |    :----:   |
 |management.azure.com |	Azure Resource Manager|
 login.windows.net |	Azure Active Directory|
