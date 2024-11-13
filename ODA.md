@@ -1,9 +1,9 @@
 <details>
-	<summary>Section A</summary><p>
+	<summary>Network Requirements</summary><p>
 	<details open>
-		<summary>Section A.B</summary><p>
+		<summary>Expand but don't open until clicked</summary><p>
 		<details>
-			<summary>Section A.B.C</summary>				
+			<summary>Expand but don't open until clicked</summary>				
 		</details>
 	</details>
 </details>
