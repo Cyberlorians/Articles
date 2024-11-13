@@ -1,4 +1,7 @@
-<details><summary>Tips for collapsed sections</summary><details><summary>AB</summary>``` The Code for AB```</details><details>    <summary>    ABC Section    </summary>    ```The code for ABC```</details></details>
+<details><summary>Tips for collapsed sections</summary>
+<details><summary>AB</summary>``` The Code for AB```</details>
+<details><summary>ABC Section</summary>    ```The code for ABC```</details>
+</details>
 
 
 <details>
