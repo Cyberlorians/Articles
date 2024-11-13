@@ -1,9 +1,7 @@
 <details>
 <summary>Network Requirements</summary>
-<details>
 <summary>Commercial</summary>
 <summary>Federal</summary>
-<details>
 </details>
 </details>
 
