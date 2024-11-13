@@ -1,23 +1,13 @@
 <details>
-  <summary><b><u>Prerequisites</u></b></summary>
-  <p>These are the prerequisites...</p>
-  
-  <details>
-    <summary style="margin-left: 20px;"><b><u>Sub-Prerequisite 1</u></b></summary>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p>Details about Sub-Prerequisite 1...</p>
-    
-    <details>
-      <summary style="margin-left: 40px;"><b><u>Sub-Sub-Prerequisite 1.1</u></b></summary>
-      <p>Details about Sub-Sub-Prerequisite 1.1...</p>
-    </details>
-  </details>
-  
-  <details>
-    <summary style="margin-left: 20px;"><b><u>Sub-Prerequisite 2</u></b></summary>
-    <p>Details about Sub-Prerequisite 2...</p>
-  </details>
+<summary>Network Requirements</summary>
+<details>
+<summary>Commercial</summary>
+<details>
+<summary>Federal</summary>
+<details>
 </details>
-
+</details>
+</details>
 
 
 
