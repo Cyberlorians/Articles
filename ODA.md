@@ -1,8 +1,11 @@
+<details><summary>Tips for collapsed sections</summary><details open><summary>AB</summary>``` The Code for AB```</details><details open>    <summary>    ABC Section    </summary>    ```The code for ABC```</details></details>
+
+
 <details>
 	<summary>Configure On-Demand Assessments</summary><p>
 
 - [On-Demand Assessment - Entra](./EntraIDAssessment.md)
-- [On-Demand Assessment - Sharepoint](file.md)
+- [On-Demand Assessment - Sharepoint](MDI-Hardened.md)
 </p>
 </details>
 
