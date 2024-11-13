@@ -1,9 +1,6 @@
 <details>
 <summary> <b><u><font size="<h3>">Network Requirements</font></u></b></summary><p>
 
-
-<summary> <b><u><font size="<h3>">Network Requirements</font></u></b></summary><p>
-</details>
 | *Azure Public Endpoint* | *Description* |
 | :---        |    :----:   |
 |management.azure.com |	Azure Resource Manager|
