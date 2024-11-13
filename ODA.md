@@ -38,30 +38,6 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 </details>
 
 
-<details>
-<summary> <b><u><font size="<h3>">Network Requirements</font></u></b></summary><p>
-
-| *Azure Public Endpoint* | *Description* |
-| :---        |    :----:   |
-|management.azure.com |	Azure Resource Manager|
-login.windows.net |	Azure Active Directory|
-dc.services.visualstudio.com |	Application Insights|
-agentserviceapi.azure-automation.net |	Guest Configuration|
-*-agentservice-prod-1.azure-automation.net |	Guest Configuration|
-*.his.hybridcompute.azure-automation.net |	Hybrid Identity Service|
-
-
-| *Azure Government Endpoint* | *Description* |
-| :---        |    :----:   |
-|management.azure.com |	Azure Resource Manager|
-login.windows.net |	Azure Active Directory|
-dc.services.visualstudio.com |	Application Insights|
-agentserviceapi.azure-automation.net |	Guest Configuration|
-*-agentservice-prod-1.azure-automation.net |	Guest Configuration|
-*.his.hybridcompute.azure-automation.net |	Hybrid Identity Service|
-
-</details>
-
 <details><summary> <b><u><font size="<h3>">Configure Microsoft On-Demand Assessment Collector</font></u></b></summary> 
 <p>
 
