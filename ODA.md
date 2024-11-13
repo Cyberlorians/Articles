@@ -2,8 +2,7 @@
   <summary>Network Requirements</summary>
   <Federal>
 </details>
-<Commercial>
-</details>
+
   ### Heading
   1. Foo
   2. Bar
