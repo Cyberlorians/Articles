@@ -79,3 +79,22 @@
     deviceTagsProfileScope: dynamic
 )
 ```
+05 - https://api-gcc.securitycenter.microsoft.us/api/baselineConfigurations
+```
+.create table DeviceBaselineComplianceAssessmentKB (
+    id: string, 
+    uniqueId: string, 
+    benchmarkName: string, 
+    benchmarkVersion: string, 
+    name: string, 
+    description: string, 
+    category: string, 
+    complianceLevels: dynamic, 
+    cce: string, 
+    rationale: string, 
+    remediation: string, 
+    recommendedValue: dynamic, 
+    source: dynamic, 
+    isCustom: bool
+)
+```
