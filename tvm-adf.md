@@ -98,3 +98,25 @@
     isCustom: bool
 )
 ```
+06 - https://api-gcc.securitycenter.microsoft.us/api/baselineConfigurations
+```
+.create table DeviceBaselineComplianceAssessment (
+    id: string, 
+    configurationId: string, 
+    deviceId: string, 
+    deviceName: string, 
+    profileId: string, 
+    osPlatform: string, 
+    osVersion: string, 
+    rbacGroupId: int, 
+    rbacGroupName: string, 
+    isApplicable: bool, 
+    isCompliant: bool, 
+    dataCollectionTimeOffset: datetime, 
+    complianceCalculationTimeOffset: datetime, 
+    recommendedValue: dynamic, 
+    currentValue: dynamic, 
+    source: dynamic, 
+    isExempt: bool
+)
+```
