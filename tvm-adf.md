@@ -1,6 +1,7 @@
 01 - https://api-gcc.securitycenter.microsoft.us/api/machines/SoftwareInventoryByMachine
 ```
 .create table DeviceTvmSoftwareInventory (
+    TimeGenerated: datetime,
     deviceId: string, 
     rbacGroupId: int, 
     rbacGroupName: string, 
@@ -21,6 +22,7 @@
 02 - https://api-gcc.securitycenter.microsoft.us/api/machines/SecureConfigurationsAssessmentByMachine
 ```
 .create table DeviceTvmSecureConfigurationAssessment (
+    TimeGenerated: datetime,
     deviceId: string, 
     rbacGroupId: int, 
     rbacGroupName: string, 
@@ -43,6 +45,7 @@
 03 - https://api-gov.securitycenter.microsoft.us/api/machines/HardwareFirmwareInventoryByMachine
 ```
 .create table DeviceTvmHardwareFirmware (
+    TimeGenerated: datetime,
     deviceId: string, 
     rbacGroupId: int, 
     rbacGroupName: string, 
@@ -58,6 +61,7 @@
 04 - https://api-gcc.securitycenter.microsoft.us/api/baselineProfiles
 ```
 .create table DeviceBaselineComplianceProfiles (
+    TimeGenerated: datetime,
     id: string, 
     name: string, 
     description: string, 
@@ -82,6 +86,7 @@
 05 - https://api-gcc.securitycenter.microsoft.us/api/baselineConfigurations
 ```
 .create table DeviceBaselineComplianceAssessmentKB (
+    TimeGenerated: datetime,
     id: string, 
     uniqueId: string, 
     benchmarkName: string, 
@@ -101,6 +106,7 @@
 06 - https://api-gcc.securitycenter.microsoft.us/api/baselineConfigurations
 ```
 .create table DeviceBaselineComplianceAssessment (
+    TimeGenerated: datetime,
     id: string, 
     configurationId: string, 
     deviceId: string, 
