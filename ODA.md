@@ -56,9 +56,13 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 </details>
 </details>
 
-<details open><summary>Troubleshooting</summary>
+<details><summary>Working with Results</summary>
 <p>
+</p>
+</details>
 
+<details><summary>Troubleshooting</summary>
+<p>
 </p>
 </details>
 
