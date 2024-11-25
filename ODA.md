@@ -69,6 +69,7 @@ Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWind
 
 </details>
 
+#####################OLD###############
 <details><summary> <b><u><font size="<h3>">Prerequisites.</font></u></b></summary> 
 <p>
 
