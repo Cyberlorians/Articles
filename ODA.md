@@ -45,7 +45,7 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 - reword this and clean up ![https://learn.microsoft.com/en-us/services-hub/unified/health/config-oda#configuring-the-required-group-policy-objects]
 </p>
 </ul>
-</details>
+
 <ul>
 <details><summary>On-Demand Assessments</summary><p>
 
@@ -53,6 +53,7 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 - [On-Demand Assessment - Sharepoint](MDI-Hardened.md)
 </p>
 </ul>
+</details>
 </details>
 </details>
 
