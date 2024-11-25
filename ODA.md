@@ -37,7 +37,8 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 *.his.hybridcompute.azure-automation.net |	Hybrid Identity Service|
 </details>
 </ul>
-
+</ul>
+</details>
 
 <ul>
 <details><summary>On-Demand Assessments</summary><p>
@@ -47,7 +48,6 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 </p>
 </ul>
 </details>
-</ul>
 </details>
 
 
