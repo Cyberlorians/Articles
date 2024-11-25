@@ -40,6 +40,13 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 </ul>
 </ul>
 <ul>
+<details><summary>Configure Security Policy Configurations</summary><p>
+
+- reword this and clean up ![https://learn.microsoft.com/en-us/services-hub/unified/health/config-oda#configuring-the-required-group-policy-objects]
+</p>
+</ul>
+</details>
+<ul>
 <details><summary>On-Demand Assessments</summary><p>
 
 - [On-Demand Assessment - Entra](./EntraIDAssessment.md)
