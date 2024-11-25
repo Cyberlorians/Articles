@@ -38,8 +38,6 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 </details>
 </ul>
 </ul>
-</details>
-
 <ul>
 <details><summary>On-Demand Assessments</summary><p>
 
@@ -49,6 +47,8 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 </ul>
 </details>
 </details>
+
+
 
 
 <details><summary> <b><u><font size="<h3>">Configure Microsoft On-Demand Assessment Collector</font></u></b></summary> 
