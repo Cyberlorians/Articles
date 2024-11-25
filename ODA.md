@@ -1,4 +1,4 @@
-<details open><summary>Getting Started with On-Demand Assessment</summary>
+<details open><summary>1 - Getting Started with On-Demand Assessment</summary>
 <p>
 
 This will auto expand but able to expand back. Verbiage from here ![https://learn.microsoft.com/en-us/services-hub/unified/health/getting-started-windows-client]. Needs to be streamlined and cleaned up with snippets at each step.
