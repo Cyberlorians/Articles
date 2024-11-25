@@ -8,41 +8,9 @@ This will auto expand but able to expand back. Verbiage from here ![https://lear
 <details>
 	<summary>Configure On-Demand Assessments</summary><p>
 
-
-</p>
-
-<details><summary>Network Requirements</summary>
-<ul>
-<details><summary>Azure Public</summary><p>
-
-| *Azure Public Endpoint* | *Description* |
-| :---        |    :----:   |
-|management.azure.com |	Azure Resource Manager|
-login.windows.net |	Azure Active Directory|
-dc.services.visualstudio.com |	Application Insights|
-agentserviceapi.azure-automation.net |	Guest Configuration|
-*-agentservice-prod-1.azure-automation.net |	Guest Configuration|
-*.his.hybridcompute.azure-automation.net |	Hybrid Identity Service|
-</p>
-</details>
-</ul>
-<ul>
-<details><summary>Azure Government</summary><p>
-
-| *Azure Government Endpoint* | *Description* |
-| :---        |    :----:   |
-|management.azure.com |	Azure Resource Manager|
-login.windows.net |	Azure Active Directory|
-dc.services.visualstudio.com |	Application Insights|
-agentserviceapi.azure-automation.net |	Guest Configuration|
-*-agentservice-prod-1.azure-automation.net |	Guest Configuration|
-*.his.hybridcompute.azure-automation.net |	Hybrid Identity Service|
-</details>
-</ul>
-</details>
 - [On-Demand Assessment - Entra](./EntraIDAssessment.md)
 - [On-Demand Assessment - Sharepoint](MDI-Hardened.md)
-</details>
+</p>
 
 <details><summary>Network Requirements</summary>
 <ul>
@@ -73,8 +41,7 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 </details>
 </ul>
 </details>
-
-
+</details>
 
 
 
@@ -286,6 +253,38 @@ https://learn.microsoft.com/en-us/services-hub/unified/health/assessments-troubl
 
 </details>
  
+
+<details><summary>Network Requirements</summary>
+<ul>
+<details><summary>Azure Public</summary><p>
+
+| *Azure Public Endpoint* | *Description* |
+| :---        |    :----:   |
+|management.azure.com |	Azure Resource Manager|
+login.windows.net |	Azure Active Directory|
+dc.services.visualstudio.com |	Application Insights|
+agentserviceapi.azure-automation.net |	Guest Configuration|
+*-agentservice-prod-1.azure-automation.net |	Guest Configuration|
+*.his.hybridcompute.azure-automation.net |	Hybrid Identity Service|
+</p>
+</details>
+</ul>
+<ul>
+<details><summary>Azure Government</summary><p>
+
+| *Azure Government Endpoint* | *Description* |
+| :---        |    :----:   |
+|management.azure.com |	Azure Resource Manager|
+login.windows.net |	Azure Active Directory|
+dc.services.visualstudio.com |	Application Insights|
+agentserviceapi.azure-automation.net |	Guest Configuration|
+*-agentservice-prod-1.azure-automation.net |	Guest Configuration|
+*.his.hybridcompute.azure-automation.net |	Hybrid Identity Service|
+</details>
+</ul>
+</details>
+
+
 
 
 
