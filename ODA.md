@@ -6,10 +6,8 @@ This will auto expand but able to expand back. Verbiage from here ![https://lear
 </details>
  
 <details>
-	<summary>Configure On-Demand Assessments</summary><p>
+	<summary>Configure Microsoft On-Demand Assessments</summary><p>
 
-- [On-Demand Assessment - Entra](./EntraIDAssessment.md)
-- [On-Demand Assessment - Sharepoint](MDI-Hardened.md)
 </p>
 <ul>
 <details><summary>System and Network Requirements</summary>
@@ -42,6 +40,13 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 </ul>
 </ul>
 </details>
+<ul>
+<details><summary>On-Demand Assessments</summary>
+<p>
+- [On-Demand Assessment - Entra](./EntraIDAssessment.md)
+- [On-Demand Assessment - Sharepoint](MDI-Hardened.md)
+</p>
+</ul>
 </details>
 
 
