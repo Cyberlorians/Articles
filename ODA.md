@@ -41,8 +41,8 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 </ul>
 </details>
 <ul>
-<details><summary>On-Demand Assessments</summary>
-<p>
+<details><summary>On-Demand Assessments</summary><p>
+
 - [On-Demand Assessment - Entra](./EntraIDAssessment.md)
 - [On-Demand Assessment - Sharepoint](MDI-Hardened.md)
 </p>
