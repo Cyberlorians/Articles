@@ -45,7 +45,6 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 - reword this and clean up ![https://learn.microsoft.com/en-us/services-hub/unified/health/config-oda#configuring-the-required-group-policy-objects]
 </p>
 </ul>
-
 <ul>
 <details><summary>On-Demand Assessments</summary><p>
 
@@ -61,6 +60,8 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 
 
 <details><summary> <b><u><font size="<h3>">Configure Microsoft On-Demand Assessment Collector</font></u></b></summary> 
+
+*** This section could be in the "Configuration main section if all assessments are equal. ***
 <p>
 
 1. Create Resource Group: 'Assessment'.
