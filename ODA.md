@@ -1,3 +1,8 @@
+<details><summary>Getting Started with On-Demand Assessment</summary>
+
+verbiage from here ![https://learn.microsoft.com/en-us/services-hub/unified/health/getting-started-windows-client]. Needs to be streamlined and cleaned up with snippets at each step.
+</details>
+
 <details><summary>Network Requirements</summary>
 <ul>
 <details><summary>Azure Public</summary><p>
