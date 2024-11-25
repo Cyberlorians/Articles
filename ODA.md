@@ -6,11 +6,11 @@ This will auto expand but able to expand back. Verbiage from here ![https://lear
 </details>
  
 <details>
-<summary>Configure Microsoft On-Demand Assessments MAIN TITLE</summary><p>
+<summary>2 - Configure Microsoft On-Demand Assessments MAIN TITLE</summary><p>
 All items from current ODA need to lie here, GPO, Network, OS etc and consolidated as a point back for the "On-Demand Assessments".
 </p>
 <ul>
-<details><summary>System and Network Requirements</summary>
+<details><summary>2.1 - System and Network Requirements</summary>
 <ul>
 <details><summary>Azure Public</summary><p>
 
@@ -40,13 +40,13 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 </ul>
 </ul>
 <ul>
-<details><summary>Configure Security Policy Configurations</summary><p>
+<details><summary>2.2 - Configure Security Policy Configurations</summary><p>
 
 - reword this and clean up ![https://learn.microsoft.com/en-us/services-hub/unified/health/config-oda#configuring-the-required-group-policy-objects]
 </p>
 </ul>
 <ul>
-<details><summary>On-Demand Assessments</summary><p>
+<details><summary>2.3 - On-Demand Assessments</summary><p>
 
 - [On-Demand Assessment - Entra](./EntraIDAssessment.md)
 - [On-Demand Assessment - Sharepoint](MDI-Hardened.md)
