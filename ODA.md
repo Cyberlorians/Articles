@@ -1,4 +1,4 @@
-<details><summary>Getting Started with On-Demand Assessment</summary>
+<details open><summary>Getting Started with On-Demand Assessment</summary>
 
 verbiage from here ![https://learn.microsoft.com/en-us/services-hub/unified/health/getting-started-windows-client]. Needs to be streamlined and cleaned up with snippets at each step.
 </details>
