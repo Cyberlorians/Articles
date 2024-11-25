@@ -11,8 +11,8 @@ This will auto expand but able to expand back. Verbiage from here ![https://lear
 - [On-Demand Assessment - Entra](./EntraIDAssessment.md)
 - [On-Demand Assessment - Sharepoint](MDI-Hardened.md)
 </p>
-
-<details><summary>Network Requirements</summary>
+<ul>
+<details><summary>System and Network Requirements</summary>
 <ul>
 <details><summary>Azure Public</summary><p>
 
@@ -39,6 +39,7 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 *-agentservice-prod-1.azure-automation.net |	Guest Configuration|
 *.his.hybridcompute.azure-automation.net |	Hybrid Identity Service|
 </details>
+</ul>
 </ul>
 </details>
 </details>
