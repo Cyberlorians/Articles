@@ -4,7 +4,7 @@
 This will auto expand but able to expand back. Verbiage from here ![https://learn.microsoft.com/en-us/services-hub/unified/health/getting-started-windows-client]. Needs to be streamlined and cleaned up with snippets at each step.
 </p>
 </details>
-
+ 
 <details>
 	<summary>Configure On-Demand Assessments</summary><p>
 
