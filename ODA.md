@@ -7,10 +7,10 @@ This will auto expand but able to expand back. Verbiage from here ![https://lear
  
 <details>
 <summary>Configure Microsoft On-Demand Assessments MAIN TITLE</summary><p>
+All items from current ODA need to lie here, GPO, Network, OS etc and consolidated as a point back for the "On-Demand Assessments".
 </p>
 <ul>
 <details><summary>System and Network Requirements</summary>
-All items from current ODA need to lie here, GPO, Network, OS etc and consolidated as a point back for the "On-Demand Assessments".
 <ul>
 <details><summary>Azure Public</summary><p>
 
