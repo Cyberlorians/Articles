@@ -6,8 +6,7 @@ This will auto expand but able to expand back. Verbiage from here ![https://lear
 </details>
  
 <details>
-	<summary>Configure Microsoft On-Demand Assessments MAIN TITLE</summary><p>
-
+<summary>Configure Microsoft On-Demand Assessments MAIN TITLE</summary><p>
 </p>
 <ul>
 <details><summary>System and Network Requirements</summary>
@@ -38,8 +37,8 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 *.his.hybridcompute.azure-automation.net |	Hybrid Identity Service|
 </details>
 </ul>
-</ul>
-</details>
+
+
 <ul>
 <details><summary>On-Demand Assessments</summary><p>
 
@@ -48,7 +47,8 @@ agentserviceapi.azure-automation.net |	Guest Configuration|
 </p>
 </ul>
 </details>
-
+</ul>
+</details>
 
 
 <details><summary> <b><u><font size="<h3>">Configure Microsoft On-Demand Assessment Collector</font></u></b></summary> 
