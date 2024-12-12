@@ -189,6 +189,13 @@ AzureAssessmentRecommendation
 
 </details>
 
+
+<details><summary> <b><u><font size="<h3>">Summary and Delivery.</font></u></b></summary> 
+<p>
+
+In ServicesHub, go to the Primary Navigation and select IT Health, then choose On-Demand Assessments. On the Assessments page, select the assessment and then click Download Executive Summary or Download All Recommendations to view the reports. Provide these to your CSA for the final review and delivery of the Assessment, along with any remediation tasks that will be assigned to you.
+</details>
+
 <details><summary> <b><u><font size="<h3>">Troubleshooting.</font></u></b></summary> 
 <p>
 
