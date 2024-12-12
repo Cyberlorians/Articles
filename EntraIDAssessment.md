@@ -11,9 +11,9 @@ Use the following checklist to ensure all steps in this section are completed be
 ***Services Hub Registration*** - *From prior, CSAM needs to invite that same OWNER w/ an associated email.*<p>
 ***Link Azure Subscription and Log Analytics Workspace to Services Hub*** - *You will see this under your account icon>Edit Log Analytics Workspace.*<p>
 
-You will negate these next two call outs that are on the link above and proceed with the build out.
-Add the assessment(s) in Services Hub
-Provide access to Log Analytics workspace
+You will negate these next two call outs that are on the link above and proceed with the build out.<p>
+- Add the assessment(s) in Services Hub
+- Provide access to Log Analytics workspace
 
 ## Begin here!
 
