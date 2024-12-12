@@ -151,6 +151,22 @@ As of 11/7/2024, after upgrading the extensions to 4.5 and 1.9 there is a known 
 ```
 New-MicrosoftAssessmentsApplication -allowclobber -force
 ```
+If there are URL restrictions in place in order to correctly setup the assessment application, you will need to ensure you whitelist the
+following URLs:
+
+URLs
+
+aadcdn.msauth.net:443
+az818661.vo.msecnd.net:443
+c.urs.microsoft.com:443
+go.microsoft.com:443
+iecvlist.microsoft.com:443
+ieonline.microsoft.com:443
+login.microsoftonline.com:443
+oneget.org:443
+psg-prod-eastus.azureedge.net:443
+www.powershellgallery.com:443
+
 </details>
 
 <details><summary> <b><u><font size="<h3>">Create Scheduled Task.</font></u></b></summary> 
