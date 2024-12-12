@@ -3,10 +3,10 @@
 <details><summary> <b><u><font size="<h3>">Prerequisites.</font></u></b></summary> 
 <p>
 
-Work with your CSAM on the [Getting Started w/ On-Demand Assessments]!(https://learn.microsoft.com/en-us/services-hub/unified/health/getting-started-with-on-demand-assessments). A few call outs that are on that link that should be mentioned here.
+Work with your CSAM on the ![Getting Started w/ On-Demand Assessments](https://learn.microsoft.com/en-us/services-hub/unified/health/getting-started-with-on-demand-assessments). A few call outs that are on that link that should be mentioned here.
 Use the following checklist to ensure all steps in this section are completed before moving onto the next section.
 
-Azure Subscription - **Assessment person needs OWNER on the subscription and an email associated with that user account.**</b>
+Azure Subscription - *Assessment person needs OWNER on the subscription and an email associated with that user account.*<b>
 Services Hub Registration - **From prior, CSAM needs to invite that same OWNER w/ an associated email.**
 Link Azure Subscription and Log Analytics Workspace to Services Hub
 Add the assessment(s) in Services Hub
