@@ -154,8 +154,10 @@ New-MicrosoftAssessmentsApplication -allowclobber -force
 If there are URL restrictions in place in order to correctly setup the assessment application, you will need to ensure you whitelist the
 following URLs:
 
-aadcdn.msauth.net:443<p>
-az818661.vo.msecnd.net:443<p>
+| Endpoint | Port |
+| :---        |    :----:   |
+| aadcdn.msauth.net|443|
+az818661.vo.msecnd.net|443<p>
 c.urs.microsoft.com:443<p>
 go.microsoft.com:443<p>
 iecvlist.microsoft.com:443<p>
