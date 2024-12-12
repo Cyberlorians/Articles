@@ -15,7 +15,7 @@ You will negate these next two call outs that are on the link above and proceed 
 Add the assessment(s) in Services Hub
 Provide access to Log Analytics workspace
 
-##Begin here!
+## Begin here!
 
 
 1. Create Resource Group: 'Assessment'.
