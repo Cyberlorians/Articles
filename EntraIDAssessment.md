@@ -213,7 +213,9 @@ Connect-AzAccount -UseDeviceAuthentication
 Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWindowsAgent -Publisher Microsoft.Azure.Monitor -ResourceGroupName Assessment -VMName Assessment -Location EastUS -TypeHandlerVersion 1.0 -EnableAutomaticUpgrade $true
 ```
 
-
+```
+Clear-MicrosoftAssessmentsApplication -IncludeAADApplication $true
+```
 </details>
  
 
