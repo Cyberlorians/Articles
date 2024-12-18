@@ -27,16 +27,6 @@ You will negate these next two call outs that are on the link above and proceed 
 
    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/mgmdidentity2.png)
 
-6. Install the Azure Monitor Agent Extension on the newly created VM (this can be seen from the Extensions blade on the VM). Run the below command from the Azure Portal PowerShell and verify.
-   
-   **!!DO NOT MISS THIS STEP!!**
-
-   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/amaassessment.png)
-```
-Connect-AzAccount -UseDeviceAuthentication
-Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWindowsAgent -Publisher Microsoft.Azure.Monitor -ResourceGroupName Assessment -VMName Assessment -Location EastUS -TypeHandlerVersion 1.0 -EnableAutomaticUpgrade $true
-```
-
    	
 </details>
 
@@ -213,6 +203,15 @@ As of 11/7/2024, after upgrading the extensions to 4.5 and 1.9 there is a known 
 1. Copy the AzureAssessment.execpkg file from "C:\Packages\Plugins\Microsoft.ServicesHub.AzureAssessment\1.9\bin" to "C:\ODA\Packages"
 2. Proceed once confirmed you have copied this file. Again, COPY not CUT.
 
+6. Install the Azure Monitor Agent Extension on the newly created VM (this can be seen from the Extensions blade on the VM). Run the below command from the Azure Portal PowerShell and verify.
+   
+   **!!DO NOT MISS THIS STEP!!**
+
+   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/amaassessment.png)
+```
+Connect-AzAccount -UseDeviceAuthentication
+Set-AzVMExtension -Name AzureMonitorWindowsAgent -ExtensionType AzureMonitorWindowsAgent -Publisher Microsoft.Azure.Monitor -ResourceGroupName Assessment -VMName Assessment -Location EastUS -TypeHandlerVersion 1.0 -EnableAutomaticUpgrade $true
+```
 
 
 </details>
