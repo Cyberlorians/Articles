@@ -1,3 +1,7 @@
+set system assigned mgmd idp from ADF>ADX
+
+https://techcommunity.microsoft.com/blog/azuredataexplorer/azure-data-factory-to-adx-free-cluster/3657756
+
 01 - https://api-gcc.securitycenter.microsoft.us/api/machines/SoftwareInventoryByMachine
 ```
 .create table DeviceTvmSoftwareInventory (
