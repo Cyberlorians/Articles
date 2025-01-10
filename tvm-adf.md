@@ -126,3 +126,21 @@
     isExempt: bool
 )
 ```
+07- https://api-gcc.securitycenter.microsoft.us/api/Machines/BrowserExtensionsInventoryByMachine
+```
+.create table DeviceTVMBrowserExtensions (
+    TimeGenerated: datetime,
+    deviceId: string,
+    rbacGroupId: int,
+    rbacGroupName: string,
+    installationTime: datetime,
+    browserName: string,
+    extensionId: string,
+    extensionName: string,
+    extensionDescription: string,
+    extensionVersion: string,
+    extensionRisk: string,
+    extensionVendor: string,
+    isActivated: bool
+)
+```
