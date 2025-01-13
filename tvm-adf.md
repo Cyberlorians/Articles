@@ -132,7 +132,7 @@ https://techcommunity.microsoft.com/blog/azuredataexplorer/azure-data-factory-to
 ```
 07- https://api-gcc.securitycenter.microsoft.us/api/Machines/BrowserExtensionsInventoryByMachine
 ```
-.create table DeviceTVMBrowserExtensions (
+.create table DeviceTvmBrowserExtensions (
     TimeGenerated: datetime,
     deviceId: string,
     rbacGroupId: int,
@@ -150,7 +150,7 @@ https://techcommunity.microsoft.com/blog/azuredataexplorer/azure-data-factory-to
 ```
 08 - https://api-gcc.securitycenter.microsoft.us/api/vulnerabilities/machinesVulnerabilities
 ```
-.create table DeviceTVMSoftwareVulnerabilities (
+.create table DeviceTvmSoftwareVulnerabilities (
     TimeGenerated: datetime,
     id: string,
     cveId: string,
@@ -164,7 +164,7 @@ https://techcommunity.microsoft.com/blog/azuredataexplorer/azure-data-factory-to
 ```
 09 - https://api-gcc.securitycenter.microsoft.us/api/machines/CertificateAssessmentByMachine
 ```
-.create table DeviceTVMCertificateInfo (
+.create table DeviceTvmCertificateInfo (
     TimeGenerated: datetime,
     deviceId: string,
     deviceName: string,
