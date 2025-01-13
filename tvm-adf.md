@@ -151,6 +151,7 @@ https://techcommunity.microsoft.com/blog/azuredataexplorer/azure-data-factory-to
 08 - https://api-gcc.securitycenter.microsoft.us/api/vulnerabilities/machinesVulnerabilities
 ```
 .create table DeviceTVMSoftwareVulnerabilities (
+    TimeGenerated: datetime,
     id: string,
     cveId: string,
     machineId: string,
@@ -164,6 +165,7 @@ https://techcommunity.microsoft.com/blog/azuredataexplorer/azure-data-factory-to
 09 - https://api-gcc.securitycenter.microsoft.us/api/machines/CertificateAssessmentByMachine
 ```
 .create table DeviceTVMCertificateInfo (
+    TimeGenerated: datetime,
     deviceId: string,
     deviceName: string,
     thumbprint: string,
