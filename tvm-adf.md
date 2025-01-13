@@ -148,3 +148,37 @@ https://techcommunity.microsoft.com/blog/azuredataexplorer/azure-data-factory-to
     isActivated: bool
 )
 ```
+08 - https://api-gcc.securitycenter.microsoft.us/api/vulnerabilities/machinesVulnerabilities
+```
+.create table DeviceTVMSoftwareVulnerabilities (
+    id: string,
+    cveId: string,
+    machineId: string,
+    fixingKbId: string, 
+    productName: string,
+    productVendor: string,
+    productVersion: string,
+    severity: string
+)
+```
+09 - https://api-gcc.securitycenter.microsoft.us/api/machines/CertificateAssessmentByMachine
+```
+.create table DeviceTVMCertificateInfo (
+    deviceId: string,
+    deviceName: string,
+    thumbprint: string,
+    path: string,
+    signatureAlgorithm: string,
+    keySize: int,
+    expirationDate: datetime,
+    issueDate: datetime,
+    subjectType: string,
+    serialNumber: string,
+    issuedTo: dynamic,
+    issuedBy: dynamic,
+    keyUsage: dynamic,
+    extendedKeyUsage: dynamic,
+    rbacGroupId: int,
+    rbacGroupName: string
+)
+```
