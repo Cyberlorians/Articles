@@ -6,7 +6,7 @@ The current environment(s) I have been working in are currently at 2016+ OS leve
 
 Before I begin, please open another browser window with the prerequisite screen side by side with this article. The setup below will work with FIPS enabled, if you cannot get approval to turn of FIPS for the server (recommended).
 
-CloudSync should be installed on an on-premises member server (can be an Azure IaaS VM as well), Windows 2016 and later. This member server should be a member of the Tier0 (Identity Tier) or installing the agent on a Domain Controller is supported. 
+CloudSync should be installed on a member server (can be an Azure IaaS VM as well), Windows 2019 and later. This member server should be a member of the Tier0 (Identity Tier) or installing the agent on a Domain Controller is supported. 
 
 *Disclaimer:* Please continue to install on a Tier0 member server. 
 
