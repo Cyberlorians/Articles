@@ -13,28 +13,20 @@ Lacking permissions for the Identity plane prevents access to view Conditional A
 1.  **Open Azure PowerShell via the browser & Paste the below code.**
 
 ```
-connect-azuread
+if(-not(Get-Module -ListAvailable -Name Microsoft.Graph.Authentication)){Install-Module Microsoft.Graph.Authentication -Scope CurrentUser -Force}Import-Module Microsoft.Graph.Authentication
 
-$miObjectID = $null
-Write-Host "Looking for Managed Identity with default prefix names of the Logic App..."
-$miObjectIDs = @()
-$miObjectIDs = (Get-AzureADServicePrincipal -SearchString "TenantCAPols-Ingest").ObjectId
-if ($miObjectIDs -eq $null) {
-   $miObjectIDs = Read-Host -Prompt "Enter ObjectId of Managed Identity (from Logic App):"
-}
-
-# The app ID of the Microsoft Graph API where we want to assign the permissions
-$appId = "00000003-0000-0000-c000-000000000000"
-$permissionsToAdd = @("policy.Read.All")
-$app = Get-AzureADServicePrincipal -Filter "AppId eq '$appId'"
-
-foreach ($miObjectID in $miObjectIDs) {
-    foreach ($permission in $permissionsToAdd) {
-    Write-Host $permission
-    $role = $app.AppRoles | where Value -Like $permission | Select-Object -First 1
-    New-AzureADServiceAppRoleAssignment -Id $role.Id -ObjectId $miObjectID -PrincipalId $miObjectID -ResourceId $app.ObjectId
-    }
-}
+Connect-MgGraph -Scopes Application.Read.All, AppRoleAssignment.ReadWrite.All  -UseDeviceAuthentication
+$miName="TenantCAPols-Ingest"
+Write-Host "Searching for Managed Identity: $miName..."
+$managedIdentity=Get-MgServicePrincipal -Filter "displayName eq '$miName'"
+if($null -eq $managedIdentity){$miObjectId=Read-Host -Prompt "Managed Identity not found. Enter ObjectId manually:"}else{$miObjectId=$managedIdentity.Id}
+$appId="00000003-0000-0000-c000-000000000000"
+$permissionsToAdd=@("Policy.Read.All")
+$app=Get-MgServicePrincipal -Filter "appId eq '$appId'"
+foreach($permission in $permissionsToAdd){Write-Host "Assigning: $permission"
+$role=$app.AppRoles | Where-Object Value -eq $permission | Select-Object -First 1
+$params=@{principalId=$miObjectId;resourceId=$app.Id;appRoleId=$role.Id}
+New-MgServicePrincipalAppRoleAssignment -ServicePrincipalId $miObjectId -BodyParameter $params}
 ```
 
 1(a). *If applicable, change http calls*. Configure your endpoint based off what graph environment you are working with. Please adjust the logic app http call per the tenant you are working in. Commercial & GCC use the same API call, Gov will need to be adjust.
