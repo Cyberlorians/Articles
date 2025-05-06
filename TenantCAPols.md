@@ -19,8 +19,11 @@ if (-not (Get-Module -ListAvailable -Name Microsoft.Graph.Authentication)) {
 }
 Import-Module Microsoft.Graph.Authentication
 
-# Connect to Microsoft Graph using device authentication
+# Connect to Microsoft Graph using device authentication - Commercial & GCC Environment
 Connect-MgGraph -Scopes Application.Read.All, AppRoleAssignment.ReadWrite.All -UseDeviceAuthentication
+
+# Connect to Microsoft Graph using device authentication - GCCH - Uncomment Next Line
+# Connect-MgGraph -Scopes Application.Read.All, AppRoleAssignment.ReadWrite.All -Environment USGov -UseDeviceAuthentication
 
 # Define the name of the Managed Identity
 $miName = "TenantCAPols-Ingest"
