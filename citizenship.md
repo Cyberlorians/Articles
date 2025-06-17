@@ -153,7 +153,7 @@ Once your Logic App is created, follow these steps to configure it in the Design
 1. On the left blade of the Logic App, under **Settings**, select **Identity**.
 2. Turn on **System assigned managed identity**.
 3. Your setup should look similar to the example below:  
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen09)
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen09.png)
 4. Connect to PowerShell (either on the client endpoint or via Azure CLI PowerShell).
 5. Enter the following code to assign the required Microsoft Graph permissions:
 
