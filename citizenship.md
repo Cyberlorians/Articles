@@ -6,7 +6,7 @@ Follow these steps to set up a Logic App as a custom extension in Entra Identity
 
 ## 1️⃣ Navigate to **Entra Identity Governance**
 
-- Go to **Entra** > **Identity Governance** in your Azure portal.
+- Go to **Entra** &gt; **Identity Governance** in your Azure portal.
 
 ---
 
@@ -36,7 +36,7 @@ Follow these steps to set up a Logic App as a custom extension in Entra Identity
     ### 🛠️ c. Extension Configuration
     - **Behavior:**  
       Select `Launch and continue`
-      > 💡 *This ensures the entitlement management governance process continues when the Logic App is launched.*
+      &gt; 💡 *This ensures the entitlement management governance process continues when the Logic App is launched.*
 
     ### 💾 d. Save and Create
     - Under **Details**, select **Logic App** as the type.
@@ -59,17 +59,10 @@ Once your Logic App is created, follow these steps to configure it in the Design
     ```
 
 4. Your setup should look similar to the example below:  
-   ![]([https://github.com/Cyberlorians/uploadedimagese](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen1.png)
-   
-1. After the **Compose** action, click **+ New step**.
+   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/cthe **Compose** action, click **+ New step**.
 2. Search for and select **Initialize variable**.
 3. Set the **Name** to `initcitiz`.
 4. Set the **Type** to `String`.
 5. Set the **Value** to the output of the **Compose** action (select it from the dynamic content list).
 6. Your setup should look similar to the example below:  
-   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen02.png)
-
----
-
-🎉 **You’re all set for this step!**  
-Next, you’ll continue building out your Logic App and set permissions as needed.
+   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen building out your Logic App and set permissions as needed.
