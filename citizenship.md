@@ -79,6 +79,15 @@ Once your Logic App is created, follow these steps to configure it in the Design
 4. Enter the **Object ID** that is associated with the catalog you created.
 5. Your setup should look similar to the example below:  
    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen03.png)
+### 🏗️ Step 4: Add a Delay in the True Branch of the Condition
+
+1. Drill down into the **Condition** action and select the **true** branch.
+2. Click **+ Add an action**.
+3. Search for and select **Delay**.
+4. Set the **Count** to `25`.
+5. Set the **Unit** to `Seconds`.
+6. Your setup should look similar to the example below:  
+   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen04.png)
 
 ---
 
