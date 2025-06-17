@@ -59,7 +59,7 @@ Once your Logic App is created, follow these steps to configure it in the Design
     ```
 
 4. Your setup should look similar to the example below:  
-   ![Compose Action Example](https://github.com/Cyose action setup in Logic App Designer*</sub>
+   ![Compose Action Example](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen1.png)
 
 ---
 
