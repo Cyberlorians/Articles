@@ -59,7 +59,8 @@ Once your Logic App is created, follow these steps to configure it in the Design
     ```
 
 4. Your setup should look similar to the example below:  
-   ![](https://github.com/Cyberlorians/uploadedimagese
+   ![]([https://github.com/Cyberlorians/uploadedimagese](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen1.png)
+   
 1. After the **Compose** action, click **+ New step**.
 2. Search for and select **Initialize variable**.
 3. Set the **Name** to `initcitiz`.
