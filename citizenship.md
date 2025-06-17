@@ -107,10 +107,18 @@ Once your Logic App is created, follow these steps to configure it in the Design
     ```
     https://graph.microsoft.com
     ```
-
 10. Your setup should look similar to the example below:  
     ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen05.png)
+    
+### 🏗️ Step 6: Update Condition 2 with assignmentRequestApproved
 
+1. Navigate to **Condition 2** in your flow.
+2. In the condition’s criteria, after **is equal to**, enter:
+    ```
+    assignmentRequestApproved
+    ```
+Your setup should look similar to the example below:  
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen06.png)
 ---
 
 🎉 **You’re all set for this step!**  
