@@ -117,7 +117,7 @@ Once your Logic App is created, follow these steps to configure it in the Design
     ```
     assignmentRequestApproved
     ```
-Your setup should look similar to the example below:  
+3. Your setup should look similar to the example below:  
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen06.png)
 ---
 
