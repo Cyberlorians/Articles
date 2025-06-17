@@ -148,5 +148,71 @@ Once your Logic App is created, follow these steps to configure it in the Design
 11. Your setup should look similar to the example below:  
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen07.png)
 
+### 🏗️ Step 8: Enable System-Assigned Managed Identity and Assign Permissions
+
+1. On the left blade of the Logic App, under **Settings**, select **Identity**.
+2. Turn on **System assigned managed identity**.
+3. Your setup should look similar to the example below:  
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen09)
+4. Connect to PowerShell (either on the client endpoint or via Azure CLI PowerShell).
+5. Enter the following code to assign the required Microsoft Graph permissions:
+
+    ```powershell
+    # Install Microsoft Graph module if not already available
+    if (-not (Get-Module -ListAvailable -Name Microsoft.Graph.Authentication)) {
+        Install-Module Microsoft.Graph.Authentication -Scope CurrentUser -Force
+    }
+    Import-Module Microsoft.Graph.Authentication
+    # Connect to Microsoft Graph using device authentication - Commercial & GCC Environment
+    Connect-MgGraph -Scopes Application.Read.All, AppRoleAssignment.ReadWrite.All -UseDeviceAuthentication
+
+    # Connect to Microsoft Graph using device authentication - GCCH - Uncomment Next Line
+    # Connect-MgGraph -Scopes Application.Read.All, AppRoleAssignment.ReadWrite.All -Environment USGov -UseDeviceAuthentication
+
+    # Define the name of the Managed Identity
+    $miName = "CitizenshipVerification_LA"
+    Write-Host "Searching for Managed Identity: $miName..."
+
+    # Attempt to retrieve the Managed Identity
+    $managedIdentity = Get-MgServicePrincipal -Filter "displayName eq '$miName'"
+
+    # Fallback: Ask for ObjectId if not found
+    if ($null -eq $managedIdentity) {
+        $miObjectId = Read-Host -Prompt "Managed Identity not found. Enter ObjectId manually:"
+    } else {
+        $miObjectId = $managedIdentity.Id
+    }
+
+    # Microsoft Graph application ID
+    $appId = "00000003-0000-0000-c000-000000000000"
+
+    # Define required permissions to assign
+    $permissionsToAdd = @("User.ReadWrite.All")
+
+    # Get the Microsoft Graph service principal
+    $graphSp = Get-MgServicePrincipal -Filter "appId eq '$appId'"
+
+    # Assign each required permission to the Managed Identity
+    foreach ($permission in $permissionsToAdd) {
+        Write-Host "Assigning: $permission"
+
+        # Find the matching AppRole
+        $role = $graphSp.AppRoles | Where-Object { $_.Value -eq $permission } | Select-Object -First 1
+
+        # Build assignment parameters
+        $params = @{
+            PrincipalId       = $miObjectId
+            ResourceId        = $graphSp.Id
+            AppRoleId         = $role.Id
+        }
+
+        # Create the app role assignment
+        New-MgServicePrincipalAppRoleAssignment -ServicePrincipalId $miObjectId -BodyParameter $params
+    }
+
+    # Disconnect from Microsoft Graph
+    Disconnect-MgGraph
+    ```
+
 🎉 **You’re all set for this step!**  
 Next, you’ll continue building out your Logic App and set permissions as needed.
