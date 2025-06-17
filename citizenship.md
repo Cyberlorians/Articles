@@ -120,6 +120,33 @@ Once your Logic App is created, follow these steps to configure it in the Design
 3. Your setup should look similar to the example below:  
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen06.png)
 ---
+### 🏗️ Step 7: Add an HTTP PATCH Action in Condition 2 (True Branch)
+
+1. Within **Condition 2**, go to the **true** branch.
+2. Click **+ Add an action** and select **HTTP**.
+3. Set the **Action name** to `http-updateuser`.
+4. Set the **Method** to `PATCH`.
+5. Set the **URI** to:
+    ```
+    https://graph.microsoft.com/v1.0/users/@{body('HTTP-GetId')?['value']?[0]?['id']}
+    ```
+6. Under **Headers**, add:
+    - **Key:** `Content-Type`
+    - **Value:** `application/json`
+7. For the **Body**, enter:
+    ```
+    {
+      "displayName": "@{triggerBody()?['Requestor']?['DisplayName']} (EXT) (@{variables('InitCitiz')})"
+    }
+    ```
+8. For **Authentication type**, select `Managed identity`.
+9. For **Managed identity**, choose `System-assigned managed identity`.
+10. For **Audience**, enter:
+    ```
+    https://graph.microsoft.com
+    ```
+11. Your setup should look similar to the example below:  
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen07.png)
 
 🎉 **You’re all set for this step!**  
 Next, you’ll continue building out your Logic App and set permissions as needed.
