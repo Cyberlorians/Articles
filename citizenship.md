@@ -44,5 +44,25 @@ Follow these steps to set up a Logic App as a custom extension in Entra Identity
 
 ---
 
-🎉 **You’re all set!**  
-Your Logic App custom extension is now ready to be used in your entitlement management workflows.
+## 4️⃣ Build the Logic App in Designer
+
+Once your Logic App is created, follow these steps to configure it in the Designer:
+
+### 🏗️ Step 1: Add a Compose Action
+
+1. In the Logic App Designer, click **+ New step**.
+2. Search for and select the **Compose** action.
+3. In the **Inputs** field, enter the following function code (including the single quotes):
+
+    ```
+    'triggerBody()?['answers'][0]['Value']'
+    ```
+
+4. Your setup should look similar to the example below:  
+   !Compose Action Example
+
+---
+
+🎉 **You’re all set for this step!**  
+Next, you’ll continue building out your Logic App and set permissions as needed.
+
