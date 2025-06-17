@@ -225,6 +225,13 @@ Once your Logic App is created, follow these steps to configure it in the Design
 6. Click **Require Attributes** for the group.
 7. In the **Attributes** panel, configure the required attributes as shown in the screenshot below:
     ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen12.png)
+### 🏗️ Step 10: Create an Access Package and Configure Request Information
+
+1. Go to the **Access Packages** section.
+2. Click **+ New Access Package**.
+3. Fill in the required details for the access package (name, description, etc.).
+4. Under **Request Information**, configure the settings as shown in the screenshot below:
+     ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen13.png)
 
 🎉 **You’re all set for this step!**  
 Next, you’ll continue building out your Logic App and set permissions as needed.
