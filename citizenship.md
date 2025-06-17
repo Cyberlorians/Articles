@@ -59,10 +59,9 @@ Once your Logic App is created, follow these steps to configure it in the Design
     ```
 
 4. Your setup should look similar to the example below:  
-   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen1.png)
+   ![Compose Action Example](https://github.com/Cyose action setup in Logic App Designer*</sub>
 
 ---
 
 🎉 **You’re all set for this step!**  
 Next, you’ll continue building out your Logic App and set permissions as needed.
-
