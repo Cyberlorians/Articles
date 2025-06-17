@@ -213,6 +213,8 @@ Once your Logic App is created, follow these steps to configure it in the Design
     # Disconnect from Microsoft Graph
     Disconnect-MgGraph
     ```
+3. Your setup should look similar to the example below:  Permissions should be set.
+![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen10.png)
 
 🎉 **You’re all set for this step!**  
 Next, you’ll continue building out your Logic App and set permissions as needed.
