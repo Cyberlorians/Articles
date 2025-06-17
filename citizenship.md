@@ -59,7 +59,20 @@ Once your Logic App is created, follow these steps to configure it in the Design
     ```
 
 4. Your setup should look similar to the example below:  
-   ![Compose Action Example](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen1.png)
+   !Compose Action Example  
+   <sub>*Figure: Compose action setup in Logic App Designer*</sub>
+
+---
+
+### 🏗️ Step 2: Add an `initcitiz` Variable
+
+1. After the **Compose** action, click **+ New step**.
+2. Search for and select **Initialize variable**.
+3. Set the **Name** to `initcitiz`.
+4. Configure the **Type** and **Value** as needed for your workflow.
+
+5. Your setup should look similar to the example below:  
+   ![Initialize Variable Example](https://github.com/Cyberlorians/uploadedimages/blob/main Designer*</sub>
 
 ---
 
