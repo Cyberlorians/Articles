@@ -216,5 +216,15 @@ Once your Logic App is created, follow these steps to configure it in the Design
 3. Your setup should look similar to the example below:  Permissions should be set.
 ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen10.png)
 
+### 🏗️ Step 9: Add a Resource Group and Configure Required Attributes
+1. Go back to the **Catalog** and select the **Resources** tab.
+2. Click **+ New Resource**.
+3. Select **Group** as the resource type.
+4. Name your group as needed (e.g., `Approved Users Group`).
+   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen11.png)
+6. Click **Require Attributes** for the group.
+7. In the **Attributes** panel, configure the required attributes as shown in the screenshot below:
+    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen12.png)
+
 🎉 **You’re all set for this step!**  
 Next, you’ll continue building out your Logic App and set permissions as needed.
