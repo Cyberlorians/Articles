@@ -71,6 +71,15 @@ Once your Logic App is created, follow these steps to configure it in the Design
 6. Your setup should look similar to the example below:  
    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen02.png)
 
+### 🏗️ Step 3: Configure the Condition
+
+1. Select the **Condition** action in your Logic App Designer.
+2. In the condition, set the first value to the relevant field (such as the Object ID from your previous steps or dynamic content).
+3. Set the condition to **is equal to**.
+4. Enter the **Object ID** that is associated with the catalog you created.
+5. Your setup should look similar to the example below:  
+   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen03.png)
+
 ---
 
 🎉 **You’re all set for this step!**  
