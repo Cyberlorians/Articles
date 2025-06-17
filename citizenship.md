@@ -1,161 +1,127 @@
 # 🚀 How to Create a Custom Extension in Entra Identity Governance
-
 Follow these steps to set up a Logic App as a custom extension in Entra Identity Governance:
 
 ---
 
-## 1️⃣ Navigate to **Entra Identity Governance**
-
-- Go to **Entra** &gt; **Identity Governance** in your Azure portal.
+## 1️⃣ Navigate to Entra Identity Governance
+-   Go to **Entra** > **Identity Governance** in your Azure portal.
 
 ---
 
 ## 2️⃣ Create a 📦 Catalog
-
-- Select **Catalogs** from the left menu.
-- Click **➕ New catalog** and fill in the required details.
-
----
-
-## 3️⃣ Create a 🧩 Custom Extension
-
-- Under your catalog, select **Custom Extensions**.
-- Click **➕ New custom extension**.
-
-    ### 🏷️ a. Name and Details
-    - **Name:**  
-      Example: `CitizenshipVerification_LA`
-    - **Description:**  
-      Provide a meaningful description for your extension.
-
-    ### ⚙️ b. Extension Type
-    - **Choose:**  
-      `Request workflow`  
-      *(Triggered when an access package is requested, approved, granted, or removed)*
-
-    ### 🛠️ c. Extension Configuration
-    - **Behavior:**  
-      Select `Launch and continue`
-      &gt; 💡 *This ensures the entitlement management governance process continues when the Logic App is launched.*
-
-    ### 💾 d. Save and Create
-    - Under **Details**, select **Logic App** as the type.
-    - Click **Create** to finish.
+1.  Select **Catalogs** from the left menu.
+2.  Click **➕ New catalog** and fill in the required details.
 
 ---
 
-## 4️⃣ Build the Logic App in Designer
+## 3️⃣ Create and Configure the 🧩 Custom Extension
+1.  Under your catalog, select **Custom Extensions**.
+2.  Click **➕ New custom extension**.
 
+#### a. Name and Details
+-   **Name:** `CitizenshipVerification_LA`
+-   **Description:** Provide a meaningful description for your extension.
+
+#### b. Extension Type
+-   **Choose:** `Request workflow` 
+    *(This is triggered when an access package is requested, approved, granted, or removed)*
+
+#### c. Extension Configuration
+-   **Behavior:** Select `Launch and continue`
+    > 💡 *This ensures the entitlement management governance process continues when the Logic App is launched.*
+
+#### d. Save and Create
+1.  Under **Details**, select **Logic App** as the type.
+2.  Click **Create** to finish.
+
+---
+
+## 4️⃣ Build the Logic App in the Designer
 Once your Logic App is created, follow these steps to configure it in the Designer:
 
 ### 🏗️ Step 1: Add a Compose Action
-
-1. In the Logic App Designer, click **+ New step**.
-2. Search for and select the **Compose** action.
-3. In the **Inputs** field, enter the following function code (including the single quotes):
-
+1.  In the Logic App Designer, click **+ New step**.
+2.  Search for and select the **Compose** action.
+3.  In the **Inputs** field, enter the following function code (including the single quotes):
     ```
     'triggerBody()?['answers'][0]['Value']'
     ```
-
-4. Your setup should look similar to the example below:  
-   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen1.png)
+4.  Your setup should look similar to the example below:
+    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen1.png)
 
 ### 🏗️ Step 2: Add an `initcitiz` Variable
-
-1. After the **Compose** action, click **+ New step**.
-2. Search for and select **Initialize variable**.
-3. Set the **Name** to `initcitiz`.
-4. Set the **Type** to `String`.
-5. Set the **Value** to the output of the **Compose** action (select it from the dynamic content list).
-6. Your setup should look similar to the example below:  
-   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen02.png)
+1.  After the **Compose** action, click **+ New step**.
+2.  Search for and select **Initialize variable**.
+3.  Set the **Name** to `initcitiz`.
+4.  Set the **Type** to `String`.
+5.  Set the **Value** to the output of the **Compose** action (select it from the dynamic content list).
+6.  Your setup should look similar to the example below:
+    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen02.png)
 
 ### 🏗️ Step 3: Configure the Condition
+1.  Select the **Condition** action in your Logic App Designer.
+2.  In the condition, set the first value to the relevant field (such as the Object ID from your previous steps or dynamic content).
+3.  Set the condition to **is equal to**.
+4.  Enter the **Object ID** that is associated with the catalog you created.
+5.  Your setup should look similar to the example below:
+    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen03.png)
 
-1. Select the **Condition** action in your Logic App Designer.
-2. In the condition, set the first value to the relevant field (such as the Object ID from your previous steps or dynamic content).
-3. Set the condition to **is equal to**.
-4. Enter the **Object ID** that is associated with the catalog you created.
-5. Your setup should look similar to the example below:  
-   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen03.png)
-### 🏗️ Step 4: Add a Delay in the True Branch of the Condition
+### 🏗️ Step 4: Add a Delay
+1.  Drill down into the **Condition** action and select the **true** branch.
+2.  Click **+ Add an action**.
+3.  Search for and select **Delay**.
+4.  Set the **Count** to `25` and the **Unit** to `Seconds`.
+5.  Your setup should look similar to the example below:
+    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen04.png)
 
-1. Drill down into the **Condition** action and select the **true** branch.
-2. Click **+ Add an action**.
-3. Search for and select **Delay**.
-4. Set the **Count** to `25`.
-5. Set the **Unit** to `Seconds`.
-6. Your setup should look similar to the example below:  
-   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen04.png)
 ### 🏗️ Step 5: Add an HTTP GET Action
-
-1. In the **true** branch after the Delay, click **+ Add an action**.
-2. Search for and select **HTTP**.
-3. Set the **Action name** to `http-getid`.
-4. Set the **Method** to `GET`.
-5. Set the **URI** to:
+1.  In the **true** branch after the Delay, click **+ Add an action**.
+2.  Search for and select the **HTTP** action.
+3.  Set the **Action name** to `http-getid`.
+4.  Set the **Method** to `GET`.
+5.  Set the **URI** to:
     ```
-    https://graph.microsoft.com/v1.0/users?$filter=mail eq '@{triggerBody()?['Requestor']?['Email']}'
+    [https://graph.microsoft.com/v1.0/users?$filter=mail](https://graph.microsoft.com/v1.0/users?$filter=mail) eq '@{triggerBody()?['Requestor']?['Email']}'
     ```
-6. Under **Headers**, add:
-    - **Key:** `Content-Type`
-    - **Value:** `application/json`
-7. For **Authentication type**, select `Managed identity`.
-8. For **Managed identity**, choose `System-assigned managed identity`.
-9. For **Audience**, enter:
+6.  Under **Headers**, add:
+    -   **Key:** `Content-Type`
+    -   **Value:** `application/json`
+7.  For **Authentication type**, select `Managed identity`, choose `System-assigned managed identity`, and set the **Audience** to:
     ```
-    https://graph.microsoft.com
+    [https://graph.microsoft.com](https://graph.microsoft.com)
     ```
-10. Your setup should look similar to the example below:  
+8.  Your setup should look similar to the example below:
     ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen05.png)
-    
-### 🏗️ Step 6: Update Condition 2 with assignmentRequestApproved
 
-1. Navigate to **Condition 2** in your flow.
-2. In the condition’s criteria, after **is equal to**, enter:
-    ```
-    assignmentRequestApproved
-    ```
-3. Your setup should look similar to the example below:  
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen06.png)
----
-### 🏗️ Step 7: Add an HTTP PATCH Action in Condition 2 (True Branch)
+### 🏗️ Step 6: Update Condition 2
+1.  Navigate to the second **Condition** action in your flow.
+2.  In the condition’s criteria, set the value to check for `assignmentRequestApproved`.
+3.  Your setup should look similar to the example below:
+    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen06.png)
 
-1. Within **Condition 2**, go to the **true** branch.
-2. Click **+ Add an action** and select **HTTP**.
-3. Set the **Action name** to `http-updateuser`.
-4. Set the **Method** to `PATCH`.
-5. Set the **URI** to:
+### 🏗️ Step 7: Add an HTTP PATCH Action
+1.  Within **Condition 2**, go to the **true** branch.
+2.  Click **+ Add an action** and select **HTTP**.
+3.  Set the **Action name** to `http-updateuser` and the **Method** to `PATCH`.
+4.  Set the **URI** to:
     ```
-    https://graph.microsoft.com/v1.0/users/@{body('HTTP-GetId')?['value']?[0]?['id']}
+    [https://graph.microsoft.com/v1.0/users/](https://graph.microsoft.com/v1.0/users/)@{body('HTTP-GetId')?['value']?[0]?['id']}
     ```
-6. Under **Headers**, add:
-    - **Key:** `Content-Type`
-    - **Value:** `application/json`
-7. For the **Body**, enter:
-    ```
+5.  For the **Body**, enter:
+    ```json
     {
       "displayName": "@{triggerBody()?['Requestor']?['DisplayName']} (EXT) (@{variables('InitCitiz')})"
     }
     ```
-8. For **Authentication type**, select `Managed identity`.
-9. For **Managed identity**, choose `System-assigned managed identity`.
-10. For **Audience**, enter:
-    ```
-    https://graph.microsoft.com
-    ```
-11. Your setup should look similar to the example below:  
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen07.png)
+6.  Set up **Authentication** using `Managed identity` as you did in Step 5.
+7.  Your setup should look similar to the example below:
+    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen07.png)
 
-### 🏗️ Step 8: Enable System-Assigned Managed Identity and Assign Permissions
-
-1. On the left blade of the Logic App, under **Settings**, select **Identity**.
-2. Turn on **System assigned managed identity**.
-3. Your setup should look similar to the example below:  
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen09.png)
-4. Connect to PowerShell (either on the client endpoint or via Azure CLI PowerShell).
-5. Enter the following code to assign the required Microsoft Graph permissions:
+### 🏗️ Step 8: Enable Managed Identity and Assign Permissions
+1.  On the main menu for the Logic App, under **Settings**, select **Identity**.
+2.  Turn the **Status** for the **System assigned** identity to **On** and save.
+    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen09.png)
+3.  Connect to PowerShell and run the following script to assign the required `User.ReadWrite.All` Microsoft Graph permission to your Logic App's managed identity.
 
     ```powershell
     # Install Microsoft Graph module if not already available
@@ -163,6 +129,7 @@ Once your Logic App is created, follow these steps to configure it in the Design
         Install-Module Microsoft.Graph.Authentication -Scope CurrentUser -Force
     }
     Import-Module Microsoft.Graph.Authentication
+    
     # Connect to Microsoft Graph using device authentication - Commercial & GCC Environment
     Connect-MgGraph -Scopes Application.Read.All, AppRoleAssignment.ReadWrite.All -UseDeviceAuthentication
 
@@ -201,9 +168,9 @@ Once your Logic App is created, follow these steps to configure it in the Design
 
         # Build assignment parameters
         $params = @{
-            PrincipalId       = $miObjectId
-            ResourceId        = $graphSp.Id
-            AppRoleId         = $role.Id
+            PrincipalId      = $miObjectId
+            ResourceId       = $graphSp.Id
+            AppRoleId        = $role.Id
         }
 
         # Create the app role assignment
@@ -213,25 +180,20 @@ Once your Logic App is created, follow these steps to configure it in the Design
     # Disconnect from Microsoft Graph
     Disconnect-MgGraph
     ```
-3. Your setup should look similar to the example below:  Permissions should be set.
-![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen10.png)
+4.  After running the script, your permissions should be set.
+    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen10.png)
 
-### 🏗️ Step 9: Add a Resource Group and Configure Required Attributes
-1. Go back to the **Catalog** and select the **Resources** tab.
-2. Click **+ New Resource**.
-3. Select **Group** as the resource type.
-4. Name your group as needed (e.g., `Approved Users Group`).
-   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen11.png)
-6. Click **Require Attributes** for the group.
-7. In the **Attributes** panel, configure the required attributes as shown in the screenshot below:
+### 🏗️ Step 9: Add Resources and Attributes to the Catalog
+1.  Go back to the **Catalog** you created and select the **Resources** tab.
+2.  Click **+ New Resource** and add the **Group** you want users to be added to (e.g., `Approved Users Group`).
+    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen11.png)
+3.  Click the group and select **Require Attributes** to configure them as needed.
     ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen12.png)
-### 🏗️ Step 10: Create an Access Package and Configure Request Information
 
-1. Go to the **Access Packages** section.
-2. Click **+ New Access Package**.
-3. Fill in the required details for the access package (name, description, etc.).
-4. Under **Request Information**, configure the settings as shown in the screenshot below:
-     ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen13.png)
+### 🏗️ Step 10: Create an Access Package
+1.  Navigate to the **Access Packages** section and click **+ New Access Package**.
+2.  Fill in the required details.
+3.  Under the **Request information** section, configure the required questions and attributes for your package.
+    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen13.png)
 
-🎉 **You’re all set for this step!**  
-Next, you’ll continue building out your Logic App and set permissions as needed.
+🎉 **You’re all set!** Next, you would link this custom extension to the access package policy to complete the workflow.
