@@ -22,38 +22,25 @@ Follow these steps to set up a Logic App as a custom extension in Entra Identity
 - Under your catalog, select **Custom Extensions**.
 - Click **➕ New custom extension**.
 
----
+    ### 🏷️ a. Name and Details
+    - **Name:**  
+      Example: `CitizenshipVerification_LA`
+    - **Description:**  
+      Provide a meaningful description for your extension.
 
-### 🏷️ Name and Details
+    ### ⚙️ b. Extension Type
+    - **Choose:**  
+      `Request workflow`  
+      *(Triggered when an access package is requested, approved, granted, or removed)*
 
-- **Name:**  
-  Example: `CitizenshipVerification_LA`
-- **Description:**  
-  Provide a meaningful description for your extension.
+    ### 🛠️ c. Extension Configuration
+    - **Behavior:**  
+      Select `Launch and continue`
+      > 💡 *This ensures the entitlement management governance process continues when the Logic App is launched.*
 
----
-
-### ⚙️ Extension Type
-
-- **Choose:**  
-  `Request workflow`  
-  *(Triggered when an access package is requested, approved, granted, or removed)*
-
----
-
-### 🛠️ Extension Configuration
-
-- **Behavior:**  
-  Select `Launch and continue`
-
-  > 💡 *This ensures the entitlement management governance process continues when the Logic App is launched.*
-
----
-
-### 💾 Save and Create
-
-- Under **Details**, select **Logic App** as the type.
-- Click **Create** to finish.
+    ### 💾 d. Save and Create
+    - Under **Details**, select **Logic App** as the type.
+    - Click **Create** to finish.
 
 ---
 
