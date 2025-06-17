@@ -88,6 +88,28 @@ Once your Logic App is created, follow these steps to configure it in the Design
 5. Set the **Unit** to `Seconds`.
 6. Your setup should look similar to the example below:  
    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen04.png)
+### 🏗️ Step 5: Add an HTTP GET Action
+
+1. In the **true** branch after the Delay, click **+ Add an action**.
+2. Search for and select **HTTP**.
+3. Set the **Action name** to `http-getid`.
+4. Set the **Method** to `GET`.
+5. Set the **URI** to:
+    ```
+    https://graph.microsoft.com/v1.0/users?$filter=mail eq '@{triggerBody()?['Requestor']?['Email']}'
+    ```
+6. Under **Headers**, add:
+    - **Key:** `Content-Type`
+    - **Value:** `application/json`
+7. For **Authentication type**, select `Managed identity`.
+8. For **Managed identity**, choose `System-assigned managed identity`.
+9. For **Audience**, enter:
+    ```
+    https://graph.microsoft.com
+    ```
+
+10. Your setup should look similar to the example below:  
+    ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen05.png)
 
 ---
 
