@@ -72,7 +72,7 @@ Once your Logic App is created, follow these steps to configure it in the Design
 4. Configure the **Type** and **Value** as needed for your workflow.
 
 5. Your setup should look similar to the example below:  
-   ![Initialize Variable Example](https://github.com/Cyberlorians/uploadedimages/blob/main Designer*</sub>
+   ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen02.png)
 
 ---
 
