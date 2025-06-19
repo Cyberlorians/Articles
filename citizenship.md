@@ -110,10 +110,12 @@ https://graph.microsoft.com/v1.0/users?$filter=mail eq '@{triggerBody()?['Reques
 
     ```
 5.  For the **Body**, enter:
-    ```json
+    ```
+    
    {
   "displayName": "@{body('HTTP-GetId')?['value'][0]['surname']}, @{body('HTTP-GetId')?['value'][0]['givenName']} (EXT) (@{variables('InitCitiz')})"
-}
+   }
+   
     ```
 6.  Set up **Authentication** using `Managed identity` as you did in Step 5.
 7.  Your setup should look similar to the example below:
