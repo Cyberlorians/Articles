@@ -80,10 +80,10 @@ Once your Logic App is created, follow these steps to configure it in the Design
 3.  Set the **Action name** to `http-getid`.
 4.  Set the **Method** to `GET`.
 5.  Set the **URI** to:
-    ```
-   
+```
 https://graph.microsoft.com/v1.0/users?$filter=mail eq '@{triggerBody()?['Requestor']?['Email']}'
-    ```
+```
+
 6.  Under **Headers**, add:
     -   **Key:** `Content-Type`
     -   **Value:** `application/json`
