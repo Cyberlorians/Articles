@@ -106,13 +106,14 @@ https://graph.microsoft.com/v1.0/users?$filter=mail eq '@{triggerBody()?['Reques
 3.  Set the **Action name** to `http-updateuser` and the **Method** to `PATCH`.
 4.  Set the **URI** to:
     ```
-    [https://graph.microsoft.com/v1.0/users/](https://graph.microsoft.com/v1.0/users/)@{body('HTTP-GetId')?['value']?[0]?['id']}
+    https://graph.microsoft.com/v1.0/users/@{body('HTTP-GetId')?['value']?[0]?['id']
+
     ```
 5.  For the **Body**, enter:
     ```json
-    {
-      "displayName": "@{triggerBody()?['Requestor']?['DisplayName']} (EXT) (@{variables('InitCitiz')})"
-    }
+   {
+  "displayName": "@{body('HTTP-GetId')?['value'][0]['surname']}, @{body('HTTP-GetId')?['value'][0]['givenName']} (EXT) (@{variables('InitCitiz')})"
+}
     ```
 6.  Set up **Authentication** using `Managed identity` as you did in Step 5.
 7.  Your setup should look similar to the example below:
