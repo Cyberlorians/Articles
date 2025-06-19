@@ -89,7 +89,7 @@ https://graph.microsoft.com/v1.0/users?$filter=mail eq '@{triggerBody()?['Reques
     -   **Value:** `application/json`
 7.  For **Authentication type**, select `Managed identity`, choose `System-assigned managed identity`, and set the **Audience** to:
     ```
-    [https://graph.microsoft.com](https://graph.microsoft.com)
+    https://graph.microsoft.com
     ```
 8.  Your setup should look similar to the example below:
     ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen05.png)
