@@ -77,7 +77,7 @@ Once your Logic App is created, follow these steps to configure it in the Design
 ### 🏗️ Step 5: Add an HTTP GET Action
 1.  In the **true** branch after the Delay, click **+ Add an action**.
 2.  Search for and select the **HTTP** action.
-3.  Set the **Action name** to `http-getid`.
+3.  Set the **Action name** to `HTTP-GetId`.
 4.  Set the **Method** to `GET`.
 5.  Set the **URI** to:
 ```
