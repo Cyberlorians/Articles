@@ -186,13 +186,22 @@ https://graph.microsoft.com/v1.0/users?$filter=mail eq '@{triggerBody()?['Reques
     ```
 4.  After running the script, your permissions should be set.
     ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen10.png)
-
+    
 ### 🏗️ Step 9: Add Resources and Attributes to the Catalog
-1.  Go back to the **Catalog** you created and select the **Resources** tab.
-2.  Click **+ New Resource** and add the **Group** you want users to be added to (e.g., `Approved Users Group`).
+
+> ✅ **Pre-requisite:**  
+> Before proceeding, go into **Entra ID** and manually create a **Security Group** named `CitizenshipVerified`. This group will be used to hold users who successfully complete the access request process. Ensure the group is available to be added as a resource in your catalog.
+
+1. Go back to the **Catalog** you created and select the **Resources** tab.
+
+2. Click **+ New Resource** and add the **Group** you want users to be added to (e.g., `CitizenshipVerified`).
+
     ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen11.png)
-3.  Click the group and select **Require Attributes** to configure them as needed.
+
+3. Click the group and select **Require Attributes** to configure them as needed.
+
     ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen12.png)
+
 
 ### 🏗️ Step 10: Create an Access Package
 1.  Navigate to the **Access Packages** section and click **+ New Access Package**.
