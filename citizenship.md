@@ -206,7 +206,7 @@ https://graph.microsoft.com/v1.0/users?$filter=mail eq '@{triggerBody()?['Reques
 ### 🏗️ Step 10: Create an Access Package
 1.  Navigate to the **Access Packages** section and click **+ New Access Package**.
 2.  Fill in the required details.
-3.  Under the **Request information** section, configure the required questions and attributes for your package.
+3.  Under the **Request information** section, configure the required questions and for your package.
     ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen13.png)
 
-🎉 **You’re all set!** Next, you would link this custom extension to the access package policy to complete the workflow.
+🎉 **You’re all set!** Next, you would link this custom extension to the access package policy under resources to complete the workflow.
