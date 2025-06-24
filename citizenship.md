@@ -101,25 +101,24 @@ https://graph.microsoft.com/v1.0/users?$filter=mail eq '@{triggerBody()?['Reques
     ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen06.png)
 
 ### 🏗️ Step 7: Add an HTTP PATCH Action
-1.  Within **Condition 2**, go to the **true** branch.
-2.  Click **+ Add an action** and select **HTTP**.
-3.  Set the **Action name** to `http-updateuser` and the **Method** to `PATCH`.
-4.  Set the **URI** to:
-    ```
-    https://graph.microsoft.com/v1.0/users/@{body('HTTP-GetId')?['value']?[0]?['id']
 
+1.  Within **Condition 2**, go to the **true** branch.  
+2.  Click **+ Add an action** and select **HTTP**.  
+3.  Set the **Action name** to `http-updateuser` and the **Method** to `PATCH`.  
+4.  Set the **URI** to:  
     ```
-5.  For the **Body**, enter:
+    https://graph.microsoft.com/v1.0/users/@{body('HTTP-GetId')?['value']?[0]?['id']}
     ```
-    
-   {
-  "displayName": "@{body('HTTP-GetId')?['value'][0]['surname']}, @{body('HTTP-GetId')?['value'][0]['givenName']} (EXT) (@{variables('InitCitiz')})"
-   }
-
+5.  For the **Body**, enter:  
     ```
-6.  Set up **Authentication** using `Managed identity` as you did in Step 5.
-7.  Your setup should look similar to the example below:
+    {
+      "displayName": "@{body('HTTP-GetId')?['value'][0]['surname']}, @{body('HTTP-GetId')?['value'][0]['givenName']} (EXT) (@{variables('InitCitiz')})"
+    }
+    ```
+6.  Set up **Authentication** using `Managed identity` as you did in Step 5.  
+7.  Your setup should look similar to the example below:  
     ![](https://github.com/Cyberlorians/uploadedimages/blob/main/citizen07.png)
+
 
 ### 🏗️ Step 8: Enable Managed Identity and Assign Permissions
 1.  On the main menu for the Logic App, under **Settings**, select **Identity**.
