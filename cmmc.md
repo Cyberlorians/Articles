@@ -65,8 +65,6 @@ This section maps all **110 CMMC Level 2 practices** to **NIST 800-171 Rev.2**, 
 </p>
 </details>
 
----
-
 <details><summary><b>Awareness & Training (AT) — 2 Practices</b></summary>
 <p>
 
@@ -95,4 +93,80 @@ This section maps all **110 CMMC Level 2 practices** to **NIST 800-171 Rev.2**, 
 
 </p>
 </details>
+
+<details><summary><b>Configuration Management (CM) — 9 Practices</b></summary>
+<p>
+
+| CMMC Practice ID | NIST 800-171 Rev.2 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
+|------------------|--------------------------------|-------------------|-------------------------|
+| **CM.L2-3.4.1** Establish and maintain baseline configuration | 3.4.1 — Establish and maintain baseline configurations and inventories of organizational systems. | **Devices 1.1** — Asset inventory & baseline mgmt | **Devices 1.1** — Baseline Configuration Enforcement |
+| **CM.L2-3.4.2** Establish and enforce security configuration settings | 3.4.2 — Establish and enforce security configuration settings for IT products. | **Devices 1.2** — Secure baseline enforcement | **Devices 1.2** — Hardened Configuration Standards |
+| **CM.L2-3.4.3** Track, review, and approve/disapprove system changes | 3.4.3 — Track, review, approve, or disapprove changes to organizational systems. | **Visibility 1.2** — Change tracking | **Visibility 1.2** — Configuration Change Auditing |
+| **CM.L2-3.4.4** Analyze security impact of changes | 3.4.4 — Analyze the security impact of changes prior to implementation. | **Visibility 1.3** — Risk-based change control | **Visibility 1.3** — Security Impact Analysis |
+| **CM.L2-3.4.5** Define, document, approve, and enforce access restrictions associated with changes | 3.4.5 — Define, document, approve, and enforce access restrictions associated with system changes. | **Identity 2.2** — Privileged access enforcement | **Identity 2.2** — Change Authorization Controls |
+| **CM.L2-3.4.6** Employ least functionality | 3.4.6 — Employ the principle of least functionality by configuring systems to provide only essential capabilities. | **Workloads 1.1** — Application/service hardening | **Apps/Workloads 1.1** — Least Functionality Enforcement |
+| **CM.L2-3.4.7** Restrict use of nonessential functions | 3.4.7 — Restrict, disable, or prevent use of nonessential functions, ports, protocols, and services. | **Networks 1.2** — Restrict nonessential services | **Networks 1.2** — Protocol/Port Control |
+| **CM.L2-3.4.8** Apply deny-by-exception policy to prevent unauthorized software execution | 3.4.8 — Apply deny-all, permit-by-exception policy to prevent unauthorized software execution. | **Devices 2.3** — Application allowlisting | **Devices 2.3** — Whitelisting & App Control |
+| **CM.L2-3.4.9** Control and monitor user-installed software | 3.4.9 — Control and monitor the use of user-installed software. | **Devices 2.4** — Software execution monitoring | **Devices 2.4** — Unauthorized Software Control |
+
+</p>
+</details>
+
+<details><summary><b>Identification & Authentication (IA) — 11 Practices</b></summary>
+<p>
+
+| CMMC Practice ID | NIST 800-171 Rev.2 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
+|------------------|--------------------------------|-------------------|-------------------------|
+| **IA.L2-3.5.3** Use multifactor authentication for local and network access | 3.5.3 — Use multifactor authentication for local and network access to privileged and non-privileged accounts. | **Identity 2.1** — MFA adoption | **Identity 2.1** — Strong MFA Enforcement |
+| **IA.L2-3.5.4** Employ replay-resistant authentication mechanisms | 3.5.4 — Employ replay-resistant authentication mechanisms for network access. | **Identity 2.5** — Replay resistance | **Identity 2.5** — Replay-Resistant Authentication |
+| **IA.L2-3.5.5** Prevent reuse of identifiers for a defined period | 3.5.5 — Prevent reuse of identifiers for a defined period. | **Identity 1.4** — Account lifecycle mgmt | **Identity 1.4** — Identifier Management |
+| **IA.L2-3.5.6** Disable identifiers after period of inactivity | 3.5.6 — Disable identifiers after a defined period of inactivity. | **Identity 1.4** — Account lifecycle mgmt | **Identity 1.4** — Account Deactivation Controls |
+| **IA.L2-3.5.7** Enforce password complexity and change of characters | 3.5.7 — Enforce a minimum password complexity and change of characters when new passwords are created. | **Identity 1.5** — Credential strength | **Identity 1.5** — Password Complexity Enforcement |
+| **IA.L2-3.5.8** Prohibit password reuse for a number of generations | 3.5.8 — Prohibit password reuse for a specified number of generations. | **Identity 1.5** — Credential lifecycle mgmt | **Identity 1.5** — Password Reuse Prevention |
+| **IA.L2-3.5.9** Allow temporary password use with immediate change requirement | 3.5.9 — Allow temporary password use only with immediate change requirement. | **Identity 1.6** — Temporary credential issuance | **Identity 1.6** — Temporary Password Enforcement |
+| **IA.L2-3.5.10** Store and transmit only cryptographically-protected passwords | 3.5.10 — Store and transmit only cryptographically-protected passwords. | **Data 2.1** — Protect credentials in transit/storage | **Data 2.1** — Credential Encryption |
+| **IA.L2-3.5.11** Obscure feedback of authentication information | 3.5.11 — Obscure feedback of authentication information during entry. | **Identity 1.7** — Authentication UX protections | **Identity 1.7** — Credential Input Protection |
+| **IA.L2-3.5.12** Use cryptographic modules that comply with FIPS standards | 3.5.12 — Use FIPS-validated cryptographic modules when used to protect information. | **Data 2.5** — Use of FIPS 140-validated crypto | **Data 2.5** — FIPS-Compliant Cryptography |
+| **IA.L2-3.5.13** Ensure cryptographic modules are up to date | 3.5.13 — Ensure cryptographic modules are up to date and replaced when revoked/compromised. | **Data 2.5** — Cryptographic module validation | **Data 2.5** — Approved Crypto Module Mgmt |
+
+</p>
+</details>
+
+<details><summary><b>Incident Response (IR) — 3 Practices</b></summary>
+<p>
+
+| CMMC Practice ID | NIST 800-171 Rev.2 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
+|------------------|--------------------------------|-------------------|-------------------------|
+| **IR.L2-3.6.1** Establish an operational incident-handling capability | 3.6.1 — Establish an operational incident-handling capability for organizational systems that includes preparation, detection, analysis, containment, recovery, and user response activities. | **Visibility 2.1** — Incident detection & response | **Visibility 2.1** — Incident Response Program |
+| **IR.L2-3.6.2** Track, document, and report incidents to appropriate officials | 3.6.2 — Track, document, and report incidents to organizational officials and/or authorities. | **Visibility 2.2** — Incident tracking & reporting | **Visibility 2.2** — Incident Documentation & Reporting |
+| **IR.L2-3.6.3** Test the organizational incident response capability | 3.6.3 — Test the organizational incident response capability. | **Visibility 2.3** — Response exercises & simulations | **Visibility 2.3** — IR Capability Testing |
+
+</p>
+</details>
+
+<details><summary><b>Incident Response (IR) — 3 Practices</b></summary>
+<p>
+
+| CMMC Practice ID | NIST 800-171 Rev.2 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
+|------------------|--------------------------------|-------------------|-------------------------|
+| **IR.L2-3.6.1** Establish an operational incident-handling capability | 3.6.1 — Establish an operational incident-handling capability for organizational systems that includes preparation, detection, analysis, containment, recovery, and user response activities. | **Visibility 2.1** — Incident detection & response | **Visibility 2.1** — Incident Response Program |
+| **IR.L2-3.6.2** Track, document, and report incidents to appropriate officials | 3.6.2 — Track, document, and report incidents to organizational officials and/or authorities. | **Visibility 2.2** — Incident tracking & reporting | **Visibility 2.2** — Incident Documentation & Reporting |
+| **IR.L2-3.6.3** Test the organizational incident response capability | 3.6.3 — Test the organizational incident response capability. | **Visibility 2.3** — Response exercises & simulations | **Visibility 2.3** — IR Capability Testing |
+
+</p>
+</details>
+
+<details><summary><b>Media Protection (MP) — 4 Practices</b></summary>
+<p>
+
+| CMMC Practice ID | NIST 800-171 Rev.2 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
+|------------------|--------------------------------|-------------------|-------------------------|
+| **MP.L2-3.8.1** Protect system media, both paper and digital | 3.8.1 — Protect (i.e., physically control and securely store) system media containing CUI, both paper and digital. | **Data 1.1** — Data storage protections | **Data 1.1** — CUI Media Protection |
+| **MP.L2-3.8.2** Limit access to CUI on system media | 3.8.2 — Limit access to CUI on system media to authorized users. | **Identity 2.2** — Least privilege enforcement | **Identity 2.2** — Media Access Controls |
+| **MP.L2-3.8.5** Control the use of removable media on systems | 3.8.5 — Control the use of removable media on system components. | **Data 2.3** — Removable media protections | **Data 2.3** — Portable Media Control |
+| **MP.L2-3.8.6** Prohibit the use of portable storage devices when nonessential | 3.8.6 — Prohibit the use of portable storage devices when such devices have no identifiable business purpose. | **Data 2.3** — Media usage enforcement | **Data 2.3** — Prohibited Media Enforcement |
+
+</p>
+</details>
+
 
