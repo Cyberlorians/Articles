@@ -1,3 +1,9 @@
+# 🔑 Key
+- **CMMC Practice ID** → CMMC 2.0 Level 1 practice  
+- **NIST 800-171 Rev.2 Reference** → Expanded with official control text  
+- **CISA ZTMM Mapping** → Exact sub-function and number from [CISA Zero Trust Maturity Model](https://learn.microsoft.com/en-us/security/zero-trust/cisa-zero-trust-maturity-model-intro)  
+- **DoD ZT Mapping** → Exact objective number from [DoD Zero Trust Strategy](https://learn.microsoft.com/en-us/security/zero-trust/dod-zero-trust-strategy-intro)  
+
 # 📘 CMMC 2.0 Level 1 — Foundational (17 Practices Fully Mapped)
 
 | CMMC Practice ID | NIST 800-171 Rev.2 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
@@ -22,11 +28,7 @@
 
 ---
 
-# 🔑 Key
-- **CMMC Practice ID** → CMMC 2.0 Level 1 practice  
-- **NIST 800-171 Rev.2 Reference** → Expanded with official control text  
-- **CISA ZTMM Mapping** → Exact sub-function and number from [CISA Zero Trust Maturity Model](https://learn.microsoft.com/en-us/security/zero-trust/cisa-zero-trust-maturity-model-intro)  
-- **DoD ZT Mapping** → Exact objective number from [DoD Zero Trust Strategy](https://learn.microsoft.com/en-us/security/zero-trust/dod-zero-trust-strategy-intro)  
+
 
 # 📗 CMMC 2.0 Level 2 — Advanced (110 Practices Fully Mapped)
 
