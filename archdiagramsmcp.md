@@ -296,7 +296,4 @@ This installs all Python libraries needed for the project.
 
 ```
 
----
 
-👉 Do you want me to also create a **“Quickstart” collapsible section** at the bottom, with just the bare minimum copy-paste commands in order (for advanced team members)?
-```
