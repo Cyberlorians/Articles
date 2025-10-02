@@ -1,25 +1,46 @@
-# CMMC v2 ↔ Zero Trust Mapping (CISA ZTMM + DoD ZT)
-| Practice ID   | Practice Text (NIST 800-171 Rev.2) | Zero Trust Pillar | Microsoft / DoD Guidance | CISA ZTMM Ref | DoD ZT Ref |
-|---------------|------------------------------------|-------------------|--------------------------|---------------|------------|
-| AC.L2-3.1.1   | Limit system access to authorized users | Identity / Governance | Entra ID accounts only, Conditional Access enforcement | Identity 1.1 – Access & Authorization | User 1.1 – Authenticate & Authorize |
-| AC.L2-3.1.2   | Limit access to authorized transactions/functions | Identity | RBAC, Entra PIM roles, separation of duties | Identity 1.2 – Authorization Granularity | User 1.2 – Role-based Access |
-| AC.L2-3.1.3   | Control flow of CUI in systems | Data / Network | Microsoft Purview DLP, Sensitivity Labels, Azure Firewall | Data 2.1 – Data Access Control | Data 2.1 – Flow Enforcement |
-| AC.L2-3.1.4   | Separate duties of individuals | Identity / Governance | Entra role assignments, PIM approvals | Identity 1.2 – Privilege Separation | User 1.3 – Segregation of Duties |
-| AC.L2-3.1.5   | Employ least privilege, including for security functions | Identity | RBAC, Just-In-Time (PIM), Just-Enough-Access | Identity 1.1 – Least Privilege | User 1.4 – Least Privilege Enforcement |
-| AC.L2-3.1.6   | Use non-privileged accounts for non-privileged functions | Identity | Tiered accounts, Conditional Access policy requiring standard accounts | Identity 1.1 – Account Management | User 1.5 – Privileged Account Use |
-| AC.L2-3.1.7   | Prevent non-privileged users from executing admin functions | Identity | Entra ID role restrictions, Azure AD built-in roles | Identity 1.1 – Authorization Control | User 1.6 – Admin Function Restriction |
-| AC.L2-3.1.8   | Limit unsuccessful login attempts | Identity / Device | Conditional Access lockout, Smart Lockout in Entra ID | Identity 2.2 – Authentication Controls | User 2.1 – Login Attempt Restriction |
-| AC.L2-3.1.9   | Provide privacy & security notice at login | Governance | Windows GPO banners, Entra sign-in banner | Governance 2.1 – Policy Awareness | Governance 1.1 – Policy Display |
-| AC.L2-3.1.10  | Use session lock after inactivity | Device / Identity | Intune timeout policies, GPO screenlock | Devices 1.1 – Session Enforcement | Device 1.2 – Idle Session Timeout |
-| AC.L2-3.1.11  | Terminate sessions after defined time limit | Device / Identity | Conditional Access session lifetime policies | Devices 1.1 – Session Mgmt | Device 1.3 – Session Termination |
-| AC.L2-3.1.12  | Monitor and control remote access sessions | Network / Identity | Defender for Endpoint monitoring, Conditional Access | Networks 2.1 – Remote Access Mgmt | Network 2.2 – Remote Access Control |
-| AC.L2-3.1.13  | Authorize remote access prior to connection | Identity / Network | VPN with Entra ID auth, Conditional Access | Identity 1.1 – Access Verification | Network 2.3 – Remote Access Authorization |
-| AC.L2-3.1.14  | Control use of remote access methods | Network | Intune restrict remote protocols, Entra restrictions | Networks 2.1 – Remote Method Control | Network 2.3 – Method Restriction |
-| AC.L2-3.1.15  | Route remote access via managed access point | Network | Azure VPN Gateway, Azure Firewall, Bastion | Networks 3.1 – Segmentation & Access Points | Network 2.4 – Access Point Routing |
-| AC.L2-3.1.16  | Authorize wireless access prior to connection | Network / Device | WPA3-Enterprise, Entra cert-based Wi-Fi auth | Networks 2.1 – Wireless AuthN | Network 2.5 – Wireless Authorization |
-| AC.L2-3.1.17  | Protect wireless access using authentication & encryption | Network / Device | WPA3, EAP-TLS with certs, Intune Wi-Fi config | Networks 2.2 – Wireless Protection | Network 2.5 – Wireless Encryption |
-| AC.L2-3.1.18  | Control connection of mobile devices | Device | Intune device compliance, MDM controls | Devices 2.1 – Mobile Device Mgmt | Device 2.6 – Mobile Device Control |
-| AC.L2-3.1.19  | Encrypt CUI on mobile devices | Data / Device | BitLocker, iOS/Android encryption, Purview | Data 2.1 – Data Encryption | Data 2.1 – Mobile Encryption |
-| AC.L2-3.1.20  | Verify and control external connections | Network / Governance | Azure Firewall, VPN, Conditional Access | Networks 3.1 – External Connection Control | Network 2.6 – External Connection Mgmt |
-| AC.L2-3.1.21  | Limit use of external systems | Governance / Device | BYOD restrictions, Conditional Access, Intune compliance | Governance 1.2 – External System Policy | Governance 1.3 – External Use Control |
-| AC.L2-3.1.22  | Control use of portable storage devices on systems | Device / Data | Intune removable storage restrictions, Defender policy | Data 2.1 – Media Control | Device 2.7 – Removable Media Control |
+# CMMC 2.0 → Zero Trust (CISA & DoD) → Microsoft Mapping
+
+This document aligns **CMMC 2.0 practices** with **Zero Trust frameworks** (CISA ZTMM + DoD ZT Strategy) and shows **Microsoft Zero Trust guidance** references.  
+
+---
+
+## 📘 Level 1 — Foundational (17 Practices)
+
+| CMMC Practice ID | NIST Ref (Rev.2/3) | CISA ZTMM Mapping | DoD ZT Pillar | Microsoft Zero Trust Guidance |
+|------------------|--------------------|-------------------|---------------|-------------------------------|
+| AC.L1-3.1.1 Limit system access to authorized users | NIST 800-171 Rev.2: 3.1.1 | Identity 1.1 (Basic auth), Identity 2.1 (MFA adoption) | Identity | [DoD ZT Strategy - Identity Pillar](https://learn.microsoft.com/en-us/security/zero-trust/dod-zero-trust-strategy-intro#identity) |
+| AC.L1-3.1.2 Limit system access to processes acting on behalf of authorized users | NIST 800-171 Rev.2: 3.1.2 | Workloads 1.1 | Applications & Workloads | [MSFT Zero Trust Workload Protection](https://learn.microsoft.com/en-us/security/zero-trust/deploy/identity-access) |
+| AC.L1-3.1.20 Verify and control/limit connections to external systems | NIST 800-171 Rev.2: 3.1.20 | Network/Environment 1.1 | Networks/Environment | [Microsoft ZT - Network Segmentation](https://learn.microsoft.com/en-us/security/zero-trust/network-segmentation) |
+| IA.L1-3.5.1 Identify users before granting access | NIST 800-171 Rev.2: 3.5.1 | Identity 1.2 (Strong auth), Identity 2.3 (CBA/MFA) | Identity | [Microsoft Entra ID Authentication](https://learn.microsoft.com/en-us/azure/active-directory/authentication/) |
+| AU.L1-3.3.1 Create and retain system audit logs | NIST 800-171 Rev.2: 3.3.1 | Visibility & Analytics 1.1 | Visibility & Analytics | [Microsoft Sentinel + M-21-31](https://learn.microsoft.com/en-us/azure/sentinel/) |
+
+---
+
+## 📗 Level 2 — Advanced (110 Practices)
+
+| CMMC Practice ID | NIST Ref (Rev.2/3) | CISA ZTMM Mapping | DoD ZT Pillar | Microsoft Zero Trust Guidance |
+|------------------|--------------------|-------------------|---------------|-------------------------------|
+| AC.L2-3.1.3 Control the flow of CUI in information systems | NIST 800-171 Rev.3: 3.1.3 | Data 1.1 | Data | [MS Purview Data Loss Prevention](https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp) |
+| AC.L2-3.1.5 Employ least privilege | NIST 800-171 Rev.2: 3.1.5 | Identity 2.2 (Least privilege), Automation 2.1 | Identity / Automation | [Microsoft Entra PIM](https://learn.microsoft.com/en-us/azure/active-directory/privileged-identity-management/) |
+| SC.L2-3.13.8 Implement cryptographic mechanisms to prevent unauthorized disclosure | NIST 800-171 Rev.3: 3.13.8 | Data 2.1 (Encryption) | Data | [Microsoft Defender for Cloud - Encryption Controls](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-overview) |
+| IR.L2-3.6.1 Establish an incident-handling capability | NIST 800-171 Rev.2: 3.6.1 | Visibility & Analytics 2.3 | Visibility & Analytics | [Microsoft Sentinel SOAR](https://learn.microsoft.com/en-us/azure/sentinel/automate-incident-handling-with-playbooks) |
+
+---
+
+## 📙 Level 3 — Expert (NIST 800-172, Advanced Practices)
+
+| CMMC Practice ID | NIST Ref (Rev.172) | CISA ZTMM Mapping | DoD ZT Pillar | Microsoft Zero Trust Guidance |
+|------------------|--------------------|-------------------|---------------|-------------------------------|
+| AC.L3-172.1 Employ enhanced identity verification techniques | NIST 800-172: 3.5.x | Identity 3.1 (Adaptive auth, risk-based) | Identity | [Microsoft Entra Conditional Access + Risk-based Policies](https://learn.microsoft.com/en-us/azure/active-directory/conditional-access/) |
+| IR.L3-172.2 Respond to advanced persistent threat events | NIST 800-172: 3.6.x | Visibility & Analytics 3.2 | Visibility & Analytics | [Microsoft Defender XDR + Threat Intelligence](https://learn.microsoft.com/en-us/microsoft-365/security/defender-xdr/) |
+| SC.L3-172.3 Implement out-of-band management to isolate compromised systems | NIST 800-172: 3.13.x | Network/Environment 3.1 | Networks/Environment | [Microsoft ZT - Network Containment](https://learn.microsoft.com/en-us/security/zero-trust/network-segmentation) |
+
+---
+
+# 🔑 Key
+- **CMMC Practice ID** → The official practice from CMMC 2.0  
+- **NIST Ref** → NIST 800-171 Rev. 2 / Rev. 3 (for Level 2) or NIST 800-172 (for Level 3)  
+- **CISA ZTMM Mapping** → Function + maturity stage reference (e.g., Identity 1.1)  
+- **DoD ZT Pillar** → One of 7 DoD Zero Trust pillars  
+- **Microsoft Guidance** → Direct MSFT documentation link for control implementation  
+
