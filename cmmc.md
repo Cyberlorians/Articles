@@ -229,4 +229,119 @@ This section maps all **110 CMMC Level 2 practices** to **NIST 800-171 Rev.2**, 
 </p>
 </details>
 
+<details><summary><b>Physical Protection (PE) — 6 Practices</b></summary>
+<p>
+
+| CMMC Practice ID | NIST 800-171 Rev.2 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
+|------------------|--------------------------------|-------------------|-------------------------|
+| **PE.L2-3.10.2** Protect and monitor physical facility and support infrastructure | 3.10.2 — Protect and monitor the physical facility and support infrastructure for organizational systems. | **Devices 1.1** — Facility and environmental controls | **Devices 1.1** — Facility & Infrastructure Protection |
+| **PE.L2-3.10.6** Enforce physical access authorizations | 3.10.6 — Enforce physical access authorizations for organizational systems. | **Identity 1.2** — Physical identity validation | **Identity 1.2** — Physical Access Authorization |
+| **PE.L2-3.10.7** Maintain physical access records | 3.10.7 — Maintain visitor access records to organizational facilities. | **Visibility 1.1** — Access audit logging | **Visibility 1.1** — Physical Access Logging |
+| **PE.L2-3.10.8** Control physical access to media | 3.10.8 — Control physical access to media containing CUI. | **Data 1.1** — Data protection | **Data 1.1** — Physical Media Protection |
+| **PE.L2-3.10.9** Protect and control physical access devices | 3.10.9 — Protect and control physical access devices. | **Devices 1.3** — Device security | **Devices 1.3** — Physical Access Device Control |
+| **PE.L2-3.10.10** Escort visitors and monitor visitor activity in facilities with CUI | 3.10.10 — Escort visitors and monitor visitor activity in facilities with organizational systems containing CUI. | **Devices 1.2** — Visitor monitoring | **Devices 1.2** — Visitor Escort & Monitoring |
+
+</p>
+</details>
+
+<details><summary><b>Personnel Security (PS) — 2 Practices</b></summary>
+<p>
+
+| CMMC Practice ID | NIST 800-171 Rev.2 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
+|------------------|--------------------------------|-------------------|-------------------------|
+| **PS.L2-3.9.1** Screen individuals prior to authorizing access to systems containing CUI | 3.9.1 — Screen individuals prior to authorizing access to organizational systems containing CUI. | **Identity 1.2** — Identity proofing | **Identity 1.2** — Personnel Vetting & Access Authorization |
+| **PS.L2-3.9.2** Ensure CUI access is removed upon termination or transfer | 3.9.2 — Ensure that CUI system access is removed when personnel are terminated or transferred. | **Identity 1.4** — Account lifecycle management | **Identity 1.4** — Timely Deprovisioning |
+
+</p>
+</details>
+
+<details><summary><b>Risk Assessment (RA) — 3 Practices</b></summary>
+<p>
+
+| CMMC Practice ID | NIST 800-171 Rev.2 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
+|------------------|--------------------------------|-------------------|-------------------------|
+| **RA.L2-3.11.1** Periodically assess risk to organizational operations | 3.11.1 — Periodically assess the risk to organizational operations, assets, and individuals. | **Visibility 2.1** — Risk-based monitoring | **Visibility 2.1** — Risk Assessments & Reviews |
+| **RA.L2-3.11.2** Scan for vulnerabilities in systems and applications | 3.11.2 — Scan for vulnerabilities in organizational systems and applications periodically and when new vulnerabilities are identified. | **Visibility 2.2** — Vulnerability scanning | **Visibility 2.2** — Vulnerability Scanning & Management |
+| **RA.L2-3.11.3** Remediate vulnerabilities in a timely manner | 3.11.3 — Remediate vulnerabilities in organizational systems in a timely manner. | **Visibility 2.3** — Remediation tracking | **Visibility 2.3** — Vulnerability Remediation |
+
+</p>
+</details>
+
+<details><summary><b>Security Assessment (CA) — 4 Practices</b></summary>
+<p>
+
+| CMMC Practice ID | NIST 800-171 Rev.2 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
+|------------------|--------------------------------|-------------------|-------------------------|
+| **CA.L2-3.12.1** Periodically assess security controls for effectiveness | 3.12.1 — Periodically assess the security controls in organizational systems to determine effectiveness. | **Visibility 2.4** — Continuous control validation | **Visibility 2.4** — Security Control Assessments |
+| **CA.L2-3.12.2** Develop and implement plans of action to correct deficiencies | 3.12.2 — Develop and implement plans of action to correct deficiencies and reduce vulnerabilities. | **Visibility 3.1** — Remediation planning & tracking | **Visibility 3.1** — POA&M Management |
+| **CA.L2-3.12.3** Monitor security controls on an ongoing basis | 3.12.3 — Monitor security controls on an ongoing basis to ensure continued effectiveness. | **Visibility 3.2** — Ongoing monitoring & assessment | **Visibility 3.2** — Continuous Monitoring |
+| **CA.L2-3.12.4** Develop, document, and periodically update system security plans | 3.12.4 — Develop, document, and periodically update system security plans describing system boundaries, environments, and controls. | **Visibility 3.3** — Documentation & governance | **Visibility 3.3** — Security Plan Management |
+
+</p>
+</details>
+
+<details><summary><b>System & Communications Protection (SC) — 27 Practices</b></summary>
+<p>
+
+| CMMC Practice ID | NIST 800-171 Rev.2 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
+|------------------|--------------------------------|-------------------|-------------------------|
+| **SC.L2-3.13.2** Separate user functionality from system management | 3.13.2 — Separate user functionality from system management functions. | **Identity 2.3** — Separation of duties | **Identity 2.3** — User/Admin Role Separation |
+| **SC.L2-3.13.3** Deny network traffic by default, allow by exception | 3.13.3 — Deny network traffic by default and allow by exception. | **Networks 1.1** — Boundary enforcement | **Networks 1.1** — Default Deny / Allow by Exception |
+| **SC.L2-3.13.4** Prevent remote activation of collaborative tools | 3.13.4 — Prevent remote activation of collaborative computing devices. | **Devices 2.5** — Endpoint collaboration controls | **Devices 2.5** — Collaboration Tool Controls |
+| **SC.L2-3.13.6** Use cryptography to protect confidentiality of remote access sessions | 3.13.6 — Employ cryptographic mechanisms to protect confidentiality of remote sessions. | **Data 2.1** — Data-in-transit encryption | **Data 2.1** — Encrypted Remote Sessions |
+| **SC.L2-3.13.7** Prevent split tunneling for remote devices | 3.13.7 — Prevent split tunneling for remote devices. | **Networks 2.6** — Tunnel separation | **Networks 2.6** — Split Tunnel Prevention |
+| **SC.L2-3.13.8** Implement cryptographic protections for VoIP | 3.13.8 — Implement cryptographic mechanisms to protect confidentiality of VoIP communications. | **Data 2.1** — Encrypted communications | **Data 2.1** — VoIP Encryption |
+| **SC.L2-3.13.9** Terminate session after inactivity | 3.13.9 — Terminate network connections after defined inactivity. | **Identity 1.3** — Session management | **Identity 1.3** — Connection Termination |
+| **SC.L2-3.13.10** Protect confidentiality of CUI at rest | 3.13.10 — Employ cryptographic mechanisms to protect CUI at rest. | **Data 2.2** — Data-at-rest encryption | **Data 2.2** — Encryption for CUI Storage |
+| **SC.L2-3.13.11** Employ FIPS-validated cryptography | 3.13.11 — Employ FIPS-validated cryptographic modules when used to protect CUI. | **Data 2.5** — FIPS crypto enforcement | **Data 2.5** — FIPS-Validated Cryptography |
+| **SC.L2-3.13.12** Prohibit remote activation of sensors/cameras without user consent | 3.13.12 — Prohibit remote activation of collaborative devices like cameras or mics. | **Devices 2.5** — Endpoint collaboration controls | **Devices 2.5** — Sensor/Camera Access Controls |
+| **SC.L2-3.13.13** Control cryptographic keys | 3.13.13 — Control and manage cryptographic keys for cryptography employed in organizational systems. | **Data 2.5** — Key management practices | **Data 2.5** — Cryptographic Key Mgmt |
+| **SC.L2-3.13.14** Establish and manage cryptographic key lifecycles | 3.13.14 — Establish key lifecycles, revocation, and renewal. | **Data 2.5** — Key lifecycle management | **Data 2.5** — Key Lifecycle Enforcement |
+| **SC.L2-3.13.15** Use cryptographic methods to protect network integrity | 3.13.15 — Employ cryptographic methods to protect integrity of remote sessions. | **Data 2.1** — Data-in-transit protections | **Data 2.1** — Encrypted Session Integrity |
+| **SC.L2-3.13.16** Protect system from malicious code at boundaries | 3.13.16 — Implement protection against malicious code at system boundaries. | **Devices 1.4** — Malware protections | **Devices 1.4** — Boundary Malware Protection |
+| **SC.L2-3.13.17** Protect system from denial-of-service attacks | 3.13.17 — Implement mechanisms to protect against DoS attacks. | **Networks 2.7** — Network resilience | **Networks 2.7** — DoS Protection |
+| **SC.L2-3.13.18** Limit use of external systems | 3.13.18 — Limit use of external systems for organizational purposes. | **Networks 2.8** — External system governance | **Networks 2.8** — External System Restrictions |
+| **SC.L2-3.13.19** Control communications at system boundaries | 3.13.19 — Control communications at external and key internal boundaries. | **Networks 1.1** — Boundary protection | **Networks 1.1** — Boundary Communications Control |
+| **SC.L2-3.13.20** Use secure DNS resolution | 3.13.20 — Use secure domain name system (DNS) resolution services. | **Networks 2.9** — Secure name resolution | **Networks 2.9** — DNS Security Controls |
+| **SC.L2-3.13.21** Protect integrity of transmitted information | 3.13.21 — Protect the integrity of transmitted information. | **Data 2.1** — Integrity protections | **Data 2.1** — Transmission Integrity Controls |
+| **SC.L2-3.13.22** Separate user functionality from system management functions across network | 3.13.22 — Separate management functions across logical/physical boundaries. | **Identity 2.3** — Separation of duties | **Identity 2.3** — Management Function Segmentation |
+| **SC.L2-3.13.23** Implement cryptographic protections for wireless communications | 3.13.23 — Employ cryptographic mechanisms to protect confidentiality of wireless communications. | **Networks 2.3** — Wireless encryption enforcement | **Networks 2.3** — Secure Wireless Crypto |
+| **SC.L2-3.13.24** Implement subnetworks for publicly accessible system components | 3.13.24 — Implement subnetworks for publicly accessible system components. | **Networks 1.3** — Network segmentation | **Networks 1.3** — DMZs & Segregation |
+| **SC.L2-3.13.25** Employ cryptographic separation for network traffic | 3.13.25 — Employ cryptographic separation for network traffic. | **Data 2.4** — Advanced crypto separation | **Data 2.4** — Encrypted Traffic Separation |
+| **SC.L2-3.13.26** Implement boundary protections for shared networks | 3.13.26 — Implement boundary protections for shared networks. | **Networks 2.10** — Shared boundary controls | **Networks 2.10** — Multi-Tenant Boundary Protection |
+| **SC.L2-3.13.27** Use cryptographic modules that comply with FIPS standards for CUI | 3.13.27 — Use FIPS-compliant crypto for CUI. | **Data 2.5** — FIPS crypto enforcement | **Data 2.5** — FIPS-Compliant CUI Encryption |
+| **SC.L2-3.13.28** Employ advanced protections for mobile code | 3.13.28 — Implement security controls to manage mobile code. | **Devices 2.8** — Mobile code protections | **Devices 2.8** — Mobile Code Security |
+| **SC.L2-3.13.29** Protect systems from externally controlled mobile code | 3.13.29 — Implement protections for mobile code controlled externally. | **Devices 2.8** — Mobile code protections | **Devices 2.8** — External Mobile Code Protections |
+
+</p>
+</details>
+
+<details><summary><b>System & Information Integrity (SI) — 11 Practices</b></summary>
+<p>
+
+| CMMC Practice ID | NIST 800-171 Rev.2 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
+|------------------|--------------------------------|-------------------|-------------------------|
+| **SI.L2-3.14.3** Monitor system security alerts and advisories | 3.14.3 — Monitor security alerts and take action upon receipt. | **Visibility 2.1** — Threat intel integration | **Visibility 2.1** — Threat Intel & Alerts |
+| **SI.L2-3.14.4** Update malicious code protection mechanisms | 3.14.4 — Update malicious code protection mechanisms periodically. | **Devices 1.4** — Endpoint protection updates | **Devices 1.4** — Malware Protection Updates |
+| **SI.L2-3.14.6** Monitor system security alerts and take appropriate action | 3.14.6 — Monitor system security alerts and advisories and take appropriate actions. | **Visibility 2.2** — Centralized monitoring | **Visibility 2.2** — Security Monitoring & Alerts |
+| **SI.L2-3.14.7** Identify unauthorized use of systems | 3.14.7 — Identify and report unauthorized use of organizational systems. | **Visibility 2.3** — Anomaly detection | **Visibility 2.3** — Unauthorized Use Detection |
+| **SI.L2-3.14.8** Perform periodic scans of systems | 3.14.8 — Perform periodic scans of organizational systems and real-time scans of files. | **Devices 1.5** — Endpoint scanning & EDR | **Devices 1.5** — Vulnerability & Malware Scanning |
+| **SI.L2-3.14.9** Protect against malicious email code | 3.14.9 — Protect against malicious code through email protections. | **Devices 1.4** — Malware protections | **Devices 1.4** — Email Malware Protection |
+| **SI.L2-3.14.10** Detect and respond to system flaws | 3.14.10 — Identify, report, and correct information system flaws in a timely manner. | **Visibility 2.4** — Vulnerability management | **Visibility 2.4** — System Flaw Remediation |
+| **SI.L2-3.14.11** Employ spam protection mechanisms | 3.14.11 — Employ spam protection mechanisms at system entry points. | **Devices 2.6** — Anti-spam protections | **Devices 2.6** — Email Spam Controls |
+| **SI.L2-3.14.12** Monitor inbound and outbound communications | 3.14.12 — Monitor inbound and outbound communications traffic for unusual activity. | **Networks 2.7** — Network traffic monitoring | **Networks 2.7** — Comms Traffic Monitoring |
+| **SI.L2-3.14.13** Control and monitor mobile code | 3.14.13 — Control and monitor the use of mobile code. | **Devices 2.8** — Mobile code controls | **Devices 2.8** — Mobile Code Security |
+| **SI.L2-3.14.14** Detect and respond to attacks | 3.14.14 — Detect and respond to system attacks. | **Visibility 3.1** — Threat detection & response | **Visibility 3.1** — Incident Detection & Response |
+
+</p>
+</details>
+
+
+
+
+
+
+
+
+
 
