@@ -294,6 +294,5 @@ This installs all Python libraries needed for the project.
 * **Chat panel** → where you send `/mcp` commands
 * **Diagrams folder** → where PNG images are saved
 
-```
 
 
