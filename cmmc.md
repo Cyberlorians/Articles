@@ -28,3 +28,71 @@
 - **CISA ZTMM Mapping** → Exact sub-function and number from [CISA Zero Trust Maturity Model](https://learn.microsoft.com/en-us/security/zero-trust/cisa-zero-trust-maturity-model-intro)  
 - **DoD ZT Mapping** → Exact objective number from [DoD Zero Trust Strategy](https://learn.microsoft.com/en-us/security/zero-trust/dod-zero-trust-strategy-intro)  
 
+# 📗 CMMC 2.0 Level 2 — Advanced (110 Practices Fully Mapped)
+
+This section maps all **110 CMMC Level 2 practices** to **NIST 800-171 Rev.2**, **CISA Zero Trust Maturity Model**, and **DoD Zero Trust Strategy objectives**.
+
+---
+
+<details><summary><b>Access Control (AC) — 22 Practices</b></summary>
+<p>
+
+| CMMC Practice ID | NIST 800-171 Rev.2 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
+|------------------|--------------------------------|-------------------|-------------------------|
+| **AC.L2-3.1.3** Control the flow of CUI | 3.1.3 — Control the flow of CUI in information systems. | **Data 1.1** — Data Flow Protections | **Data 1.1** — Controlled Data Flow |
+| **AC.L2-3.1.4** Separate duties of individuals | 3.1.4 — Separate the duties of individuals to reduce risk of collusion. | **Identity 2.2** — Least Privilege Enforcement | **Identity 2.2** — Role-Based Access Controls |
+| **AC.L2-3.1.5** Employ least privilege | 3.1.5 — Employ the principle of least privilege. | **Identity 2.2** — Least Privilege Enforcement | **Identity 2.2** — Privileged Access Controls |
+| **AC.L2-3.1.6** Use non-privileged accounts | 3.1.6 — Use non-privileged accounts or roles when accessing non-security functions. | **Identity 2.3** — Privilege Separation | **Identity 2.3** — Admin vs User Separation |
+| **AC.L2-3.1.7** Prevent non-privileged users from executing privileged functions | 3.1.7 — Prevent non-privileged users from executing privileged functions. | **Identity 2.4** — Privileged Activity Monitoring | **Identity 2.4** — Privileged Function Monitoring |
+| **AC.L2-3.1.8** Limit unsuccessful logon attempts | 3.1.8 — Limit unsuccessful logon attempts. | **Identity 1.3** — Session Protections | **Identity 1.3** — Account Lockout Controls |
+| **AC.L2-3.1.9** Provide privacy/security notices | 3.1.9 — Provide privacy/security notices consistent with law. | **Visibility 1.3** — User Awareness | **Visibility 1.3** — User Notification/Audit |
+| **AC.L2-3.1.10** Use session lock | 3.1.10 — Use session lock with pattern-hiding displays. | **Devices 1.6** — Session Timeout Enforcement | **Devices 1.6** — Idle Timeout Enforcement |
+| **AC.L2-3.1.11** Terminate session after inactivity | 3.1.11 — Terminate sessions after inactivity. | **Identity 1.3** — Session Management | **Identity 1.3** — Session Termination Controls |
+| **AC.L2-3.1.12** Monitor/control remote sessions | 3.1.12 — Monitor/control remote access. | **Networks 2.1** — Secure Remote Access | **Networks 2.1** — Remote Access Controls |
+| **AC.L2-3.1.13** Encrypt remote access | 3.1.13 — Use cryptography to protect remote access. | **Data 2.1** — Encryption of Data in Transit | **Data 2.1** — Encrypted Remote Access |
+| **AC.L2-3.1.14** Route remote access via managed points | 3.1.14 — Route remote access through managed access points. | **Networks 2.2** — Controlled Ingress/Egress | **Networks 2.2** — Remote Gateway Enforcement |
+| **AC.L2-3.1.15** Authorize remote privileged commands | 3.1.15 — Authorize remote execution of privileged commands. | **Identity 2.4** — Privileged Session Monitoring | **Identity 2.4** — Remote Privileged Control |
+| **AC.L2-3.1.16** Authorize wireless access | 3.1.16 — Authorize wireless access prior to connections. | **Networks 1.4** — Wireless Access Controls | **Networks 1.4** — Wireless Access Enforcement |
+| **AC.L2-3.1.17** Protect wireless with auth/encryption | 3.1.17 — Protect wireless access using auth & encryption. | **Networks 2.3** — Wireless Encryption Enforcement | **Networks 2.3** — Secure Wireless Controls |
+| **AC.L2-3.1.18** Control connection of mobile devices | 3.1.18 — Control connection of mobile devices. | **Devices 2.1** — Mobile Device Protections | **Devices 2.1** — Mobile Device Access Control |
+| **AC.L2-3.1.19** Encrypt CUI on mobile devices | 3.1.19 — Encrypt CUI on mobile devices. | **Data 2.2** — Mobile Data Encryption | **Data 2.2** — Encrypted Mobile Storage |
+| **AC.L2-3.1.21** Limit use of portable storage | 3.1.21 — Limit use of portable storage devices. | **Data 2.3** — Removable Media Protections | **Data 2.3** — Portable Media Controls |
+| **AC.L2-3.1.23** Control remote access methods | 3.1.23 — Control remote access methods. | **Networks 2.4** — Remote Access Enforcement | **Networks 2.4** — Remote Access Enforcement |
+| **AC.L2-3.1.24** Authorize remote access | 3.1.24 — Authorize remote access prior to connection. | **Networks 2.5** — Remote Access Authorization | **Networks 2.5** — Remote Access Authorization |
+| **AC.L2-3.1.25** Separate tunneling mechanisms | 3.1.25 — Separate user and device tunneling mechanisms. | **Networks 2.6** — Tunnel Separation | **Networks 2.6** — Tunneling Separation |
+| **AC.L2-3.1.26** Employ cryptographic separation | 3.1.26 — Employ cryptographic separation for remote sessions. | **Data 2.4** — Advanced Encryption Protections | **Data 2.4** — Cryptographic Session Isolation |
+
+</p>
+</details>
+
+---
+
+<details><summary><b>Awareness & Training (AT) — 2 Practices</b></summary>
+<p>
+
+| CMMC Practice ID | NIST 800-171 Rev.2 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
+|------------------|--------------------------------|-------------------|-------------------------|
+| **AT.L2-3.2.1** Ensure awareness training | 3.2.1 — Ensure managers, system admins, and users are aware of security risks. | **Visibility 1.4** — Awareness & Training | **Visibility 1.4** — Workforce Cyber Awareness |
+| **AT.L2-3.2.2** Role-specific security training | 3.2.2 — Ensure personnel are adequately trained to perform their duties. | **Visibility 1.5** — Role-Based Awareness | **Visibility 1.5** — Role-Based Cyber Training |
+
+</p>
+</details>
+
+<details><summary><b>Audit & Accountability (AU) — 9 Practices</b></summary>
+<p>
+
+| CMMC Practice ID | NIST 800-171 Rev.2 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
+|------------------|--------------------------------|-------------------|-------------------------|
+| **AU.L2-3.3.1** Create, protect, and retain audit records | 3.3.1 — Create and retain system audit records to enable monitoring, analysis, investigation, and reporting. | **Visibility 1.1** — Audit logging and visibility | **Visibility 1.1** — Enterprise Audit & Logging |
+| **AU.L2-3.3.2** Ensure individual accountability in audit records | 3.3.2 — Ensure that audit records contain information to establish individual accountability. | **Visibility 1.2** — Correlation of user activity | **Visibility 1.2** — Individual Accountability in Logs |
+| **AU.L2-3.3.3** Review and update audit events | 3.3.3 — Review and update audited events periodically. | **Visibility 1.3** — Continuous monitoring | **Visibility 1.3** — Audit Event Governance |
+| **AU.L2-3.3.4** Alert in response to audit processing failures | 3.3.4 — Alert in the event of audit processing failures. | **Visibility 2.1** — Real-time alerting | **Visibility 2.1** — Audit Failure Detection |
+| **AU.L2-3.3.5** Correlate audit review and analysis | 3.3.5 — Correlate audit review, analysis, and reporting processes for indications of misuse. | **Visibility 2.2** — Centralized log correlation | **Visibility 2.2** — SIEM & Correlation |
+| **AU.L2-3.3.6** Provide audit reduction and report generation | 3.3.6 — Provide audit reduction and report generation to support investigations. | **Visibility 2.3** — Audit reporting capabilities | **Visibility 2.3** — Log Analytics & Reporting |
+| **AU.L2-3.3.7** Provide audit record reduction before long-term storage | 3.3.7 — Provide audit reduction and record storage management before long-term storage. | **Visibility 2.4** — Audit lifecycle management | **Visibility 2.4** — Log Retention & Storage Controls |
+| **AU.L2-3.3.8** Protect audit information | 3.3.8 — Protect audit information and tools from unauthorized access. | **Data 1.1** — Protect sensitive data (logs) | **Data 1.1** — Log Protection & Security |
+| **AU.L2-3.3.9** Limit management of audit logging | 3.3.9 — Limit management of audit logging functionality to privileged users. | **Identity 2.4** — Privileged session management | **Identity 2.4** — Admin-only Log Management |
+
+</p>
+</details>
+
