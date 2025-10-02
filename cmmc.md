@@ -5,6 +5,11 @@
 - **DoD ZT Mapping** → Exact objective number from [DoD Zero Trust Strategy](https://learn.microsoft.com/en-us/security/zero-trust/dod-zero-trust-strategy-intro)
   
 # 📘 CMMC 2.0 Level 1 — Foundational (17 Practices Fully Mapped)
+
+This section maps all 17 CMMC Level 1 practices to NIST 800-171 Rev.2, CISA Zero Trust Maturity Model, and DoD Zero Trust Strategy objectives.
+
+---
+
 <details><summary><b>Access Control (AC) — 4 Practices</b></summary>
 <p>
 
