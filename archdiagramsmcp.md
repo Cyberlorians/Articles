@@ -1,10 +1,3 @@
-Perfect 👍 thank you for the example — now I understand what you’re after. You want the **Azure Diagram MCP full setup guide** written in the **same expandable `<details>` format**, with headings and collapsible sections, so your team can open/close steps in GitHub.
-
-Here’s the entire thing, ready to paste into your repo:
-
----
-
-```markdown
 # 🖥 Azure Diagram MCP — Full Setup Guide
 
 This guide explains how to set up and use **Azure Diagram MCP** in Visual Studio Code (VS Code).  
