@@ -34,7 +34,6 @@ Each table row represents a **CMMC practice** and its mapping:
 Each level is divided into expandable `<details>` blocks organized by **CMMC family** (AC, AT, AU, CM, etc.) for readability.  
 
 ---
----
   
 # 📘 CMMC 2.0 Level 1 — Foundational (17 Practices Fully Mapped)
 
