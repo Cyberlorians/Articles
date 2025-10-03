@@ -336,6 +336,138 @@ This section maps all **110 CMMC Level 2 practices** to **NIST 800-171 Rev.2**, 
 </p>
 </details>
 
+# 🟥 CMMC 2.0 Level 3 — Expert (35 Practices Fully Mapped)
+
+This section maps the **35 additional Level 3 practices** (from NIST SP 800-172) to:  
+- **NIST 800-172 Enhanced Security Requirements**  
+- **CISA Zero Trust Maturity Model** (ZTMM)  
+- **DoD Zero Trust Strategy** objectives  
+
+Practices are grouped by family for readability.
+
+---
+
+<details><summary><b>Access Control (AC) — 6 Practices</b></summary>
+<p>
+
+| CMMC Practice ID | NIST 800-172 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
+|------------------|---------------------------|-------------------|-------------------------|
+| **AC.L3-3.1.27** Require risk-based, adaptive access enforcement | 172-3.1.x — Enforce dynamic, risk-based access control. | **Identity 3.1** — Adaptive policy enforcement | **Identity 3.1** — Risk-Adaptive Access |
+| **AC.L3-3.1.28** Dual authorization for privileged actions | 172-3.1.x — Require dual authorization for privileged/high-risk transactions. | **Identity 3.2** — Privileged session approval | **Identity 3.2** — Dual-Control Access |
+| **AC.L3-3.1.29** Employ hardware-backed authenticators | 172-3.1.x — Require hardware tokens/PKI for privileged accounts. | **Identity 3.3** — PKI / FIDO2 enforcement | **Identity 3.3** — Hardware-Backed AuthN |
+| **AC.L3-3.1.30** Time-bound, context-sensitive access | 172-3.1.x — Grant access based on time, location, or mission need. | **Identity 3.4** — Contextual adaptive access | **Identity 3.4** — Mission-Context Access |
+| **AC.L3-3.1.31** Employ data-centric access controls | 172-3.1.x — Apply protections directly at the data level. | **Data 3.1** — Attribute-based access | **Data 3.1** — Data-Centric Controls |
+| **AC.L3-3.1.32** Segment admin functions into isolated environments | 172-3.1.x — Use administrative enclaves for privileged operations. | **Workloads 3.1** — Admin isolation | **Workloads 3.1** — Privileged Admin Enclaves |
+
+</p>
+</details>
+
+---
+
+<details><summary><b>Audit & Accountability (AU) — 3 Practices</b></summary>
+<p>
+
+| CMMC Practice ID | NIST 800-172 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
+|------------------|---------------------------|-------------------|-------------------------|
+| **AU.L3-3.3.10** Correlate audit data with external threat intel | 172-3.3.x — Integrate audit logs with threat intelligence feeds. | **Visibility 3.1** — Threat intel-driven detection | **Visibility 3.1** — Intel-Based Correlation |
+| **AU.L3-3.3.11** Automate cross-domain monitoring | 172-3.3.x — Automate collection/analysis across domains. | **Visibility 3.2** — Cross-domain monitoring | **Visibility 3.2** — Enterprise Threat Hunting |
+| **AU.L3-3.3.12** Employ deception to detect adversaries | 172-3.3.x — Use honeypots/deception for APT detection. | **Visibility 3.3** — Deception technologies | **Visibility 3.3** — Adversary Engagement |
+
+</p>
+</details>
+
+---
+
+<details><summary><b>Configuration Management (CM) — 2 Practices</b></summary>
+<p>
+
+| CMMC Practice ID | NIST 800-172 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
+|------------------|---------------------------|-------------------|-------------------------|
+| **CM.L3-3.4.10** Employ dynamic reconfiguration | 172-3.4.x — Reconfigure systems dynamically in response to threats. | **Workloads 3.2** — Dynamic reconfiguration | **Workloads 3.2** — Adaptive Config Mgmt |
+| **CM.L3-3.4.11** Protect configuration management tools | 172-3.4.x — Harden and isolate config/change mgmt tools. | **Workloads 3.3** — Secure admin toolchain | **Workloads 3.3** — Secure Config Tools |
+
+</p>
+</details>
+
+---
+
+<details><summary><b>Incident Response (IR) — 3 Practices</b></summary>
+<p>
+
+| CMMC Practice ID | NIST 800-172 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
+|------------------|---------------------------|-------------------|-------------------------|
+| **IR.L3-3.6.4** Employ advanced incident detection methods | 172-3.6.x — Use ML/behavioral analytics for incident detection. | **Visibility 3.4** — Behavior analytics | **Visibility 3.4** — Advanced Detection |
+| **IR.L3-3.6.5** Conduct coordinated, cross-organization IR | 172-3.6.x — Coordinate IR across multiple stakeholders. | **Visibility 3.5** — Coordinated response | **Visibility 3.5** — Joint Incident Response |
+| **IR.L3-3.6.6** Employ cyber threat hunting | 172-3.6.x — Implement proactive threat hunting capabilities. | **Visibility 3.6** — Threat hunting maturity | **Visibility 3.6** — Proactive Hunt Ops |
+
+</p>
+</details>
+
+---
+
+<details><summary><b>Maintenance (MA) — 2 Practices</b></summary>
+<p>
+
+| CMMC Practice ID | NIST 800-172 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
+|------------------|---------------------------|-------------------|-------------------------|
+| **MA.L3-3.7.3** Employ advanced protections for remote maintenance | 172-3.7.x — Use encrypted, monitored remote maintenance. | **Networks 3.1** — Secure remote maintenance | **Networks 3.1** — Encrypted Maint Channels |
+| **MA.L3-3.7.4** Alternate maintenance methods for resilience | 172-3.7.x — Employ redundant/alternate maintenance options. | **Networks 3.2** — Redundant mgmt channels | **Networks 3.2** — Resilient Maint Pathways |
+
+</p>
+</details>
+
+---
+
+<details><summary><b>Media Protection (MP) — 2 Practices</b></summary>
+<p>
+
+| CMMC Practice ID | NIST 800-172 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
+|------------------|---------------------------|-------------------|-------------------------|
+| **MP.L3-3.8.5** Apply advanced media protection techniques | 172-3.8.x — Stronger protections for CUI-bearing media. | **Data 3.2** — Enhanced media protection | **Data 3.2** — CUI Media Hardening |
+| **MP.L3-3.8.6** Employ digital rights management (DRM) | 172-3.8.x — Apply DRM to sensitive data/media. | **Data 3.3** — DRM / usage enforcement | **Data 3.3** — DRM Enforcement |
+
+</p>
+</details>
+
+---
+
+<details><summary><b>System & Communications Protection (SC) — 9 Practices</b></summary>
+<p>
+
+| CMMC Practice ID | NIST 800-172 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
+|------------------|---------------------------|-------------------|-------------------------|
+| **SC.L3-3.13.30** Employ moving target defenses | 172-3.13.x — Use dynamic network defenses (e.g., IP randomization). | **Networks 3.3** — Moving target defense | **Networks 3.3** — Dynamic Network Defense |
+| **SC.L3-3.13.31** Employ non-persistent systems | 172-3.13.x — Use ephemeral/non-persistent VMs or sessions. | **Workloads 3.4** — Non-persistent workloads | **Workloads 3.4** — Ephemeral Systems |
+| **SC.L3-3.13.32** Employ hardware-based isolation | 172-3.13.x — Use hardware enclaves (e.g., SGX/TPM). | **Workloads 3.5** — Trusted execution | **Workloads 3.5** — Hardware Root-of-Trust |
+| **SC.L3-3.13.33** Employ out-of-band management networks | 172-3.13.x — Separate OOB management networks. | **Networks 3.4** — Out-of-band mgmt | **Networks 3.4** — Separate Admin Networks |
+| **SC.L3-3.13.34** Employ advanced supply chain protections | 172-3.13.x — Validate supply chain components. | **Workloads 3.6** — Supply chain validation | **Workloads 3.6** — Supply Chain Risk Mgmt |
+| **SC.L3-3.13.35** Employ isolation for high-value assets | 172-3.13.x — Strong isolation of critical systems. | **Workloads 3.7** — Critical asset isolation | **Workloads 3.7** — Mission System Isolation |
+| **SC.L3-3.13.36** Employ advanced traffic analysis protections | 172-3.13.x — Use anti-traffic analysis techniques. | **Networks 3.5** — Traffic obfuscation | **Networks 3.5** — Traffic Camouflage |
+| **SC.L3-3.13.37** Employ quantum-resistant cryptography (prep) | 172-3.13.x — Begin migration to quantum-safe crypto. | **Data 3.4** — Crypto agility | **Data 3.4** — Post-Quantum Preparation |
+| **SC.L3-3.13.38** Employ enhanced boundary protections | 172-3.13.x — Stronger protections for multi-tenant/shared boundaries. | **Networks 3.6** — Cross-boundary resilience | **Networks 3.6** — Boundary Hardening |
+
+</p>
+</details>
+
+---
+
+<details><summary><b>System & Information Integrity (SI) — 8 Practices</b></summary>
+<p>
+
+| CMMC Practice ID | NIST 800-172 Requirement | CISA ZTMM Mapping | DoD Zero Trust Mapping |
+|------------------|---------------------------|-------------------|-------------------------|
+| **SI.L3-3.14.15** Employ advanced anomaly detection | 172-3.14.x — Behavioral & ML anomaly detection. | **Visibility 3.7** — AI/ML analytics | **Visibility 3.7** — Behavior Anomaly Detection |
+| **SI.L3-3.14.16** Employ deception to detect malicious activity | 172-3.14.x — Deception-based threat detection. | **Visibility 3.8** — Deception/honeypots | **Visibility 3.8** — Deception Ops |
+| **SI.L3-3.14.17** Employ integrity verification mechanisms | 172-3.14.x — File integrity monitoring and validation. | **Visibility 3.9** — Integrity validation | **Visibility 3.9** — File/Config Integrity Checks |
+| **SI.L3-3.14.18** Employ system self-healing mechanisms | 172-3.14.x — Automated recovery from compromise. | **Workloads 3.8** — Self-healing workloads | **Workloads 3.8** — Autonomous Recovery |
+| **SI.L3-3.14.19** Employ active defense measures | 172-3.14.x — Engage adversaries with active defense. | **Visibility 3.10** — Active defense | **Visibility 3.10** — Adversary Engagement |
+| **SI.L3-3.14.20** Employ external verification of threats | 172-3.14.x — Use third-party validation of threats. | **Visibility 3.11** — External validation | **Visibility 3.11** — Federated Intel Sharing |
+| **SI.L3-3.14.21** Employ automated recovery of compromised sessions | 172-3.14.x — Auto-reset of compromised sessions. | **Identity 3.5** — Auto session reset | **Identity 3.5** — Auto Recovery of Sessions |
+| **SI.L3-3.14.22** Employ predictive defenses | 172-3.14.x — Predictive analytics to prevent exploitation. | **Visibility 3.12** — Predictive defenses | **Visibility 3.12** — Anticipatory Defense |
+
+</p>
+</details>
+
 
 
 
