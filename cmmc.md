@@ -336,6 +336,8 @@ This section maps all **110 CMMC Level 2 practices** to **NIST 800-171 Rev.2**, 
 </p>
 </details>
 
+---
+
 # 🟥 CMMC 2.0 Level 3 — Expert (35 Practices Fully Mapped)
 
 This section maps all 35 CMMC Level 3 practices to NIST SP 800-172, CISA Zero Trust Maturity Model, and DoD Zero Trust Strategy objectives.
