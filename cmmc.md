@@ -1,9 +1,39 @@
-# 🔑 Key
-- **CMMC Practice ID** → CMMC 2.0 Level 1 practice  
-- **NIST 800-171 Rev.2 Reference** → Expanded with official control text  
-- **CISA ZTMM Mapping** → Exact sub-function and number from [CISA Zero Trust Maturity Model](https://learn.microsoft.com/en-us/security/zero-trust/cisa-zero-trust-maturity-model-intro)  
-- **DoD ZT Mapping** → Exact objective number from [DoD Zero Trust Strategy](https://learn.microsoft.com/en-us/security/zero-trust/dod-zero-trust-strategy-intro)
+# 📘 CMMC 2.0 to NIST & Zero Trust Mapping Guide
 
+This guide provides a **comprehensive mapping** of CMMC 2.0 practices across all three levels to:  
+- **NIST 800-171 Rev.2** (and NIST 800-172 for Level 3)  
+- **CISA Zero Trust Maturity Model (ZTMM)**  
+- **DoD Zero Trust Strategy**  
+
+The goal is to show how organizations can **align their CMMC compliance journey with Zero Trust adoption** by directly connecting practices to Zero Trust pillars, functions, and objectives.  
+
+---
+
+## 🔑 How to Read This Guide
+
+Each table row represents a **CMMC practice** and its mapping:
+
+- **CMMC Practice ID** → Unique identifier for each CMMC 2.0 practice (e.g., *AC.L1-3.1.1*).  
+- **NIST Reference** → The official **NIST 800-171 Rev.2 requirement** text (or **800-172** for Level 3).  
+- **CISA ZTMM Mapping** → The **exact sub-function** and numbering from the [CISA Zero Trust Maturity Model](https://learn.microsoft.com/en-us/security/zero-trust/cisa-zero-trust-maturity-model-intro).  
+- **DoD ZT Mapping** → The **objective number** from the [DoD Zero Trust Strategy](https://learn.microsoft.com/en-us/security/zero-trust/dod-zero-trust-strategy-intro).  
+
+---
+
+## 📚 Organization of This Guide
+
+- **Level 1 (Foundational — 17 Practices)**  
+  Basic safeguarding of Federal Contract Information (FCI).  
+
+- **Level 2 (Advanced — 110 Practices)**  
+  Protecting Controlled Unclassified Information (CUI).  
+
+- **Level 3 (Expert — 35 Practices)**  
+  Enhanced protections against **advanced persistent threats (APTs)**, mapped to **NIST SP 800-172**.  
+
+Each level is divided into expandable `<details>` blocks organized by **CMMC family** (AC, AT, AU, CM, etc.) for readability.  
+
+---
 ---
   
 # 📘 CMMC 2.0 Level 1 — Foundational (17 Practices Fully Mapped)
