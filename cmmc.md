@@ -389,7 +389,6 @@ This section maps all 35 CMMC Level 3 practices to NIST SP 800-172, CISA Zero Tr
 </p>
 </details>
 
----
 
 <details><summary><b>Audit & Accountability (AU) — 3 Practices</b></summary>
 <p>
@@ -403,8 +402,6 @@ This section maps all 35 CMMC Level 3 practices to NIST SP 800-172, CISA Zero Tr
 </p>
 </details>
 
----
-
 <details><summary><b>Configuration Management (CM) — 2 Practices</b></summary>
 <p>
 
@@ -415,8 +412,6 @@ This section maps all 35 CMMC Level 3 practices to NIST SP 800-172, CISA Zero Tr
 
 </p>
 </details>
-
----
 
 <details><summary><b>Incident Response (IR) — 3 Practices</b></summary>
 <p>
@@ -430,8 +425,6 @@ This section maps all 35 CMMC Level 3 practices to NIST SP 800-172, CISA Zero Tr
 </p>
 </details>
 
----
-
 <details><summary><b>Maintenance (MA) — 2 Practices</b></summary>
 <p>
 
@@ -443,8 +436,6 @@ This section maps all 35 CMMC Level 3 practices to NIST SP 800-172, CISA Zero Tr
 </p>
 </details>
 
----
-
 <details><summary><b>Media Protection (MP) — 2 Practices</b></summary>
 <p>
 
@@ -455,8 +446,6 @@ This section maps all 35 CMMC Level 3 practices to NIST SP 800-172, CISA Zero Tr
 
 </p>
 </details>
-
----
 
 <details><summary><b>System & Communications Protection (SC) — 9 Practices</b></summary>
 <p>
@@ -475,8 +464,6 @@ This section maps all 35 CMMC Level 3 practices to NIST SP 800-172, CISA Zero Tr
 
 </p>
 </details>
-
----
 
 <details><summary><b>System & Information Integrity (SI) — 8 Practices</b></summary>
 <p>
