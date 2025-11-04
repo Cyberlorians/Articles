@@ -1,77 +1,92 @@
-CrowdStrike API Connector — Quick Deployment Steps (GCC High)
+Here’s the raw Markdown version of your deployment steps:
 
-Open PowerShell (as Administrator).
+````markdown
+# CrowdStrike API Connector — Quick Deployment Steps (GCC High)
 
-Install Azure modules (one time only):
+## 1. Open PowerShell (as Administrator)
 
+## 2. Install Azure modules (one time only)
+```powershell
 Install-Module Az -Scope CurrentUser -Force
 Import-Module Az
+````
 
+## 3. Sign in to Azure Government
 
-Sign in to Azure Government:
-
+```powershell
 Connect-AzAccount -Environment AzureUSGovernment
+```
 
+## 4. Select your subscription
 
-Select your subscription:
-
+```powershell
 Set-AzContext -Subscription "<your subscription ID>"
+```
 
+## 5. Make sure all files are in one folder:
 
-Make sure all files are in one folder:
+*   `CrowdStrikeAPI_DCR.json`
+*   `CrowdStrikeAPI_Definition.json`
+*   `CrowdStrikeAPI_PollingConfig.json`
+*   `main.json`
+*   `deploy.parameters.json`
 
-CrowdStrikeAPI_DCR.json
-CrowdStrikeAPI_Definition.json
-CrowdStrikeAPI_PollingConfig.json
-main.json
-deploy.parameters.json
+## 6. Edit `deploy.parameters.json`:
 
-
-Edit deploy.parameters.json:
 Replace these values with your own:
 
-Subscription ID
+*   Subscription ID
+*   Resource Group name
+*   Workspace name
+*   CrowdStrike Client ID
+*   CrowdStrike Client Secret
 
-Resource Group name
+## 7. Run the deployment
 
-Workspace name
-
-CrowdStrike Client ID
-
-CrowdStrike Client Secret
-
-Run the deployment:
-
+```powershell
 New-AzResourceGroupDeployment `
   -ResourceGroupName "<your resource group>" `
   -TemplateFile ".\main.json" `
   -TemplateParameterFile ".\deploy.parameters.json" `
   -Verbose
+```
 
+## 8. Verify the deployment
 
-Verify the deployment:
-
+```powershell
 az resource list --resource-group <your resource group> --output table | findstr crowdstrike
-
+```
 
 You should see:
 
-dce-crowdstrike
-dcr-crowdstrike
-apipolling-crowdstrike-ccp
+    dce-crowdstrike
+    dcr-crowdstrike
+    apipolling-crowdstrike-ccp
 
+## 9. Check data in Sentinel
 
-Check data in Sentinel:
-Open Microsoft Sentinel → your workspace → Logs
+Open **Microsoft Sentinel → your workspace → Logs**  
 Run:
 
+```kusto
 CrowdStrikeAlerts | take 5
-
+```
 
 If results appear, it’s working.
 
-If you need to remove it later:
+***
 
+## To remove later:
+
+```powershell
 Remove-AzResource -Name "dce-crowdstrike" -ResourceGroupName "<your resource group>" -ResourceType "Microsoft.Insights/dataCollectionEndpoints" -Force
 Remove-AzResource -Name "dcr-crowdstrike" -ResourceGroupName "<your resource group>" -ResourceType "Microsoft.Insights/dataCollectionRules" -Force
 Remove-AzResource -Name "apipolling-crowdstrike-ccp" -ResourceGroupName "<your resource group>" -ResourceType "Microsoft.SecurityInsights/dataConnectors" -Force
+```
+
+```
+
+---
+
+Do you want me to **add a short prerequisites section** (like required permissions and API scopes) or keep it exactly as-is?
+```
