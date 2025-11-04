@@ -35,7 +35,7 @@ Replace these values with your own:
 
 *   Subscription ID
 *   Resource Group name
-*   Workspace name
+*   Log Analytics Workspace name
 *   CrowdStrike Client ID
 *   CrowdStrike Client Secret
 
