@@ -72,21 +72,5 @@ Run:
 CrowdStrikeAlerts | take 5
 ```
 
-If results appear, it’s working.
 
-***
 
-## To remove later:
-
-```powershell
-Remove-AzResource -Name "dce-crowdstrike" -ResourceGroupName "<your resource group>" -ResourceType "Microsoft.Insights/dataCollectionEndpoints" -Force
-Remove-AzResource -Name "dcr-crowdstrike" -ResourceGroupName "<your resource group>" -ResourceType "Microsoft.Insights/dataCollectionRules" -Force
-Remove-AzResource -Name "apipolling-crowdstrike-ccp" -ResourceGroupName "<your resource group>" -ResourceType "Microsoft.SecurityInsights/dataConnectors" -Force
-```
-
-```
-
----
-
-Do you want me to **add a short prerequisites section** (like required permissions and API scopes) or keep it exactly as-is?
-```
