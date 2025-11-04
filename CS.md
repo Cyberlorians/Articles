@@ -1,5 +1,3 @@
-Here’s the raw Markdown version of your deployment steps:
-
 # CrowdStrike API Connector — Quick Deployment Steps (GCC High)
 
 ## 1. Open PowerShell (as Administrator)
