@@ -9,7 +9,7 @@ Here’s the raw Markdown version of your deployment steps:
 ```powershell
 Install-Module Az -Scope CurrentUser -Force
 Import-Module Az
-````
+```
 
 ## 3. Sign in to Azure Government
 
