@@ -1,11 +1,11 @@
 Here’s the raw Markdown version of your deployment steps:
 
-````markdown
 # CrowdStrike API Connector — Quick Deployment Steps (GCC High)
 
 ## 1. Open PowerShell (as Administrator)
 
 ## 2. Install Azure modules (one time only)
+
 ```powershell
 Install-Module Az -Scope CurrentUser -Force
 Import-Module Az
