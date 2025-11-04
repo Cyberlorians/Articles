@@ -33,11 +33,11 @@ Set-AzContext -Subscription "<your subscription ID>"
 
 Replace these values with your own:
 
-*   Subscription ID
-*   Resource Group name
-*   Log Analytics Workspace name
-*   CrowdStrike Client ID
-*   CrowdStrike Client Secret
+*   Azure Subscription Id
+*   Azure Resource Group name
+*   Azure Log Analytics Workspace Resource Id
+*   CrowdStrike API Client Id
+*   CrowdStrike API Client Secret
 
 ## 7. Run the deployment
 
