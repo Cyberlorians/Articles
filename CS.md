@@ -46,6 +46,8 @@ New-AzResourceGroupDeployment `
   -ResourceGroupName "<your resource group>" `
   -TemplateFile ".\main.json" `
   -TemplateParameterFile ".\deploy.parameters.json" `
+  -crowdStrikeClientId $clientId `
+  -crowdStrikeClientSecret $clientSecret `
   -Verbose
 ```
 
