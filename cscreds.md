@@ -1,5 +1,6 @@
-Open this connector>
-CrowdStrike API Data Connector (via Codeless Connector Framework) (Preview)
+Go to Sentinel and Open this connector
+
+`CrowdStrike API Data Connector (via Codeless Connector Framework) (Preview)`
 
 and enter info below. Works in mine, please test. 
 
