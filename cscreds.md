@@ -5,7 +5,8 @@ Go to Sentinel and Open this connector
 and enter info below. Works in mine, please test. 
 
 API URL: 
-```https://crowdstrike-mock.agreeableflower-56ca7d49.usgovvirginia.azurecontainerapps.us
+```
+https://crowdstrike-mock.agreeableflower-56ca7d49.usgovvirginia.azurecontainerapps.us
 ```
 Client ID: 
 ```
