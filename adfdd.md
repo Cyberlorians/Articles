@@ -321,6 +321,54 @@ dsregcmd /status | findstr /i "CloudTgt OnPremTgt"
 
 ## Microsoft Documentation References
 
+### Cloud Kerberos Trust Deployment Guide
+
+> "On a Microsoft Entra hybrid joined device, the first use of the PIN requires line of sight to a DC. Once the user signs in or unlocks with the DC, cached sign-in can be used for subsequent unlocks without line of sight or network connectivity."
+
+— [Cloud Kerberos trust deployment guide](https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/deploy/hybrid-cloud-kerberos-trust#enroll-in-windows-hello-for-business)
+
+### When Line-of-Sight to DC is Required
+
+> "Windows Hello for Business cloud Kerberos trust requires line of sight to a domain controller when:
+>
+> 1. A user signs in for the first time or unlocks with Windows Hello for Business after provisioning
+> 2. Attempting to access on-premises resources secured by Active Directory
+> 3. Hybrid users who change the password locally on the device"
+
+— [Cloud Kerberos Trust FAQ](https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/faq#do-i-need-line-of-sight-to-a-domain-controller-to-use-windows-hello-for-business-cloud-kerberos-trust)
+
+### Explicitly Unsupported Scenario
+
+> "Signing in with cloud Kerberos trust on a Microsoft Entra hybrid joined device without previously signing in with DC connectivity"
+
+— Listed under Unsupported scenarios in the [Cloud Kerberos Trust Deployment Guide](https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/deploy/hybrid-cloud-kerberos-trust#unsupported-scenarios)
+
+### Password Change and Cached Credentials
+
+> "If a password is changed outside the corporate network (for example, by using Microsoft Entra SSPR), then the user sign-in with the new password fails. For Microsoft Entra hybrid joined devices, on-premises Active Directory is the primary authority. When a device doesn't have line of sight to a domain controller, it's unable to validate the new password."
+
+— [Microsoft Entra device management FAQ](https://learn.microsoft.com/en-us/entra/identity/devices/faq#what-happens-if-a-user-changes-their-password-and-tries-to-sign-in-to-their-windows-10-11-microsoft-entra-hybrid-joined-device-outside-the-corporate-network)
+
+### SSPR and DC Connectivity Requirement
+
+> "Microsoft Entra hybrid-joined machines must have network connectivity line of sight to a domain controller to use the new password and update cached credentials."
+
+— [Enable SSPR on Windows sign-in screen](https://learn.microsoft.com/en-us/entra/identity/authentication/howto-sspr-windows#general-limitations)
+
+### Cached Domain Logon Information
+
+> "Windows caches previous users' logon information locally so that they can log on if a logon server is unavailable during later logon attempts."
+>
+> "If a domain controller is unavailable and a user's logon information is cached, the user will be prompted with a dialog that says: 'A domain controller for your domain could not be contacted. You have been logged on using cached account information.'"
+>
+> "With caching disabled, the user is prompted with this message: 'The system cannot log you on now because the domain <DOMAIN_NAME> is not available.'"
+
+— [Cached domain logon information](https://learn.microsoft.com/en-us/troubleshoot/windows-server/user-profiles-and-logon/cached-domain-logon-information)
+
+---
+
+## Additional References
+
 - [Cloud Kerberos Trust Deployment Guide](https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/deploy/hybrid-cloud-kerberos-trust)
 - [Cloud Kerberos Trust FAQ](https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/faq#cloud-kerberos-trust)
 - [Microsoft Entra Device FAQ](https://learn.microsoft.com/en-us/entra/identity/devices/faq)
