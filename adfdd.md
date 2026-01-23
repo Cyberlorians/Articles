@@ -135,17 +135,50 @@ Cached credentials are:
 
 Neither KDC Proxy nor Machine Tunnels eliminate cached credentials. They ensure cached credentials are not used when the device has network connectivity, forcing real-time Active Directory validation instead.
 
-### Why Cached Credentials Must Exist
+### The Case for Cached Credentials
 
-Even with KDC Proxy and Machine Tunnel deployed, if there is no internet connectivity, no VPN tunnel, and no HTTPS path to KDC Proxy, Windows must allow cached logon. Otherwise field workers are locked out, disaster recovery fails, and network outages cause complete lockout.
+Even with KDC Proxy and Machine Tunnel deployed, if there is no internet connectivity, no VPN tunnel, and no HTTPS path to KDC Proxy, you want Windows to allow cached logon. This ensures that:
 
-This is by design and cannot be fully disabled without breaking usability.
+- Field workers are not locked out
+- Disaster recovery scenarios remain functional
+- Airplane mode does not mean no access
+- Network outages do not cause complete lockout
 
-Additionally, cached credentials enable **Windows Fast Logon Optimization**. By default, Windows does not wait for the network to be fully initialized at startup and sign-in. Existing users are logged on using cached credentials, resulting in shorter logon times. Group Policy is applied in the background after the network becomes available.
+This is by design and disabling cached credentials breaks these scenarios.
 
-> "By default... Windows XP, Windows Vista, Windows 7, and Windows 8 do not wait for the network to be fully initialized at startup and sign-in. Existing users are logged on by using cached credentials. This results in shorter logon times."
+Additionally, cached credentials enable faster logon times. By default on Windows 10 and 11 client computers, Group Policy processing is asynchronous — the computer does not wait for the network to be fully initialized at startup and sign-in. Existing users are logged on using cached credentials, and Group Policy is applied in the background after the network becomes available.
 
-— [Description of the Windows Fast Logon Optimization feature](https://support.microsoft.com/en-us/topic/description-of-the-windows-fast-logon-optimization-feature-9ca41d24-0210-edd8-08b0-21b772c534b7)
+> "By default, on client computers, Group Policy processing isn't synchronous; client computers typically don't wait for the network to be fully initialized at startup and logon. Existing users are logged-on using cached credentials, which results in shorter logon times. Group Policy is applied in the background after the network becomes available."
+
+— [Policy CSP - ADMX_Logon - SyncForegroundPolicy](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-logon#syncforegroundpolicy)
+
+### Cached Credentials Are Still Passwordless
+
+A common misconception is that using cached credentials means the sign-in is no longer passwordless. This is incorrect.
+
+When a user unlocks a device using cached WHfB credentials:
+
+1. The user provides their PIN or biometric
+2. Windows validates this locally against the cached credential verifier
+3. The local security service unlocks the WHfB key container in the TPM
+4. The user gains access to the desktop
+
+This is local validation of a passwordless credential — not a password logon. The PIN or biometric unlocks the hardware-bound key stored in the TPM. No password is involved at any point.
+
+The difference between online and cached sign-in is whether Windows contacts the domain controller to get a Kerberos TGT — not whether the credential is passwordless.
+
+### Caching the WHfB Credential
+
+When a user initially enrolls in Windows Hello for Business, the credential is not yet cached. To cache the WHfB credential:
+
+1. User completes WHfB enrollment
+2. User locks the device (Win + L)
+3. User unlocks with WHfB PIN or biometric while DC connectivity exists
+4. Credential is now cached for offline use
+
+Recommend users immediately lock and unlock their device after WHfB setup to ensure the credential is cached.
+
+Similarly, when users change their password (via SSPR or otherwise), they should sign in or unlock with WHfB while connected to a DC to update the cached credential.
 
 ### FAQ: Can We Turn Off Cached Credentials?
 
