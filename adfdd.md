@@ -13,15 +13,15 @@ This document covers:
 
 ---
 
-## The Problem
+## Requirements
 
-Hybrid Azure AD joined devices using Windows Hello for Business with Cloud Kerberos Trust require:
+Microsoft Entra hybrid joined devices using Windows Hello for Business with Cloud Kerberos Trust require:
 
-1. Line-of-sight to Microsoft Entra ID to obtain a Primary Refresh Token (PRT) and partial TGT
-2. Line-of-sight to a Domain Controller to exchange the partial TGT for a full Kerberos TGT
-3. Cached credentials for subsequent sign-ins when the DC is unreachable
+1. **Line-of-sight to Microsoft Entra ID** — to obtain a Primary Refresh Token (PRT) and partial TGT
+2. **Line-of-sight to a Domain Controller** — to exchange the partial TGT for a full Kerberos TGT (first sign-in only)
+3. **Cached credentials** — for subsequent sign-ins when the DC is unreachable
 
-When cached credentials are not established and password sign-in is blocked, users have no fallback mechanism. If the device cannot reach a domain controller (common with SASE/Zero Trust architectures), sign-in fails.
+Once a user has successfully signed in with DC connectivity, cached credentials allow offline sign-in for subsequent sessions.
 
 ### Common Symptoms
 
