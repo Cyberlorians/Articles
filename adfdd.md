@@ -5,10 +5,10 @@
 This guide addresses common operational challenges with Windows Hello for Business (WHfB) Cloud Kerberos Trust deployments on Microsoft Entra hybrid joined devices dealing with remote and offline access scenarios. When cached credentials are not properly established and there is no line-of-sight to a domain controller, Windows sign-in will fail.
 
 This document covers:
-- Root cause analysis
+- Requirements for Cloud Kerberos Trust
 - Correct Group Policy configuration
 - Solutions for DC connectivity (Machine Tunnel, KDC Proxy)
-- Cached credentials clarification
+- Cached credentials for offline sign-in
 - Security hardening
 
 ---
@@ -18,7 +18,10 @@ This document covers:
 Microsoft Entra hybrid joined devices using Windows Hello for Business with Cloud Kerberos Trust require:
 
 1. **Line-of-sight to Microsoft Entra ID** — to obtain a Primary Refresh Token (PRT) and partial TGT
-2. **Line-of-sight to a Domain Controller** — to exchange the partial TGT for a full Kerberos TGT (first sign-in only)
+2. **Line-of-sight to a Domain Controller** — to exchange the partial TGT for a full Kerberos TGT
+
+For offline sign-in scenarios, an additional requirement applies:
+
 3. **Cached credentials** — for subsequent sign-ins when the DC is unreachable
 
 Once a user has successfully signed in with DC connectivity, cached credentials allow offline sign-in for subsequent sessions.
