@@ -2,112 +2,242 @@
 
 ## Overview
 
-This guide addresses a common misconfiguration with Windows Hello for Business (WHfB) Cloud Kerberos Trust deployments on Microsoft Entra hybrid joined devices. When cached credentials are disabled and there is no line-of-sight to a domain controller, Windows sign-in will fail.
+This guide addresses common operational challenges with Windows Hello for Business (WHfB) Cloud Kerberos Trust deployments on Microsoft Entra hybrid joined devices dealing with remote and offline access scenarios. When cached credentials are not properly established and there is no line-of-sight to a domain controller, Windows sign-in will fail.
+
+This document covers:
+- Requirements for Cloud Kerberos Trust
+- Correct Group Policy configuration
+- Solutions for DC connectivity (Machine Tunnel, KDC Proxy)
+- Cached credentials for offline sign-in
+- Security hardening
 
 ---
 
-## The Problem
+## Requirements
 
-Hybrid Azure AD joined devices using Windows Hello for Business with Cloud Kerberos Trust require:
+Microsoft Entra hybrid joined devices using Windows Hello for Business with Cloud Kerberos Trust require:
 
 1. **Line-of-sight to Microsoft Entra ID** — to obtain a Primary Refresh Token (PRT) and partial TGT
 2. **Line-of-sight to a Domain Controller** — to exchange the partial TGT for a full Kerberos TGT
+
+For offline sign-in scenarios, an additional requirement applies:
+
 3. **Cached credentials** — for subsequent sign-ins when the DC is unreachable
 
-When cached credentials are disabled and password sign-in is also disabled, users have no fallback mechanism. If the device cannot reach a domain controller (common in SASE/Zscaler architectures), sign-in fails entirely.
+Once a user has successfully signed in with DC connectivity, cached credentials allow offline sign-in for subsequent sessions.
+
+### Common Symptoms
+
+- "Your account has been disabled" error at Windows lock screen
+- Intermittent sign-in failures for remote users
+- Users locked out after password changes via SSPR
+- Issues resolve when helpdesk remotely connects (because network tunnel establishes)
 
 ---
 
 ## How Cloud Kerberos Trust Authentication Works
 
-Understanding the authentication flow explains why cached credentials are essential:
-
 ### Initial Sign-In (Requires Network Connectivity)
 
 1. User enters PIN or uses biometric on the device
-2. Windows authenticates to **Microsoft Entra ID** via the Cloud Authentication Provider (CloudAP)
-3. Microsoft Entra ID issues:
-   - A **Primary Refresh Token (PRT)** containing user and device claims
-   - A **Cloud TGT** for the realm `KERBEROS.MICROSOFTONLINE.COM`
-   - A **partial TGT** (OnPremTgt) containing only the user's SID — no group memberships
-4. The device contacts an **on-premises Domain Controller** over the network
-5. The DC exchanges the partial TGT for a **full Kerberos TGT** with complete authorization data
-6. The user now holds both tokens and can access cloud and on-premises resources
+2. Windows authenticates to Microsoft Entra ID via CloudAP
+3. Microsoft Entra ID issues a PRT, Cloud TGT, and partial TGT (OnPremTgt)
+4. The device contacts an on-premises Domain Controller
+5. The DC exchanges the partial TGT for a full Kerberos TGT
+6. User can now access cloud and on-premises resources
 
 ### Subsequent Sign-Ins (Cached Credentials)
 
 When the domain controller is unreachable:
 
 1. User enters PIN or uses biometric
-2. Windows validates the credential against the **locally cached credential verifier**
+2. Windows validates against locally cached credential verifier
 3. User gains access to the desktop
-4. Cloud resources remain accessible via the PRT (if internet connectivity exists)
-5. On-premises resources requiring Kerberos are unavailable until DC connectivity is restored
+4. Cloud resources accessible via PRT (if internet exists)
+5. On-premises Kerberos resources unavailable until DC connectivity restored
 
-> **Key Point:** The cached credential caches the **Windows Hello for Business credential** (PIN/biometric verification), not a password. The PIN is hardware-bound to the device's TPM and is useless without physical access to the device.
-
----
-
-## Microsoft Documentation References
-
-### Cloud Kerberos Trust Deployment Guide
-
-> "On a Microsoft Entra hybrid joined device, **the first use of the PIN requires line of sight to a DC**. Once the user signs in or unlocks with the DC, **cached sign-in can be used for subsequent unlocks without line of sight or network connectivity**."
->
-> — [Cloud Kerberos trust deployment guide](https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/deploy/hybrid-cloud-kerberos-trust#enroll-in-windows-hello-for-business)
-
-### When Line-of-Sight to DC is Required
-
-> "Windows Hello for Business cloud Kerberos trust **requires line of sight to a domain controller** when:
-> 1. A user signs in for the first time or unlocks with Windows Hello for Business after provisioning
-> 2. Attempting to access on-premises resources secured by Active Directory
-> 3. Hybrid users who change the password locally on the device"
->
-> — [Cloud Kerberos Trust FAQ](https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/faq#do-i-need-line-of-sight-to-a-domain-controller-to-use-windows-hello-for-business-cloud-kerberos-trust)
-
-### Explicitly Unsupported Scenario
-
-> "Signing in with cloud Kerberos trust on a Microsoft Entra hybrid joined device **without previously signing in with DC connectivity**"
->
-> — Listed under **Unsupported scenarios** in the [Cloud Kerberos Trust Deployment Guide](https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/deploy/hybrid-cloud-kerberos-trust#unsupported-scenarios)
-
-### Cached Domain Logon Information
-
-> "Windows caches previous users' logon information locally so that they can log on if a logon server is unavailable during later logon attempts."
->
-> "If a domain controller is unavailable and a user's logon information is cached, the user will be prompted with a dialog that says: 'A domain controller for your domain could not be contacted. You have been logged on using cached account information.'"
->
-> "**With caching disabled**, the user is prompted with this message: 'The system cannot log you on now because the domain \<DOMAIN_NAME\> is not available.'"
->
-> — [Cached domain logon information](https://learn.microsoft.com/en-us/troubleshoot/windows-server/user-profiles-and-logon/cached-domain-logon-information)
-
-### Partial TGT Security Model
-
-> "The partial TGT issued by Microsoft Entra ID includes minimal info (just the user SID). This ensures that Microsoft Entra ID isn't making any authorization decisions – those remain with the on-prem DC when it issues the full TGT (which includes group memberships etc.)."
->
-> "The entire exchange is secure: the partial TGT is encrypted such that only the on-prem domain controllers (via the Kerberos server object's keys) can decrypt it."
->
-> — [SSO - Windows Cloud Detailed Authentication Flow](https://learn.microsoft.com/en-us/windows-365/enterprise/detailed-authentication-flow#hybrid-authentication-flow---kerberos-cloud-trust-for-on-premises)
+The cached credential stores the WHfB credential verification (PIN/biometric), not a password. The PIN is hardware-bound to the device TPM.
 
 ---
 
-## Remediation
+## Group Policy Configuration
 
-### Step 1: Enable Cached Credentials
+### Required Policies
 
-Cached credentials must be enabled for hybrid-joined devices that may not always have DC connectivity.
+| Policy | Path | Value |
+|--------|------|-------|
+| Use Windows Hello for Business | Computer or User Config > Admin Templates > Windows Components > Windows Hello for Business | Enabled |
+| Use cloud trust for on-premises authentication | **Computer Config ONLY** > Admin Templates > Windows Components > Windows Hello for Business | Enabled |
+| Use a hardware security device | Computer Config > Admin Templates > Windows Components > Windows Hello for Business | Enabled |
 
-#### Option A: Group Policy
+### Critical Note: Computer vs User Policy
 
-**Path:** `Computer Configuration > Windows Settings > Security Settings > Local Policies > Security Options`
+The "Use cloud trust for on-premises authentication" policy is **only available as a computer configuration**.
 
-**Setting:** Interactive logon: Number of previous logons to cache (in case domain controller is not available)
+> "Cloud Kerberos trust requires setting a dedicated policy for it to be enabled. This policy setting is only available as a computer configuration."
+>
+> — [Cloud Kerberos trust deployment guide](https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/deploy/hybrid-cloud-kerberos-trust)
 
-**Recommended Value:** `10` (default)
+For "Use Windows Hello for Business", if both user and computer policy settings are deployed, the user policy setting has precedence.
 
-**Valid Range:** 0–50 (0 disables caching, values above 50 are treated as 50)
+### Verification
 
-#### Option B: Registry
+Run `gpresult /h gpresult.html` on an affected device and confirm:
+- "Use cloud trust for on-premises authentication" = Enabled
+- Source GPO is Computer Configuration (not User)
+
+---
+
+## Understanding Cached Credentials
+
+### Common Misconceptions
+
+**Myth:** Cloud Kerberos Trust eliminates cached credentials.
+**Reality:** Cached credentials are a Windows OS feature, independent of WHfB.
+
+**Myth:** KDC Proxy or Machine Tunnels remove cached credentials.
+**Reality:** They bypass cached credentials when connectivity exists. They do not remove them.
+
+**Myth:** Cached credentials are a security flaw that should be disabled.
+**Reality:** Cached credentials are a design requirement for offline scenarios. Disabling them breaks field work, disaster recovery, and boot scenarios.
+
+### The Correct Understanding
+
+Cached credentials are:
+- A Windows OS safety mechanism
+- Always present on domain-joined and hybrid-joined devices
+- NOT removed by Cloud Kerberos Trust
+- NOT removed by KDC Proxy
+- NOT removed by Machine Tunnels
+
+**The goal is not removal of cached credentials. The goal is preventing their use when network connectivity exists.**
+
+### What Changes with Each Solution
+
+**No Machine Tunnel, No KDC Proxy:**
+- Device cannot reach a DC
+- Windows falls back to cached credentials
+- Disabled accounts may still log in offline
+
+**Machine Tunnel (Pre-logon VPN):**
+- Device reaches AD before logon
+- Kerberos auth hits a live DC
+- Cached credentials are bypassed
+- Disabled accounts are rejected
+
+**KDC Proxy (HTTPS Kerberos):**
+- Device reaches AD over HTTPS
+- Kerberos validation occurs in real time
+- Disabled accounts rejected
+- Cached credentials bypassed when internet exists
+
+### Key Statement
+
+Neither KDC Proxy nor Machine Tunnels eliminate cached credentials. They ensure cached credentials are not used when the device has network connectivity, forcing real-time Active Directory validation instead.
+
+### The Case for Cached Credentials
+
+Even with KDC Proxy and Machine Tunnel deployed, if there is no internet connectivity, no VPN tunnel, and no HTTPS path to KDC Proxy, you want Windows to allow cached logon. This ensures that:
+
+- Field workers are not locked out
+- Disaster recovery scenarios remain functional
+- Airplane mode does not mean no access
+- Network outages do not cause complete lockout
+
+This is by design and disabling cached credentials breaks these scenarios.
+
+Additionally, cached credentials enable faster logon times. By default on Windows 10 and 11 client computers, Group Policy processing is asynchronous — the computer does not wait for the network to be fully initialized at startup and sign-in. Existing users are logged on using cached credentials, and Group Policy is applied in the background after the network becomes available.
+
+> "By default, on client computers, Group Policy processing isn't synchronous; client computers typically don't wait for the network to be fully initialized at startup and logon. Existing users are logged-on using cached credentials, which results in shorter logon times. Group Policy is applied in the background after the network becomes available."
+
+— [Policy CSP - ADMX_Logon - SyncForegroundPolicy](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-logon#syncforegroundpolicy)
+
+### Cached Credentials Are Still Passwordless
+
+A common misconception is that using cached credentials means the sign-in is no longer passwordless. This is incorrect.
+
+When a user unlocks a device using cached WHfB credentials:
+
+1. The user provides their PIN or biometric
+2. Windows validates this locally against the cached credential verifier
+3. The local security service unlocks the WHfB key container in the TPM
+4. The user gains access to the desktop
+
+This is local validation of a passwordless credential — not a password logon. The PIN or biometric unlocks the hardware-bound key stored in the TPM. No password is involved at any point.
+
+The difference between online and cached sign-in is whether Windows contacts the domain controller to get a Kerberos TGT — not whether the credential is passwordless.
+
+### Caching the WHfB Credential
+
+When a user initially enrolls in Windows Hello for Business, the credential is not yet cached. To cache the WHfB credential:
+
+1. User completes WHfB enrollment
+2. User locks the device (Win + L)
+3. User unlocks with WHfB PIN or biometric while DC connectivity exists
+4. Credential is now cached for offline use
+
+Recommend users immediately lock and unlock their device after WHfB setup to ensure the credential is cached.
+
+Similarly, when users change their password (via SSPR or otherwise), they should sign in or unlock with WHfB while connected to a DC to update the cached credential.
+
+### FAQ: Can We Turn Off Cached Credentials?
+
+**Short answer:** No, but you can make them irrelevant whenever the device has connectivity.
+
+Setting `CachedLogonsCount` to 0 technically disables caching, but this breaks offline scenarios entirely. The correct approach is ensuring real-time DC validation via Machine Tunnel or KDC Proxy, with cached credentials serving as the fallback mechanism they were designed to be.
+
+---
+
+## Solutions for DC Connectivity
+
+### Solution 1: Machine Tunnel / Pre-Logon VPN
+
+For organizations using Zscaler, Palo Alto GlobalProtect, or similar SASE solutions, Machine Tunnel provides DC connectivity before user login.
+
+How it works:
+- VPN tunnel establishes at machine boot (system context)
+- Device has DC line-of-sight at the Windows lock screen
+- User can authenticate with WHfB PIN immediately
+
+> "Machine Tunnel allows the Zscaler Client Connector to establish a tunnel to Zscaler before a user logs in. This is useful for scenarios where the device needs to communicate with on-premises resources, such as a domain controller, before the user signs in."
+>
+> — [Zscaler - About Machine Tunnels](https://help.zscaler.com/zscaler-client-connector/about-machine-tunnels)
+
+Other vendors:
+- Palo Alto GlobalProtect: Pre-logon VPN
+- Cisco AnyConnect: Start Before Logon (SBL)
+- Microsoft Always On VPN: Device Tunnel
+
+### Solution 2: KDC Proxy
+
+KDC Proxy allows Kerberos authentication over HTTPS from anywhere on the internet, eliminating the need for VPN to reach a domain controller.
+
+How it works:
+- KDC Proxy is an HTTPS service that proxies Kerberos messages
+- Can be exposed publicly (through Azure Application Proxy, WAP, or direct)
+- Client sends Kerberos requests over HTTPS
+- Proxy forwards to on-premises KDC (Domain Controller)
+
+Benefits:
+- No VPN required for DC authentication
+- Immediate account lockout/disable enforcement
+- Can be configured to only allow WHfB/smart card authentication
+
+Reference: [Kerberos Key Distribution Center Proxy Protocol](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-kkdcp/5bcebb8d-b747-4ee5-9453-428aec1c5c38)
+
+### Solution 3: Enable Cached Credentials (Fallback)
+
+Cached credentials must be enabled for hybrid-joined devices as the fallback when Solutions 1 and 2 are unavailable.
+
+**Group Policy:**
+
+Path: `Computer Configuration > Windows Settings > Security Settings > Local Policies > Security Options`
+
+Setting: Interactive logon: Number of previous logons to cache (in case domain controller is not available)
+
+Recommended Value: 10 (default)
+
+**Registry:**
 
 ```
 Key:   HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
@@ -116,171 +246,199 @@ Type:  REG_SZ
 Data:  10
 ```
 
-Restart required for changes to take effect.
+**Intune (MDM):**
 
-#### Option C: Intune (MDM)
+OMA-URI: `./Device/Vendor/MSFT/Policy/Config/LocalPoliciesSecurityOptions/InteractiveLogon_NumberOfPreviousLogonsToCache`
 
-**OMA-URI:**
-```
-./Device/Vendor/MSFT/Policy/Config/LocalPoliciesSecurityOptions/InteractiveLogon_NumberOfPreviousLogonsToCache
-```
-
-**Value:** `10`
-
-> **Note:** Windows supports a maximum of 50 cached entries. The number of entries consumed per user depends on the credential type. Password-based accounts consume 1 slot; smart card accounts consume 2 slots (password + certificate information).
+Value: 10
 
 ---
 
-### Step 2: Maintain Passwordless Sign-In Experience
+## Maintaining Passwordless Sign-In
 
-Enabling cached credentials does not mean users must use passwords. The following configurations maintain a passwordless experience while allowing cached WHfB credentials.
+### Require Windows Hello for Business or Smart Card
 
-#### Option A: Require Windows Hello for Business or Smart Card (Recommended)
+This policy blocks password sign-in at the Windows UI while allowing cached WHfB credentials.
 
-This policy blocks password sign-in at the Windows UI while allowing cached WHfB credentials:
+Path: `Computer Configuration > Windows Settings > Security Settings > Local Policies > Security Options`
 
-**Group Policy Path:** `Computer Configuration > Windows Settings > Security Settings > Local Policies > Security Options`
+Setting: Interactive logon: Require Windows Hello for Business or smart card
 
-**Setting:** Interactive logon: Require Windows Hello for Business or smart card
+Value: Enabled
 
-**Value:** Enabled
-
-**What this does:**
+This ensures:
 - Users cannot type a password at the sign-in screen
 - Windows Hello PIN and biometrics are required
 - Cached WHfB credentials work offline
-- LAPS (Local Administrator Password Solution) still functions for local admin accounts
+- LAPS still functions for local admin accounts
 
-> **Important:** Before enabling this policy, ensure all users have successfully enrolled in Windows Hello for Business or have a smart card.
+Before enabling, ensure all users have successfully enrolled in Windows Hello for Business.
 
-#### Option B: Windows Passwordless Experience
+Reference: [Reduce the user-visible password surface area](https://learn.microsoft.com/en-us/windows/security/identity-protection/passwordless-strategy/journey-step-2#require-windows-hello-for-business-or-a-smart-card)
 
-**Scope:** Microsoft Entra joined devices only (not hybrid-joined)
+### Remove Password Credential Provider
 
-**What this does:**
-- Hides the password credential provider for accounts that sign in with WHfB or FIDO2
-- Does not affect local accounts
-- Provides a backup "Other User" option
+For a more aggressive approach, you can remove the password credential provider entirely from the sign-in screen.
 
-**Policy:** Available via Intune Settings Catalog under "Windows Passwordless Experience"
+Path: `Computer Configuration > Administrative Templates > System > Logon`
 
-> **Note:** This option is not applicable for hybrid-joined devices. Use Option A instead.
+Setting: Exclude credential providers
 
-#### Option C: Exclude Password Credential Provider
+Value: Add the Password Credential Provider CLSID: `{60b78e88-ead8-445c-9cfd-0b87f74ea6cd}`
 
-**Group Policy Path:** `Computer Configuration > Administrative Templates > System > Logon > Exclude credential providers`
+This removes the password option from the Windows sign-in screen entirely. Users will only see Windows Hello for Business (PIN, fingerprint, face) as sign-in options.
 
-**Value:** `{60b78e88-ead8-445c-9cfd-0b87f74ea6cd}`
+Note: Ensure all users have enrolled in WHfB before deploying this. Test thoroughly in a pilot group first.
 
-**Intune CSP:**
-```
-./Device/Vendor/MSFT/Policy/Config/ADMX_CredentialProviders/ExcludedCredentialProviders
-```
+Reference: [Journey to passwordless - Step 2](https://learn.microsoft.com/en-us/windows/security/identity-protection/passwordless-strategy/journey-step-2)
 
-> **Warning:** This disables passwords for **all accounts**, including local accounts, RDP, and "Run as" scenarios. This may impact support scenarios. Evaluate carefully before enabling.
+### Windows Passwordless Experience
 
----
+Note: Microsoft Entra hybrid joined devices are currently out of scope for Windows Passwordless Experience. Use the policy above instead.
 
-### Step 3: Enforce Strong Authentication for Resource Access
-
-Even with cached credentials enabled, enforce fresh authentication for sensitive resources using Conditional Access:
-
-| Control | Configuration | Purpose |
-|---------|---------------|---------|
-| **Sign-in Frequency** | 1–8 hours depending on sensitivity | Forces re-authentication periodically |
-| **Authentication Context** | Assign to sensitive apps/resources | Requires step-up MFA for specific resources |
-| **Continuous Access Evaluation** | Enable for supported apps | Revokes sessions in near real-time on policy changes |
-| **Authentication Strength** | Phishing-resistant MFA | Enforces specific credential types |
+> "Microsoft Entra hybrid joined devices and Active Directory domain joined devices are currently out of scope."
+>
+> — [Windows Passwordless Experience](https://learn.microsoft.com/en-us/windows/security/identity-protection/passwordless-experience/)
 
 ---
 
-## Security Considerations
+## Security Hardening
 
-### Is Caching the PIN a Security Risk?
+### Multi-factor Unlock
 
-No. The Windows Hello PIN is fundamentally different from a password:
+For high-security environments, require both biometrics AND PIN for device unlock.
 
-| Factor | Password | WHfB PIN |
-|--------|----------|----------|
-| **Scope** | Network credential — works from any device | Local credential — bound to specific device TPM |
-| **Theft impact** | Attacker can use from anywhere | Attacker needs physical device + PIN |
-| **Brute force** | Network attacks possible | TPM anti-hammering protection; device locks after attempts |
-| **Replay** | Can be replayed | Cannot be replayed without device |
+This:
+- Requires two factors to unlock the device
+- Can be configured to only apply when off-network
+- Significantly increases stolen device protection
 
-> "Even when doing cached creds, the access for resources will enforce fresh authentication. They can even make that more forceful by using SIF policies. But at the end of the day you have a PRT and it is all silent."
+Path: `Computer Configuration > Administrative Templates > Windows Components > Windows Hello for Business > Configure device unlock factors`
 
-### Stolen Device Scenario
+Reference: [Multi-factor unlock](https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/feature-multifactor-unlock)
 
-If an attacker steals a device and knows the PIN:
+### PIN vs Password Security
 
-1. **Device unlock:** Attacker can unlock the device
-2. **Local access:** Attacker has access to local data (mitigate with BitLocker)
-3. **Resource access:** Conditional Access policies can require re-authentication
-4. **Detection:** User behavior analytics and risk-based policies can detect anomalies
-5. **Response:** Remote wipe, session revocation via CAE
+The Windows Hello PIN is fundamentally different from a password:
 
-**Mitigation options:**
-- Require biometric + PIN (multi-factor unlock)
-- Enable BitLocker with TPM + PIN
-- Configure Conditional Access sign-in frequency
-- Enable Continuous Access Evaluation
-- Deploy Microsoft Defender for Endpoint for device risk signals
+| Characteristic | Password | PIN |
+|----------------|----------|-----|
+| Scope | Network credential, works from any device | Local credential, bound to device TPM |
+| Theft impact | Attacker can use from anywhere | Attacker needs physical device + PIN |
+| Brute force | Network attacks possible | TPM anti-hammering; device locks after attempts |
+
+Even with cached credentials, resource access will enforce fresh authentication. Use Conditional Access Sign-in Frequency policies and Continuous Access Evaluation (CAE) for additional control.
 
 ---
 
 ## Verification Commands
 
-### Check Device Join and SSO Status
-
-```powershell
+Check device join and SSO status:
+```cmd
 dsregcmd /status
 ```
 
-Look for:
-- `AzureAdJoined: YES` or `DomainJoined: YES` (hybrid)
-- `AzureAdPrt: YES` (Primary Refresh Token obtained)
-- `CloudTgt: YES` (Cloud TGT obtained)
+Look for: AzureAdJoined: YES, AzureAdPrt: YES, CloudTgt: YES
 
-### Check Cached Credentials Configuration
-
+Check cached credentials configuration:
 ```powershell
 Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" | Select-Object CachedLogonsCount
 ```
 
-### View Kerberos Tickets
-
+View Kerberos tickets:
 ```cmd
 klist
 klist cloud_debug
+```
+
+Check Cloud Kerberos Trust status:
+```cmd
+dsregcmd /status | findstr /i "CloudTgt OnPremTgt"
 ```
 
 ---
 
 ## Summary
 
-| Requirement | Configuration |
-|-------------|---------------|
-| Cached credentials | **Enabled** (CachedLogonsCount = 10) |
-| Password sign-in at UI | **Blocked** (Require WHfB or smart card) |
-| WHfB enrollment | **Completed** before enforcing policies |
-| First sign-in | **Requires** DC line-of-sight |
-| Subsequent sign-ins | **Work offline** via cached credentials |
-| Resource access | **Enforced** via Conditional Access |
+| Configuration | Recommended Setting | Notes |
+|---------------|---------------------|-------|
+| Cached credentials | Enabled (10) | Required fallback, do not disable |
+| Password sign-in at UI | Blocked | Require WHfB or smart card |
+| Cloud trust GPO | Computer Configuration | User Config not supported |
+| DC connectivity | Machine Tunnel or KDC Proxy | Bypasses cached creds when connected |
+| Resource access | Conditional Access | SIF, CAE, compliance |
+
+### Key Takeaways
+
+1. Cached credentials are not the problem. Uncontrolled fallback is the problem.
+2. Machine Tunnel and KDC Proxy do not remove cached credentials. They bypass them when connectivity exists.
+3. Real-time DC validation is the goal, not elimination of caching.
+4. Cloud Kerberos Trust GPO must be in Computer Configuration. This is the only supported location.
 
 ---
 
-## References
+## Microsoft Documentation References
 
-| Topic | URL |
-|-------|-----|
-| Cloud Kerberos Trust Deployment Guide | https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/deploy/hybrid-cloud-kerberos-trust |
-| Cloud Kerberos Trust FAQ | https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/faq#cloud-kerberos-trust |
-| Introduction to Microsoft Entra Kerberos | https://learn.microsoft.com/en-us/entra/identity/authentication/kerberos |
-| Microsoft Entra Kerberos FAQ | https://learn.microsoft.com/en-us/entra/identity/authentication/kerberos-faq |
-| Cached Domain Logon Information | https://learn.microsoft.com/en-us/troubleshoot/windows-server/user-profiles-and-logon/cached-domain-logon-information |
-| CachedLogonsCount Registry Setting | https://learn.microsoft.com/en-us/troubleshoot/windows-client/user-profiles-and-logon/cached-user-logon-fails-lsasrv-event-45058 |
-| InteractiveLogon_NumberOfPreviousLogonsToCache CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#interactivelogon_numberofpreviouslogonstocache |
-| Reduce Password Surface Area | https://learn.microsoft.com/en-us/windows/security/identity-protection/passwordless-strategy/journey-step-2 |
-| Windows Passwordless Experience | https://learn.microsoft.com/en-us/windows/security/identity-protection/passwordless-experience |
-| SSO Detailed Authentication Flow | https://learn.microsoft.com/en-us/windows-365/enterprise/detailed-authentication-flow |
-| Primary Refresh Token (PRT) | https://learn.microsoft.com/en-us/entra/identity/devices/concept-primary-refresh-token |
+### Cloud Kerberos Trust Deployment Guide
+
+> "On a Microsoft Entra hybrid joined device, the first use of the PIN requires line of sight to a DC. Once the user signs in or unlocks with the DC, cached sign-in can be used for subsequent unlocks without line of sight or network connectivity."
+
+— [Cloud Kerberos trust deployment guide](https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/deploy/hybrid-cloud-kerberos-trust#enroll-in-windows-hello-for-business)
+
+### When Line-of-Sight to DC is Required
+
+> "Windows Hello for Business cloud Kerberos trust requires line of sight to a domain controller when:
+>
+> 1. A user signs in for the first time or unlocks with Windows Hello for Business after provisioning
+> 2. Attempting to access on-premises resources secured by Active Directory
+> 3. Hybrid users who change the password locally on the device"
+
+— [Cloud Kerberos Trust FAQ](https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/faq#do-i-need-line-of-sight-to-a-domain-controller-to-use-windows-hello-for-business-cloud-kerberos-trust)
+
+### Explicitly Unsupported Scenario
+
+> "Signing in with cloud Kerberos trust on a Microsoft Entra hybrid joined device without previously signing in with DC connectivity"
+
+— Listed under Unsupported scenarios in the [Cloud Kerberos Trust Deployment Guide](https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/deploy/hybrid-cloud-kerberos-trust#unsupported-scenarios)
+
+### Password Change and Cached Credentials
+
+> "If a password is changed outside the corporate network (for example, by using Microsoft Entra SSPR), then the user sign-in with the new password fails. For Microsoft Entra hybrid joined devices, on-premises Active Directory is the primary authority. When a device doesn't have line of sight to a domain controller, it's unable to validate the new password."
+
+— [Microsoft Entra device management FAQ](https://learn.microsoft.com/en-us/entra/identity/devices/faq#what-happens-if-a-user-changes-their-password-and-tries-to-sign-in-to-their-windows-10-11-microsoft-entra-hybrid-joined-device-outside-the-corporate-network)
+
+### SSPR and DC Connectivity Requirement
+
+> "Microsoft Entra hybrid-joined machines must have network connectivity line of sight to a domain controller to use the new password and update cached credentials."
+
+— [Enable SSPR on Windows sign-in screen](https://learn.microsoft.com/en-us/entra/identity/authentication/howto-sspr-windows#general-limitations)
+
+### Cached Domain Logon Information
+
+> "Windows caches previous users' logon information locally so that they can log on if a logon server is unavailable during later logon attempts."
+>
+> "If a domain controller is unavailable and a user's logon information is cached, the user will be prompted with a dialog that says: 'A domain controller for your domain could not be contacted. You have been logged on using cached account information.'"
+>
+> "With caching disabled, the user is prompted with this message: 'The system cannot log you on now because the domain <DOMAIN_NAME> is not available.'"
+
+— [Cached domain logon information](https://learn.microsoft.com/en-us/troubleshoot/windows-server/user-profiles-and-logon/cached-domain-logon-information)
+
+---
+
+## Additional References
+
+- [Cloud Kerberos Trust Deployment Guide](https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/deploy/hybrid-cloud-kerberos-trust)
+- [Cloud Kerberos Trust FAQ](https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/faq#cloud-kerberos-trust)
+- [Microsoft Entra Device FAQ](https://learn.microsoft.com/en-us/entra/identity/devices/faq)
+- [Cached Domain Logon Information](https://learn.microsoft.com/en-us/troubleshoot/windows-server/user-profiles-and-logon/cached-domain-logon-information)
+- [Windows Passwordless Experience](https://learn.microsoft.com/en-us/windows/security/identity-protection/passwordless-experience)
+- [Reduce Password Surface Area](https://learn.microsoft.com/en-us/windows/security/identity-protection/passwordless-strategy/journey-step-2)
+- [Multi-factor Unlock](https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/feature-multifactor-unlock)
+- [SSPR Windows Sign-in Limitations](https://learn.microsoft.com/en-us/entra/identity/authentication/howto-sspr-windows#general-limitations)
+- [Zscaler Machine Tunnels](https://help.zscaler.com/zscaler-client-connector/about-machine-tunnels)
+- [KDC Proxy Protocol](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-kkdcp/5bcebb8d-b747-4ee5-9453-428aec1c5c38)
+
+---
+
+Document Version: 2.0  
+Last Updated: January 2026
