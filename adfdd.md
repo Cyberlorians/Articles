@@ -2,7 +2,7 @@
 
 ## Overview
 
-This guide addresses common operational challenges with Windows Hello for Business (WHfB) Cloud Kerberos Trust deployments on Microsoft Entra hybrid joined devices. When cached credentials are not properly established and there is no line-of-sight to a domain controller, Windows sign-in will fail.
+This guide addresses common operational challenges with Windows Hello for Business (WHfB) Cloud Kerberos Trust deployments on Microsoft Entra hybrid joined devices dealing with remote and offline access scenarios. When cached credentials are not properly established and there is no line-of-sight to a domain controller, Windows sign-in will fail.
 
 This document covers:
 - Root cause analysis
