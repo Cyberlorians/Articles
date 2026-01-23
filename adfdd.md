@@ -138,6 +138,12 @@ Even with KDC Proxy and Machine Tunnel deployed, if there is no internet connect
 
 This is by design and cannot be fully disabled without breaking usability.
 
+Additionally, cached credentials enable **Windows Fast Logon Optimization**. By default, Windows does not wait for the network to be fully initialized at startup and sign-in. Existing users are logged on using cached credentials, resulting in shorter logon times. Group Policy is applied in the background after the network becomes available.
+
+> "By default... Windows XP, Windows Vista, Windows 7, and Windows 8 do not wait for the network to be fully initialized at startup and sign-in. Existing users are logged on by using cached credentials. This results in shorter logon times."
+
+— [Description of the Windows Fast Logon Optimization feature](https://support.microsoft.com/en-us/topic/description-of-the-windows-fast-logon-optimization-feature-9ca41d24-0210-edd8-08b0-21b772c534b7)
+
 ### FAQ: Can We Turn Off Cached Credentials?
 
 **Short answer:** No, but you can make them irrelevant whenever the device has connectivity.
@@ -233,6 +239,22 @@ This ensures:
 Before enabling, ensure all users have successfully enrolled in Windows Hello for Business.
 
 Reference: [Reduce the user-visible password surface area](https://learn.microsoft.com/en-us/windows/security/identity-protection/passwordless-strategy/journey-step-2#require-windows-hello-for-business-or-a-smart-card)
+
+### Remove Password Credential Provider
+
+For a more aggressive approach, you can remove the password credential provider entirely from the sign-in screen.
+
+Path: `Computer Configuration > Administrative Templates > System > Logon`
+
+Setting: Exclude credential providers
+
+Value: Add the Password Credential Provider CLSID: `{60b78e88-ead8-445c-9cfd-0b87f74ea6cd}`
+
+This removes the password option from the Windows sign-in screen entirely. Users will only see Windows Hello for Business (PIN, fingerprint, face) as sign-in options.
+
+Note: Ensure all users have enrolled in WHfB before deploying this. Test thoroughly in a pilot group first.
+
+Reference: [Journey to passwordless - Step 2](https://learn.microsoft.com/en-us/windows/security/identity-protection/passwordless-strategy/journey-step-2)
 
 ### Windows Passwordless Experience
 
