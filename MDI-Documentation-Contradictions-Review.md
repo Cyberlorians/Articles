@@ -109,7 +109,33 @@ Customers will configure SAM-R for a deprecated/disabled feature.
 ### Script: Test-MdiReadiness.ps1
 **Source:** https://github.com/microsoft/Microsoft-Defender-for-Identity/tree/main/Test-MdiReadiness
 
-**Behavior:** Checks `RemoteSAM` configuration and reports "Failed" if not configured.
+### Actual Script Output (Screenshot from Testing)
+
+| Configuration | Status | GPO Name |
+|---------------|--------|----------|
+| AdfsAuditing | Passed | Not Applicable |
+| AdRecycleBin | Passed | Not Applicable |
+| AdvancedAuditPolicyCAs | **Failed** | Microsoft Defender for Identity - Advanced Audit Policy for CAs |
+| AdvancedAuditPolicyDCs | Passed | Microsoft Defender for Identity - Advanced Audit Policy for DCs |
+| CAAuditing | **Failed** | Microsoft Defender for Identity - Auditing for CAs |
+| ConfigurationContainerAuditing | Passed | Not Applicable |
+| DeletedObjectsContainerPermission | **Failed** | Not Applicable |
+| DomainObjectAuditing | Passed | Not Applicable |
+| EntraConnectAuditing | **Failed** | Microsoft Defender for Identity - Advanced Audit and URA Policy for Entra Connect |
+| NTLMAuditing | Passed | Microsoft Defender for Identity - NTLM Auditing for DCs |
+| ProcessorPerformance | **Failed** | Microsoft Defender for Identity - Processor Performance |
+| RemoteSAM | **Failed** | Microsoft Defender for Identity - Remote SAM Access |
+
+### Analysis of Failed Items
+
+| Failed Item | Still Required? | Notes |
+|-------------|-----------------|-------|
+| **RemoteSAM** | ❌ NO | SAM-R/LMP deprecated May 2025 - **why is script checking?** |
+| **DeletedObjectsContainerPermission** | ⚠️ MAYBE | v3 uses LocalSystem which has access on DCs |
+| **AdvancedAuditPolicyCAs** | Only if AD CS | Skip if no CA servers |
+| **CAAuditing** | Only if AD CS | Skip if no CA servers |
+| **EntraConnectAuditing** | Only if Entra Connect | Skip if no Entra Connect servers |
+| **ProcessorPerformance** | ✅ YES | Set power plan to High Performance |
 
 ### Documentation: What's New - May 2025
 **URL:** https://learn.microsoft.com/en-us/defender-for-identity/whats-new#may-2025
@@ -118,8 +144,16 @@ Customers will configure SAM-R for a deprecated/disabled feature.
 > "Local administrators collection (using SAM-R queries) feature is disabled"
 
 ### The Contradiction
-- Script checks for SAM-R configuration and fails without it
-- Documentation says SAM-R is disabled and not used
+- Script checks for SAM-R configuration and reports **"Failed"** if not configured
+- Documentation says SAM-R is disabled and not used since May 2025
+- Customers see failed status and think they need to fix it
+
+### Confusion This Creates
+1. Customer runs readiness script
+2. Sees `RemoteSAM = Failed`
+3. Follows documentation to configure SAM-R GPO
+4. Spends time on unnecessary configuration
+5. Feature is actually disabled and won't be used
 
 ### Impact
 Customers see "Failed" status for a configuration that's no longer relevant, causing confusion and unnecessary remediation efforts.
@@ -127,6 +161,7 @@ Customers see "Failed" status for a configuration that's no longer relevant, cau
 ### Clarification Needed
 - Will the script be updated to remove RemoteSAM check?
 - Should the check be changed to informational rather than failed?
+- Should DeletedObjectsContainerPermission be skipped for v3 DC deployments?
 
 ---
 
@@ -221,6 +256,46 @@ Consider creating:
 | Configure SAM-R | https://learn.microsoft.com/en-us/defender-for-identity/deploy/remote-calls-sam |
 | What's New - May 2025 | https://learn.microsoft.com/en-us/defender-for-identity/whats-new#may-2025 |
 | Test-MdiReadiness Script | https://github.com/microsoft/Microsoft-Defender-for-Identity/tree/main/Test-MdiReadiness |
+
+---
+
+## Test-MdiReadiness - What Actually Matters?
+
+Based on documentation review, here's what the readiness script checks vs. what's actually required:
+
+### For v2.x Sensor (Single Domain, DCs Only)
+
+| Check | Script Shows | Actually Required? | Action |
+|-------|--------------|-------------------|--------|
+| AdvancedAuditPolicyDCs | ✅ | ✅ YES | Configure GPO |
+| NTLMAuditing | ✅ | ✅ YES | Configure GPO |
+| ProcessorPerformance | ❌ | ✅ YES | Set to High Performance |
+| RemoteSAM | ❌ | ❌ NO | **SKIP** - LMP deprecated |
+| DeletedObjectsContainerPermission | ❌ | ⚠️ Maybe | Test without first |
+| AdvancedAuditPolicyCAs | ❌ | Only if AD CS | Skip if no CAs |
+| CAAuditing | ❌ | Only if AD CS | Skip if no CAs |
+| EntraConnectAuditing | ❌ | Only if Entra Connect | Skip if no EC servers |
+| AdfsAuditing | ✅ | Only if AD FS | Skip if no AD FS |
+
+### For v3.x Sensor (Single Domain, DCs Only)
+
+| Check | Script Shows | Actually Required? | Action |
+|-------|--------------|-------------------|--------|
+| AdvancedAuditPolicyDCs | ✅ | ✅ YES | Configure GPO |
+| NTLMAuditing | ✅ | ✅ YES | Configure GPO |
+| ProcessorPerformance | ❌ | ✅ YES | Set to High Performance |
+| RemoteSAM | ❌ | ❌ NO | **SKIP** - LMP deprecated |
+| DeletedObjectsContainerPermission | ❌ | ❌ NO | LocalSystem has access |
+| gMSA DSA | N/A | ❌ NO | LocalSystem used instead |
+| gMSA Action Account | N/A | ❌ NO | **BREAKS** response actions |
+
+### Key Takeaway
+
+The readiness script creates confusion by:
+1. Checking for **RemoteSAM** (deprecated feature)
+2. Checking **DeletedObjectsContainerPermission** (not needed for v3 on DCs)
+3. Not distinguishing between v2.x and v3.x requirements
+4. Showing "Failed" for items that may not apply to the deployment scenario
 
 ---
 
