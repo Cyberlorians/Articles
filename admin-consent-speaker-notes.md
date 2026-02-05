@@ -1,256 +1,272 @@
-# Admin Consent vs User Consent: Speaker Notes & Side Talk
+# Admin Consent vs User Consent: Speaker Notes
 
-## 📋 Quick Reference for Your Presentation
-
-Use these talking points alongside your Gamma presentation. Reference the compliance frameworks when customers ask "how does this align with federal requirements?"
+**Read this as you go through each slide. Everything you need is here.**
 
 ---
 
-## 🎯 Slide-by-Slide Talking Points
+## 🔑 THE BIG IDEA (Memorize This)
 
-### Slide 1: Title / Intro
-**Key Message:** This isn't just about configuration—it's about protecting your organization from one of the most effective modern attack vectors.
+> **"Consent is a TRUST decision, not an ACCESS decision."**
+> 
+> - PIM & RBAC control *who can perform admin actions*
+> - Consent controls *what an application is trusted to do on behalf of users*
+> - Once consent is granted, it's **permanent** until revoked—PIM doesn't protect you anymore
 
-**Side Talk:**
-> "Before we dive in, I want to set context. Consent phishing is now one of the top attack vectors CISA tracks against federal agencies. It bypasses MFA entirely because you're not stealing a password—you're getting legitimate access granted to a malicious app."
-
----
-
-### Slide 2: Your Question Answered
-**Key Message:** The answer balances security with usability—we're not blocking everything.
-
-**Side Talk:**
-> "I know what you're thinking—'if we block all user consent, we'll drown in helpdesk tickets.' That's why Microsoft's recommendation is nuanced: allow consent for LOW-RISK permissions from VERIFIED publishers only. Everything else goes through admin review."
+**Executive One-Liner (if asked to summarize):**
+> "Admin consent is a permanent trust decision. PIM controls who can approve trust—but it does NOT limit what happens after trust is granted. That's why consent must be governed like any other privileged tenant configuration."
 
 ---
 
-### Slide 3: What Microsoft Recommends
-**Key Message:** This is Microsoft's official guidance, not just a best practice.
+# 📊 SLIDE-BY-SLIDE GUIDE
 
-**Side Talk:**
-> "The policy name is `microsoft-user-default-low`. This is the out-of-box recommended setting Microsoft provides. It's documented in their security baselines and aligns with their Zero Trust deployment guidance."
+---
 
-**Reference to drop:**
+## Slide 1: Title / Intro
+
+**SAY THIS:**
+> "Before we dive in, I want to set context. Consent phishing is one of the top attack vectors CISA tracks against federal agencies. It bypasses MFA entirely—you're not stealing a password, you're getting legitimate access granted to a malicious app."
+
+**IF THEY ASK "Why does this matter?"**
+> "Because once a user clicks Accept on a malicious app, that app has API access to their mailbox, files, whatever permissions it requested. Password reset doesn't help. MFA doesn't help. The app has tokens, not credentials."
+
+---
+
+## Slide 2: Your Question Answered
+
+**THE ANSWER:**
+> Allow limited user consent for low-risk apps from verified publishers.  
+> Require admin consent for everything else.  
+> Enable Admin Consent Workflow so users can request access.
+
+**SAY THIS:**
+> "I know what you're thinking—'if we block all user consent, we'll drown in helpdesk tickets.' That's why Microsoft's recommendation is nuanced: LOW-RISK permissions from VERIFIED publishers only. Everything else goes through admin review."
+
+**IF THEY PUSH BACK:**
+> "This approach balances security with productivity. Users aren't blocked—they're redirected through a controlled process. You get visibility, they get access when appropriate."
+
+---
+
+## Slide 3: What Microsoft Recommends
+
+**THE SETTING:**
+- Policy: `microsoft-user-default-low`
+- Users CAN consent to: verified publisher apps + low-risk permissions
+- Users CANNOT consent to: unverified apps or sensitive permissions
+
+**SAY THIS:**
+> "This is Microsoft's official guidance—it's in their security baselines and Zero Trust deployment docs. It's not just a best practice, it's the recommended default."
+
+**LINK TO DROP IF ASKED:**
 - [Configure User Consent Settings](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/configure-user-consent)
 
 ---
 
-### Slide 4-5: Where to Configure / Steps
-**Key Message:** This is a 5-minute configuration change with massive security impact.
+## Slide 4-5: Where to Configure / Steps
 
-**Side Talk:**
-> "This is one of those rare security wins that takes 5 minutes to implement and has immediate impact. No agents to deploy, no infrastructure changes, just policy configuration."
+**THE PATH:**
+```
+Entra Admin Center → Identity → Applications → Enterprise Applications → Consent and Permissions → User Consent Settings
+```
 
----
+**SAY THIS:**
+> "This is a 5-minute configuration change with massive security impact. No agents, no infrastructure changes—just policy."
 
-### Slide 6: Permission Classifications
-**Key Message:** You control what's "low risk" for YOUR organization.
-
-**Side Talk:**
-> "What's low risk? Microsoft suggests User.Read, openid, profile, email—basic sign-in permissions. But YOU decide what goes on this list. If your org is sensitive about even profile data, don't classify anything as low impact."
-
-**High-risk examples to mention:**
-- `User.Read.All` - Read all user profiles
-- `Mail.Send` - Send email as the user
-- `Mail.ReadWrite` - Read/write all email
-- `Directory.Read.All` - Read entire directory
-- `Files.ReadWrite.All` - Access all files
+**THE STEPS:**
+1. Set "Users can consent to apps" → **Allow for verified publishers, low-risk only**
+2. Set "Users can request admin consent" → **Yes**
+3. Add reviewers (use PIM-eligible roles)
+4. Set notification email
 
 ---
 
-### Slide 7: Admin Consent Workflow
-**Key Message:** Users aren't blocked—they're redirected through a controlled process.
+## Slide 6: Permission Classifications
 
-**Side Talk:**
-> "This is the key to making restrictive consent work operationally. Users don't hit a wall—they submit a request. You get visibility, they get access when appropriate. Win-win."
+**WHAT TO SAY:**
+> "You control what 'low risk' means for YOUR organization. Microsoft suggests these as low impact—but you decide."
 
----
+**LOW RISK (safe for user consent):**
+| Permission | What It Does |
+|------------|--------------|
+| `User.Read` | Read signed-in user's profile |
+| `openid` | Sign users in |
+| `profile` | View basic profile |
+| `email` | View email address |
 
-### Slide 8: PIM Integration
-**Key Message:** The people approving consent requests shouldn't have standing privileges.
+**HIGH RISK (require admin consent):**
+| Permission | What It Does | Why It's Dangerous |
+|------------|--------------|-------------------|
+| `User.Read.All` | Read ALL user profiles | Directory enumeration |
+| `Mail.Read` | Read user's mail | Data exfiltration |
+| `Mail.Send` | Send mail as user | Phishing, BEC |
+| `Mail.ReadWrite` | Full mailbox access | Complete compromise |
+| `Files.ReadWrite.All` | Access all files | Data exfiltration |
+| `Directory.Read.All` | Read entire directory | Reconnaissance |
 
-**Side Talk:**
-> "Who should approve consent requests? Someone with Cloud Application Administrator or Application Administrator. But those roles shouldn't be permanently assigned. Put them behind PIM—elevate just-in-time when a request comes in, approve, and the role expires."
-
----
-
-### Slide 9: Summary / Action Items
-**Key Message:** These are your 5 action items to take back to your team.
-
----
-
-## 🛡️ Federal Compliance Alignment
-
-### CISA Zero Trust Maturity Model (ZTMM)
-**Relevant Section:** Identity Pillar → Governance Function
-
-| Maturity Level | Requirement | How Consent Settings Align |
-|----------------|-------------|---------------------------|
-| Initial | Begin implementing identity policies for enterprise-wide enforcement | Configure consent settings tenant-wide |
-| Advanced | Implement policies with automation, update periodically | Use admin consent workflow, review existing consents |
-| Optimal | Fully automate enterprise-wide policies with continuous enforcement | Integrate with Defender for Cloud Apps, continuous monitoring |
-
-**Microsoft's Mapping:** [CISA Zero Trust Maturity Model - Identity Pillar](https://learn.microsoft.com/en-us/security/zero-trust/cisa-zero-trust-maturity-model-identity)
+**IF THEY ASK "What if we're really sensitive?"**
+> "Then don't classify anything as low impact. Force everything through admin review. It's more friction but maximum control."
 
 ---
 
-### CISA SCuBA (Secure Cloud Business Applications)
-**What It Is:** CISA's security configuration baselines for M365/Azure
+## Slide 7: Admin Consent Workflow
 
-**Relevant Requirement:** Control third-party application access to organizational data
+**THE FLOW:**
+```
+User tries to consent → Blocked → Submits request → Admin reviews → Approve/Deny
+```
 
-**SCuBA Baseline Document:** [Azure AD SCuBA Baseline (PDF)](https://www.cisa.gov/sites/default/files/2023-12/Azure%20Active%20Directory%20SCB_12.20.2023.pdf)
+**SAY THIS:**
+> "This is the key to making restrictive consent work. Users don't hit a wall—they submit a request. You get visibility, they get access when appropriate."
 
-**Talking Point:**
-> "CISA's SCuBA project provides specific configuration baselines for Azure AD/Entra ID. Restricting user consent and implementing admin consent workflow directly addresses their requirements for controlling third-party application access."
-
----
-
-### DoD Zero Trust Strategy
-**Reference Document:** [DoD Zero Trust Reference Architecture](https://dodcio.defense.gov/Portals/0/Documents/Library/DoD-ZTStrategy.pdf)
-
-**Relevant Pillars:**
-- **User Pillar:** Verify explicitly, use least privilege access
-- **Application Pillar:** Secure all applications, monitor access continuously
-
-**Talking Point:**
-> "The DoD Zero Trust Strategy emphasizes 'never trust, always verify' for application access. Requiring admin consent for sensitive permissions implements explicit verification at the application layer."
+**WHERE TO CONFIGURE:**
+```
+Enterprise Applications → Consent and Permissions → Admin Consent Settings → Enable
+```
 
 ---
 
-### OMB Memorandum M-22-09
-**What It Is:** Federal Zero Trust Architecture mandate (January 2022)
+## Slide 8: PIM Integration
 
-**Key Requirements:**
-1. Phishing-resistant MFA for all users
-2. Application-level access controls
-3. Continuous monitoring
+**⚠️ CRITICAL NUANCE (don't skip this):**
 
-**How Consent Aligns:**
-- Consent controls = application-level access controls
-- Admin workflow = explicit verification before granting access
-- Monitoring consents = continuous verification
+> "Here's what most people get wrong: PIM only gates the *act of granting consent*. It does NOT gate the *use of the permission* afterward."
 
-**Talking Point:**
-> "M-22-09 requires agencies to implement application-level access controls. Consent management is foundational—if you can't control which apps access your data, you can't claim Zero Trust."
+**WHAT THIS MEANS:**
+- Admin activates PIM role → grants consent → role expires
+- BUT: The consent is **permanent**
+- The app can use that permission 24/7, on behalf of ANY user who signs in
+- Until someone explicitly revokes it
+
+**SAY THIS:**
+> "PIM protects the approval process. But once consent is granted, it's a permanent trust artifact in your tenant. That's why we need ongoing governance—not just controlled approval."
+
+**ROLES TO PUT BEHIND PIM:**
+- Global Administrator
+- Cloud Application Administrator  
+- Application Administrator
 
 ---
 
-## ⚠️ Consent Phishing: Why This Matters
+## Slide 9: Summary / Action Items
 
-### What Is Consent Phishing?
-An attacker tricks a user into granting a malicious OAuth app access to their data. The app is registered legitimately with Microsoft Entra ID, so it looks real.
+**THE 5 ACTIONS:**
+1. ✅ Configure user consent (verified + low-risk only)
+2. ✅ Enable admin consent workflow
+3. ✅ Classify permissions (define your low-risk list)
+4. ✅ Put consent roles behind PIM
+5. ✅ Review regularly (audit existing consents)
+
+**CLOSE WITH:**
+> "The biggest gap we see: admin consent is granted once and never looked at again. Strong tenants treat consent like any other privileged configuration—inventory, review, revoke when no longer needed."
+
+---
+
+# 🛡️ FEDERAL COMPLIANCE (If They Ask)
+
+**Quick hits for each framework:**
+
+| Framework | What to Say |
+|-----------|-------------|
+| **CISA ZTMM** | "Identity Pillar, Governance Function—Advanced maturity requires controlled app access with periodic review" |
+| **CISA SCuBA** | "Azure AD baseline specifically requires controlling third-party application access" |
+| **DoD Zero Trust** | "Never trust, always verify—at the application layer, that means admin consent for sensitive permissions" |
+| **OMB M-22-09** | "Application-level access controls are required. If you can't control which apps access your data, you can't claim Zero Trust" |
+| **FedRAMP** | "Third-party integrations must be authorized and monitored" |
+
+**DOCUMENT LINKS:**
+- [CISA ZTMM - Identity Pillar](https://learn.microsoft.com/en-us/security/zero-trust/cisa-zero-trust-maturity-model-identity)
+- [CISA SCuBA Azure AD Baseline (PDF)](https://www.cisa.gov/sites/default/files/2023-12/Azure%20Active%20Directory%20SCB_12.20.2023.pdf)
+
+---
+
+# 💬 COMMON QUESTIONS (Have These Ready)
+
+### "If we block user consent, won't we get overwhelmed?"
+> "That's why we use permission classifications. Users self-consent to low-risk stuff. Only sensitive permissions require review. After the initial wave of pre-approving common apps, volume is manageable."
+
+### "What if we already have a lot of apps with user consent?"
+> "Audit first. Run the PowerShell script, identify apps with sensitive permissions, revoke what's not justified. Then implement controls going forward."
+
+### "How do we know if an app is 'verified'?"
+> "Blue checkmark in the consent prompt. Microsoft verified the publisher owns their domain. It's not a guarantee the app is safe—just that the publisher is who they claim to be."
+
+### "What about Microsoft apps like Teams?"
+> "First-party Microsoft apps are pre-consented. This is about third-party and custom apps."
+
+### "What's the difference between delegated and application permissions?"
+> "Delegated = app acts on behalf of a signed-in user. Application = app acts as itself, no user needed. For backend services with no UI, use application permissions + managed identity—not delegated."
+
+### "Does PIM protect us after consent is granted?"
+> "No. PIM controls WHO can approve consent. Once approved, the consent persists 24/7 until someone revokes it. That's why you need ongoing review, not just controlled approval."
+
+---
+
+# ⚠️ CONSENT PHISHING (If You Need to Explain the Threat)
 
 **Attack Flow:**
-1. Attacker registers an app in Entra ID (easy, anyone can do this)
-2. App requests permissions like Mail.Read, Files.ReadWrite
-3. Attacker sends phishing email with "Click here to access shared files"
-4. User clicks → sees Microsoft consent prompt → clicks Accept
-5. Attacker now has API access to user's mailbox/files
-6. **MFA doesn't help**—the user authenticated legitimately
+1. Attacker registers app in Entra ID (anyone can do this)
+2. App requests Mail.Read, Files.ReadWrite
+3. Attacker sends phishing email: "Click to access shared document"
+4. User clicks → sees legit Microsoft consent prompt → clicks Accept
+5. Attacker now has API access to mailbox/files
+6. **MFA doesn't help**—user authenticated legitimately
 
-### Why Traditional Defenses Fail
-| Defense | Why It Doesn't Work |
-|---------|---------------------|
-| Password reset | App has OAuth tokens, not passwords |
-| MFA | User already passed MFA when consenting |
-| Email filtering | Consent link goes to legitimate Microsoft domain |
-| Endpoint protection | No malware—it's a cloud API |
-
-### CISA Warning
-CISA has specifically called out consent phishing in their threat advisories as a top technique used against federal agencies.
-
-**Reference:** [CISA - Detecting and Responding to Identity-Based Attacks](https://www.cisa.gov/news-events/cybersecurity-advisories)
+**Why This Bypasses Everything:**
+| Your Defense | Why It Fails |
+|--------------|--------------|
+| Password reset | App has OAuth tokens, not password |
+| MFA | User already passed MFA |
+| Email filter | Link goes to real Microsoft domain |
+| EDR | No malware—it's cloud API calls |
 
 ---
 
-## 🔍 Monitoring & Governance (Post-Implementation)
+# 🔍 MONITORING (For Follow-Up Conversations)
 
-### Audit Existing Consents
-**Why:** You may already have malicious or unnecessary consents in your tenant.
-
-**How:**
-1. Entra Admin Center → Enterprise Applications → filter by "User consented"
-2. Run PowerShell audit script: [Get-AzureADPSPermissions.ps1](https://gist.github.com/psignoret/41793f8c6211d2df5051d77ca3728c09)
-
-**Looking For:**
-- Apps with high-risk permissions (Mail.ReadWrite, Files.ReadWrite.All)
-- Apps from unverified publishers
-- Apps with suspicious names mimicking legitimate products
-- Apps consented by many users in a short timeframe
-
-### Microsoft Defender for Cloud Apps
-**If Licensed:** Use OAuth app governance features to:
-- Automatically detect risky apps
-- Set policies to alert on sensitive permission grants
-- Revoke app access automatically
-
-**Reference:** [Investigate Risky OAuth Apps](https://learn.microsoft.com/en-us/defender-cloud-apps/investigate-risky-oauth)
-
-### Microsoft Sentinel Detection
-**KQL Query - Detect New Consent Grants:**
+**Sentinel KQL - Detect New Consent Grants:**
 ```kql
 AuditLogs
 | where OperationName == "Consent to application"
-| extend AppDisplayName = tostring(TargetResources[0].displayName)
-| extend UserPrincipalName = tostring(InitiatedBy.user.userPrincipalName)
-| extend ConsentType = tostring(TargetResources[0].modifiedProperties[0].newValue)
-| project TimeGenerated, UserPrincipalName, AppDisplayName, ConsentType
+| extend AppName = tostring(TargetResources[0].displayName)
+| extend User = tostring(InitiatedBy.user.userPrincipalName)
+| project TimeGenerated, User, AppName
 | order by TimeGenerated desc
 ```
 
-**Alert On:**
-- Any admin consent grants (should be rare)
-- Consent to apps requesting Mail.* or Files.* permissions
-- Bulk consent events (multiple users consenting to same app quickly)
+**Defender for Cloud Apps:**
+- OAuth app governance
+- Auto-detect risky apps
+- Alert on sensitive permission grants
+
+**Audit Script:**
+- [Get-AzureADPSPermissions.ps1](https://gist.github.com/psignoret/41793f8c6211d2df5051d77ca3728c09)
 
 ---
 
-## 📚 Key Microsoft Documentation References
+# ✅ IMPLEMENTATION CHECKLIST (Give to Customer)
+
+- [ ] Audit existing application consents
+- [ ] Revoke suspicious/unnecessary consents
+- [ ] Configure: "Allow for verified publishers, low-risk only"
+- [ ] Define permission classifications
+- [ ] Enable admin consent workflow
+- [ ] Designate reviewers (PIM-eligible)
+- [ ] Pre-approve known business apps
+- [ ] Set up monitoring (Sentinel/MDCA)
+- [ ] Document for compliance audits
+
+---
+
+# 📚 REFERENCE LINKS
 
 | Topic | Link |
 |-------|------|
 | Configure User Consent | [learn.microsoft.com](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/configure-user-consent) |
 | Admin Consent Workflow | [learn.microsoft.com](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/admin-consent-workflow-overview) |
 | Permission Classifications | [learn.microsoft.com](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/configure-permission-classifications) |
-| Detect Illicit Consent Grants | [learn.microsoft.com](https://learn.microsoft.com/en-us/defender-office-365/detect-and-remediate-illicit-consent-grants) |
-| App Consent Investigation Playbook | [learn.microsoft.com](https://learn.microsoft.com/en-us/security/operations/incident-response-playbook-app-consent) |
+| Illicit Consent Grants | [learn.microsoft.com](https://learn.microsoft.com/en-us/defender-office-365/detect-and-remediate-illicit-consent-grants) |
+| Consent Investigation Playbook | [learn.microsoft.com](https://learn.microsoft.com/en-us/security/operations/incident-response-playbook-app-consent) |
 | Protect Against Consent Phishing | [learn.microsoft.com](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/protect-against-consent-phishing) |
-| Zero Trust - Identity | [learn.microsoft.com](https://learn.microsoft.com/en-us/security/zero-trust/deploy/identity) |
-| CISA ZTMM - Identity Pillar | [learn.microsoft.com](https://learn.microsoft.com/en-us/security/zero-trust/cisa-zero-trust-maturity-model-identity) |
 
 ---
 
-## 💬 Anticipated Customer Questions
-
-### Q: "If we block all user consent, won't we get overwhelmed with requests?"
-**A:** "That's why we implement the admin consent workflow AND permission classifications. Users can still self-consent to low-risk permissions from verified publishers. Only sensitive permissions require admin review. In practice, after the initial wave of pre-approving common business apps, the ongoing request volume is manageable."
-
-### Q: "What if we already have a lot of apps with user consent?"
-**A:** "Great question—that's why we recommend auditing existing consents first. Run the PowerShell audit script, identify apps with sensitive permissions, and revoke any that aren't business-justified. Then implement the new controls going forward."
-
-### Q: "How do we know if an app is from a 'verified publisher'?"
-**A:** "Microsoft has a Publisher Verification program. Verified apps display a blue checkmark in the consent prompt. The publisher has proven they own the domain associated with the app. It's not a guarantee the app is safe, but it's a baseline trust signal."
-
-### Q: "Does this apply to Microsoft first-party apps?"
-**A:** "Microsoft first-party apps (Teams, Outlook, SharePoint, etc.) are pre-consented and don't require user or admin consent. This primarily affects third-party apps and custom line-of-business apps."
-
----
-
-## ✅ Implementation Checklist
-
-- [ ] Audit existing application consents in tenant
-- [ ] Identify and revoke suspicious/unnecessary consents
-- [ ] Configure user consent: "Allow for verified publishers, low-risk only"
-- [ ] Define permission classifications (low impact list)
-- [ ] Enable admin consent workflow
-- [ ] Designate reviewers (use PIM-eligible roles)
-- [ ] Configure notification email for consent requests
-- [ ] Pre-approve known business-critical apps via admin consent
-- [ ] Set up monitoring (Sentinel/Defender for Cloud Apps)
-- [ ] Document policy for compliance (CISA, DoD, FedRAMP audits)
-
----
-
-*Last Updated: February 2026*
-*Author: Michael Crane*
+*Last Updated: February 5, 2026*
