@@ -358,11 +358,6 @@ https://learn.microsoft.com/en-us/defender-for-identity/configure-detection-excl
 
 > 💡 **Demo:** Show global exclusions vs. per-rule exclusions. Emphasize per-rule is preferred.
 
-
-https://learn.microsoft.com/en-us/defender-for-identity/exclusions
-https://learn.microsoft.com/en-us/defender-for-identity/configure-detection-exclusions
-```
-
 </details>
 
 ---
