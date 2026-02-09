@@ -139,6 +139,30 @@ Incidents contain evidence from multiple sources (MDI, MDE, MDO, etc.)
 
 ---
 
+### Step 3b: Pivot to Sensitive Groups Config (2 min) — Optional Teaching Moment
+
+**If the user is tagged Sensitive:**
+
+| Do | Say |
+|----|-----|
+| Point to the **Sensitive** tag on the user | "This user is flagged as sensitive — let's see why" |
+| Scroll to **Groups** section on user profile | "They're in Domain Admins — that's why they're sensitive" |
+| Explain | "MDI automatically tags members of privileged groups as sensitive" |
+
+**Pivot to show configuration:**
+
+| Do | Say |
+|----|-----|
+| Navigate to **Settings → Identities → Entity tags → Sensitive** | "Let me show you where this is configured" |
+| Show the **default sensitive groups** list | "These groups are sensitive by default — Domain Admins, Enterprise Admins, Schema Admins, etc." |
+| Show you can **add custom users/groups** | "You can also manually tag users, devices, or groups that are sensitive to your organization" |
+| Navigate back to the incident | "Now back to our investigation..." |
+
+**One-liner:**
+> *"MDI automatically flags members of privileged groups as sensitive. You can also manually tag users or groups that matter to your org — like executives or service accounts with elevated access."*
+
+---
+
 ### Step 4: Investigate the Device (3 min)
 
 | Do | Say |
