@@ -212,27 +212,43 @@ Incidents contain evidence from multiple sources (MDI, MDE, MDO, etc.)
 
 ---
 
-### Step 7: Tune to Prevent Future False Positives (5 min)
+### Step 7: Alert Tuning Mindset (3 min)
 
-**When to tune:**
-- This incident is false positive (authorized activity)
-- Same entity keeps triggering this alert
-- Alert is noise, not signal
+> MDI alerts often become part of a larger attack story.
+
+**How to Identify What Needs Tuning:**
+
+| Look For | What It Means |
+|----------|---------------|
+| **Alert grouping** | Grouped alerts = validation (part of attack story). Stand-alone alerts = may need tuning |
+| **High-volume incidents marked as FP** | If you keep closing the same alert as false positive, it needs tuning |
+| **Trends in common entities** | Same user or device triggering alerts repeatedly? Likely a tuning candidate |
+| **Authorized activity** | Scanners, backup tools, admin scripts generating expected alerts |
 
 | Do | Say |
 |----|-----|
-| Note the **alert type** from the incident | "This was an LDAP reconnaissance alert — let's tune it" |
-| Go to **Settings → Identities → Detection rules** | "Here's where I configure exclusions per alert type" |
-| Find the alert rule that fired | "Let me find the LDAP recon rule" |
-| Click the rule → **Exclusions** | "I can exclude by user, group, IP, or IP range" |
-| Add an exclusion (e.g., scanner account) | "This scanner runs daily — I'll exclude it so it doesn't trigger noise" |
-| Click **Save** | "Now this account won't trigger this specific alert" |
+| Point to the incident list | "Alert grouping is validation — if MDI correlates alerts into an attack story, that's confidence" |
+| Show a standalone alert | "Stand-alone alerts that keep appearing? That's your tuning signal" |
+| Click into a repeated alert | "Look for patterns — same entity, same alert type, same time of day" |
+| Identify the source entity | "Is this authorized? A scanner? A scheduled task? That tells you whether to tune" |
 
-**Common exclusions:**
-- Vulnerability scanners
-- Authorized admin scripts
-- Service accounts with legitimate recon behavior
-- VPN IP ranges (if causing false positives)
+**Decision Points:**
+
+| Question | If Yes → |
+|----------|----------|
+| Is it authorized activity? | Consider exclusion |
+| Does it fire repeatedly? | Tune it |
+| One-time occurrence? | Close as FP, no exclusion needed |
+| Part of an attack story? | Investigate, don't tune |
+
+**Other Considerations:**
+- Consider providing feedback to Microsoft on detection quality
+- Defender XDR and Sentinel have additional tuning features (custom detection rules, automation rules) not covered here
+
+**One-liner:**
+> *"Alert grouping validates detections. Stand-alone, high-volume alerts closed as FP are your tuning targets."*
+
+> 📌 **How to add exclusions:** See **Section 3: Exclusions**
 
 ---
 
@@ -252,12 +268,13 @@ Incidents contain evidence from multiple sources (MDI, MDE, MDO, etc.)
 | 1. Filter to MDI | 2 min | Service source filter |
 | 2. Open incident | 2 min | Attack story, evidence |
 | 3. Investigate user | 5 min | Profile, timeline, alerts |
-| 4. Investigate device | 3 min | Logged on users, alerts |
+| 3b. Sensitive groups | 2 min | Entity tags config |
+| 4. Investigate device | 3 min | Timeline, alerts |
 | 5. Investigate group | 2 min | Membership, changes |
 | 6. Make decision | 2 min | Classification, actions |
-| 7. Tune alert | 5 min | Detection rules, exclusions |
+| 7. Tuning mindset | 3 min | How to identify tuning candidates |
 | 8. Feedback | 1 min | Close as FP |
-| **Total** | **~20 min** | |
+| **Total** | **~22 min** | |
 
 ---
 
@@ -276,28 +293,90 @@ https://learn.microsoft.com/en-us/defender-for-identity/exclusions
 <details>
 <summary><h2>3. Exclusions</h2></summary>
 
-### Global Exclusions
-**Where:** Settings → Identities → Excluded entities
+### When to Use Exclusions
 
-Exclude users, domains, devices, IP addresses **globally** (rare cases like IDS appliances).
+- Alert is a **false positive** (authorized activity)
+- Same entity keeps triggering the same alert
+- Alert is noise, not signal
 
-⚠️ Check periodically for unauthorized additions.
+---
 
-### Per-Detection Exclusions (Preferred)
-**Where:** Settings → Identities → Detection rules → [Select rule] → Exclusions
+### Global Excluded Entities (Use Sparingly)
 
-More surgical — exclude by user, group, IP, or IP range per alert type.
+**Where:** Settings → Identities → **Actions and exclusions → Global excluded entities**
 
-**Common exclusions:**
-- Scanners / vulnerability tools
-- Authorized scripts
-- Custom applications
-- VPN IP ranges (if causing false positives)
+Excludes entities from **ALL** detection rules.
 
-> 💡 **Demo:** Show global exclusions vs. per-rule exclusions.
+| Tab | What You Can Exclude |
+|-----|---------------------|
+| Users | Specific user accounts |
+| Domains | Entire domains |
+| Devices | Specific devices |
+| IP addresses | IPs or IP ranges |
+
+**Use cases:**
+- IDS/IPS appliances that generate legitimate recon traffic
+- Vulnerability scanner IPs
+- Security tools that query AD
+
+⚠️ **Warning:** Check periodically for unauthorized additions. Over-exclusion creates blind spots.
+
+---
+
+### Exclusions by Detection Rule (Preferred)
+
+**Where:** Settings → Identities → **Actions and exclusions → Exclusions by detection rule**
+
+Excludes entities from **specific** detection rules only. This is the surgical approach.
+
+| Do | Say |
+|----|-----|
+| Click **Exclusions by detection rule** | "This is where I tune specific alerts" |
+| Find the detection (e.g., Security principal reconnaissance) | "Let me find the rule that fired" |
+| Click the rule | "I can add exclusions here" |
+| Click **+ Add exclusion** | "I'll exclude this scanner account" |
+| Select exclusion type (user, group, device, IP) | "Excluding by user" |
+| Enter the entity | "This account runs authorized scans" |
+| Save | "Now this account won't trigger this specific alert" |
+
+---
+
+### Common Exclusions
+
+| Entity Type | Example Use Case |
+|-------------|------------------|
+| **Service accounts** | svc_scanner, svc_backup — legitimate recon |
+| **Scanner IPs** | Vulnerability scanners, pen test tools |
+| **Admin scripts** | Scheduled tasks that query AD |
+| **VPN IP ranges** | If VPN IPs cause false positives |
+
+---
+
+### Demo: Show Both Exclusion Types
+
+| Do | Say |
+|----|-----|
+| Go to **Settings → Identities → Actions and exclusions** | "Two ways to exclude" |
+| Click **Global excluded entities** | "This excludes from everything — use sparingly" |
+| Show the tabs (Users, Domains, Devices, IPs) | "I can exclude by user, domain, device, or IP" |
+| Go back, click **Exclusions by detection rule** | "This is surgical — excludes from one rule only" |
+| Click a detection rule | "I can add exclusions per alert type" |
+| Show the exclusion form | "Much safer — only affects this specific detection" |
+
+**One-liner:**
+> *"Global exclusions create blind spots. Per-rule exclusions let you tune without losing visibility."*
+
+---
 
 ### 📚 Reference Articles
 ```
+https://learn.microsoft.com/en-us/defender-for-identity/exclusions
+https://learn.microsoft.com/en-us/defender-for-identity/configure-detection-exclusions
+```
+
+> 💡 **Demo:** Show global exclusions vs. per-rule exclusions. Emphasize per-rule is preferred.
+
+
 https://learn.microsoft.com/en-us/defender-for-identity/exclusions
 https://learn.microsoft.com/en-us/defender-for-identity/configure-detection-exclusions
 ```
