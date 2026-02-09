@@ -543,25 +543,7 @@ https://learn.microsoft.com/en-us/defender-for-identity/classic-integrate-mde
 ---
 
 <details>
-<summary><h2>7. VPN Integration (Classic Sensor Only)</h2></summary>
-
-MDI can listen to RADIUS accounting events for VPN correlation.
-
-**Supported:** Microsoft, F5, Check Point, Cisco ASA
-
-⚠️ Not supported in FIPS environments.
-
-### 📚 Reference Articles
-```
-https://learn.microsoft.com/en-us/defender-for-identity/vpn-integration
-```
-
-</details>
-
----
-
-<details>
-<summary><h2>8. Operations</h2></summary>
+<summary><h2>7. Operations</h2></summary>
 
 ### Health Monitoring
 **Where:** Identities → Health issues
@@ -588,7 +570,7 @@ https://learn.microsoft.com/en-us/defender-for-identity/sensor-settings
 ---
 
 <details>
-<summary><h2>9. Hunting</h2></summary>
+<summary><h2>8. Hunting</h2></summary>
 
 ### Key Tables
 
@@ -598,6 +580,17 @@ https://learn.microsoft.com/en-us/defender-for-identity/sensor-settings
 | **IdentityLogonEvents** | Sign-in activity: success, failure, location |
 | **IdentityQueryEvents** | LDAP/directory queries — recon detection |
 | **IdentityInfo** | User session details, device mapping |
+
+### Workbooks
+
+Two workbooks to showcase:
+
+| Workbook | What It Shows |
+|----------|---------------|
+| **Microsoft Defender for Identity** | Alerts, health, activity overview |
+| **Identity & Access** | Sign-in trends, failed logons, risky users |
+
+> 💡 **Demo:** Show both workbooks in Sentinel. Great for executive dashboards.
 
 ### Sample Queries
 
@@ -642,34 +635,43 @@ https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-identityqueryeve
 ---
 
 <details>
-<summary><h2>10. Troubleshooting</h2></summary>
+<summary><h2>9. Troubleshooting</h2></summary>
 
-### Common Issues
+### General Approach
 
-| Issue | Likely Cause | Fix |
-|-------|--------------|-----|
-| "Directory services user credentials are incorrect" | gMSA permissions or Kerberos ticket | Verify gMSA config, purge Kerberos tickets, reboot DC |
-| Sensor not updating | Delayed update enabled or network issue | Check setting, verify connectivity |
-| Missing lateral movement paths | Configuration gap | Verify required permissions |
-| High alert volume | Threshold too low or missing exclusions | Tune thresholds, add exclusions |
+1. **Check Health Dashboard** — Settings → Identities → Health issues
+2. **Review Sensor Logs** — `C:\Program Files\Azure Advanced Threat Protection Sensor\Logs`
+3. **Validate gMSA** — Most common issue
+4. **Check connectivity** — Sensor → cloud service
 
-### gMSA Verification
+### MDI PowerShell Module
+
+Use the **DefenderForIdentity** PowerShell module for troubleshooting and automation:
+
 ```powershell
-# Test gMSA is working
-Test-ADServiceAccount -Identity "MDIgMSA$"
+# Install the module
+Install-Module -Name DefenderForIdentity
 
-# Check who can retrieve password
-Get-ADServiceAccount -Identity "MDIgMSA$" -Properties PrincipalsAllowedToRetrieveManagedPassword
+# Import and explore
+Import-Module DefenderForIdentity
+Get-Command -Module DefenderForIdentity
 ```
 
-### Sensor Logs
-**Location:** `C:\Program Files\Azure Advanced Threat Protection Sensor\Logs`
+**Common cmdlets:**
+- `Test-MDISensorConnection` — Verify sensor connectivity
+- `Get-MDISensorHealth` — Check sensor health status
+- `Get-MDIConfiguration` — Review current config
+
+### Quick gMSA Check
+```powershell
+Test-ADServiceAccount -Identity "YourMDIgMSA$"
+```
 
 ### 📚 Reference Articles
 ```
 https://learn.microsoft.com/en-us/defender-for-identity/troubleshooting-known-issues
-https://learn.microsoft.com/en-us/defender-for-identity/deploy/create-directory-service-account-gmsa
 https://learn.microsoft.com/en-us/defender-for-identity/health-alerts
+https://www.powershellgallery.com/packages/DefenderForIdentity
 ```
 
 </details>
@@ -677,7 +679,7 @@ https://learn.microsoft.com/en-us/defender-for-identity/health-alerts
 ---
 
 <details>
-<summary><h2>11. Resources</h2></summary>
+<summary><h2>10. Resources</h2></summary>
 
 ### Core Documentation
 ```
