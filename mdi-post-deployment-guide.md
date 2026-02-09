@@ -75,7 +75,7 @@ https://learn.microsoft.com/en-us/defender-for-identity/advanced-settings
 ---
 
 <details>
-<summary><h2>2. Alerts & Alert Tuning</h2></summary>
+<summary><h2>2. Alerts, Investigation & Tuning (Combined Demo)</h2></summary>
 
 ### How Alerts Flow
 
@@ -87,79 +87,161 @@ Defender XDR correlates into Incidents
 Incidents contain evidence from multiple sources (MDI, MDE, MDO, etc.)
 ```
 
-### Filter MDI Alerts in Defender XDR
+---
 
-**Portal:** security.microsoft.com → Incidents & alerts → Filter by "Defender for Identity"
+## 🎬 DEMO: Alert Investigation & Tuning Workflow
 
-> 💡 **Demo:** Show filtering by MDI source in the Defender portal.
+### Pre-Demo Setup
+- Have at least one MDI incident in your environment
+- If none exists, trigger a test alert (honeytoken login, or run a recon query)
+- Have the Defender portal open: security.microsoft.com
+
+---
+
+### Step 1: Filter to MDI Alerts (2 min)
+
+| Do | Say |
+|----|-----|
+| Go to **Incidents & alerts → Incidents** | "Let's find our MDI alerts" |
+| Click **Add filter → Service source → Defender for Identity** | "I filter by service source to isolate identity-based alerts" |
+| Show the filtered list | "Now I'm only seeing incidents where MDI contributed evidence" |
+
+---
+
+### Step 2: Open an Incident (2 min)
+
+| Do | Say |
+|----|-----|
+| Click on an incident | "Let's investigate this one" |
+| Show the **Attack story** tab | "This shows me the timeline — what happened, in what order" |
+| Point out the **Evidence** section | "MDI flagged this behavior as suspicious — let's dig in" |
+
+---
+
+### Step 3: Investigate the User (5 min)
+
+| Do | Say |
+|----|-----|
+| Click on the **user entity** in the incident | "First question: Who is this user?" |
+| Show the user profile page | "I can see their role, group memberships, and whether they're tagged sensitive" |
+| Scroll to **Observed in organization → Timeline** | "Let's look at their recent activity" |
+| Look for failed sign-ins | "Any failed logins before this? Could indicate brute force" |
+| Check **Alerts** tab on user | "Does this user have other open alerts?" |
+
+**User Investigation Checklist:**
+- [ ] Is user sensitive (admin, watchlist)?
+- [ ] What's their role in the organization?
+- [ ] Other open alerts on this user?
+- [ ] Recent failed sign-ins?
+- [ ] What resources did they access?
+- [ ] What devices did they sign into?
+- [ ] Were they authorized for this activity?
+
+---
+
+### Step 4: Investigate the Device (3 min)
+
+| Do | Say |
+|----|-----|
+| Click on the **device** in the incident | "Now let's look at the device" |
+| Show device details | "Who else uses this machine?" |
+| Check **Logged on users** | "Was this user supposed to be on this device?" |
+| Check **Alerts** tab on device | "Any other suspicious activity on this device?" |
+
+**Device Investigation Checklist:**
+- [ ] What happened around the time of suspicious activity?
+- [ ] Which user was signed in?
+- [ ] Does this user normally use this device?
+- [ ] Other alerts on this device?
+
+---
+
+### Step 5: Investigate a Group (if applicable) (2 min)
+
+| Do | Say |
+|----|-----|
+| If a group is involved, click on it | "Let's check this group" |
+| Show group membership | "Is this a sensitive group like Domain Admins?" |
+| Check recent changes | "Who was recently added or removed?" |
+
+**Group Investigation Checklist:**
+- [ ] Is it a sensitive group (Domain Admins, Enterprise Admins)?
+- [ ] Does it include sensitive users?
+- [ ] Recent membership changes?
+- [ ] Who queried this group recently?
+
+---
+
+### Step 6: Make a Decision (2 min)
+
+| Finding | Action |
+|---------|--------|
+| **Confirmed compromise** | Disable account, reset password, isolate device |
+| **Suspicious but unclear** | Continue investigation, don't close yet |
+| **False positive (authorized activity)** | Close as False Positive, consider exclusion |
+
+| Do | Say |
+|----|-----|
+| Click **Manage incident** | "Based on our investigation, we take action" |
+| Show the **Classification** dropdown | "I can mark this as True Positive, False Positive, or Informational" |
+| Show **Actions** (Disable user, Contain device) | "And I can take response actions directly from here" |
+
+---
+
+### Step 7: Tune to Prevent Future False Positives (5 min)
+
+**When to tune:**
+- This incident is false positive (authorized activity)
+- Same entity keeps triggering this alert
+- Alert is noise, not signal
+
+| Do | Say |
+|----|-----|
+| Note the **alert type** from the incident | "This was an LDAP reconnaissance alert — let's tune it" |
+| Go to **Settings → Identities → Detection rules** | "Here's where I configure exclusions per alert type" |
+| Find the alert rule that fired | "Let me find the LDAP recon rule" |
+| Click the rule → **Exclusions** | "I can exclude by user, group, IP, or IP range" |
+| Add an exclusion (e.g., scanner account) | "This scanner runs daily — I'll exclude it so it doesn't trigger noise" |
+| Click **Save** | "Now this account won't trigger this specific alert" |
+
+**Common exclusions:**
+- Vulnerability scanners
+- Authorized admin scripts
+- Service accounts with legitimate recon behavior
+- VPN IP ranges (if causing false positives)
+
+---
+
+### Step 8: Provide Feedback (Optional) (1 min)
+
+| Do | Say |
+|----|-----|
+| Close alert as **False Positive** | "Closing as FP tells Microsoft this detection may need refinement" |
+| Mention feedback bubbles | "Watch for feedback prompts in the portal — Microsoft is always improving detections" |
+
+---
+
+## Demo Summary
+
+| Step | Time | What You Show |
+|------|------|---------------|
+| 1. Filter to MDI | 2 min | Service source filter |
+| 2. Open incident | 2 min | Attack story, evidence |
+| 3. Investigate user | 5 min | Profile, timeline, alerts |
+| 4. Investigate device | 3 min | Logged on users, alerts |
+| 5. Investigate group | 2 min | Membership, changes |
+| 6. Make decision | 2 min | Classification, actions |
+| 7. Tune alert | 5 min | Detection rules, exclusions |
+| 8. Feedback | 1 min | Close as FP |
+| **Total** | **~20 min** | |
+
+---
 
 ### 📚 Reference Articles
 ```
 https://learn.microsoft.com/en-us/defender-for-identity/alerts-overview
 https://learn.microsoft.com/en-us/defender-for-identity/understanding-security-alerts
-```
-
-</details>
-
----
-
-<details>
-<summary><h2>3. Alert Investigation Checklist</h2></summary>
-
-### Users
-- [ ] Is user sensitive (admin, watchlist)?
-- [ ] Role in organization?
-- [ ] Other open alerts?
-- [ ] Failed sign-ins?
-- [ ] What resources did they access?
-- [ ] What devices did they sign into?
-- [ ] Were they authorized?
-
-**Action:** Disable account or reset password if compromised.
-
-### Groups
-- [ ] Is it a sensitive group (Domain Admins)?
-- [ ] Does it include sensitive users?
-- [ ] Other open alerts?
-- [ ] Recent membership changes?
-- [ ] Recently queried? By whom?
-
-### Devices
-- [ ] What happened around the suspicious activity?
-- [ ] Which user was signed in?
-- [ ] Does user normally access this device?
-- [ ] Other suspicious activity from this user?
-
-> 💡 **Demo:** Walk through an incident, show investigation steps.
-
-### 📚 Reference Articles
-```
 https://learn.microsoft.com/en-us/defender-for-identity/investigate-assets
-https://learn.microsoft.com/en-us/defender-for-identity/understanding-security-alerts
-```
-
-</details>
-
----
-
-<details>
-<summary><h2>4. Alert Tuning</h2></summary>
-
-### When to Tune
-- High volume incidents marked as false positive
-- MDI alerts are primary evidence but activity is authorized
-- Common entities (users/devices) triggering repeatedly
-
-### How to Tune
-- Exclude specific users/groups/IPs from alert rules
-- Look for patterns in false positives
-- Provide feedback to Microsoft (close as False Positive)
-
-> 💡 **Demo:** Show an alert rule, add an exclusion.
-
-### 📚 Reference Articles
-```
-https://learn.microsoft.com/en-us/defender-for-identity/advanced-settings
 https://learn.microsoft.com/en-us/defender-for-identity/exclusions
 ```
 
@@ -168,7 +250,7 @@ https://learn.microsoft.com/en-us/defender-for-identity/exclusions
 ---
 
 <details>
-<summary><h2>5. Exclusions</h2></summary>
+<summary><h2>3. Exclusions</h2></summary>
 
 ### Global Exclusions
 **Where:** Settings → Identities → Excluded entities
@@ -201,7 +283,7 @@ https://learn.microsoft.com/en-us/defender-for-identity/configure-detection-excl
 ---
 
 <details>
-<summary><h2>6. Notifications</h2></summary>
+<summary><h2>4. Notifications</h2></summary>
 
 **Where:** Settings → Identities → Notifications
 
@@ -223,7 +305,7 @@ https://learn.microsoft.com/en-us/defender-for-identity/notifications
 ---
 
 <details>
-<summary><h2>7. Entity Tags</h2></summary>
+<summary><h2>5. Entity Tags</h2></summary>
 
 ### Sensitive
 **Where:** Settings → Identities → Entity tags → Sensitive
@@ -259,7 +341,7 @@ https://learn.microsoft.com/en-us/defender-for-identity/manage-sensitive-honeyto
 ---
 
 <details>
-<summary><h2>8. Integrations</h2></summary>
+<summary><h2>6. Integrations</h2></summary>
 
 ### PAM Integration
 MDI integrates with Privileged Access Management solutions:
@@ -310,7 +392,7 @@ https://learn.microsoft.com/en-us/defender-xdr/streaming-api
 ---
 
 <details>
-<summary><h2>9. VPN Integration (Classic Sensor Only)</h2></summary>
+<summary><h2>7. VPN Integration (Classic Sensor Only)</h2></summary>
 
 MDI can listen to RADIUS accounting events for VPN correlation.
 
@@ -328,7 +410,7 @@ https://learn.microsoft.com/en-us/defender-for-identity/vpn-integration
 ---
 
 <details>
-<summary><h2>10. Operations</h2></summary>
+<summary><h2>8. Operations</h2></summary>
 
 ### Health Monitoring
 **Where:** Identities → Health issues
@@ -355,7 +437,7 @@ https://learn.microsoft.com/en-us/defender-for-identity/sensor-settings
 ---
 
 <details>
-<summary><h2>11. Hunting</h2></summary>
+<summary><h2>9. Hunting</h2></summary>
 
 ### Key Tables
 
@@ -409,7 +491,7 @@ https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-identityqueryeve
 ---
 
 <details>
-<summary><h2>12. Troubleshooting</h2></summary>
+<summary><h2>10. Troubleshooting</h2></summary>
 
 ### Common Issues
 
@@ -444,7 +526,7 @@ https://learn.microsoft.com/en-us/defender-for-identity/health-alerts
 ---
 
 <details>
-<summary><h2>13. Resources</h2></summary>
+<summary><h2>11. Resources</h2></summary>
 
 ### Core Documentation
 ```
