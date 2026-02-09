@@ -423,48 +423,119 @@ https://learn.microsoft.com/en-us/defender-for-identity/manage-sensitive-honeyto
 <details>
 <summary><h2>6. Integrations</h2></summary>
 
-### PAM Integration
-MDI integrates with Privileged Access Management solutions:
-- **Microsoft:** Entra PIM (built-in)
-- **Third-party:** CyberArk, Delinea, BeyondTrust
+### PAM Integration (Third-Party)
+
+MDI integrates with Privileged Access Management solutions for enhanced detection and response.
+
+**Supported PAM Vendors:**
+
+| Vendor | Capabilities |
+|--------|--------------|
+| **CyberArk** | Credential vaulting, session monitoring, threat remediation |
+| **BeyondTrust** | Identity-centric controls, privilege attack surface management |
+| **Delinea** | Centralized authorization, session control for privileged identities |
+
+**What the Integration Does:**
+- **Auto-tags** PAM-managed identities in Defender XDR (shows "Privileged account" tag)
+- **Password reset from XDR** — triggers reset through connected PAM system
+- **Combined analytics** — PAM access controls + MDI behavioral analytics
+
+**To reset password via PAM:**
+1. Go to **Assets → Identities**
+2. Select the identity
+3. Click **⋯** (three-dot menu)
+4. Select **Reset password** (label shows vendor, e.g., "Reset password by CyberArk")
+
+---
 
 ### Okta Integration
-MDI can ingest Okta identity data for hybrid visibility.
 
-### Microsoft Sentinel Integration
+MDI can integrate with Okta to detect suspicious behaviors and highlight threats related to monitored users authenticated by Okta.
+
+- Identifies risky sign-in patterns and suspicious role assignments in Okta
+- Correlates Okta identity data with on-premises AD for hybrid visibility
+
+**Requires:** An Okta Developer or Production tenant
+
+---
+
+### Defender XDR & Microsoft Sentinel Integration
+
+Defender XDR services integrate with Microsoft Sentinel using a **single data connector**.
+
 **Where:** Defender portal → Settings → Microsoft Sentinel
 
-**Two connection levels:**
+**Connection Options:**
 
-| Level | What It Does |
-|-------|--------------|
-| **Incidents & Alerts** | Syncs incidents between Sentinel and XDR |
-| **Events (Advanced Hunting)** | Sends raw MDI events to Sentinel |
+| Option | What It Does |
+|--------|--------------|
+| **Connect incidents and alerts** | Syncs incidents between Sentinel and XDR |
+| **Connect events** | Sends raw Advanced Hunting tables to Sentinel |
+
+**Two modes:**
+
+| Mode | Description |
+|------|-------------|
+| **Ingest Defender XDR incidents into Sentinel** | Bi-directional sync (status, owner, closing reason) |
+| **Ingest Sentinel incidents and alerts into Defender XDR** | Unified incident queue |
+
+> 💡 **Demo:** Show the Sentinel data connector in Defender portal.
+
+---
 
 ### MDI Data Costs
 
 | Data | Cost |
 |------|------|
-| Alerts & Incidents (SecurityAlert, SecurityIncident) | **Free** |
-| IdentityDirectoryEvents | Billable |
-| IdentityLogonEvents | Billable |
-| IdentityQueryEvents | Billable |
+| MDI data retained in **XDR Advanced Hunting** | **Free** (no cost) |
+| Alerts & Incidents (SecurityAlert, SecurityIncident) | **Free** to Sentinel |
+| **IdentityDirectoryEvents** | Billable (Sentinel ingestion) |
+| **IdentityLogonEvents** | Billable (Sentinel ingestion) |
+| **IdentityQueryEvents** | Billable (Sentinel ingestion) |
 
-> 💡 **Demo:** Show Sentinel data connector, explain cost implications.
+> ⚠️ Sentinel ingestion charges apply to MDI data tables. Plan accordingly.
+
+---
 
 ### SIEM Integration
-**Methods:**
-- REST API (pull incidents)
-- Event Hubs (stream events)
 
-**Supported SIEMs:** Splunk, ArcSight, Elastic, QRadar
+Microsoft Defender XDR integrates with various SIEM/SOAR and IT Service Management (ITSM) tools, enabling SOC teams to monitor and respond to incidents seamlessly.
+
+**Integration Methods:**
+
+| Method | Description |
+|--------|-------------|
+| **REST API** | Pull incidents on demand (M365D Incident API) |
+| **Event Hubs** | Stream data via Event Hubs (real-time) |
+| **Graph Security API** | Access security data via Microsoft Graph |
+
+**Supported SIEMs:**
+- Splunk (Splunk Add-on for Microsoft Cloud Services)
+- IBM QRadar
+- Elastic
+- ArcSight (FlexConnector)
+- Palo Alto XSIAM/XSOAR
+- ServiceNow
+
+> 📌 **Note:** Alert/incident data can be routed through Event Hub/Graph API or Graph Security API.
+
+---
+
+### Health API
+
+MDI exposes health status via API for monitoring integrations:
+- Sensor health status
+- Global health issues
+- Useful for integration with monitoring tools (SCOM, Zabbix, etc.)
+
+---
 
 ### 📚 Reference Articles
 ```
-https://learn.microsoft.com/en-us/defender-for-identity/classic-integrate-mde
-https://learn.microsoft.com/en-us/defender-for-identity/microsoft-365-security-center-mdi
+https://learn.microsoft.com/en-us/defender-for-identity/integrate-microsoft-and-pam-services
 https://learn.microsoft.com/en-us/azure/sentinel/microsoft-365-defender-sentinel-integration
 https://learn.microsoft.com/en-us/defender-xdr/streaming-api
+https://learn.microsoft.com/en-us/defender-for-identity/classic-integrate-mde
 ```
 
 </details>
