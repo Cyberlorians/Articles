@@ -6,18 +6,62 @@ A practical guide for MDI post-deployment configuration, tuning, and operations.
 
 ## 1. Learning Period & Alert Thresholds
 
-MDI has a learning period for behavioral baselines. You can customize alert thresholds:
+### What is the Learning Period?
 
-| Threshold | Behavior |
-|-----------|----------|
-| **Test Mode** | Alert immediately (no learning delay) |
-| **Low** | Lowest threshold — more alerts |
-| **Medium** | Lower threshold |
-| **High** | Standard (default) |
+MDI observes your environment to understand **what's normal** before alerting on anomalies:
+- Who logs in where
+- What queries are typical
+- What administrative patterns exist
 
-**Where:** Settings → Identities → Alert thresholds
+**Learning periods vary by alert type** — see table below.
 
-> 💡 **Demo:** Show threshold settings, explain when to use Test Mode vs. High.
+### Learning Periods by Alert Type
+
+| Alert | Learning Period |
+|-------|-----------------|
+| Network-mapping reconnaissance (DNS) | **8 days** from DC monitoring start |
+| Suspected Golden Ticket (encryption downgrade) | **5 days** from DC monitoring start |
+| Suspected Brute Force (Kerberos, NTLM) | **1 week** |
+| Security principal reconnaissance (LDAP) | **15 days** per computer |
+| User and Group membership recon (SAMR) | **4 weeks** per DC |
+| Suspicious additions to sensitive groups | **4 weeks** per DC |
+| Suspected over-pass-the-hash attack | **1 month** |
+| Suspicious VPN connection | **30 days** + at least 5 VPN connections |
+
+### Alert Threshold Levels
+
+| Level | Learning Period | Sensitivity | Use Case |
+|-------|-----------------|-------------|----------|
+| **High** (default) | ✅ Waits for learning | Standard — fewer false positives | Production |
+| **Medium** | ❌ **Ignores learning** | More alerts, lower threshold | Early detection |
+| **Low** | ❌ **Ignores learning** | Most alerts, lowest threshold | Testing |
+| **Test Mode** | ❌ **All alerts = Low** | Maximum alerts | Initial deployment |
+
+### Why Low/Medium Ignore Learning
+
+- **High:** MDI says *"I've seen this user do LDAP queries for 3 weeks — this is normal."* → No alert
+- **Low/Medium:** MDI says *"I don't care what's normal. This looks suspicious."* → **Alert NOW**
+
+### Test Mode (Nugget 🥇)
+
+- **Limited to 60 days maximum**
+- Sets ALL thresholds to Low (read-only while enabled)
+- Automatically reverts after 60 days or when you disable it
+- **New workspaces:** Learning period automatically removed for first 30 days
+
+### When to Use Each
+
+| Scenario | Threshold |
+|----------|-----------|
+| Production (day-to-day) | **High** |
+| Pen test / red team | **Low** or **Test Mode** |
+| New deployment (see everything) | **Test Mode** (60-day max) |
+| Too many false positives on specific alert | Keep **High**, add exclusions |
+| Alert not firing when expected | Lower to **Medium** |
+
+**Where:** Settings → Identities → Adjust alert thresholds
+
+> 💡 **Demo:** Show threshold settings. Explain Test Mode's 60-day limit. Show how Low/Medium skip learning.
 
 ---
 
