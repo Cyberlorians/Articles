@@ -4,7 +4,8 @@ A practical guide for MDI post-deployment configuration, tuning, and operations.
 
 ---
 
-## 1. Learning Period & Alert Thresholds
+<details>
+<summary><h2>1. Learning Period & Alert Thresholds</h2></summary>
 
 ### What is the Learning Period?
 
@@ -63,9 +64,18 @@ MDI observes your environment to understand **what's normal** before alerting on
 
 > 💡 **Demo:** Show threshold settings. Explain Test Mode's 60-day limit. Show how Low/Medium skip learning.
 
+### 📚 Reference Articles
+```
+https://learn.microsoft.com/en-us/defender-for-identity/security-testing-best-practices
+https://learn.microsoft.com/en-us/defender-for-identity/advanced-settings
+```
+
+</details>
+
 ---
 
-## 2. Alerts & Alert Tuning
+<details>
+<summary><h2>2. Alerts & Alert Tuning</h2></summary>
 
 ### How Alerts Flow
 
@@ -83,9 +93,18 @@ Incidents contain evidence from multiple sources (MDI, MDE, MDO, etc.)
 
 > 💡 **Demo:** Show filtering by MDI source in the Defender portal.
 
+### 📚 Reference Articles
+```
+https://learn.microsoft.com/en-us/defender-for-identity/alerts-overview
+https://learn.microsoft.com/en-us/defender-for-identity/understanding-security-alerts
+```
+
+</details>
+
 ---
 
-## 3. Alert Investigation Checklist
+<details>
+<summary><h2>3. Alert Investigation Checklist</h2></summary>
 
 ### Users
 - [ ] Is user sensitive (admin, watchlist)?
@@ -113,9 +132,18 @@ Incidents contain evidence from multiple sources (MDI, MDE, MDO, etc.)
 
 > 💡 **Demo:** Walk through an incident, show investigation steps.
 
+### 📚 Reference Articles
+```
+https://learn.microsoft.com/en-us/defender-for-identity/investigate-assets
+https://learn.microsoft.com/en-us/defender-for-identity/understanding-security-alerts
+```
+
+</details>
+
 ---
 
-## 4. Alert Tuning
+<details>
+<summary><h2>4. Alert Tuning</h2></summary>
 
 ### When to Tune
 - High volume incidents marked as false positive
@@ -129,9 +157,18 @@ Incidents contain evidence from multiple sources (MDI, MDE, MDO, etc.)
 
 > 💡 **Demo:** Show an alert rule, add an exclusion.
 
+### 📚 Reference Articles
+```
+https://learn.microsoft.com/en-us/defender-for-identity/advanced-settings
+https://learn.microsoft.com/en-us/defender-for-identity/exclusions
+```
+
+</details>
+
 ---
 
-## 5. Exclusions
+<details>
+<summary><h2>5. Exclusions</h2></summary>
 
 ### Global Exclusions
 **Where:** Settings → Identities → Excluded entities
@@ -153,9 +190,18 @@ More surgical — exclude by user, group, IP, or IP range per alert type.
 
 > 💡 **Demo:** Show global exclusions vs. per-rule exclusions.
 
+### 📚 Reference Articles
+```
+https://learn.microsoft.com/en-us/defender-for-identity/exclusions
+https://learn.microsoft.com/en-us/defender-for-identity/configure-detection-exclusions
+```
+
+</details>
+
 ---
 
-## 6. Notifications
+<details>
+<summary><h2>6. Notifications</h2></summary>
 
 **Where:** Settings → Identities → Notifications
 
@@ -167,9 +213,17 @@ Can also send to Syslog server.
 
 > 💡 **Demo:** Show notification settings.
 
+### 📚 Reference Articles
+```
+https://learn.microsoft.com/en-us/defender-for-identity/notifications
+```
+
+</details>
+
 ---
 
-## 7. Entity Tags
+<details>
+<summary><h2>7. Entity Tags</h2></summary>
 
 ### Sensitive
 **Where:** Settings → Identities → Entity tags → Sensitive
@@ -194,9 +248,18 @@ Supports users and devices.
 
 > 💡 **Demo:** Create a honeytoken account, show how to tag it.
 
+### 📚 Reference Articles
+```
+https://learn.microsoft.com/en-us/defender-for-identity/entity-tags
+https://learn.microsoft.com/en-us/defender-for-identity/manage-sensitive-honeytoken-accounts
+```
+
+</details>
+
 ---
 
-## 8. Integrations
+<details>
+<summary><h2>8. Integrations</h2></summary>
 
 ### PAM Integration
 MDI integrates with Privileged Access Management solutions:
@@ -234,9 +297,20 @@ MDI can ingest Okta identity data for hybrid visibility.
 
 **Supported SIEMs:** Splunk, ArcSight, Elastic, QRadar
 
+### 📚 Reference Articles
+```
+https://learn.microsoft.com/en-us/defender-for-identity/classic-integrate-mde
+https://learn.microsoft.com/en-us/defender-for-identity/microsoft-365-security-center-mdi
+https://learn.microsoft.com/en-us/azure/sentinel/microsoft-365-defender-sentinel-integration
+https://learn.microsoft.com/en-us/defender-xdr/streaming-api
+```
+
+</details>
+
 ---
 
-## 9. VPN Integration (Classic Sensor Only)
+<details>
+<summary><h2>9. VPN Integration (Classic Sensor Only)</h2></summary>
 
 MDI can listen to RADIUS accounting events for VPN correlation.
 
@@ -244,9 +318,17 @@ MDI can listen to RADIUS accounting events for VPN correlation.
 
 ⚠️ Not supported in FIPS environments.
 
+### 📚 Reference Articles
+```
+https://learn.microsoft.com/en-us/defender-for-identity/vpn-integration
+```
+
+</details>
+
 ---
 
-## 10. Operations
+<details>
+<summary><h2>10. Operations</h2></summary>
 
 ### Health Monitoring
 **Where:** Identities → Health issues
@@ -262,9 +344,18 @@ MDI can listen to RADIUS accounting events for VPN correlation.
 
 > 💡 **Demo:** Show health dashboard, sensor settings.
 
+### 📚 Reference Articles
+```
+https://learn.microsoft.com/en-us/defender-for-identity/health-alerts
+https://learn.microsoft.com/en-us/defender-for-identity/sensor-settings
+```
+
+</details>
+
 ---
 
-## 11. Hunting
+<details>
+<summary><h2>11. Hunting</h2></summary>
 
 ### Key Tables
 
@@ -305,9 +396,20 @@ IdentityDirectoryEvents
 
 > 💡 **Demo:** Run queries in Advanced Hunting, show results.
 
+### 📚 Reference Articles
+```
+https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-overview
+https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-identitydirectoryevents-table
+https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-identitylogonevents-table
+https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-identityqueryevents-table
+```
+
+</details>
+
 ---
 
-## 12. Troubleshooting
+<details>
+<summary><h2>12. Troubleshooting</h2></summary>
 
 ### Common Issues
 
@@ -330,14 +432,51 @@ Get-ADServiceAccount -Identity "MDIgMSA$" -Properties PrincipalsAllowedToRetriev
 ### Sensor Logs
 **Location:** `C:\Program Files\Azure Advanced Threat Protection Sensor\Logs`
 
+### 📚 Reference Articles
+```
+https://learn.microsoft.com/en-us/defender-for-identity/troubleshooting-known-issues
+https://learn.microsoft.com/en-us/defender-for-identity/deploy/create-directory-service-account-gmsa
+https://learn.microsoft.com/en-us/defender-for-identity/health-alerts
+```
+
+</details>
+
 ---
 
-## 13. Resources
+<details>
+<summary><h2>13. Resources</h2></summary>
 
-- [MDI Documentation](https://learn.microsoft.com/en-us/defender-for-identity/)
-- [Configure gMSA for MDI](https://learn.microsoft.com/en-us/defender-for-identity/deploy/create-directory-service-account-gmsa)
-- [MDI Health Alerts](https://learn.microsoft.com/en-us/defender-for-identity/health-alerts)
-- [Advanced Hunting Schema](https://learn.microsoft.com/en-us/microsoft-365/security/defender/advanced-hunting-schema-tables)
+### Core Documentation
+```
+https://learn.microsoft.com/en-us/defender-for-identity/
+```
+
+### gMSA Configuration
+```
+https://learn.microsoft.com/en-us/defender-for-identity/deploy/create-directory-service-account-gmsa
+```
+
+### Health Alerts Reference
+```
+https://learn.microsoft.com/en-us/defender-for-identity/health-alerts
+```
+
+### Advanced Hunting Schema
+```
+https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-schema-tables
+```
+
+### Security Testing Best Practices (Learning Periods Source)
+```
+https://learn.microsoft.com/en-us/defender-for-identity/security-testing-best-practices
+```
+
+### Adjust Alert Thresholds
+```
+https://learn.microsoft.com/en-us/defender-for-identity/advanced-settings
+```
+
+</details>
 
 ---
 
