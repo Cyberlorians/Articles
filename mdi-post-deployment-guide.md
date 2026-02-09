@@ -214,41 +214,23 @@ Incidents contain evidence from multiple sources (MDI, MDE, MDO, etc.)
 
 ### Step 7: Alert Tuning Mindset (3 min)
 
-> MDI alerts often become part of a larger attack story.
+**What You Do:**
+1. Go back to your **Incidents list** (filtered to MDI)
+2. Point at the screen and talk through what you see
 
-**How to Identify What Needs Tuning:**
+**What You Say (pick the ones that apply):**
 
-| Look For | What It Means |
-|----------|---------------|
-| **Alert grouping** | Grouped alerts = validation (part of attack story). Stand-alone alerts = may need tuning |
-| **High-volume incidents marked as FP** | If you keep closing the same alert as false positive, it needs tuning |
-| **Trends in common entities** | Same user or device triggering alerts repeatedly? Likely a tuning candidate |
-| **Authorized activity** | Scanners, backup tools, admin scripts generating expected alerts |
+| Point At | Say |
+|----------|-----|
+| A grouped incident (multiple alerts) | "See how MDI grouped these alerts? That's validation — it sees an attack story" |
+| A standalone alert | "This one's by itself. Standalone alerts that repeat are tuning candidates" |
+| An alert you've seen before | "If I keep closing the same alert as false positive, that's my signal to tune" |
+| The LDAP recon alerts | "We have 3 of these. Same source? Same time? That's a pattern — probably a scanner" |
+| Any repeated entity | "Same user or device keeps appearing? Likely authorized activity" |
 
-| Do | Say |
-|----|-----|
-| Point to the incident list | "Alert grouping is validation — if MDI correlates alerts into an attack story, that's confidence" |
-| Show a standalone alert | "Stand-alone alerts that keep appearing? That's your tuning signal" |
-| Click into a repeated alert | "Look for patterns — same entity, same alert type, same time of day" |
-| Identify the source entity | "Is this authorized? A scanner? A scheduled task? That tells you whether to tune" |
+**That's It.** Step 7 is just talking through what you see.
 
-**Decision Points:**
-
-| Question | If Yes → |
-|----------|----------|
-| Is it authorized activity? | Consider exclusion |
-| Does it fire repeatedly? | Tune it |
-| One-time occurrence? | Close as FP, no exclusion needed |
-| Part of an attack story? | Investigate, don't tune |
-
-**Other Considerations:**
-- Consider providing feedback to Microsoft on detection quality
-- Defender XDR and Sentinel have additional tuning features (custom detection rules, automation rules) not covered here
-
-**One-liner:**
-> *"Alert grouping validates detections. Stand-alone, high-volume alerts closed as FP are your tuning targets."*
-
-> 📌 **How to add exclusions:** See **Section 3: Exclusions**
+> 📌 **Adding exclusions is in Section 3** — you don't demo that here unless you want to.
 
 ---
 
