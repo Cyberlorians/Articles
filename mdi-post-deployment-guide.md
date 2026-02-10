@@ -7,6 +7,10 @@ A practical guide for MDI post-deployment configuration, tuning, and operations.
 <details>
 <summary><h2>1. Learning Period & Alert Thresholds</h2></summary>
 
+**Where:** Settings → Identities → Adjust alert thresholds
+
+> 💡 **Demo:** Show threshold settings. Explain Test Mode's 60-day limit. Show how Low/Medium skip learning.
+
 ### What is the Learning Period?
 
 MDI observes your environment to understand **what's normal** before alerting on anomalies:
@@ -59,10 +63,6 @@ MDI observes your environment to understand **what's normal** before alerting on
 | New deployment (see everything) | **Test Mode** (60-day max) |
 | Too many false positives on specific alert | Keep **High**, add exclusions |
 | Alert not firing when expected | Lower to **Medium** |
-
-**Where:** Settings → Identities → Adjust alert thresholds
-
-> 💡 **Demo:** Show threshold settings. Explain Test Mode's 60-day limit. Show how Low/Medium skip learning.
 
 ### 📚 Reference Articles
 ```
@@ -716,3 +716,4 @@ https://learn.microsoft.com/en-us/defender-for-identity/advanced-settings
 ---
 
 *Last updated: February 2026*
+
