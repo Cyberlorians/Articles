@@ -7,10 +7,6 @@ A practical guide for MDI post-deployment configuration, tuning, and operations.
 <details>
 <summary><h2>1. Learning Period & Alert Thresholds</h2></summary>
 
-**Where:** Settings → Identities → Adjust alert thresholds
-
-> 💡 **Demo:** Show threshold settings. Explain Test Mode's 60-day limit. Show how Low/Medium skip learning.
-
 ### What is the Learning Period?
 
 MDI observes your environment to understand **what's normal** before alerting on anomalies:
@@ -24,14 +20,25 @@ MDI observes your environment to understand **what's normal** before alerting on
 
 | Alert | Learning Period |
 |-------|-----------------|
-| Network-mapping reconnaissance (DNS) | **8 days** from DC monitoring start |
-| Suspected Golden Ticket (encryption downgrade) | **5 days** from DC monitoring start |
-| Suspected Brute Force (Kerberos, NTLM) | **1 week** |
 | Security principal reconnaissance (LDAP) | **15 days** per computer |
-| User and Group membership recon (SAMR) | **4 weeks** per DC |
+| Suspected Brute Force (Kerberos, NTLM) | **1 week** |
 | Suspicious additions to sensitive groups | **4 weeks** per DC |
-| Suspected over-pass-the-hash attack | **1 month** |
-| Suspicious VPN connection | **30 days** + at least 5 VPN connections |
+| User and Group membership recon (SAMR) | **4 weeks** per DC |
+| Suspected Golden Ticket (encryption downgrade) | **5 days** from DC monitoring start |
+
+### What Medium/Low Do Per Alert
+
+| Alert | Medium Mode | Low Mode |
+|-------|-------------|----------|
+| **Security principal reconnaissance (LDAP)** | Triggers immediately, disables filtering of popular queries | Everything in Medium + lower threshold for queries, single scope enumeration |
+| **Suspected AD FS DKM key read** | — | Triggers immediately |
+| **Suspected Brute Force (Kerberos, NTLM)** | Ignores learning, lower threshold for failed passwords | Ignores learning, lowest possible threshold for failed passwords |
+| **Suspected DCSync attack** | Triggers immediately | Triggers immediately, avoids IP filtering (NAT/VPN) |
+| **Suspected Golden Ticket (encryption downgrade)** | — | Triggers alert based on lower confidence resolution of a device |
+| **Suspected Golden Ticket (forged authorization data)** | — | Triggers immediately |
+| **Suspected identity theft (pass-the-ticket)** | — | Triggers immediately, avoids IP filtering (NAT/VPN) |
+| **Suspicious additions to sensitive groups** | — | Avoids sliding window, ignores previous learnings |
+| **User and Group membership recon (SAMR)** | Triggers immediately | Triggers immediately, lower alert threshold |
 
 ### Alert Threshold Levels
 
@@ -63,6 +70,10 @@ MDI observes your environment to understand **what's normal** before alerting on
 | New deployment (see everything) | **Test Mode** (60-day max) |
 | Too many false positives on specific alert | Keep **High**, add exclusions |
 | Alert not firing when expected | Lower to **Medium** |
+
+**Where:** Settings → Identities → Adjust alert thresholds
+
+> 💡 **Demo:** Show threshold settings. Explain Test Mode's 60-day limit. Show how Low/Medium skip learning.
 
 ### 📚 Reference Articles
 ```
@@ -716,4 +727,3 @@ https://learn.microsoft.com/en-us/defender-for-identity/advanced-settings
 ---
 
 *Last updated: February 2026*
-
