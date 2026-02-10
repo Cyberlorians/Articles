@@ -456,9 +456,9 @@ https://learn.microsoft.com/en-us/defender-for-identity/manage-sensitive-honeyto
 
 > 🧭 **Demo Navigation:**
 > - Sentinel Connector: `security.microsoft.com` → Settings → **Microsoft Sentinel**
-> - Streaming API: `security.microsoft.com` → Settings → **Streaming API** (for Event Hubs)
+> - Streaming API: `security.microsoft.com` → Settings → **Microsoft Defender XDR** → **Streaming API**
 > - PAM: Configured via vendor (CyberArk, BeyondTrust, Delinea) — see partner catalog
-> - REST API: No portal demo — API calls via script/Postman
+> - Graph API: No portal demo — API calls via script/Postman
 
 ### PAM Integration (Third-Party)
 
