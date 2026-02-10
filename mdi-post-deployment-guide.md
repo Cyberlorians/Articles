@@ -580,6 +580,12 @@ Body: { "Query": "IdentityLogonEvents | take 10" }
 GET https://graph.microsoft.com/beta/security/identities/healthIssues
 ```
 
+**Required Permissions:**
+- `SecurityIdentitiesHealth.Read.All` — Read health issues
+- `SecurityIdentitiesHealth.ReadWrite.All` — Read and write health issues
+
+> 💡 **Demo:** Use **Graph Explorer** (`https://developer.microsoft.com/graph/graph-explorer`) to show the Health Issues API live. Consent to permissions, run the query, show the JSON response.
+
 **Response Actions Available:**
 - `disable` — Disable account
 - `enable` — Enable account  
@@ -769,21 +775,4 @@ https://learn.microsoft.com/en-us/defender-for-identity/health-alerts
 
 ### Advanced Hunting Schema
 ```
-https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-schema-tables
-```
-
-### Security Testing Best Practices (Learning Periods Source)
-```
-https://learn.microsoft.com/en-us/defender-for-identity/security-testing-best-practices
-```
-
-### Adjust Alert Thresholds
-```
-https://learn.microsoft.com/en-us/defender-for-identity/advanced-settings
-```
-
-</details>
-
----
-
-*Last updated: February 2026*
+https://learn.microsoft.com/en-us/defender-xd
