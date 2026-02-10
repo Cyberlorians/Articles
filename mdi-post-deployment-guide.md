@@ -7,6 +7,8 @@ A practical guide for MDI post-deployment configuration, tuning, and operations.
 <details>
 <summary><h2>1. Learning Period & Alert Thresholds</h2></summary>
 
+> 🧭 **Demo Navigation:** `security.microsoft.com` → Settings → Identities → **Adjust alert thresholds**
+
 ### What is the Learning Period?
 
 MDI observes your environment to understand **what's normal** before alerting on anomalies:
@@ -87,6 +89,8 @@ https://learn.microsoft.com/en-us/defender-for-identity/advanced-settings
 
 <details>
 <summary><h2>2. Alerts, Investigation & Tuning (Combined Demo)</h2></summary>
+
+> 🧭 **Demo Navigation:** `security.microsoft.com` → Incidents & alerts → **Incidents** → Filter by Service source: Defender for Identity
 
 ### How Alerts Flow
 
@@ -286,6 +290,10 @@ https://learn.microsoft.com/en-us/defender-for-identity/exclusions
 <details>
 <summary><h2>3. Exclusions</h2></summary>
 
+> 🧭 **Demo Navigation:** `security.microsoft.com` → Settings → Identities → **Actions and exclusions**
+> - Global excluded entities
+> - Exclusions by detection rule
+
 ### When to Use Exclusions
 
 - Alert is a **false positive** (authorized activity)
@@ -376,6 +384,8 @@ https://learn.microsoft.com/en-us/defender-for-identity/configure-detection-excl
 <details>
 <summary><h2>4. Notifications</h2></summary>
 
+> 🧭 **Demo Navigation:** `security.microsoft.com` → Settings → Identities → **Notifications**
+
 **Where:** Settings → Identities → Notifications
 
 Configure email notifications for:
@@ -397,6 +407,11 @@ https://learn.microsoft.com/en-us/defender-for-identity/notifications
 
 <details>
 <summary><h2>5. Entity Tags</h2></summary>
+
+> 🧭 **Demo Navigation:** `security.microsoft.com` → Settings → Identities → **Entity tags**
+> - Sensitive
+> - Exchange server  
+> - Honeytoken
 
 ### Sensitive
 **Where:** Settings → Identities → Entity tags → Sensitive
@@ -433,6 +448,11 @@ https://learn.microsoft.com/en-us/defender-for-identity/manage-sensitive-honeyto
 
 <details>
 <summary><h2>6. Integrations</h2></summary>
+
+> 🧭 **Demo Navigation:**
+> - PAM: `security.microsoft.com` → Settings → Identities → **Integrations**
+> - Sentinel: `security.microsoft.com` → Settings → **Microsoft Sentinel**
+> - SIEM: Azure portal → Event Hubs / Graph API
 
 ### PAM Integration (Third-Party)
 
@@ -556,6 +576,9 @@ https://learn.microsoft.com/en-us/defender-for-identity/classic-integrate-mde
 <details>
 <summary><h2>7. Operations</h2></summary>
 
+> 🧭 **Demo Navigation:** `security.microsoft.com` → Identities → **Health issues**
+> - Also: Settings → Identities → **Sensors** (for sensor management)
+
 ### Health Monitoring
 **Where:** Identities → Health issues
 
@@ -582,6 +605,10 @@ https://learn.microsoft.com/en-us/defender-for-identity/sensor-settings
 
 <details>
 <summary><h2>8. Hunting</h2></summary>
+
+> 🧭 **Demo Navigation:**
+> - Advanced Hunting: `security.microsoft.com` → Hunting → **Advanced hunting**
+> - Workbooks: `portal.azure.com` → Microsoft Sentinel → **Workbooks**
 
 ### Key Tables
 
@@ -647,6 +674,11 @@ https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-identityqueryeve
 
 <details>
 <summary><h2>9. Troubleshooting</h2></summary>
+
+> 🧭 **Demo Navigation:**
+> - Health: `security.microsoft.com` → Identities → **Health issues**
+> - Sensors: `security.microsoft.com` → Settings → Identities → **Sensors**
+> - Logs: DC → `C:\Program Files\Azure Advanced Threat Protection Sensor\Logs`
 
 ### General Approach
 
