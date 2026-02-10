@@ -650,23 +650,22 @@ Two workbooks to showcase:
 IdentityLogonEvents
 | where Timestamp > ago(24h)
 | where ActionType == "LogonFailed"
-| summarize FailedAttempts = count() by AccountName, DeviceName
+| summarize FailedAttempts = count() by AccountUpn, DeviceName
 | order by FailedAttempts desc
 ```
 
-**LDAP reconnaissance:**
+**LDAP queries (last 30d):**
 ```kql
 IdentityQueryEvents
-| where Timestamp > ago(7d)
-| where QueryType == "Ldap"
-| summarize QueryCount = count() by AccountName, QueryTarget
-| where QueryCount > 100
+| where Timestamp > ago(30d)
+| where ActionType == @"LDAP query"
 ```
 
-**Sensitive group changes:**
+**Sensitive group changes (last 90d):**
 ```kql
 IdentityDirectoryEvents
-| where ActionType == "Group Membership changed"
+| where Timestamp > ago(90d)
+| where ActionType == @"Group Membership changed"
 | where DestinationDeviceName contains "Domain Admins" or DestinationDeviceName contains "Enterprise Admins"
 | project Timestamp, AccountName, ActionType, DestinationDeviceName
 ```
