@@ -420,7 +420,12 @@ Tag users, devices, or groups as sensitive. Enables:
 - Sensitive group modification alerts
 - Priority in attack path analysis
 
-**Default sensitive groups:** Domain Admins, Enterprise Admins, Schema Admins, etc.
+**Default Sensitive Entities:**
+Any entity that is a member of these AD groups (including nested groups) is **automatically considered sensitive**:
+
+> Administrators, Power Users, Account Operators, Server Operators, Print Operators, Backup Operators, Replicators, Network Configuration Operators, Incoming Forest Trust Builders, Domain Admins, Domain Controllers, Group Policy Creator Owners, Read-only Domain Controllers, Enterprise Read-only Domain Controllers, Schema Admins, Enterprise Admins, Microsoft Exchange Servers
+
+📌 You can also **manually tag** additional users, devices, or groups that are sensitive to your organization (e.g., executives, service accounts with elevated access).
 
 ### Exchange Servers
 **Where:** Settings → Identities → Entity tags → Exchange server
