@@ -454,153 +454,132 @@ https://learn.microsoft.com/en-us/defender-for-identity/manage-sensitive-honeyto
 <details>
 <summary><h2>6. Integrations</h2></summary>
 
-> 🧭 **Demo Navigation:**
-> - Sentinel Connector: `security.microsoft.com` → Settings → **Microsoft Sentinel**
-> - Streaming API: `security.microsoft.com` → Settings → **Microsoft Defender XDR** → **Streaming API**
-> - PAM: Configured via vendor (CyberArk, BeyondTrust, Delinea) — see partner catalog
-> - Graph API: No portal demo — API calls via script/Postman
+> 🧭 **Quick Nav:**
+> | Integration | Where to Demo |
+> |-------------|---------------|
+> | 6.1 Sentinel | Settings → Microsoft Sentinel |
+> | 6.2 SIEM/Streaming | Settings → Microsoft Defender XDR → Streaming API |
+> | 6.3 Graph API | Graph Explorer (`developer.microsoft.com/graph/graph-explorer`) |
+> | 6.4 PAM | Assets → Identities (look for "Privileged account" tag) |
+> | 6.5 Okta | Vendor config — no portal demo |
 
-### PAM Integration (Third-Party)
+---
 
-> 📌 **Note:** PAM integration is configured through the **M365 Defender partner catalog** and vendor-specific setup, not a portal setting.
+### 6.1 Microsoft Sentinel Integration
 
-MDI integrates with Privileged Access Management solutions for enhanced detection and response.
+**Where:** `security.microsoft.com` → Settings → **Microsoft Sentinel**
 
-**Supported PAM Vendors:**
+Defender XDR connects to Sentinel with a **single data connector**.
+
+| What to Connect | Cost | What It Does |
+|-----------------|------|--------------|
+| **Incidents & Alerts** | ✅ Free | Bi-directional sync (SecurityIncident, SecurityAlert) |
+| **Advanced Hunting Events** | ❌ Billable | Streams raw tables (IdentityLogonEvents, etc.) to Sentinel |
+
+**MDI Data Costs:**
+
+| Data | Cost |
+|------|------|
+| MDI in **XDR Advanced Hunting** | **Free** (30-day retention) |
+| Alerts/Incidents to Sentinel | **Free** |
+| IdentityLogonEvents to Sentinel | **Billable** |
+| IdentityDirectoryEvents to Sentinel | **Billable** |
+| IdentityQueryEvents to Sentinel | **Billable** |
+
+> ⚠️ **Key Point:** Even in unified mode, streaming raw MDI tables to Sentinel is **opt-in** and **billable**.
+
+> 💡 **Demo:** Show the Sentinel data connector. Explain free vs. billable data.
+
+---
+
+### 6.2 SIEM Integration (Non-Sentinel)
+
+**Where:** `security.microsoft.com` → Settings → **Microsoft Defender XDR** → **Streaming API**
+
+| Method | Use Case |
+|--------|----------|
+| **Streaming API** | Real-time stream to Azure Event Hub → SIEM |
+| **Graph API** | On-demand pull via scripts/automation |
+
+**Supported SIEMs:** Splunk, IBM QRadar, Elastic, ArcSight, Palo Alto XSIAM/XSOAR, ServiceNow
+
+> 💡 **Demo:** Show the Streaming API settings page.
+
+---
+
+### 6.3 Graph API (Automation)
+
+**Where:** No portal — use **Graph Explorer** or scripts
+
+MDI uses **Microsoft Graph API** for automation (no standalone MDI API):
+
+| API | Endpoint | What It Does |
+|-----|----------|--------------|
+| **Health Issues** | `GET /beta/security/identities/healthIssues` | View sensor/config health |
+| **Advanced Hunting** | `POST /v1.0/security/runHuntingQuery` | Query MDI tables |
+| **Incidents** | `GET /v1.0/security/incidents` | Get/manage incidents |
+| **Response Actions** | `POST /beta/security/identityAccounts/{id}/invokeAction` | Disable, enable, force password reset |
+
+**Required Permissions:**
+| Permission | Description |
+|------------|-------------|
+| `SecurityIdentitiesHealth.Read.All` | Read health issues |
+| `SecurityIdentitiesHealth.ReadWrite.All` | Read/write health issues |
+
+**Example — Get Health Issues:**
+```
+GET https://graph.microsoft.com/beta/security/identities/healthIssues
+```
+
+> 💡 **Demo:** Open **Graph Explorer** → Consent to permissions → Run the health issues query → Show JSON response.
+
+---
+
+### 6.4 PAM Integration (Third-Party)
+
+**Where:** Configured via vendor, visible in **Assets → Identities**
+
+> 📌 **Note:** PAM integration is set up through the vendor and M365 Defender partner catalog, not a portal setting.
+
+**Supported Vendors:**
 
 | Vendor | Capabilities |
 |--------|--------------|
 | **CyberArk** | Credential vaulting, session monitoring, threat remediation |
 | **BeyondTrust** | Identity-centric controls, privilege attack surface management |
-| **Delinea** | Centralized authorization, session control for privileged identities |
+| **Delinea** | Centralized authorization, session control |
 
-**What the Integration Does:**
-- **Auto-tags** PAM-managed identities in Defender XDR (shows "Privileged account" tag)
-- **Password reset from XDR** — triggers reset through connected PAM system
-- **Combined analytics** — PAM access controls + MDI behavioral analytics
+**What It Does:**
+- Auto-tags PAM-managed identities with **"Privileged account"** tag
+- Enables **password reset** directly from XDR (via connected PAM)
 
-**To see PAM in action (once configured):**
+**To see it (once configured):**
 1. Go to **Assets → Identities**
 2. Select a PAM-managed identity
-3. Look for **"Privileged account"** tag
+3. Look for the **"Privileged account"** tag
 4. Click **⋯** → **Reset password** (shows vendor name)
 
 ---
 
-### Okta Integration
+### 6.5 Okta Integration
 
-MDI can integrate with Okta to detect suspicious behaviors and highlight threats related to monitored users authenticated by Okta.
+**Where:** Vendor config — requires Okta Developer or Production tenant
 
-- Identifies risky sign-in patterns and suspicious role assignments in Okta
-- Correlates Okta identity data with on-premises AD for hybrid visibility
-
-**Requires:** An Okta Developer or Production tenant
-
----
-
-### Defender XDR & Microsoft Sentinel Integration
-
-Defender XDR services integrate with Microsoft Sentinel using a **single data connector**.
-
-**Where:** Defender portal → Settings → Microsoft Sentinel
-
-**Connection Options:**
-
-| Option | What It Does |
-|--------|--------------|
-| **Connect incidents and alerts** | Syncs incidents between Sentinel and XDR |
-| **Connect events** | Sends raw Advanced Hunting tables to Sentinel |
-
-**Two modes:**
-
-| Mode | Description |
-|------|-------------|
-| **Ingest Defender XDR incidents into Sentinel** | Bi-directional sync (status, owner, closing reason) |
-| **Ingest Sentinel incidents and alerts into Defender XDR** | Unified incident queue |
-
-> 💡 **Demo:** Show the Sentinel data connector in Defender portal.
-
----
-
-### MDI Data Costs
-
-| Data | Cost |
-|------|------|
-| MDI data retained in **XDR Advanced Hunting** | **Free** (no cost) |
-| Alerts & Incidents (SecurityAlert, SecurityIncident) | **Free** to Sentinel |
-| **IdentityDirectoryEvents** | Billable (Sentinel ingestion) |
-| **IdentityLogonEvents** | Billable (Sentinel ingestion) |
-| **IdentityQueryEvents** | Billable (Sentinel ingestion) |
-
-> ⚠️ Sentinel ingestion charges apply to MDI data tables. Plan accordingly.
-
----
-
-### SIEM Integration
-
-Microsoft Defender XDR integrates with various SIEM/SOAR and IT Service Management (ITSM) tools, enabling SOC teams to monitor and respond to incidents seamlessly.
-
-**Integration Methods:**
-
-| Method | Description |
-|--------|-------------|
-| **Streaming API** | Real-time stream to Event Hub |
-| **Graph API** | Query/manage via Microsoft Graph |
-
-**Supported SIEMs:**
-- Splunk (Splunk Add-on for Microsoft Cloud Services)
-- IBM QRadar
-- Elastic
-- ArcSight (FlexConnector)
-- Palo Alto XSIAM/XSOAR
-- ServiceNow
-
----
-
-### MDI Graph API Endpoints
-
-MDI uses **Microsoft Graph API** for automation and integration (no standalone MDI API):
-
-| API | What It Does | Endpoint |
-|-----|--------------|----------|
-| **Advanced Hunting** | Query MDI tables | `POST /security/runHuntingQuery` |
-| **Incidents/Alerts** | Get/manage incidents | `GET /security/incidents` |
-| **Health Issues** | View MDI health issues | `GET /security/identities/healthIssues` |
-| **Response Actions** | Disable user, force password reset | `POST /security/identityAccounts/{id}/invokeAction` |
-| **Sensor Management** | Monitor/activate sensors (v3.x) | Graph API (preview) |
-
-**Example: Query MDI Tables**
-```
-POST https://graph.microsoft.com/v1.0/security/runHuntingQuery
-Body: { "Query": "IdentityLogonEvents | take 10" }
-```
-
-**Example: Get Health Issues**
-```
-GET https://graph.microsoft.com/beta/security/identities/healthIssues
-```
-
-**Required Permissions:**
-- `SecurityIdentitiesHealth.Read.All` — Read health issues
-- `SecurityIdentitiesHealth.ReadWrite.All` — Read and write health issues
-
-> 💡 **Demo:** Use **Graph Explorer** (`https://developer.microsoft.com/graph/graph-explorer`) to show the Health Issues API live. Consent to permissions, run the query, show the JSON response.
-
-**Response Actions Available:**
-- `disable` — Disable account
-- `enable` — Enable account  
-- `forcePasswordChange` — Force password reset
+MDI can integrate with Okta to:
+- Detect suspicious sign-in patterns in Okta
+- Identify risky role assignments
+- Correlate Okta identity data with on-premises AD
 
 ---
 
 ### 📚 Reference Articles
 ```
-https://learn.microsoft.com/en-us/defender-for-identity/integrate-microsoft-and-pam-services
 https://learn.microsoft.com/en-us/azure/sentinel/microsoft-365-defender-sentinel-integration
 https://learn.microsoft.com/en-us/defender-xdr/streaming-api
 https://learn.microsoft.com/en-us/graph/api/resources/security-healthissue
 https://learn.microsoft.com/en-us/graph/api/resources/security-identityaccounts
 https://learn.microsoft.com/en-us/defender-xdr/api-advanced-hunting
+https://learn.microsoft.com/en-us/defender-for-identity/integrate-microsoft-and-pam-services
 ```
 
 </details>
@@ -775,4 +754,21 @@ https://learn.microsoft.com/en-us/defender-for-identity/health-alerts
 
 ### Advanced Hunting Schema
 ```
-https://learn.microsoft.com/en-us/defender-xd
+https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-schema-tables
+```
+
+### Security Testing Best Practices (Learning Periods Source)
+```
+https://learn.microsoft.com/en-us/defender-for-identity/security-testing-best-practices
+```
+
+### Adjust Alert Thresholds
+```
+https://learn.microsoft.com/en-us/defender-for-identity/advanced-settings
+```
+
+</details>
+
+---
+
+*Last updated: February 2026*
