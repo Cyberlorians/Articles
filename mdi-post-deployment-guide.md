@@ -455,11 +455,14 @@ https://learn.microsoft.com/en-us/defender-for-identity/manage-sensitive-honeyto
 <summary><h2>6. Integrations</h2></summary>
 
 > 🧭 **Demo Navigation:**
-> - PAM: `security.microsoft.com` → Settings → Identities → **Integrations**
-> - Sentinel: `security.microsoft.com` → Settings → **Microsoft Sentinel**
-> - SIEM: Azure portal → Event Hubs / Graph API
+> - Sentinel Connector: `security.microsoft.com` → Settings → **Microsoft Sentinel**
+> - Streaming API: `security.microsoft.com` → Settings → **Streaming API** (for Event Hubs)
+> - PAM: Configured via vendor (CyberArk, BeyondTrust, Delinea) — see partner catalog
+> - REST API: No portal demo — API calls via script/Postman
 
 ### PAM Integration (Third-Party)
+
+> 📌 **Note:** PAM integration is configured through the **M365 Defender partner catalog** and vendor-specific setup, not a portal setting.
 
 MDI integrates with Privileged Access Management solutions for enhanced detection and response.
 
@@ -476,11 +479,11 @@ MDI integrates with Privileged Access Management solutions for enhanced detectio
 - **Password reset from XDR** — triggers reset through connected PAM system
 - **Combined analytics** — PAM access controls + MDI behavioral analytics
 
-**To reset password via PAM:**
+**To see PAM in action (once configured):**
 1. Go to **Assets → Identities**
-2. Select the identity
-3. Click **⋯** (three-dot menu)
-4. Select **Reset password** (label shows vendor, e.g., "Reset password by CyberArk")
+2. Select a PAM-managed identity
+3. Look for **"Privileged account"** tag
+4. Click **⋯** → **Reset password** (shows vendor name)
 
 ---
 
@@ -541,9 +544,8 @@ Microsoft Defender XDR integrates with various SIEM/SOAR and IT Service Manageme
 
 | Method | Description |
 |--------|-------------|
-| **REST API** | Pull incidents on demand (M365D Incident API) |
-| **Event Hubs** | Stream data via Event Hubs (real-time) |
-| **Graph Security API** | Access security data via Microsoft Graph |
+| **Streaming API** | Real-time stream to Event Hub |
+| **Graph API** | Query/manage via Microsoft Graph |
 
 **Supported SIEMs:**
 - Splunk (Splunk Add-on for Microsoft Cloud Services)
@@ -553,16 +555,35 @@ Microsoft Defender XDR integrates with various SIEM/SOAR and IT Service Manageme
 - Palo Alto XSIAM/XSOAR
 - ServiceNow
 
-> 📌 **Note:** Alert/incident data can be routed through Event Hub/Graph API or Graph Security API.
-
 ---
 
-### Health API
+### MDI Graph API Endpoints
 
-MDI exposes health status via API for monitoring integrations:
-- Sensor health status
-- Global health issues
-- Useful for integration with monitoring tools (SCOM, Zabbix, etc.)
+MDI uses **Microsoft Graph API** for automation and integration (no standalone MDI API):
+
+| API | What It Does | Endpoint |
+|-----|--------------|----------|
+| **Advanced Hunting** | Query MDI tables | `POST /security/runHuntingQuery` |
+| **Incidents/Alerts** | Get/manage incidents | `GET /security/incidents` |
+| **Health Issues** | View MDI health issues | `GET /security/identities/healthIssues` |
+| **Response Actions** | Disable user, force password reset | `POST /security/identityAccounts/{id}/invokeAction` |
+| **Sensor Management** | Monitor/activate sensors (v3.x) | Graph API (preview) |
+
+**Example: Query MDI Tables**
+```
+POST https://graph.microsoft.com/v1.0/security/runHuntingQuery
+Body: { "Query": "IdentityLogonEvents | take 10" }
+```
+
+**Example: Get Health Issues**
+```
+GET https://graph.microsoft.com/beta/security/identities/healthIssues
+```
+
+**Response Actions Available:**
+- `disable` — Disable account
+- `enable` — Enable account  
+- `forcePasswordChange` — Force password reset
 
 ---
 
@@ -571,7 +592,9 @@ MDI exposes health status via API for monitoring integrations:
 https://learn.microsoft.com/en-us/defender-for-identity/integrate-microsoft-and-pam-services
 https://learn.microsoft.com/en-us/azure/sentinel/microsoft-365-defender-sentinel-integration
 https://learn.microsoft.com/en-us/defender-xdr/streaming-api
-https://learn.microsoft.com/en-us/defender-for-identity/classic-integrate-mde
+https://learn.microsoft.com/en-us/graph/api/resources/security-healthissue
+https://learn.microsoft.com/en-us/graph/api/resources/security-identityaccounts
+https://learn.microsoft.com/en-us/defender-xdr/api-advanced-hunting
 ```
 
 </details>
