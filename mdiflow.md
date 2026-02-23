@@ -33,8 +33,6 @@ flowchart TB
         ldap_ep["LDAP & Global Catalog<br/>Endpoints"]
     end
 
-    nps["📡 RADIUS / NPS Server"]
-
     sensor -->|"TCP 443<br/>TLS 1.2+ HTTPS"| fw
     fw -->|"outbound to<br/>*.atp.azure.com"| mdi_cloud
     sensor -.->|"TCP 444<br/>SSL (localhost)"| updater
@@ -42,7 +40,6 @@ flowchart TB
     sensor -->|"TCP/UDP 53<br/>DNS + rDNS"| dns_local
     sensor -->|"TCP 135 RPC/NTLM<br/>UDP 137 NetBIOS<br/>TCP 3389 RDP ClientHello<br/>TCP/UDP 445 SMB/Netlogon"| nnr_ep
     sensor -->|"TCP/UDP 389 LDAP<br/>TCP 636 LDAPS (TLS)<br/>TCP 3268 Global Catalog<br/>TCP 3269 GC-S (TLS)"| ldap_ep
-    nps -->|"UDP 1813<br/>RADIUS Accounting<br/>(inbound)"| sensor
 
     style cloud fill:#e6f2ff,stroke:#0078D4,stroke-width:2px,color:#333
     style perimeter fill:#fff3e0,stroke:#FF8C00,stroke-width:2px,color:#333
@@ -52,7 +49,6 @@ flowchart TB
     style sensor fill:#0078D4,stroke:#005a9e,color:#fff
     style mdi_cloud fill:#0078D4,stroke:#005a9e,color:#fff
     style fw fill:#FF8C00,stroke:#cc7000,color:#fff
-    style nps fill:#C239B3,stroke:#9c2d8f,color:#fff
 ```
 
 ---
@@ -102,14 +98,6 @@ flowchart TB
 | **3268** | LDAP GC | TCP | Outbound | Global Catalog servers | Optional | Global Catalog read queries — cross-domain entity resolution |
 | **3269** | LDAPS GC | TCP | Outbound | Global Catalog servers | TLS required | Secure Global Catalog queries — encrypted cross-domain lookups |
 
-### 6. RADIUS Accounting (Inbound)
-
-| Port | Protocol | Transport | Direction | Source | Purpose |
-|------|----------|-----------|-----------|--------|---------|
-| **1813** | RADIUS | UDP | **Inbound** | NPS / RADIUS servers | VPN and Wi-Fi authentication event collection — captures RADIUS accounting packets for identity correlation |
-
-> **Note:** This is the only **inbound** port. The sensor listens on UDP 1813 for RADIUS accounting messages from NPS.
-
 ---
 
 ## Firewall Rule Summary
@@ -130,11 +118,23 @@ ALLOW TCP 3268  → Global Catalog servers              # LDAP GC
 ALLOW TCP 3269  → Global Catalog servers              # LDAPS GC
 ```
 
-### Required Inbound Rules
+> **Note:** All flows are outbound or localhost. No inbound firewall rules are required.
 
-```
-ALLOW UDP 1813  ← NPS/RADIUS servers                 # RADIUS accounting
-```
+---
+
+## gMSA Service Account
+
+The MDI sensor service runs under a **Group Managed Service Account (gMSA)**. This does not introduce additional network ports — gMSA password retrieval operates through the existing **LDAP (389/636)** and **Kerberos (88)** paths to Domain Controllers.
+
+| Setting | Value |
+|---------|-------|
+| Account type | gMSA (Group Managed Service Account) |
+| Password rotation | Automatic (30-day default via AD DS) |
+| Authentication | Kerberos — DC retrieves password from AD via existing LDAP/Kerberos channels |
+| Configuration | Assigned during sensor installation or via MDI portal |
+| Benefit | No manual password management, reduced credential exposure |
+
+> The sensor uses the gMSA to authenticate when performing SAM-R queries, LDAP lookups, and accessing remote resources on NNR targets. All traffic flows through ports already documented above.
 
 ---
 
@@ -163,4 +163,3 @@ For environments using Azure ExpressRoute instead of public internet:
 | 135, 137, 3389 | Network Name Resolution for lateral movement path mapping |
 | 445 | Lateral movement (SMB), SAM-R reconnaissance, remote execution |
 | 389, 636, 3268, 3269 | Directory enumeration, DCShadow, suspicious replication, LDAP reconnaissance |
-| 1813 | VPN/Wi-Fi identity correlation, impossible travel via RADIUS |
