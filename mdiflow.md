@@ -27,7 +27,11 @@ flowchart TB
     end
 
     subgraph nnr["🔍 NNR Targets — All Devices on Network"]
-        nnr_ep["DCs, ADFS, ADCS,<br/>Entra Connect"]
+        nnr_ep["DCs, ADFS, ADCS,<br/>Microsoft Entra Connect"]
+    end
+
+    subgraph internal["📦 Internal Ports — All Devices on Network"]
+        smb_ep["Netlogon / SMB / CIFS<br/>Targets"]
     end
 
     subgraph ldap["📁 LDAP / GC — Multi-Forest Domain Controllers"]
@@ -39,17 +43,20 @@ flowchart TB
     sensor -.->|"TCP 444<br/>SSL (localhost)"| updater
     sensor -.->|"ETW Tracing +<br/>Event Logs (local)"| etw
     sensor -->|"TCP/UDP 53<br/>DNS + rDNS"| dns_local
-    sensor -->|"TCP 135 NTLM over RPC<br/>UDP 137 NetBIOS<br/>TCP 3389 RDP ClientHello<br/>TCP/UDP 445 Netlogon/SMB/CIFS"| nnr_ep
+    sensor -->|"TCP 135 NTLM over RPC<br/>UDP 137 NetBIOS<br/>TCP 3389 RDP ClientHello"| nnr_ep
+    sensor -->|"TCP/UDP 445<br/>Netlogon/SMB/CIFS"| smb_ep
     sensor -->|"TCP/UDP 389 LDAP (default)<br/>TCP 3268 Global Catalog (default)<br/>TCP 636 LDAPS (support case)<br/>TCP 3269 GC-S (support case)"| ldap_ep
 
     style cloud fill:#e6f2ff,stroke:#0078D4,stroke-width:2px,color:#333
     style perimeter fill:#fff3e0,stroke:#FF8C00,stroke-width:2px,color:#333
     style dc fill:#e8f5e9,stroke:#107C10,stroke-width:2px,color:#333
     style nnr fill:#fce4ec,stroke:#D83B01,stroke-width:2px,color:#333
+    style internal fill:#fff8e1,stroke:#F9A825,stroke-width:2px,color:#333
     style ldap fill:#e0f2f1,stroke:#008575,stroke-width:2px,color:#333
     style sensor fill:#0078D4,stroke:#005a9e,color:#fff
     style mdi_cloud fill:#0078D4,stroke:#005a9e,color:#fff
     style fw fill:#FF8C00,stroke:#cc7000,color:#fff
+    style smb_ep fill:#F9A825,stroke:#c17900,color:#333
 ```
 
 ---
@@ -82,18 +89,25 @@ flowchart TB
 
 ### 4. Network Name Resolution (NNR)
 
+NNR ports resolve IP addresses to computer names. These are categorized separately from Internal ports in the [docs](https://learn.microsoft.com/en-us/defender-for-identity/nnr-policy).
+
 | Port | Protocol | Transport | Direction | Targets | Purpose |
 |------|----------|-----------|-----------|---------|---------|
-| **135** | NTLM over RPC | TCP | Outbound | All devices on network (DCs, ADFS, ADCS, Entra Connect) | NTLM-based name resolution via RPC endpoint mapper |
-| **137** | NetBIOS | UDP | Outbound | All devices on network (DCs, ADFS, ADCS, Entra Connect) | NetBIOS name resolution |
-| **3389** | RDP | TCP | Outbound | All devices on network (DCs, ADFS, ADCS, Entra Connect) | Only the first packet of **Client hello** — extracts machine identity, no full RDP session |
-| **445** | Netlogon (SMB, CIFS) | TCP/UDP | Outbound | All devices on network (DCs, ADFS, ADCS, Entra Connect) | Netlogon, SMB session enumeration, CIFS |
+| **135** | NTLM over RPC | TCP | Outbound | All devices on network (DCs, ADFS, ADCS, and Microsoft Entra Connect) | NTLM-based name resolution |
+| **137** | NetBIOS | UDP | Outbound | All devices on network (DCs, ADFS, ADCS, and Microsoft Entra Connect) | NetBIOS name resolution |
+| **3389** | RDP | TCP | Outbound | All devices on network (DCs, ADFS, ADCS, and Microsoft Entra Connect) | Only the first packet of **Client hello** — extracts machine identity, no full RDP session |
 
 > **NNR primary methods:** NTLM over RPC (135) → NetBIOS (137) → RDP (3389)  
 > **NNR secondary method:** Reverse DNS lookup (UDP 53) — used only when no primary method responds or results conflict  
 > **Note:** Only one primary method is required, but all are recommended. No authentication is performed on any NNR port.
 
-### 5. LDAP / Global Catalog Queries (Multi-Forest)
+### 5. Internal Ports
+
+| Port | Protocol | Transport | Direction | Targets | Purpose |
+|------|----------|-----------|-----------|---------|---------|
+| **445** | Netlogon (SMB, CIFS) | TCP/UDP | Outbound | All devices on the network (DCs, ADFS, ADCS, and Microsoft Entra Connect) | Netlogon, SMB session enumeration, CIFS |
+
+### 6. LDAP / Global Catalog Queries (Multi-Forest)
 
 These ports are required when working with **multiple forests**. They must be open on any machine where an MDI sensor is installed.
 
