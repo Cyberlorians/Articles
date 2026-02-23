@@ -85,7 +85,7 @@ flowchart TB
 | **135** | RPC/NTLM | TCP | Outbound | DCs, ADFS, ADCS, Entra Connect | RPC endpoint mapper — NTLM-based name resolution |
 | **137** | NetBIOS | UDP | Outbound | DCs, ADFS, ADCS, Entra Connect | NetBIOS name resolution (legacy fallback) |
 | **3389** | RDP | TCP | Outbound | DCs, ADFS, ADCS, Entra Connect | RDP ClientHello packet parsing — extracts machine identity without full RDP session |
-| **445** | SMB | TCP/UDP | Outbound | DCs, ADFS, ADCS, Entra Connect | SMB session enumeration, Netlogon, SAM-R queries for lateral movement detection |
+| **445** | SMB | TCP/UDP | Outbound | DCs, ADFS, ADCS, Entra Connect | SMB session enumeration, Netlogon for lateral movement detection |
 
 > **NNR priority order:** RPC (135) → NetBIOS (137) → RDP (3389) → DNS rDNS (53)
 
@@ -134,7 +134,7 @@ The MDI sensor service runs under a **Group Managed Service Account (gMSA)**. Th
 | Configuration | Assigned during sensor installation or via MDI portal |
 | Benefit | No manual password management, reduced credential exposure |
 
-> The sensor uses the gMSA to authenticate when performing SAM-R queries, LDAP lookups, and accessing remote resources on NNR targets. All traffic flows through ports already documented above.
+> With gMSA, SAM-R queries are deprecated. The sensor uses the gMSA to authenticate LDAP lookups and access remote resources on NNR targets. All traffic flows through ports already documented above.
 
 ---
 
