@@ -20,13 +20,21 @@ The sensor captures network traffic, Windows event logs, and LDAP/ETW traces loc
 
 MDI uses a Group Managed Service Account (gMSA) to query Active Directory via LDAP. The ADDS team owns this account and its supporting infrastructure.
 
+### What the gMSA Is Used For
+
+| Use Case | Required? |
+|----------|-----------|
+| Cross-domain LDAP queries (resolving entities across child domains) | Yes |
+| Domain and trust mapping (every 10 minutes) | Yes |
+| Deleted object detection | **No** — sensor detects deletions via ETW/event capture |
+
 ### Key Components
 
 | Component | Value |
 |-----------|-------|
 | gMSA Account | `MSAMDI$` |
 | Password Retrieval Group | `gMSA_MDI` (Universal Security Group) |
-| Required Permissions | Read access + Deleted Objects container (LCRP) per domain |
+| Required Permissions | Read access to AD objects |
 
 ### When You Add a New DC
 
@@ -34,7 +42,7 @@ MDI uses a Group Managed Service Account (gMSA) to query Active Directory via LD
 2. Reboot the DC (or wait for Kerberos ticket refresh)
 3. Verify the sensor starts and shows healthy in the portal
 
-> **If a DC is not in `gMSA_MDI`, MDI will be blind on that DC.**
+> **If a DC is not in `gMSA_MDI`, that sensor cannot perform cross-domain queries or trust mapping.**
 
 ### Verify gMSA Health
 
@@ -43,24 +51,7 @@ MDI uses a Group Managed Service Account (gMSA) to query Active Directory via LD
 Get-ADServiceAccount -Identity MSAMDI -Properties PrincipalsAllowedToRetrieveManagedPassword
 
 # Confirm all DCs are in the group
-Get-ADGroupMember -Identity "gMSA_MDI" -Server fly.boeing.com | Select-Object Name
-```
-
-### Deleted Objects Container Permissions
-
-The gMSA group needs **List Contents** and **Read Property** on the Deleted Objects container in every domain in the forest.
-
-```powershell
-# Grant permissions (run per domain)
-dsacls "CN=Deleted Objects,DC=fly,DC=boeing,DC=com" /G "FLY\gMSA_MDI:LCRP"
-
-# Verify permissions
-dsacls "CN=Deleted Objects,DC=fly,DC=boeing,DC=com"
-```
-
-For child domains, repeat with the child domain DN:
-```powershell
-dsacls "CN=Deleted Objects,DC=bar,DC=fly,DC=boeing,DC=com" /G "FLY\gMSA_MDI:LCRP"
+Get-ADGroupMember -Identity "gMSA_MDI" -Server cyberlorian.net | Select-Object Name
 ```
 
 ---
@@ -96,7 +87,6 @@ Dormant AD accounts can be tagged as **honeytokens** in MDI. Any authentication 
 | Health Alert | What It Means | Your Action |
 |---|---|---|
 | gMSA credentials incorrect | DC can't retrieve gMSA password | Verify DC is in `gMSA_MDI` group |
-| Deleted Objects permissions missing | Can't read deleted AD objects | Run `dsacls` to grant LCRP |
 | Sensor not receiving traffic | NIC or network issue on DC | Check DC network config |
 
 ---
@@ -130,7 +120,6 @@ Communicate change windows to the SOC team so updates can be deferred when neede
 
 - [ ] Confirm all DCs are in `gMSA_MDI` group
 - [ ] Establish process to add new DCs to `gMSA_MDI`
-- [ ] Verify Deleted Objects permissions in each domain
 - [ ] Provide service account list for exclusion tuning
 - [ ] Identify honeytoken candidates (dormant accounts)
 - [ ] Identify custom groups to tag as sensitive
@@ -138,4 +127,4 @@ Communicate change windows to the SOC team so updates can be deferred when neede
 
 ---
 
-*Last updated: February 2026*
+*Last updated: March 2026*
