@@ -1,300 +1,233 @@
-# Migrating from Trellix to Microsoft Defender for Endpoint
+# Trellix to BitLocker Migration Guide
 
-## Overview
-
-This guide walks you through replacing Trellix Endpoint Security (ENS) with Microsoft Defender for Endpoint (MDE). The migration has three phases: **Prepare**, **Setup**, and **Switch Over**. Follow each step in order.
+A conversation starter for teams migrating from Trellix Drive Encryption to BitLocker with Intune.
 
 ---
 
-## Before You Start
+## The Big Picture
 
-Make sure you have:
+You're moving from Trellix Drive Encryption (managed by ePO) to BitLocker (managed by Intune). This is **not** an in-place migration — you must fully decrypt, remove Trellix, then encrypt with BitLocker.
 
-- Microsoft 365 E5 or E3 + MDE P2 add-on licenses assigned to users
-- Access to the Microsoft Defender portal: https://security.microsoft.com
-- Access to Trellix ePO console
-- Local admin rights on endpoints (or a deployment tool like Intune, SCCM, or GPO)
-- A pilot group of 5–10 machines identified for initial testing
+> ⚠️ **Microsoft Warning:** "If BitLocker is enabled on a system that's already encrypted by a third-party encryption product, it might render the device unusable. Data loss can occur."
 
 ---
 
-## Phase 1: Prepare
+## What Changes for End Users?
 
-### 1.1 — Export Your Trellix Exclusions
-
-Before removing Trellix, you need your current exclusion list so you can recreate them in MDE.
-
-1. Open **Trellix ePO Console**
-2. Go to your **ENS Threat Prevention** policy
-3. Export all exclusions (On-Access Scan, On-Demand Scan, process exclusions)
-4. Save to a spreadsheet — you'll need these in Phase 2
-
-> **Mapping Trellix exclusions to MDE:**
->
-> | Trellix Setting | MDE Equivalent |
-> |---|---|
-> | On-Access Scan exclusions | Real-time protection exclusions |
-> | On-Demand Scan exclusions | Scheduled scan exclusions |
-> | Process exclusions | Process exclusions (add as both path + process) |
-
-### 1.2 — Capture a Performance Baseline
-
-On a few representative machines, record current CPU, memory, and disk usage so you have a comparison point after the switch.
-
-```powershell
-# Quick baseline snapshot (run on a test machine)
-Get-Process | Sort-Object CPU -Descending | Select-Object -First 10 Name, CPU, WorkingSet64
-Get-Counter '\Processor(_Total)\% Processor Time' -SampleInterval 5 -MaxSamples 3
-```
-
-### 1.3 — Verify Firewall / Network Access
-
-MDE needs outbound HTTPS (TCP 443) to Microsoft cloud services. Make sure these URLs are reachable from your endpoints:
-
-| URL Pattern | Purpose |
-|---|---|
-| `*.endpoint.security.microsoft.com` | MDE service |
-| `*.blob.core.windows.net` | Sample submission / updates |
-| `*.microsoft.com` | Definitions, CRL, telemetry |
-
-Test connectivity:
-
-```powershell
-Test-NetConnection -ComputerName "endpoint.security.microsoft.com" -Port 443
-```
-
-> **GCC / GCC High:** Use the appropriate government URLs per your licensing. See Microsoft documentation for government endpoint URLs.
-
-### 1.4 — Confirm Licensing
-
-In the Microsoft 365 Admin Center (https://admin.microsoft.com), verify MDE licenses are assigned to the users whose devices you are migrating.
+| Today (Trellix) | Tomorrow (BitLocker) |
+|-----------------|---------------------|
+| Pre-boot PIN via Trellix | TPM-only (no PIN) or TPM+PIN |
+| Recovery via ePO/helpdesk | Recovery via Entra ID / Company Portal |
+| Trellix agent on device | No additional agent (built into Windows) |
 
 ---
 
-## Phase 2: Setup (Do This Before Removing Trellix)
-
-### 2.1 — Make Sure Microsoft Defender Antivirus Is Present
-
-On **Windows 10/11 clients**, Defender Antivirus is built in. It should already be installed but in a disabled state because Trellix is running.
-
-On **Windows Server 2016 / 2019 / 2022**, the Defender Antivirus feature may have been removed. Check and install if needed:
-
-```powershell
-# Check if Defender feature is installed (Server only)
-Get-WindowsFeature -Name Windows-Defender
-
-# Install if missing (Server only)
-Install-WindowsFeature -Name Windows-Defender -IncludeManagementTools
-```
-
-### 2.2 — Onboard Devices to MDE
-
-1. Go to **https://security.microsoft.com**
-2. Navigate to **Settings → Endpoints → Onboarding**
-3. Select your OS and deployment method (Intune, GPO, SCCM, or local script)
-4. Download the onboarding package and deploy it
-
-> **Tip:** For a pilot, the local script works fine. For production, use Intune or GPO.
-
-After onboarding, Defender Antivirus will automatically enter **passive mode** on Windows 10/11 clients (because Trellix is still running). On servers, you must set passive mode manually:
+## Migration Steps (High Level)
 
 ```
-Registry Path: HKLM\SOFTWARE\Policies\Microsoft\Windows Advanced Threat Protection
-DWORD Value:   ForceDefenderPassiveMode = 1
+┌─────────────────────────────────────────────────────────────┐
+│  1. DECRYPT                                                 │
+│     Trellix team pushes decryption policy via ePO           │
+│     Wait for 100% completion on each device                 │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│  2. REMOVE                                                  │
+│     Uninstall Trellix Drive Encryption agent                │
+│     Reboot device                                           │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│  3. ENCRYPT                                                 │
+│     Intune BitLocker policy applies automatically           │
+│     Recovery key escrows to Entra ID                        │
+└─────────────────────────────────────────────────────────────┘
 ```
-
-### 2.3 — Set Up Mutual Exclusions
-
-**In Trellix ePO** — add these MDE paths to the Trellix exclusion list:
-
-```
-C:\Program Files\Windows Defender Advanced Threat Protection\
-C:\Program Files\Windows Defender\
-C:\ProgramData\Microsoft\Windows Defender\
-```
-
-**In MDE (Intune, GPO, or Defender portal)** — add these Trellix paths to Defender Antivirus exclusions:
-
-```
-C:\Program Files\McAfee\
-C:\Program Files (x86)\McAfee\
-C:\Program Files\Common Files\McAfee\
-C:\ProgramData\McAfee\
-```
-
-This prevents the two products from scanning each other and causing performance issues during the coexistence period.
-
-### 2.4 — Configure MDE Protection Settings
-
-While Defender is in passive mode alongside Trellix, configure these settings so they are ready when Defender goes active:
-
-- **Tamper Protection** — Turn ON in the Defender portal (Settings → Endpoints → Advanced Features)
-- **Cloud-Delivered Protection** — Enable via Intune or GPO
-- **Attack Surface Reduction (ASR) rules** — Start in Audit mode
-- **Import your exclusions** from the spreadsheet you created in Step 1.1
-
-### 2.5 — Prepare Windows Firewall Rules (If Using ENS Firewall)
-
-If Trellix ENS Firewall is managing your firewall rules, those rules will disappear when ENS is removed. **Before removing Trellix**, make sure equivalent rules are in place via:
-
-- Windows Defender Firewall GPO policies, or
-- Intune Firewall profiles
-
-Skip this step if you are not using ENS Firewall.
 
 ---
 
-## Phase 3: Switch Over
+## ⚠️ Gotchas — Read Before You Start
 
-### 3.1 — Validate on Pilot Machines First
+### 1. Don't Assign BitLocker Policy During Decryption
 
-On your pilot group (5–10 machines), run through Steps 3.2–3.5 below. Keep them running for **1–2 weeks** before moving to the broader environment.
+If you assign a BitLocker policy while Trellix is still decrypting:
+- A recovery key may escrow to Entra ID ✓
+- But the OS drive **won't actually encrypt** ✗
+- Device looks compliant, but it's not protected
 
-### 3.2 — Disable Trellix Self-Protection
-
-In **Trellix ePO**, push a policy update to your target machines:
-
-1. Open the **ENS Common** policy (or ENS Threat Prevention policy, depending on version)
-2. **Disable Self-Protection** (sometimes called "Access Protection" on the ENS module itself)
-3. Assign the policy to your target group and wait for the policy to enforce
-
-> **This is critical.** If self-protection is still on, the uninstall will silently fail.
-
-### 3.3 — Uninstall Trellix (Correct Order)
-
-Uninstall the Trellix components **in this exact order**:
-
-| Step | Component | How |
-|---|---|---|
-| 1 | ENS Threat Prevention | Add/Remove Programs or `msiexec` |
-| 2 | ENS Firewall (if installed) | Add/Remove Programs or `msiexec` |
-| 3 | ENS Web Control (if installed) | Add/Remove Programs or `msiexec` |
-| 4 | ENS Adaptive Threat Protection (if installed) | Add/Remove Programs or `msiexec` |
-| 5 | ENS Platform | Add/Remove Programs or `msiexec` |
-| 6 | DLP Endpoint (if installed) | Add/Remove Programs or `msiexec` |
-| 7 | **McAfee Agent — ALWAYS LAST** | `FrmInst.exe /Remove=Agent` |
-
-> **Do NOT remove the McAfee Agent first.** Doing so orphans the ENS modules and makes them very hard to clean up.
-
-If standard uninstall fails, use the **McAfee Agent Removal Tool** (`FrmInst.exe /Remove=Agent`) provided by Trellix support.
-
-**Reboot** after the full uninstall.
-
-### 3.4 — Verify Trellix Is Fully Removed
-
-After reboot, check that no Trellix components are left behind:
-
-```powershell
-# Check for leftover services
-Get-Service | Where-Object { $_.Name -match 'mc|mfe|trellix' } |
-    Format-Table Name, Status, StartType
-
-# Check for leftover drivers
-sc.exe query type=driver | findstr /i "mfe mcafee"
-
-# Check for leftover folders
-Test-Path "C:\Program Files\McAfee"
-Test-Path "C:\Program Files (x86)\McAfee"
-Test-Path "C:\Program Files\Common Files\McAfee"
-```
-
-If anything remains, clean it up manually or use the Trellix Product Removal tool from their support site.
-
-### 3.5 — Confirm Defender Is Active
-
-After Trellix is removed, Defender Antivirus should automatically switch from passive to active mode on Windows 10/11 clients.
-
-```powershell
-# Confirm Defender is in Active mode
-Get-MpComputerStatus | Select-Object AMRunningMode, AntivirusEnabled, RealTimeProtectionEnabled
-```
-
-Expected output:
-
-```
-AMRunningMode             : Normal
-AntivirusEnabled          : True
-RealTimeProtectionEnabled : True
-```
-
-On **servers**, remove the `ForceDefenderPassiveMode` registry key you set in Step 2.2, then restart the Defender service:
-
-```powershell
-Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Advanced Threat Protection" `
-    -Name "ForceDefenderPassiveMode" -ErrorAction SilentlyContinue
-Restart-Service WinDefend
-```
-
-### 3.6 — Run a Detection Test
-
-Verify MDE is working end-to-end by running the standard test:
-
-```powershell
-# Run from an elevated command prompt (not PowerShell)
-powershell.exe -NoExit -ExecutionPolicy Bypass -WindowStyle Hidden $ErrorActionPreference='silentlycontinue';(New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/T1059.001.yaml') > $null;Write-Host 'MDE Test Complete'
-```
-
-Or use the simpler EICAR test:
-1. Go to **https://security.microsoft.com → Settings → Endpoints → Onboarding**
-2. Click **Run detection test** and follow the instructions
-3. Confirm the test alert appears in the portal under **Incidents & Alerts**
-
-### 3.7 — Remove Trellix Exclusions from MDE
-
-Now that Trellix is gone, remove the Trellix paths you added to the Defender exclusion list in Step 2.3. You don't want unnecessary exclusions lingering.
-
-### 3.8 — Roll Out to Remaining Machines
-
-After a successful 1–2 week pilot, repeat Steps 3.2–3.7 for the rest of your environment in waves:
-
-| Wave | Scope | Duration |
-|---|---|---|
-| Pilot | 5–10 machines | 1–2 weeks |
-| Wave 1 | Workstations | 1–2 weeks |
-| Wave 2 | Servers (extra caution) | 1–2 weeks |
-| Wave 3 | Remaining endpoints | Complete |
+**Fix:** Wait until decryption is **100% complete** and Trellix is **uninstalled** before assigning BitLocker policy.
 
 ---
 
-## After Migration
+### 2. Pre-Boot Authentication Blocks Silent Encryption
 
-### Clean Up ePO
+If your BitLocker policy requires TPM + PIN, TPM + Startup Key, or any combination:
+- Silent encryption **will not work**
+- Device waits for user interaction that never happens
+- Drive stays unencrypted
 
-Remove migrated devices from the Trellix ePO console so they don't generate stale alerts or consume licenses.
+**For silent encryption, configure:**
+- TPM startup PIN: **Do not allow**
+- TPM startup key: **Do not allow**
+- TPM startup key and PIN: **Do not allow**
 
-### Monitor in the Defender Portal
-
-- **Device Inventory** (https://security.microsoft.com → Assets → Devices) — confirm all devices show as onboarded with active protection
-- **Threat & Vulnerability Management** — review any new recommendations
-- **Incidents & Alerts** — monitor for the first few weeks after each wave
-
-### Tune Performance If Needed
-
-If you see higher CPU usage after the switch, use the MDE Performance Analyzer:
-
-```powershell
-# Record performance for 10 minutes
-New-MpPerformanceRecording -RecordTo C:\Temp\MDE-Perf.etl
-# Wait 10 minutes, then stop and analyze
-Get-MpPerformanceReport -TopFiles 20 -TopScansPerFile 10 -TopProcesses 10 C:\Temp\MDE-Perf.etl
-```
-
-This will show you which files or processes are causing the most scan activity so you can add targeted exclusions.
+**If you need pre-boot PIN:** Users must complete BitLocker wizard manually.
 
 ---
 
-## Quick Reference — Common Gotchas
+### 3. Recovery Key in Entra ≠ Drive is Encrypted
 
-| Gotcha | What to Do |
-|---|---|
-| Trellix uninstall silently fails | Disable Self-Protection in ePO policy first |
-| Removed McAfee Agent before ENS | Reinstall McAfee Agent, then uninstall in correct order |
-| MDAV stuck in passive mode (servers) | Remove `ForceDefenderPassiveMode` registry key and restart `WinDefend` |
-| MDAV stuck in passive mode (clients) | Verify Trellix is fully removed; check for leftover services |
-| High CPU after switching to Defender | Run Performance Analyzer, add targeted exclusions |
-| Blue screen after removing Trellix | Check for leftover Trellix kernel drivers (`mfehidk`, `mfefirek`, etc.) and remove them |
-| ENS Firewall rules gone after uninstall | Deploy Windows Firewall GPO/Intune policies **before** removing ENS |
-| Exclusions not working as expected | MDE process exclusions only exclude files the process touches — add both path + process exclusion |
+Just because a key shows up in Entra ID doesn't mean the drive is encrypted. Always verify:
+
+```powershell
+# Check actual encryption status
+manage-bde -status C:
+
+# Expected output for encrypted drive:
+#   Conversion Status:    Fully Encrypted
+#   Percentage Encrypted: 100%
+#   Protection Status:    Protection On
+```
+
+---
+
+### 4. Security Baseline Conflicts
+
+The Microsoft Defender Security Baseline enables TPM+PIN by default. If you're using the baseline AND trying silent BitLocker, they conflict.
+
+**Check:** Intune → Devices → Configuration → Conflicts
+
+---
+
+## Detailed Migration Checklist
+
+| Step | Owner | Action | How to Verify |
+|------|-------|--------|---------------|
+| 1 | Trellix | Export recovery keys from ePO (backup) | Keys exported |
+| 2 | Trellix | Push decryption policy via ePO | Policy assigned |
+| 3 | Trellix | **Wait for 100% decryption** | `manage-bde -status` = Fully Decrypted |
+| 4 | Trellix | Uninstall Trellix Drive Encryption | Agent removed |
+| 5 | Trellix | Reboot device | Clean boot, no Trellix services |
+| 6 | Intune | Verify no third-party encryption | See verification script below |
+| 7 | Intune | Assign BitLocker policy | Policy applies to device |
+| 8 | Intune | **Wait for encryption to complete** | `manage-bde -status` = Fully Encrypted |
+| 9 | Intune | Verify key in Entra ID | Key visible in portal |
+
+---
+
+## Verification Scripts
+
+### Check for Trellix/Third-Party Encryption
+
+```powershell
+# Check for Trellix/McAfee services
+Get-Service | Where-Object { 
+    $_.Name -like "*McAfee*" -or 
+    $_.Name -like "*Trellix*" -or 
+    $_.Name -like "*MfeEE*" 
+}
+
+# Check for encryption products in installed software
+Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name LIKE '%Trellix%' OR Name LIKE '%McAfee%Encryption%'"
+
+# Check current encryption status
+manage-bde -status
+```
+
+### Verify BitLocker Encryption Complete
+
+```powershell
+# Detailed BitLocker status
+Get-BitLockerVolume -MountPoint C: | Select-Object MountPoint, VolumeStatus, EncryptionPercentage, ProtectionStatus, KeyProtector
+
+# Quick check
+manage-bde -status C:
+```
+
+**Expected output after successful migration:**
+```
+Volume C:
+    Conversion Status:    Fully Encrypted
+    Percentage Encrypted: 100%
+    Protection Status:    Protection On
+    Key Protectors:
+        TPM
+        Numerical Password
+```
+
+---
+
+## BitLocker vs Trellix Comparison
+
+| Feature | Trellix Drive Encryption | BitLocker (Intune) |
+|---------|-------------------------|-------------------|
+| Full disk encryption | ✓ | ✓ |
+| Pre-boot authentication | ✓ (PIN/password) | Optional (TPM-only default) |
+| Central management | ePO server | Intune (cloud) |
+| Recovery key storage | ePO database | Entra ID |
+| Hardware requirement | None | TPM 1.2+ (2.0 recommended) |
+| Encryption algorithm | AES-256 | AES-128 or AES-256 |
+| Removable media | Separate product | BitLocker To Go (built-in) |
+| Agent required | Yes | No (built into Windows) |
+| Server infrastructure | Yes (ePO) | No (cloud-native) |
+
+---
+
+## Intune Policy Settings (Recommended)
+
+**Portal:** Intune → Endpoint Security → Disk encryption → Create Policy → BitLocker
+
+| Setting | Value | Notes |
+|---------|-------|-------|
+| Require Device Encryption | Enabled | Core requirement |
+| Allow Warning For Other Disk Encryption | Not Configured | Keep warning ON during migration |
+| Allow Standard User Encryption | Enabled | For non-admin users |
+| Configure TPM startup PIN | Do not allow | Required for silent encryption |
+| Configure TPM startup key | Do not allow | Required for silent encryption |
+| Encryption method (OS drive) | XTS-AES 256-bit | Matches Trellix strength |
+| Recovery Password Rotation | Enabled | Auto-rotate after use |
+
+---
+
+## Timeline Recommendation
+
+| Phase | Duration | Notes |
+|-------|----------|-------|
+| Pilot (10-20 devices) | 1-2 weeks | Validate process, catch issues |
+| Wave 1 (100 devices) | 1 week | First production wave |
+| Wave 2+ (remaining) | 2-4 weeks | Scale based on pilot learnings |
+
+**Don't rush.** Each device needs time to fully decrypt before BitLocker can encrypt.
+
+---
+
+## Recovery Key Access (Post-Migration)
+
+**For IT/Helpdesk:**
+- Intune → Devices → [Device] → Recovery keys
+- Entra ID → Devices → [Device] → BitLocker keys
+
+**For End Users (if enabled):**
+- https://myaccount.microsoft.com → Devices → View BitLocker Keys
+
+---
+
+## Questions for Trellix Team
+
+1. How many devices have Trellix Drive Encryption?
+2. What's your current pre-boot auth policy (PIN required)?
+3. Do you have any devices with multiple encrypted volumes?
+4. What's your change management process for pushing decryption?
+5. Can you provide a list of devices to pilot first?
+
+---
+
+## Docs & References
+
+- [Encrypt Windows devices with BitLocker in Intune](https://learn.microsoft.com/intune/intune-service/protect/encrypt-devices)
+- [Silent BitLocker encryption prerequisites](https://learn.microsoft.com/intune/intune-service/protect/encrypt-devices#configure-silent-bitlocker-encryption)
+- [BitLocker CSP reference](https://learn.microsoft.com/windows/client-management/mdm/bitlocker-csp)
+- [BitLocker operations guide](https://learn.microsoft.com/windows/security/operating-system-security/data-protection/bitlocker/operations-guide)
 
 ---
 
