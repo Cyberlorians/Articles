@@ -1,24 +1,51 @@
 # Live Response Monitoring on Domain Controllers — Discussion Guide
 
 ## Customer Ask
-Alert when a Live Response session is initiated on a domain controller in MDE.
+> *"I want to be alerted if a Live Response is initiated on a domain controller."*
 
 ---
 
-## Answering Each Point
+## 1. Live Response Abuse Vectors
 
-### 1. Live Response Abuse Vectors
-You're right to be concerned. Thomas Naunheim's blog ([Abuse and Detection of Live Response for Tier0](https://www.cloud-architekt.net/abuse-detection-live-response-tier0/)) demonstrates two concrete attack paths:
+**Referenced article:** [Abuse and Detection of M365D Live Response for privilege escalation on Control Plane (Tier0) assets](https://www.cloud-architekt.net/abuse-detection-live-response-tier0/) — Thomas Naunheim
+
+> *"Read about ways to abuse Live Response."*
+
+You're right to be concerned. Naunheim demonstrates two concrete attack paths:
 
 **Attack 1 — Create Domain Admin via Live Response:**
-A Security Admin can upload a script to the Live Response library and execute it on a DC. The script runs as **SYSTEM** — which on a DC means full Domain Admin capability. Example: a few lines of PowerShell to create a user and add them to Domain Admins. No on-prem credentials required.
+A Security Admin uploads a script to the Live Response library and executes it on a DC. The script runs as **SYSTEM** — which on a DC means full Domain Admin capability. A few lines of PowerShell to create a user and add them to Domain Admins. No on-prem credentials required.
 
 **Attack 2 — Exfiltrate Global Admin tokens from a PAW:**
-An attacker can use Live Response to plant a PostImportScript in the Az PowerShell module folder on a privileged user's workstation. When the admin next runs an Az cmdlet, their access token is silently exfiltrated to blob storage. The token includes `Directory.AccessAsUser.All` scope — full Graph API access.
+An attacker uses Live Response to plant a PostImportScript in the Az PowerShell module folder on a privileged user's workstation. When the admin next runs an Az cmdlet, their access token is silently exfiltrated to blob storage. The token includes `Directory.AccessAsUser.All` scope — full Graph API access.
 
 **Key takeaway:** Live Response runs as SYSTEM, supports unsigned scripts (if enabled), and bridges the cloud portal to on-prem Tier 0 assets. Any user with Security Admin, Security Operator, or the custom "Advanced Live Response" RBAC permission can do this.
 
-### 2. MachineActions API — Is It True That GUI Sessions Don't Show Up?
+**Naunheim's recommended mitigation stack:**
+1. **Device Groups** — Create a dedicated device group for DCs/Tier 0 assets and restrict which roles can access them
+2. **Custom RBAC roles** — Create a dedicated "Security Responder" role with Live Response permissions separate from general Security Admin
+3. **PIM for Groups** — Put that role behind JIT activation with approval, so no one has standing Live Response access to DCs
+4. **Disable unsigned scripts** — In Advanced Features, disable "Live Response unsigned script execution" unless absolutely needed
+5. **High Value Assets Watchlist** — Tag DCs in Sentinel's built-in "HighValueAssets" watchlist for correlation in analytics rules
+
+**Additional detection via Windows Event Logs (from Naunheim):**
+Two event log providers on the DC itself capture Live Response activity:
+- `Microsoft-Windows-SENSE` — logs SenseIR initialization
+- `Microsoft-Windows-SenseIR` — logs connection details and Action IDs (correlates to transcripts)
+
+These can be ingested into Sentinel via Azure Monitor Agent (AMA) with a custom XPath query.
+
+---
+
+## 2. MachineActions API — GUI Sessions Don't Show Up
+
+**Referenced articles:**
+- [MDE APIs using PowerShell](https://learn.microsoft.com/en-us/defender-endpoint/api/exposed-apis-full-sample-powershell) — Microsoft Learn (auth + API call sample)
+- [List MachineActions API](https://learn.microsoft.com/en-us/defender-endpoint/api/get-machineactions-collection) — Microsoft Learn (OData filters, rate limits)
+- [MachineAction resource type](https://learn.microsoft.com/en-us/defender-endpoint/api/machineaction) — Microsoft Learn (type enum, properties)
+
+> *"Followed the Microsoft doc to make an app registration & small script to query the MachineActions API where I expected to see the same 'LiveResponse' type actions that I'd seen in the Action Center History GUI... But no, I got one single entry for when a virus scan was triggered on an endpoint – and no records at all for my Live Response sessions. That seems bizarre. Is it true?"*
+
 **Yes, confirmed.** Microsoft explicitly documents this:
 
 > *"Live response actions initiated from the Device page are not available in the MachineActions API."*
@@ -26,28 +53,48 @@ An attacker can use Live Response to plant a PostImportScript in the Az PowerShe
 
 The API only returns Live Response sessions initiated **via the API itself** (e.g., automated scripts calling `POST /api/machines/{id}/runliveresponse`). GUI-initiated sessions are **not returned**. This is a known product gap.
 
-**What the API does return (for API-initiated sessions):**
+**What the API does return (for API-initiated sessions only):**
 The [MachineAction resource type](https://learn.microsoft.com/en-us/defender-endpoint/api/machineaction) includes a `type` enum with `LiveResponse` as a value, and a `requestSource` field that shows origin (e.g., `PublicApi`). You can query with OData filters:
 ```
 GET https://api.security.microsoft.com/api/machineactions?$filter=type eq 'LiveResponse'
 ```
-Rate limit: 100 calls/min, 1,500 calls/hr. Max page size: 10,000. See the [List MachineActions API](https://learn.microsoft.com/en-us/defender-endpoint/api/get-machineactions-collection) and [PowerShell sample](https://learn.microsoft.com/en-us/defender-endpoint/api/exposed-apis-full-sample-powershell) for examples.
+Rate limit: 100 calls/min, 1,500 calls/hr. Max page size: 10,000.
 
-**But none of this helps for GUI sessions.** Naunheim also confirms: *"the list of Machine Action seems to cover Live Response API activities only. Session operations from the Microsoft 365 Defender Portal UI seems not to be included!"*
+Naunheim also confirms: *"the list of Machine Action seems to cover Live Response API activities only. Session operations from the Microsoft 365 Defender Portal UI seems not to be included!"*
 
-**Should we escalate?** Yes — this is a legitimate feature gap. We can submit feedback through the Defender portal (Settings > Endpoints > Feature feedback) and if needed, file a formal Design Change Request (DCR). The MachineActions API should return all Live Response actions regardless of initiation method.
+> *"If yes, would you please contact someone with the power to effect change and ask them to address it?"*
 
-### 3. Search-UnifiedAuditLog — Performance Concerns
-Your concern about performance is valid but manageable. Key tips:
+**Yes — we will escalate this.** We can submit feedback through the Defender portal (Settings > Endpoints > Feature feedback) and file a formal Design Change Request (DCR). The MachineActions API should return all Live Response actions regardless of initiation method. This is a legitimate gap that affects security monitoring for every MDE customer.
+
+---
+
+## 3. Search-UnifiedAuditLog — Performance Concerns
+
+**Referenced article:** [Microsoft Proposes a Horrible Change for the Search-UnifiedAuditLog Cmdlet](https://office365itpros.com/2024/12/17/search-unifiedauditlog-change/) — Tony Redmond, Office 365 IT Pros
+
+> *"I read about how to query the unified audit log with the Search-UnifiedAuditLog cmdlet, but was discouraged by the vibes of it maybe taking a long time to run and being flakey. But maybe it's my only option?"*
+
+Your concern is valid — but manageable with the right approach, and no, it's not your only option:
+
+**Performance tips (when you do need to use it):**
 - **Always filter by `-Operations`** — this dramatically reduces query time. Don't pull everything.
 - **Use narrow date ranges** — 1-7 days, not 90 days.
 - **`-ResultSize` maxes at 5,000** per call. Use `-SessionId` and `-SessionCommand ReturnLargeSet` to paginate if needed.
 - It's not instant (can take 10-60 seconds) but it's reliable when filtered properly.
-- **Better long-term:** Don't query it manually at all — ingest into Sentinel and alert automatically (see Option 3 below).
 
-**Important context from [Tony Redmond's article](https://office365itpros.com/2024/12/17/search-unifiedauditlog-change/):** In December 2024 (MC955752), Microsoft tried to force all audit log searches to use "high completeness" mode — which was extremely slow (8+ minutes) and unreliable (frequent `InternalServerError` failures). They postponed the change on January 27, 2025, after backlash. For now, the normal (fast) search mode still works. But this signals Microsoft's intent to push everyone toward the Graph AuditLog Query API or Sentinel ingestion long-term. Don't build critical automation solely on `Search-UnifiedAuditLog` — plan for the Sentinel approach.
+**What Tony Redmond found:** In December 2024 (MC955752), Microsoft tried to force all audit log searches to use "high completeness" mode — which was extremely slow (8+ minutes per query) and unreliable (frequent `InternalServerError` failures after waiting 6-8 minutes). They postponed the change on January 27, 2025, after backlash. For now, the normal (fast) search mode still works. But this signals Microsoft's intent to push everyone toward the Graph AuditLog Query API or Sentinel ingestion long-term.
 
-### 4. ExchangeOnlineManagement Module v3.9.2 — Connection Issues
+**Better options than manually running this cmdlet:**
+- **Option 3 (Sentinel)** — ingest audit logs and alert automatically, no manual queries
+- **Option 5 (CloudAppEvents CDR)** — if you have Defender for Cloud Apps, alert natively in XDR
+- Don't build critical automation solely on `Search-UnifiedAuditLog` — plan for the Sentinel approach.
+
+---
+
+## 4. ExchangeOnlineManagement Module v3.9.2 — Connection Issues
+
+> *"I installed the ExchangeOnlineManagement PowerShell module (which contains the Search-UnifiedAuditLog cmdlet), version 3.9.2, but am unable to connect. I could try an older version of the module if necessary."*
+
 Common issues on v3.9.2:
 - **TLS 1.2 not enabled:**
   ```powershell
@@ -67,10 +114,19 @@ Common issues on v3.9.2:
   Connect-ExchangeOnline -CertificateThumbprint $thumb -AppId $appId -Organization contoso.onmicrosoft.com
   ```
 
-### 5. Advanced Hunting — Can't Find Live Response Events
-**Partially correct.** Live Response *session initiation* events are NOT in the Advanced Hunting tables — you can't query "who started a Live Response session at what time" from Advanced Hunting.
+We can troubleshoot the specific error message on the call if the above doesn't resolve it.
 
-**However**, you CAN detect Live Response *activity* (commands executed, files created, processes spawned) using Advanced Hunting. Thomas Naunheim's blog provides two useful queries:
+---
+
+## 5. Advanced Hunting — Can't Find Live Response Events
+
+**Referenced article:** [Abuse and Detection of Live Response for Tier0](https://www.cloud-architekt.net/abuse-detection-live-response-tier0/) — Thomas Naunheim (hunting queries)
+
+> *"I tried using the MDE Advanced Hunting query window to see if I could find a record of a LiveResponse session starting but failed (I see it in the timeline GUI, but not query results)."*
+
+**Partially correct.** Live Response *session initiation* events are NOT in the standard MDE Advanced Hunting tables (DeviceEvents, DeviceProcessEvents, etc.) — you can't query "who started a Live Response session at what time" from those tables.
+
+**However**, you CAN detect Live Response *activity* (commands executed, files created, processes spawned). Naunheim provides two useful queries:
 
 **Query 1 — SenseIR activity (session initialization + script execution):**
 ```kql
@@ -91,7 +147,7 @@ DeviceProcessEvents
     ProcessCommandLine, ProcessId, InitiatingProcessParentFileName
 ```
 
-These queries will show you what was **done** during a Live Response session (e.g., `net group "Domain Admins"` commands), but they won't tell you **who initiated the session** from the portal. For that, you still need the Unified Audit Log.
+These show what was **done** during a Live Response session (e.g., `net group "Domain Admins"` commands), but won't tell you **who initiated the session** from the portal. For that, you need the Unified Audit Log.
 
 **NEW — CloudAppEvents table (requires Defender for Cloud Apps license):**
 The [TechCommunity Public Sector Blog](https://techcommunity.microsoft.com/blog/publicsectorblog/auditing-admin-activities-in-microsoft-defender-endpoint/4421154) by Brian Tirch reveals that if you have **Microsoft Defender for Cloud Apps** (MDCA), the Purview audit data flows into the `CloudAppEvents` Advanced Hunting table. This means you CAN query Live Response events in Advanced Hunting after all:
@@ -108,40 +164,87 @@ CloudAppEvents
 ```
 This also lets you create **Custom Detection Rules** (CDRs) that trigger alerts natively in XDR — no Sentinel required. See Option 5 below.
 
-### 6. SenseIR.exe — Runs Full-Time Now
-Correct. `SenseIR.exe` is the Live Response component of the MDE sensor, but it runs as a persistent process now — not just during active sessions. Monitoring for its process start is no longer a viable detection method.
+---
 
-### 7. Email Alerts for XDR Actions — Delayed
-The email notification you received was triggered **after the action completed** (AV scan finished), not when it was initiated. This is by design — XDR action notifications are post-completion.
+## 6. SenseIR.exe Runs Full-Time Now
 
-**Additional limitations from [Brian Tirch's blog](https://techcommunity.microsoft.com/blog/publicsectorblog/auditing-admin-activities-in-microsoft-defender-endpoint/4421154):**
+> *"The blogger in step 1 searched for 'SenseIR.exe' processes, but that process runs fulltime now."*
+
+Correct. `SenseIR.exe` is the Live Response component of the MDE sensor, but it now runs as a persistent process — not just during active sessions. Monitoring for its process start is no longer a viable detection method. Naunheim's blog was written in March 2023 when the behavior was different.
+
+---
+
+## 7. Email Alerts for XDR Actions — Delayed
+
+**Referenced article:** [Auditing Admin Activities in Microsoft Defender Endpoint](https://techcommunity.microsoft.com/blog/publicsectorblog/auditing-admin-activities-in-microsoft-defender-endpoint/4421154) — Brian Tirch, Microsoft Public Sector Blog
+
+> *"I configured email alerts for XDR actions & tested it by starting an antivirus scan on a domain controller from the portal; quite a while later, after the scan completed, I did receive an email. So that worked & maybe I should be satisfied with it?"*
+
+The email notification was triggered **after the action completed** (AV scan finished), not when it was initiated. This is by design — XDR action notifications are post-completion.
+
+**Additional limitations from Brian Tirch's blog:**
 - Can't scope which users trigger event notifications — all admin actions trigger them
 - Not all admin actions are available for notification
-- It's a robust set of actions though, and it's built-in at no additional cost
+- No API to send this data to a SIEM
 
-For **near-real-time alerting on session initiation**, you need the Sentinel analytics rule (Option 3) or CloudAppEvents CDR (Option 5). The Unified Audit Log typically logs the `RunLiveResponseSession` event within minutes of initiation — much faster than waiting for action completion.
+**Benefits:**
+- It's built-in, no additional cost, simple to configure
+- Robust set of actions can be configured
+- Can be paired with a workflow for additional automation
 
-### 8. XDR Streaming API
-Correct — the Streaming API exports existing Advanced Hunting tables (DeviceEvents, etc.) to Event Hub/Storage. Since Live Response events aren't in those tables (see #5), the Streaming API won't help here.
+**Bottom line:** It's a reasonable safety net, but for **near-real-time alerting on session initiation**, you need the Sentinel analytics rule (Option 3) or CloudAppEvents CDR (Option 5). The Unified Audit Log typically logs the `RunLiveResponseSession` event within minutes of initiation — much faster than waiting for action completion.
 
-### 9. Reddit Suggestion — Monitor File Downloads from LR Library
-This is a valid **supplementary** detection. You can use Advanced Hunting to detect files dropped by Live Response:
+---
+
+## 8. XDR Streaming API
+
+> *"I looked at the XDR Streaming API option, but that just streams the existing tables elsewhere and thus doesn't help."*
+
+Correct. The Streaming API exports existing Advanced Hunting tables (DeviceEvents, DeviceProcessEvents, etc.) to Event Hub or Storage Account. Since Live Response session initiation events aren't in those tables (see #5), the Streaming API won't help here. It would stream the SenseIR child process events from the Naunheim queries, but not the session metadata (who initiated, when, from the portal).
+
+---
+
+## 9. Reddit — Monitor File Downloads from LR Library
+
+**Referenced article:** [Reddit: Live Response in logs to catch with detection or...](https://www.reddit.com/r/DefenderATP/comments/12t7u7h/live_response_in_logs_to_catch_with_detection_or/)
+
+> *"This Redditor suggests monitoring for situations where a file is downloaded to a client from the Live Response Library, which sounds better than nothing, but it's not the same as an alert for when a Live Response session is initiated."*
+
+You're right — it's a valid **supplementary** detection but not the primary one. You can use Advanced Hunting to detect files dropped by Live Response:
 ```kql
 DeviceFileEvents
 | where InitiatingProcessFileName == "SenseIR.exe"
 | where ActionType == "FileCreated"
 | project Timestamp, DeviceName, FileName, FolderPath, InitiatingProcessCommandLine
 ```
-But as you noted — this only catches file drops, not session initiation. Use it as an additional signal, not the primary detection.
+This catches file drops from the library to the endpoint, but:
+- It doesn't fire if the operator only runs built-in commands (dir, processes, etc.) without uploading files
+- It doesn't tell you **who** initiated the session
+- It's a supplementary signal, not the primary detection
 
-### 10. Purview Audit Log API — How to Access It
-Three ways:
+Use it as a **layer** on top of the Unified Audit Log approach.
 
-**A. PowerShell (Search-UnifiedAuditLog):** This is the cmdlet you found in step 3. It works and is the simplest approach. See Option 1 below. Use `-RecordType` filter `*MSDE*` to get `MSDERResponseActions` (Live Response) and `MSDEIndicatorSettings` records.
+---
 
-**B. Office 365 Management Activity API (REST):** This is the "Purview Audit Log API" the blog referenced. It's a REST API that lets you subscribe to audit events and pull them programmatically:
+## 10. Purview Audit Log API — How to Access It
+
+**Referenced articles:**
+- [Auditing Admin Activities in Microsoft Defender Endpoint](https://techcommunity.microsoft.com/blog/publicsectorblog/auditing-admin-activities-in-microsoft-defender-endpoint/4421154) — Brian Tirch, Microsoft Public Sector Blog
+- [Using the Microsoft AuditLog Query Graph API (Preview)](https://practical365.com/audit-log-query-api/) — Tony Redmond, Practical365
+
+> *"This Microsoft blog post suggests querying the Unified Audit Log and references the 'Purview Audit Log API' — but I don't know how to access that API."*
+
+Three ways to access the Purview Audit Log programmatically:
+
+**A. PowerShell (Search-UnifiedAuditLog):** The simplest approach. See Option 1 below. Use `-RecordType` filter `*MSDE*` to get `MSDERResponseActions` (Live Response) and `MSDEIndicatorSettings` records. Brian Tirch's blog shows the exact command:
+```powershell
+Search-UnifiedAuditLog -StartDate "2025-05-15 20:21:00" -EndDate "2025-05-15 20:22:00" |
+  Where-Object { $_.RecordType -like "*MSDE*" }
+```
+
+**B. Office 365 Management Activity API (REST):** The "Purview Audit Log API" referenced in the blog. It's a REST API that lets you subscribe to audit events and pull them programmatically:
 - Docs: [Office 365 Management Activity API](https://learn.microsoft.com/en-us/office/office-365-management-api/office-365-management-activity-api-reference)
-- You create a subscription for `Audit.General` content type
+- Create a subscription for `Audit.General` content type
 - Poll for new events or use webhooks
 - Events include `RunLiveResponseSession` under the `MicrosoftDefenderForEndpoint` workload
 - **GCC-H endpoint:** `https://manage.office365.us/api/v1.0/{tenant_id}/activity/feed/{operation}`
@@ -149,7 +252,7 @@ Three ways:
 - Limited to last **7 days** of history, 2,000 requests/min (G/E5 gets 2x bandwidth)
 - **Complex to set up.** For most orgs, ingesting into Sentinel is easier.
 
-**C. Microsoft Graph AuditLog Query API (Preview):** This is the newer replacement Microsoft is pushing. Covered in detail by [Tony Redmond at Practical365](https://practical365.com/audit-log-query-api/):
+**C. Microsoft Graph AuditLog Query API (Preview):** The newer replacement Microsoft is pushing. Covered in detail by [Tony Redmond](https://practical365.com/audit-log-query-api/):
 - Async model: create a search query → wait up to 10 min → fetch results
 - Permission: `AuditLogsQuery.Read.All`
 - Endpoint: `POST https://graph.microsoft.com/beta/security/auditLog/queries`
@@ -157,26 +260,6 @@ Three ways:
 - Returns 150 records/page (can use `$top` up to 1000)
 - **Caution:** Still in preview, has stability issues (500 errors, unpredictable completion times). Tony notes it's "deeply unsatisfying" in its current state.
 - **Bottom line:** Works but not production-ready. Sentinel ingestion remains the most reliable approach.
-
-### 11. Isolating DCs — Should You Stop There?
-**No — isolation + monitoring is the right answer.** You're correct that both are needed:
-- **Isolation** = prevention (restrict who can even initiate Live Response on DCs)
-- **Monitoring** = detection (alert if someone does it anyway, including authorized users)
-- This mirrors what you do on-prem — restrict access to Tier 0 + audit all access
-
-**Naunheim's recommended mitigation stack:**
-1. **Device Groups** — Create a dedicated device group for DCs/Tier 0 assets and restrict which roles can access them
-2. **Custom RBAC roles** — Create a dedicated "Security Responder" role with Live Response permissions separate from general Security Admin
-3. **PIM for Groups** — Put that role behind JIT activation with approval, so no one has standing Live Response access to DCs
-4. **Disable unsigned scripts** — In Advanced Features, disable "Live Response unsigned script execution" unless absolutely needed
-5. **High Value Assets Watchlist** — Tag DCs in Sentinel's built-in "HighValueAssets" watchlist for correlation in analytics rules
-
-**Additional detection via Windows Event Logs:**
-Two event log providers on the DC itself capture Live Response activity:
-- `Microsoft-Windows-SENSE` — logs SenseIR initialization
-- `Microsoft-Windows-SenseIR` — logs connection details and Action IDs (correlates to transcripts)
-
-These can be ingested into Sentinel via Azure Monitor Agent (AMA) with a custom XPath query, giving you an on-device detection signal independent of the Unified Audit Log.
 
 ---
 
