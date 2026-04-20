@@ -25,24 +25,24 @@ declarative trigger.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│ 1. ANALYST / AUTOMATION             ──►  MANUAL  (analyst tags in   │
-│    Adds tag "ForensicCollect" to                  the XDR portal)   │
-│    the target device in Defender    ──►  DYNAMIC (XDR custom        │
-│    XDR                                            detection / Sentinel
-│                                                   playbook adds tag │
-│                                                   on alert)         │
+│ 1. ANALYST / AUTOMATION             ──►  MANUALLY  (analyst tags   │
+│    Adds tag "ForensicCollect" to              in the XDR portal)   │
+│    the target device in Defender    ──►  OR via ANOTHER LOGIC APP  │
+│    XDR                                       (e.g. XDR / Sentinel  │
+│                                               playbook adds tag)   │
 └────────────────────────────┬────────────────────────────────────────┘
                              │
 ┌────────────────────────────▼────────────────────────────────────────┐
 │ 2. AZURE LOGIC APP  (CyberTriage collector)                         │
-│    Polls every 2 minutes (concurrency = 1, no overlapping runs)     │
+│    Recurrence every 15 min (concurrency = 1, no overlapping runs)   │
+│    — OR — run manually from the portal / API on demand              │
 │                                                                     │
 │    a. Queries the Defender REST API for devices that are:           │
 │         • machineTags contains "ForensicCollect"                    │
 │         • onboardingStatus = Onboarded                              │
 │         • healthStatus    = Active                                  │
 │                                                                     │
-│    b. If none → ends silently, sleeps 2 min                         │
+│    b. If none → ends silently, sleeps until next cycle              │
 │    c. If found → for each device:                                   │
 └────────────────────────────┬────────────────────────────────────────┘
                              │
@@ -68,7 +68,7 @@ declarative trigger.
 ┌────────────────────────────▼────────────────────────────────────────┐
 │ 5. AUTO-CLEANUP                                                     │
 │    Logic App removes "ForensicCollect" from the device              │
-│    (prevents repeat collection on the next 2-min cycle)             │
+│    (prevents repeat collection on the next cycle)                   │
 │    On failure, the tag is left in place — device is retried         │
 └────────────────────────────┬────────────────────────────────────────┘
                              │
@@ -136,9 +136,11 @@ Three tenant-compliant options (no shared keys, all use Entra ID):
 
 - **Single Logic App** — minimal moving parts, easy to audit.
 - **Single tag, single workflow** — operators only need to remember one thing.
-- **Recurrence-only trigger today**; the Logic App can also be invoked directly
-  by Defender XDR or Sentinel playbooks when the customer is ready to remove
-  the polling loop.
+- **Recurrence every 15 minutes by default** — balances responsiveness
+  with cost. Recommended alternative for low-volume environments: leave
+  recurrence disabled and run the Logic App manually (portal **Run Trigger**
+  or API call) when a device is tagged. The Logic App can also be invoked
+  directly by another Logic App, Defender XDR, or Sentinel playbook.
 - **Concurrency = 1** prevents overlapping Live Response sessions on the same
   device (Defender allows only one active LR session per host).
 - **Auto-detag after success** turns the tag into a queue: present = "collect
