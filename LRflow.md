@@ -25,8 +25,12 @@ declarative trigger.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│ 1. ANALYST / AUTOMATION                                             │
-│    Adds tag "ForensicCollect" to the target device in Defender XDR  │
+│ 1. ANALYST / AUTOMATION             ──►  MANUAL  (analyst tags in   │
+│    Adds tag "ForensicCollect" to                  the XDR portal)   │
+│    the target device in Defender    ──►  DYNAMIC (XDR custom        │
+│    XDR                                            detection / Sentinel
+│                                                   playbook adds tag │
+│                                                   on alert)         │
 └────────────────────────────┬────────────────────────────────────────┘
                              │
 ┌────────────────────────────▼────────────────────────────────────────┐
