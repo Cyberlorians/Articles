@@ -22,7 +22,8 @@ The problem: only two of the possible CA result values represent a policy that *
 | `reportOnly:notApplied` | Report-only policy didn't match | **None** |
 | `reportOnly:success` | Report-only — *would have* allowed | **Low** (tuning only) |
 | `reportOnly:failure` | Report-only — *would have* blocked | **Low** (tuning only) |
-| `unknownFutureValue` | Reserved enum placeholder | **None** |
+
+> **Important — `SigninLogs` is not affected.** This transform applies **only** to `AADNonInteractiveUserSignInLogs`. The full, unfiltered `ConditionalAccessPolicies` blob — including all `notApplied`, `notEnabled`, and report-only results — is still captured on every **interactive** sign-in in the `SigninLogs` table. That's where CA policy tuning, report-only analysis, and full evaluation history belong. The noise we're stripping here is the redundant re-evaluation that happens on every token refresh and background call, not the authoritative record of a user actually signing in.
 
 ### Why each "noise" result is pointless
 
