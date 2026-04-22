@@ -33,6 +33,8 @@ The problem: only two of the possible CA result values represent a policy that *
 
 After filtering, you still keep **every blocked sign-in**, **every CA-allowed sign-in**, and **every other column on the row** (user, app, IP, device, risk, auth method, etc.). The only thing dropped is a multi-KB JSON blob that was 95% repeated `"result":"notApplied"` entries.
 
+> **Tip — Use the Entra workbook for CA visibility.** The **Microsoft Entra ID** solution in the Sentinel **Content Hub** ships a **Conditional Access Insights & Reporting** workbook that visualizes policy outcomes, report-only impact, and per-policy success/failure trends. Pair it with this transform: the workbook handles CA reporting and tuning (driven primarily by `SigninLogs`), while the transform keeps your non-interactive ingest costs under control.
+
 ---
 
 ## Before — Raw Ingestion (No Transform)
