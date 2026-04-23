@@ -42,11 +42,24 @@ After filtering, you still keep **every blocked sign-in**, **every CA-allowed si
 This is what gets ingested today. Every row carries the full `ConditionalAccessPolicies` blob, regardless of whether any policy actually fired.
 
 ```kql
-// Baseline: full table volume with raw CA blob
+// TOTAL SAVED = all CA result values except "success" and "failure"
+// Each non-success/failure row is counted in both its own Result bucket AND the total
 AADNonInteractiveUserSignInLogs
-| summarize 
-    MessageCount   = count(),
-    DataIngestedGB = sum(_BilledSize) / 1024 / 1024 / 1024
+| mv-expand cap = parse_json(ConditionalAccessPolicies)
+| extend Result = tostring(cap.result)
+| extend ResultGroups = iff(Result !in ("success", "failure"),
+    pack_array(Result, "── TOTAL SAVED (excl. success + failure) ──"),
+    pack_array(Result))
+| mv-expand ResultGroups to typeof(string)
+| summarize
+    Evaluations = count(),
+    EstDataGB   = round(sum(_BilledSize) / pow(1024, 3), 4)
+    by Result = ResultGroups
+| order by
+    iff(Result == "success", 0,
+    iff(Result == "failure", 1,
+    iff(Result startswith "──", 3, 2))) asc,
+    Evaluations desc
 ```
 
 Run this against your workspace to capture your starting cost baseline before deploying the transform.
