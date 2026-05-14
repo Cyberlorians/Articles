@@ -1,6 +1,6 @@
 # MISP to Microsoft Sentinel via the NEW Upload API (GCC-H)
 
-**Authored by: Michael Crane and Matt Larkin**
+**Authored by: Michael Crane**
 
 The old method using `microsoftgraph/security-api-solutions` and the Graph API `ThreatIndicators.ReadWrite.OwnedBy` permission is **deprecated**. Microsoft replaced it with the [Threat Intelligence Upload STIX Objects API](https://learn.microsoft.com/en-us/azure/sentinel/stix-objects-api). This guide assumes MISP is already installed and running with feeds enabled. Below are the steps to connect MISP feeds to Microsoft Sentinel using the new API.
 
