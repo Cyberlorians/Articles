@@ -2,9 +2,9 @@
 
 _Last updated: May 15, 2026_
 
-This is an exam-focused study guide for SC-730, not a link dump. The official Microsoft Learn objectives define what can be tested, but the exam is likely to ask practical business-user judgment questions: what looks risky, what should be verified, what should be reported, what data should be protected, and which action is safest under policy.
+This guide breaks down the SC-730 exam objectives into plain-English study areas, then points you to the relevant Microsoft Learn pages for deeper reading. Use the breakdown first to understand what the exam is testing, then use the linked Microsoft Learn content to fill in the details.
 
-The audience is a business professional who uses email, Teams, Microsoft 365, cloud files, mobile devices, remote access, and sometimes AI tools. You are not expected to tune SIEM rules or administer Defender. You are expected to recognize risk, protect data, follow policy, and escalate early.
+The audience is a business professional who uses email, Teams, Microsoft 365, cloud files, mobile devices, remote access, and AI tools. You are not expected to tune SIEM rules or administer Defender. You are expected to recognize risk, protect data, follow policy, and escalate early.
 
 ## Exam Snapshot
 
@@ -16,6 +16,238 @@ The audience is a business professional who uses email, Teams, Microsoft 365, cl
 | Report and respond to security incidents | 10-15% | When to report, what details to include, reporting channels, breach actions, escalation triggers |
 
 Passing score: 700 or greater.
+
+## Study Breakdown With Microsoft Learn Links
+
+Start with the official exam guide, then study by objective. The goal is not to memorize every product feature. The goal is to understand what a business user should recognize, avoid, protect, verify, report, or escalate.
+
+Start here:
+
+- [Study guide for Exam SC-730: Cybersecurity Business Professional](https://learn.microsoft.com/credentials/certifications/resources/study-guides/sc-730)
+- [Describe security and compliance concepts](https://learn.microsoft.com/training/modules/describe-security-concepts-methodologies/)
+- [Shared responsibility in the cloud](https://learn.microsoft.com/azure/security/fundamentals/shared-responsibility)
+
+### Domain 1: Understand Cybersecurity Concepts (25-30%)
+
+#### Roles, Responsibilities, and Shared Responsibility
+
+Breakdown:
+
+- Microsoft and cloud providers protect the cloud platform and services.
+- The organization owns its data, identities, access decisions, device hygiene, and policies.
+- Employees own their behavior: protecting credentials, using approved tools, following labels, and reporting suspicious activity.
+- Managers and business owners reinforce accountability and approve access based on business need.
+
+Microsoft Learn:
+
+- [SC-730 skills measured](https://learn.microsoft.com/credentials/certifications/resources/study-guides/sc-730#skills-measured)
+- [Shared responsibility in the cloud](https://learn.microsoft.com/azure/security/fundamentals/shared-responsibility)
+- [Describe the shared responsibility model](https://learn.microsoft.com/training/modules/describe-security-concepts-methodologies/2-describe-shared-responsibility-model)
+- [Microsoft Cybersecurity Defense Operations Center](https://learn.microsoft.com/security/engineering/fy18-strategy-brief)
+
+#### Security Awareness, Accountability, and Policies
+
+Breakdown:
+
+- Know examples of security awareness: training, reporting phishing, following clean desk practices, using approved apps, and applying data labels.
+- Accountability means actions are traceable and users follow policy even when shortcuts seem faster.
+- Know the purpose of security, privacy, acceptable use, remote work, data classification, and incident reporting policies.
+
+Microsoft Learn:
+
+- [SC-730 cybersecurity concepts objectives](https://learn.microsoft.com/credentials/certifications/resources/study-guides/sc-730#understand-cybersecurity-concepts-2530)
+- [Describe governance, risk, and compliance concepts](https://learn.microsoft.com/training/modules/describe-security-concepts-methodologies/6-describe-compliance-concepts)
+- [Microsoft 365 for business security best practices](https://learn.microsoft.com/microsoft-365/admin/security-and-compliance/m365b-security-best-practices)
+
+#### Passwords, Password Managers, and MFA
+
+Breakdown:
+
+- Password reuse is risky because one breached site can expose other accounts.
+- Password managers help create strong, unique passwords and can reduce phishing risk by autofilling only on matching sites.
+- MFA makes stolen passwords less useful.
+- Phishing-resistant MFA is stronger than SMS, email OTP, or basic push approvals.
+- Unexpected MFA prompts should be denied and reported.
+
+Microsoft Learn:
+
+- [Microsoft Edge password manager security](https://learn.microsoft.com/deployedge/microsoft-edge-security-password-manager-security)
+- [Password policy recommendations for Microsoft 365 passwords](https://learn.microsoft.com/microsoft-365/admin/misc/password-policy-recommendations)
+- [Microsoft Entra authentication overview](https://learn.microsoft.com/entra/identity/authentication/overview-authentication)
+- [Phishing-resistant authentication methods](https://learn.microsoft.com/entra/identity/authentication/overview-authentication#phishing-resistant-authentication-methods)
+
+#### AI Tools and Sensitive Data
+
+Breakdown:
+
+- Treat AI prompts like a data-sharing location.
+- Do not paste credentials, customer data, personal data, HR data, legal material, source code, security findings, confidential files, or regulated information into unauthorized AI tools.
+- Approved AI still requires policy-aware use, correct account context, and allowed data types.
+
+Microsoft Learn:
+
+- [Protect sensitive data from AI-related risks](https://learn.microsoft.com/training/modules/purview-ai-protect-sensitive-data/)
+- [Microsoft Purview data security and compliance protections for generative AI apps](https://learn.microsoft.com/purview/ai-microsoft-purview)
+- [Block sensitive data going to sanctioned AI apps](https://learn.microsoft.com/purview/deploymentmodels/depmod-data-leak-shadow-ai-step3)
+
+#### Core Terms and Emerging Threats
+
+Breakdown:
+
+- Vulnerability: weakness.
+- Threat: possible cause of harm.
+- Risk: likelihood and impact of harm.
+- Exploit: method used to take advantage of a weakness.
+- Encryption: protects readable data by making it unreadable without a key.
+- Deepfake: manipulated or synthetic media used to impersonate or mislead.
+
+Microsoft Learn:
+
+- [Describe security and compliance concepts](https://learn.microsoft.com/training/modules/describe-security-concepts-methodologies/)
+- [Describe encryption and hashing](https://learn.microsoft.com/training/modules/describe-security-concepts-methodologies/5-describe-encryption-hashing)
+- [Microsoft Cybersecurity Defense Operations Center](https://learn.microsoft.com/security/engineering/fy18-strategy-brief)
+
+### Domain 2: Understand Cybersecurity Risks and Threats (30-35%)
+
+#### Phishing, Spoofing, and Social Engineering
+
+Breakdown:
+
+- Phishing tries to steal credentials, money, or data by pretending to be legitimate.
+- Spear phishing is targeted; whaling targets executives; business email compromise targets payments and trusted business workflows.
+- Spoofing makes a message, sender, site, or caller appear legitimate.
+- Pretexting uses a fake story; baiting uses a tempting file, reward, or device.
+- Best response: do not click, open, reply, or approve. Verify through a known channel and report.
+
+Microsoft Learn:
+
+- [Protect users against phishing and other attacks in Microsoft 365 for business](https://learn.microsoft.com/microsoft-365/admin/security-and-compliance/m365b-users-phishing-spam-malware)
+- [Anti-phishing protection in cloud organizations](https://learn.microsoft.com/defender-office-365/anti-phishing-protection-about)
+- [How to protect against phishing attacks](https://learn.microsoft.com/defender-endpoint/malware/phishing)
+- [Report suspicious email or files to Microsoft](https://learn.microsoft.com/defender-office-365/submissions-report-messages-files-to-microsoft)
+
+#### Malware, Ransomware, and Abnormal System Behavior
+
+Breakdown:
+
+- Malware signs include sudden slowness, pop-ups, disabled security tools, unknown apps, browser redirects, locked files, or messages sent without the user.
+- Ransomware can encrypt files, steal data, disrupt operations, and target backups.
+- The user response is to stop interacting, preserve evidence, and report quickly.
+
+Microsoft Learn:
+
+- [Prevent malware infection](https://learn.microsoft.com/defender-endpoint/malware/prevent-malware-infection)
+- [Human-operated ransomware](https://learn.microsoft.com/security/ransomware/human-operated-ransomware)
+- [Microsoft Incident Response ransomware approach and best practices](https://learn.microsoft.com/security/ransomware/incident-response-playbook-dart-ransomware-approach)
+
+#### Public Wi-Fi and Remote Work Risks
+
+Breakdown:
+
+- Public Wi-Fi can involve fake hotspots, malicious captive portals, interception, and credential theft.
+- Remote work adds risks from unmanaged networks, personal devices, shared spaces, shoulder surfing, and local-only storage.
+- Use approved secure access, managed devices, updates, screen locks, and approved storage.
+
+Microsoft Learn:
+
+- [Microsoft 365 VPN split tunneling overview](https://learn.microsoft.com/microsoft-365/enterprise/microsoft-365-vpn-split-tunnel)
+- [Microsoft 365 for business security best practices](https://learn.microsoft.com/microsoft-365/admin/security-and-compliance/m365b-security-best-practices)
+- [Prevent malware infection](https://learn.microsoft.com/defender-endpoint/malware/prevent-malware-infection)
+
+#### Insider Risk Indicators
+
+Breakdown:
+
+- Insider risk can be malicious, careless, or accidental.
+- Indicators include unusual access, large data downloads, personal email forwarding, unauthorized storage, bypass attempts, or access unrelated to job duties.
+- Do not confront the person; report observable facts through the correct process.
+
+Microsoft Learn:
+
+- [Microsoft Purview data security solutions](https://learn.microsoft.com/purview/purview-security)
+- [Microsoft Purview Insider Risk Management](https://learn.microsoft.com/purview/insider-risk-management)
+- [Microsoft Cybersecurity Defense Operations Center](https://learn.microsoft.com/security/engineering/fy18-strategy-brief)
+
+### Domain 3: Apply Basic Security Policies to Protect the Organization (25-30%)
+
+#### Securing Devices, Accounts, and Workspaces
+
+Breakdown:
+
+- Secure accounts with unique passwords, password managers, MFA, and reporting of suspicious sign-ins.
+- Secure devices with updates, endpoint protection, screen locks, approved apps, and immediate lost-device reporting.
+- Secure workspaces by protecting screens, printed documents, badges, and sensitive conversations.
+
+Microsoft Learn:
+
+- [Microsoft 365 for business security best practices](https://learn.microsoft.com/microsoft-365/admin/security-and-compliance/m365b-security-best-practices)
+- [Step 3: Protect your Microsoft 365 user accounts](https://learn.microsoft.com/microsoft-365/enterprise/microsoft-365-secure-sign-in)
+- [Prevent malware infection](https://learn.microsoft.com/defender-endpoint/malware/prevent-malware-infection)
+
+#### Sensitive Data, Sensitivity Labels, and Rights Management
+
+Breakdown:
+
+- Sensitive data includes personal, financial, health, HR, student, customer, legal, credential, source code, and confidential business information.
+- Sensitivity labels classify and protect files and emails.
+- Labels can apply encryption, access restrictions, visual markings, and sharing controls.
+- Rights management controls what a recipient can do with protected content: view, edit, print, copy, forward, or access after expiration.
+
+Microsoft Learn:
+
+- [Microsoft Purview data security solutions](https://learn.microsoft.com/purview/purview-security)
+- [Learn about sensitivity labels](https://learn.microsoft.com/purview/sensitivity-labels)
+- [Get started with sensitivity labels](https://learn.microsoft.com/purview/get-started-with-sensitivity-labels)
+- [Microsoft 365 Rights Management](https://learn.microsoft.com/azure/azure-sovereign-clouds/public/microsoft-365-rights-management)
+- [Implement information protection and DLP by using Microsoft Purview](https://learn.microsoft.com/training/paths/purview-implement-information-protection-data-loss-prevention/)
+
+#### Data Handling, DLP, Backup, and Recovery
+
+Breakdown:
+
+- Data handling covers collect, use, transfer, store, retain, and destroy.
+- Use approved storage and sharing locations so access controls, labels, DLP, audit, retention, and backup can apply.
+- DLP helps prevent sensitive data from being leaked through email, endpoints, browsers, cloud apps, or AI tools.
+- Backups matter only if data is stored where it can be protected and restored.
+
+Microsoft Learn:
+
+- [Microsoft Purview Data Loss Prevention](https://learn.microsoft.com/purview/dlp-learn-about-dlp)
+- [Microsoft Purview data security solutions](https://learn.microsoft.com/purview/purview-security)
+- [Prevent data loss in Microsoft Purview](https://learn.microsoft.com/training/modules/m365-compliance-information-prevent-data-loss/)
+- [Microsoft Incident Response ransomware approach and best practices](https://learn.microsoft.com/security/ransomware/incident-response-playbook-dart-ransomware-approach)
+
+### Domain 4: Report and Respond to Security Incidents (10-15%)
+
+#### What to Report and What to Include
+
+Breakdown:
+
+- Report phishing, lost devices, malware signs, ransomware, unexpected MFA prompts, unauthorized access, accidental data sharing, and suspicious payment or access changes.
+- Include facts: date, time, affected account/device/file/app, sender, URL, attachment, what happened, what action was taken, and whether sensitive data was involved.
+- Do not delete evidence, forward broadly, or investigate alone.
+
+Microsoft Learn:
+
+- [Incident response playbooks](https://learn.microsoft.com/security/operations/incident-response-playbooks)
+- [Report suspicious email or files to Microsoft](https://learn.microsoft.com/defender-office-365/submissions-report-messages-files-to-microsoft)
+- [Security incident management overview](https://learn.microsoft.com/compliance/assurance/assurance-incident-management)
+
+#### Breach, Ransomware, and Escalation Actions
+
+Breakdown:
+
+- Stop unsafe activity.
+- Report immediately.
+- Preserve evidence.
+- Disconnect or isolate only when policy or IT/security guidance says to, or when active malware/ransomware behavior is occurring.
+- Escalate when sensitive data, credentials, ransomware, lost devices, money movement, or business impact is involved.
+
+Microsoft Learn:
+
+- [Microsoft Incident Response ransomware approach and best practices](https://learn.microsoft.com/security/ransomware/incident-response-playbook-dart-ransomware-approach)
+- [Human-operated ransomware](https://learn.microsoft.com/security/ransomware/human-operated-ransomware)
+- [Incident response playbooks](https://learn.microsoft.com/security/operations/incident-response-playbooks)
 
 ## What the Exam Is Really Testing
 
