@@ -6,13 +6,13 @@
 
 ## What You Will Get
 
-At the end of this walkthrough, you will have three different billing answers:
+At the end of this walkthrough, you will have three billing details for the selected scope and period:
 
-| Question | Cost Management dimension | Example from this walkthrough |
-|---|---|---|
-| What usage meter generated the charge? | **Meter** | `Pay-as-you-go Analysis` |
-| What billing product/SKU label appears on the charge? | **Product** | `Sentinel - Pay-as-you-go - US Gov Virginia` |
-| What did that meter cost for the selected month? | **Cost** | `$24.64` in the portal |
+| Question | Cost Management dimension |
+|---|---|
+| What usage meter generated the charge? | **Meter** |
+| What billing product/SKU label appears on the charge? | **Product** |
+| What did that meter cost for the selected period? | **Cost** |
 
 You will also export a CSV containing the meter-level data used by the report.
 
@@ -21,17 +21,11 @@ You will also export a CSV containing the meter-level data used by the report.
 
 ---
 
-## Environment Used
+## Scope
 
-This walkthrough was validated in:
+This walkthrough uses the Azure Government portal at `https://portal.azure.us`, an Azure subscription scope, and the **Invoice details** Cost Analysis view.
 
-- Azure Government portal: `https://portal.azure.us`
-- Cost scope: Azure subscription
-- Cost Analysis view: **Invoice details**
-- Billing period: **July 2026**
-- Display currency: **USD**
-
-The screenshots show real portal behavior, but the subscription name and costs are examples. Your values will differ.
+The screenshots are illustrations from one environment. Subscription names, billing periods, regions, meters, products, currencies, and costs vary by customer.
 
 ## Prerequisites
 
@@ -86,9 +80,7 @@ Why use **Invoice details**? It exposes the dimensions needed for billing reconc
 4. Keep **Granularity** set to **None** for a monthly meter total.
 5. Keep the visualization set to **Table**.
 
-In this example, **Jul 2026** contains `$332.68` in total subscription cost across `22` meter rows.
-
-![Invoice details configured for July 2026 and grouped by Meter](assets/sentinel-billing-export-gcch/03-invoice-details.png)
+![Invoice details configured for a billing period and grouped by Meter](assets/sentinel-billing-export-gcch/03-invoice-details.png)
 
 > [!NOTE]
 > The large **Actual cost** value is the total for the selected scope and period. It is not the Microsoft Sentinel total until the data is filtered or isolated.
@@ -101,10 +93,10 @@ Open **Group by** to change the question that the report answers.
 
 Use these two dimensions for this workflow:
 
-| Dimension | What it tells you | Example |
-|---|---|---|
-| **Meter** | The usage category that generated the charge | `Pay-as-you-go Analysis` |
-| **Product** | The billed product/SKU-style label and region | `Sentinel - Pay-as-you-go - US Gov Virginia` |
+| Dimension | What it tells you |
+|---|---|
+| **Meter** | The usage category that generated the charge |
+| **Product** | The billed product/SKU-style label and region |
 
 ![Group by menu showing Meter and other billing dimensions](assets/sentinel-billing-export-gcch/04-group-by-menu.png)
 
@@ -118,19 +110,12 @@ Other dimensions can answer different questions, but they do not replace Meter o
 2. In **Filter items**, enter `Sentinel`.
 3. Read the rows where **Service name** is **Sentinel**.
 
-This walkthrough produced two Sentinel meters:
-
-| Meter | Charge type | Service family | Cost |
-|---|---|---|---:|
-| `Pay-as-you-go Analysis` | Usage | Management and Governance | `$24.64` |
-| `Free Benefit - M365 Defender Analysis` | Usage | Management and Governance | `$0` |
-
 ![Sentinel meter rows and costs](assets/sentinel-billing-export-gcch/05-meter-results.png)
 
-The paid meter is the important reconciliation row. The free-benefit row shows Microsoft 365 Defender data analysis that was included at no additional charge for the selected period.
+Record each displayed Sentinel meter, its charge type, service family, and cost. More than one row can appear, including paid usage and included-benefit meters.
 
 > [!WARNING]
-> **Filter items is a display filter, not a reliable export filter.** It narrows the rows visible in the table, but the download can still contain every meter in the report. In this example, the table displayed two Sentinel rows while the report still indicated `22 rows`, and the downloaded CSV contained all 22 meter rows.
+> **Filter items is a display filter, not a reliable export filter.** It narrows the rows visible in the table, but the download can still contain every meter in the report. Always validate and filter the downloaded CSV.
 
 ---
 
@@ -140,16 +125,9 @@ The paid meter is the important reconciliation row. The free-benefit row shows M
 2. Select **Product**.
 3. Keep `Sentinel` in **Filter items**.
 
-The Product view shows the complete billing labels:
-
-| Product | Cost |
-|---|---:|
-| `Sentinel - Pay-as-you-go - US Gov Virginia` | `$24.64` |
-| `Sentinel - Free Benefit - M365 Defender - US Gov Virginia` | `$0` |
-
 ![Sentinel Product labels and costs](assets/sentinel-billing-export-gcch/06-product-results.png)
 
-The paid product label is the closest Cost Analysis equivalent to the requested Sentinel billing SKU. It includes both the pricing model and Azure Government region.
+Record each complete Product label and its cost. The paid Product label is the closest Cost Analysis equivalent to the requested Sentinel billing SKU and commonly includes the pricing model and Azure Government region.
 
 ---
 
@@ -198,66 +176,35 @@ Microsoft documents a `15,000`-record limit for CSV files downloaded from the Co
 
 ---
 
-## Step 9: Isolate Sentinel Rows in the CSV
+## Step 9: Review the CSV
 
 Because **Filter items** does not constrain the downloaded file, filter the CSV after download.
-
-### Excel
 
 1. Open the CSV in Excel.
 2. Enable filters on the header row.
 3. Filter `ServiceName` to `Sentinel`.
 4. Review `Meter`, `CostUSD`, and `Currency`.
+5. Compare the CSV rows with the Meter and Product values recorded in the portal.
 
-### PowerShell
-
-```powershell
-$sourcePath = "$HOME\Downloads\Azure-Cost-Meters.csv"
-$outputPath = "$HOME\Downloads\Sentinel-Cost-Meters.csv"
-
-$sentinelMeters = Import-Csv -Path $sourcePath |
-    Where-Object ServiceName -eq "Sentinel"
-
-$sentinelMeters |
-    Select-Object ServiceName, Meter, CostUSD, Currency |
-    Format-Table -AutoSize
-
-$sentinelMeters |
-    Export-Csv -Path $outputPath -NoTypeInformation
-```
-
-Expected shape:
-
-```text
-ServiceName  Meter                                  CostUSD          Currency
------------  -----                                  -------          --------
-Sentinel     Free Benefit - M365 Defender Analysis  0                USD
-Sentinel     Pay-as-you-go Analysis                 24.63517845176   USD
-```
-
-The portal rounds the paid row to `$24.64`; the CSV retains the more precise cost value.
+The portal can display rounded costs while the CSV retains more precise values. Use the CSV value for detailed reconciliation.
 
 ---
 
-## Reading the Result Correctly
+## Record the Result
 
-The final interpretation for this example is:
+Use the following fields for a consistent handoff to finance, security operations, or cloud engineering:
 
-```text
-Workspace pricing model: Pay-as-you-go
-Billing product:         Sentinel - Pay-as-you-go - US Gov Virginia
-Paid meter:              Pay-as-you-go Analysis
-Paid meter cost:         24.63517845176 USD (displayed as $24.64)
-Free meter:              Free Benefit - M365 Defender Analysis
-Free meter cost:         0 USD
-```
+| Field | Value to record |
+|---|---|
+| Customer or environment | Customer-defined identifier |
+| Azure scope | Subscription, resource group, or billing scope reviewed |
+| Billing period | Selected date range |
+| Workspace pricing tier | Tier configured for the Sentinel workspace |
+| Product | Full paid Product label shown in Cost Analysis |
+| Meter | Each relevant paid or included-benefit Meter |
+| Cost | Precise CSV value and currency |
 
-This gives finance, security operations, and cloud engineering a common vocabulary:
-
-- The **workspace pricing model** explains the commercial tier.
-- The **Product** value identifies the billed Sentinel offer and region.
-- The **Meter** value identifies the charge-producing usage category.
-- The **CSV cost** is the precise amount used for reconciliation.
+The **workspace pricing tier** explains the commercial tier, **Product** identifies the billed Sentinel offer and region, and **Meter** identifies the charge-producing usage category.
 
 ---
 
@@ -307,18 +254,3 @@ A downloaded CSV is a point-in-time snapshot. Use scheduled Cost Management expo
 - [Save and share customized Cost Analysis views](https://learn.microsoft.com/azure/cost-management-billing/costs/save-share-views)
 - [Azure Monitor cost and usage](https://learn.microsoft.com/azure/azure-monitor/fundamentals/cost-usage)
 - [Create and manage Cost Management exports](https://learn.microsoft.com/azure/cost-management-billing/costs/tutorial-improved-exports)
-
----
-
-## Final Answer From the Walkthrough
-
-For July 2026 in the tested Azure Government subscription:
-
-- **Pricing model:** Pay-as-you-go
-- **Billing product/SKU label:** `Sentinel - Pay-as-you-go - US Gov Virginia`
-- **Paid meter:** `Pay-as-you-go Analysis`
-- **Paid cost:** `$24.64` in the portal, `24.63517845176 USD` in the CSV
-- **Included benefit meter:** `Free Benefit - M365 Defender Analysis`
-- **Included benefit cost:** `$0`
-
-That is the complete UI-to-CSV path for identifying and exporting Microsoft Sentinel billing meters in Azure Government.
