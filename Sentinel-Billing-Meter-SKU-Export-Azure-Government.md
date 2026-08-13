@@ -29,14 +29,35 @@ The screenshots are illustrations from one environment. Subscription names, bill
 
 ## Prerequisites
 
-You need:
+For the subscription-scoped Cost Analysis and one-time CSV download in this guide, assign:
 
-- Access to the Azure Government subscription that contains the Microsoft Sentinel workspace.
-- Permission to read Cost Management data at the selected scope.
+- **Cost Management Reader** at the target subscription scope. This is the least-privilege Azure RBAC role for viewing Cost Analysis data. **Cost Management Contributor** also works but is not required for this walkthrough.
+
+You also need:
+
+- Access to the Azure Government tenant and target subscription.
 - A month with Microsoft Sentinel usage.
 - A modern browser that can download CSV files.
 
-At minimum, use a role that grants access to Cost Management data for the subscription. If the cost blades are empty or unavailable, verify both Azure RBAC and the account's billing-data access policy.
+Cost visibility can also depend on the customer's billing agreement:
+
+| Billing agreement | Additional requirement |
+|---|---|
+| Enterprise Agreement (EA) | **Account owner (AO) view charges** must be enabled for subscription-scope users. |
+| Microsoft Customer Agreement (MCA) | The billing profile's **Azure charges** policy must allow cost visibility. |
+| Cloud Solution Provider (CSP) | The partner must enable the customer's Cost Management cost-visibility policy. |
+
+These additional permissions are needed only for related tasks outside the one-time download workflow:
+
+| Related task | Additional role |
+|---|---|
+| Open the Log Analytics workspace and verify its configured pricing tier | **Reader** on the workspace or a parent scope |
+| Create a recurring Cost Management export | **Cost Management Contributor** at the cost scope and **Storage Account Contributor** for the destination storage account |
+
+> [!NOTE]
+> Azure **Reader** and **Cost Management Reader** are different roles. Azure Reader provides resource visibility but does not replace Cost Management Reader for this billing workflow.
+
+If Cost Analysis is empty or unavailable, verify the Cost Management role assignment and the applicable billing-policy setting above.
 
 ---
 
@@ -250,6 +271,7 @@ A downloaded CSV is a point-in-time snapshot. Use scheduled Cost Management expo
 ## Microsoft References
 
 - [Manage and monitor costs for Microsoft Sentinel](https://learn.microsoft.com/azure/sentinel/billing-monitor-costs)
+- [Assign access to Cost Management data](https://learn.microsoft.com/azure/cost-management-billing/costs/assign-access-acm-data)
 - [Quickstart: Start using Cost Analysis](https://learn.microsoft.com/azure/cost-management-billing/costs/quick-acm-cost-analysis)
 - [Save and share customized Cost Analysis views](https://learn.microsoft.com/azure/cost-management-billing/costs/save-share-views)
 - [Azure Monitor cost and usage](https://learn.microsoft.com/azure/azure-monitor/fundamentals/cost-usage)
